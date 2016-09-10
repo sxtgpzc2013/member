@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes">
+	<link rel="apple-touch-icon" href="icon.png" >
+
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/cms/css/reserve_style.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/cms/css/all.css?time=<?php echo time(); ?>">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/cms/css/jquery-ui.css?time=<?php echo time(); ?>">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/cms/css/jquery-ui.pack.css?time=<?php echo time(); ?>">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/cms/css/style_1.css?time=<?php echo time(); ?>">
+	<!-- 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/cms/css/bootstrap.min.css">  -->
+		<script type="text/javascript" src="__PUBLIC__/cms/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/cms/js/jquery.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/cms/js/jquery.ui.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/cms/js/ueditor/editor_config.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/cms/js/ueditor/editor_all.js"></script>
+		<!-- 图表js -->
+		<script src="__PUBLIC__/cms/js/Chart.min.js"></script>
+		<script language="javascript" type="text/javascript" src="__PUBLIC__/cms/js/My97DatePicker/WdatePicker.js"></script>
+	
+		<!--[if lte IE 8]>
+			<script src="/javascripts/excanvas.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<notempty name="_SESSION['OftenGo']['user']">
+	<div class="header">
+				<h1 class="logo">
+					<img height="30" src="__PUBLIC__/cms/images/logo-qi.png" style="margin-left: 20;">
+				</h1>
+			<ul class="a-list">
+			<li><a   href="__APP__/Index/index">智能云商户</a></li>
+			<li><a   class="active" href="__APP__/Index/wx_login">微信平台</a></li>
+			<div class="clearb"></div>
+			</ul> 
+			<div class="user-list">
+				<div id="user-list-click">
+					<img class="user-img" height="36" width="36" src="__ROOT__/Uploads/images/corps/s_{$_SESSION['OftenGo']['user']['logo']}"><span class="text-user-name">{$_SESSION['OftenGo']['user']['name']}</span><span class="jiantou">▼</span>
+				</div>
+					<ul id="user-list-con">  
+						 <li><a href="__APP__/Set/edit_password">修改密码</a> </li> 
+						<li><a href="__APP__/Index/index">账户充值</a> </li>
+						<li><a href="__APP__/Index/index">产品手册</a> </li>
+						<li><a href="__APP__/Login/logout">退出</a> </li>
+					</ul>
+			</div>
+			<span class="phone-400">400-019-2098</span>
+	</div>

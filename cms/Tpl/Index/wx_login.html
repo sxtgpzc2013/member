@@ -1,0 +1,122 @@
+<include file="public:header2" />
+<script type="text/javascript">
+	$(function(){
+		$('.user-list').hover(function() {
+			$('#user-list-con').stop(true,true).slideDown();
+		}, function() {
+			$('#user-list-con').stop(true,true).slideUp();
+		});
+	})
+	$(function(){
+		var $check = $('.content_table .table-check');
+		for (var i = $check.length - 1; i >= 0; i--) {
+			$check[i].index = i;
+		};
+		$check.click(function(){
+			if(this.index == 0){
+				$check.attr("checked",this.checked);
+			}else{
+				function fn1 (){
+					for (var i = 0; i < $check.length; i++) {
+						if((i != 0)&&(!$check[i].checked))return;
+					};
+					$check[0].checked = true;
+				}
+				function fn2 (){
+					$check[0].checked = false;
+				}
+				!!this.checked?fn1():fn2();
+			}
+		})
+	})
+	$(function (){
+		var $div = $('#add-group');
+		var $a = $('#add-group-a');
+		$a.click(function (){
+			$div.show(100);
+			return false;
+		})
+	})
+	$(function(){
+		$hoverDd = $('.houtai-new-box-2 dd');
+		$hoverDd.hover(function() {
+			$(this).find('.bianji').show();
+			$(this).find('.btn-del').show();
+		}, function() {
+			$(this).find('.bianji').hide();
+			$(this).find('.btn-del').hide();
+		});
+	})
+</script>
+
+
+<style type="text/css">
+	.weixin-iframe iframe{
+
+		display: block;
+		width: 100%;
+		height: 1000px;
+	}
+	.weixin-tishi{
+		height: 40px;
+		position: relative;
+		background: rgb(248, 248, 163);
+
+	}
+	.weixin-tishi p{
+		width: 1000px;
+		font-size: 18px;
+		line-height: 40px;
+		margin: 0 auto;
+	}
+	.weixin-tishi .p1{
+		cursor: pointer;
+	}
+	.weixin-tishi .p2{
+		display: none;
+	}
+	.weixin-tishi .btn1{
+		display: block;
+		cursor: pointer;
+		font-size: 20px;
+		position: absolute;
+		top: 5px;
+		width: 30px;
+		height: 30px;
+		background: url(/Public/cms/images/notification_close.png) 0 -30px no-repeat;
+		left: 50%;
+		margin-left: 440px;
+		color: #fff;
+		margin-right: 10px;
+		border-radius: 4px;
+	}
+	.weixin-tishi .btn1:hover{
+		background: url(/Public/cms/images/notification_close.png) 0 -60px no-repeat;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	var box = $('.weixin-tishi');
+	var p1 = box.find('.p1');
+	var p2 = box.find('.p2');
+	var btn = box.find('.btn1');
+	btn.click(function() {
+		box.slideUp(300)
+	});
+	p1.click(function (){
+		//alert(1);
+		$(this).hide('100');
+		$(p2).slideDown('100');;
+	});
+})
+</script>
+<div class="weixin-tishi">
+	<p class="p1">点击查看您的公众平台账号和密码>></p>
+	<p class="p2">您的帐号是:	{$result['wx_username']}	密码是		{$result['wx_password']}	</p>
+	<a class="btn1"></a>
+</div>
+<div class="weixin-iframe">
+	<iframe src="https://mp.weixin.qq.com/"></iframe>
+
+</div>
+<include file="public:footer" />

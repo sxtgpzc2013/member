@@ -1,0 +1,341 @@
+[ 2016-09-09T15:22:34+08:00 ] 0.0.0.0 /shequsong/cms.php/skin-config.html
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000218s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000383s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Dispatcher.class.php 第 125 行.
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000120s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000183s ]
+NOTIC: [8] Undefined variable: group /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/App.class.php 第 120 行.
+ERR: 无法加载模块:skin-config
+NOTIC: [2] include(): Filename cannot be empty /Library/WebServer/Documents/www/shequsong/ThinkPHP/Common/functions.php 第 52 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.::/Library/WebServer/Documents/www/shequsong/ThinkPHP/Extend/Vendor/') /Library/WebServer/Documents/www/shequsong/ThinkPHP/Common/functions.php 第 52 行.
+
+[ 2016-09-09T15:22:39+08:00 ] 0.0.0.0 /shequsong/cms.php/Index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000228s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000406s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Dispatcher.class.php 第 125 行.
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000376s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000606s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Driver/Db/DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `rz_common` [ RunTime:0.010071s ]
+ERR: 1146:Table 'rz_data.rz_common' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `rz_common`
+SQL: SHOW COLUMNS FROM `rz_corps` [ RunTime:0.011335s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT * FROM `rz_corps` WHERE ( is_del = 0 AND status = 2 AND id = 1 ) LIMIT 1   [ RunTime:0.011034s ]
+SQL: SHOW COLUMNS FROM `rz_index` [ RunTime:0.009830s ]
+ERR: 1146:Table 'rz_data.rz_index' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `rz_index`
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT * FROM `rz_corps` WHERE ( id = 1  ) LIMIT 1   [ RunTime:0.753628s ]
+SQL: SHOW COLUMNS FROM `rz_sms_posts` [ RunTime:0.010907s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `rz_sms_posts` WHERE ( corp_id = 1 ) LIMIT 1   [ RunTime:0.009859s ]
+SQL: SHOW COLUMNS FROM `rz_members` [ RunTime:0.009766s ]
+ERR: 1146:Table 'rz_data.rz_members' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `rz_members`
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `rz_members` WHERE ( corp_id = 1  AND is_del = 0 ) LIMIT 1   [ RunTime:0.009764s ]
+ERR: 1146:Table 'rz_data.rz_members' doesn't exist
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `rz_members` WHERE ( corp_id = 1  AND is_del = 0 ) LIMIT 1  
+SQL: SHOW COLUMNS FROM `rz_wx_accounts` [ RunTime:0.010748s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT * FROM `rz_wx_accounts` WHERE ( corp_id = 1 ) LIMIT 1   [ RunTime:0.010578s ]
+NOTIC: [8] Undefined index: delivered_at /Library/WebServer/Documents/www/shequsong/cms/Lib/Action/IndexAction.class.php 第 214 行.
+NOTIC: [8] Undefined index: delivered_at /Library/WebServer/Documents/www/shequsong/cms/Lib/Action/IndexAction.class.php 第 214 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.000202s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000341s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 168 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 197 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 137 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.014904s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015024s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000172s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000159s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000056s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000543s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000105s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000185s ]
+
+[ 2016-09-09T15:22:40+08:00 ] 0.0.0.0 /shequsong/cms.php/skin-config.html
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000092s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000176s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Dispatcher.class.php 第 125 行.
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000324s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000477s ]
+NOTIC: [8] Undefined variable: group /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/App.class.php 第 120 行.
+ERR: 无法加载模块:skin-config
+NOTIC: [2] include(): Filename cannot be empty /Library/WebServer/Documents/www/shequsong/ThinkPHP/Common/functions.php 第 52 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.::/Library/WebServer/Documents/www/shequsong/ThinkPHP/Extend/Vendor/') /Library/WebServer/Documents/www/shequsong/ThinkPHP/Common/functions.php 第 52 行.
+
+[ 2016-09-09T15:22:44+08:00 ] 0.0.0.0 /shequsong/cms.php/Index
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000221s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000694s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Dispatcher.class.php 第 125 行.
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000407s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000558s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Driver/Db/DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `rz_common` [ RunTime:0.008623s ]
+ERR: 1146:Table 'rz_data.rz_common' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `rz_common`
+SQL: SHOW COLUMNS FROM `rz_corps` [ RunTime:0.009683s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT * FROM `rz_corps` WHERE ( is_del = 0 AND status = 2 AND id = 1 ) LIMIT 1   [ RunTime:0.010143s ]
+SQL: SHOW COLUMNS FROM `rz_index` [ RunTime:0.008013s ]
+ERR: 1146:Table 'rz_data.rz_index' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `rz_index`
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT * FROM `rz_corps` WHERE ( id = 1  ) LIMIT 1   [ RunTime:0.010198s ]
+SQL: SHOW COLUMNS FROM `rz_sms_posts` [ RunTime:0.008080s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `rz_sms_posts` WHERE ( corp_id = 1 ) LIMIT 1   [ RunTime:0.008339s ]
+SQL: SHOW COLUMNS FROM `rz_members` [ RunTime:0.008467s ]
+ERR: 1146:Table 'rz_data.rz_members' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `rz_members`
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `rz_members` WHERE ( corp_id = 1  AND is_del = 0 ) LIMIT 1   [ RunTime:0.009333s ]
+ERR: 1146:Table 'rz_data.rz_members' doesn't exist
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `rz_members` WHERE ( corp_id = 1  AND is_del = 0 ) LIMIT 1  
+SQL: SHOW COLUMNS FROM `rz_wx_accounts` [ RunTime:0.008990s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Db.class.php 第 601 行.
+SQL: SELECT * FROM `rz_wx_accounts` WHERE ( corp_id = 1 ) LIMIT 1   [ RunTime:0.009224s ]
+NOTIC: [8] Undefined index: delivered_at /Library/WebServer/Documents/www/shequsong/cms/Lib/Action/IndexAction.class.php 第 214 行.
+NOTIC: [8] Undefined index: delivered_at /Library/WebServer/Documents/www/shequsong/cms/Lib/Action/IndexAction.class.php 第 214 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.000168s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000265s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 168 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 197 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Template/ThinkTemplate.class.php 第 137 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.016928s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017116s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000180s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000116s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000055s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000493s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000232s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000651s ]
+
+[ 2016-09-09T15:22:45+08:00 ] 0.0.0.0 /shequsong/cms.php/skin-config.html
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.000170s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000310s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/Dispatcher.class.php 第 125 行.
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000215s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000350s ]
+NOTIC: [8] Undefined variable: group /Library/WebServer/Documents/www/shequsong/ThinkPHP/Lib/Core/App.class.php 第 120 行.
+ERR: 无法加载模块:skin-config
+NOTIC: [2] include(): Filename cannot be empty /Library/WebServer/Documents/www/shequsong/ThinkPHP/Common/functions.php 第 52 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.::/Library/WebServer/Documents/www/shequsong/ThinkPHP/Extend/Vendor/') /Library/WebServer/Documents/www/shequsong/ThinkPHP/Common/functions.php 第 52 行.
+
