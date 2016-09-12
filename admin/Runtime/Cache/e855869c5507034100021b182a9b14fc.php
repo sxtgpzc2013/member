@@ -45,10 +45,10 @@
 				</ul>
 			</li>
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
+				<a href="__APP__/News/index"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司新闻</a>
+						<a href="__APP__/News/index">公司新闻</a>
 					</li>
 					<!-- <li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'add') {echo 'active';} ?>">
 						<a href="__APP__">添加新闻</a>
@@ -423,7 +423,7 @@
 							<button type="button" class="btn btn-w-m btn-primary">修改消费商职务</button>
 						</p>
 					</div>
-					
+
 				</div>
 
 				<!-- <div class="ibox-title">
@@ -464,9 +464,36 @@
                         </table>
                     </div>
 
+					<div class="ibox-title" style="padding-left:5px">
+                        <h5>关系信息</h5>
+                    </div>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td><small>推荐人</small>
+                                </td>
+                                <td>青衣5858</td>
+                            </tr>
+                            <tr>
+                                <td>报单中心</td>
+								<td>青衣5858</td>
+                            </tr>
+							<tr>
+                                <td>接点人</td>
+								<td>青衣5858</td>
+                            </tr>
+							<tr>
+                                <td>接点区</td>
+								<td>青衣5858</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
+
 
     </div>
 

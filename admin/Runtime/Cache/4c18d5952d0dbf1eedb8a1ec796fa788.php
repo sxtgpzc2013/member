@@ -40,72 +40,60 @@
 				<a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">首页</a>
+						<a href="__APP__">首页</a>
 					</li>
 				</ul>
 			</li>
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
+				<a href="__APP__/News/index"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">公司新闻</a>
+						<a href="__APP__/News/index">公司新闻</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">添加新闻</a>
-					</li>
+					<!-- <li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'add') {echo 'active';} ?>">
+						<a href="__APP__">添加新闻</a>
+					</li> -->
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Details' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-envelope"></i> <span class="nav-label">信息资料</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Details' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">公司简介</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Details' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">学习资料</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active';} ?>">
+			<li class="<?php if (MODULE_NAME == 'Admins') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">管理员列表</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">权限管理</a>
+					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'auth') {echo 'active bcolor';} ?>">
+						<a href="__APP__">权限管理</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">新增管理员</a>
+					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'add') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Admins/add">新增管理员</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">管理员修改</a>
+					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'edit') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Admins/edit">管理员修改</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">管理员列表</a>
+					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Admins/index">管理员列表</a>
 					</li>
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">分销商管理</span> <span class="fa arrow"></span></a>
+			<li class="<?php if (MODULE_NAME == 'Corps') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">分销商列表</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/index">消费商列表</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">分销商激活</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'activate') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/activate">消费商激活</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">分销商注册</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'register') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/register">消费商注册</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">推荐拓扑</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'recommend_topology') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/recommend_topology">推荐拓扑</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">接点拓扑</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'contact_topology') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/contact_topology">接点拓扑</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">分销商留言</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'upgrade') {echo 'active';} ?>">
+						<a href="__APP__/Corps/upgrade">消费商升级</a>
 					</li>
 				</ul>
 			</li>
@@ -115,37 +103,34 @@
 				<a href="index.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">奖金统计</a>
+						<a href="__APP__">奖金统计</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">业绩统计</a>
+						<a href="__APP__">业绩统计</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">财务流水</a>
+						<a href="__APP__">财务流水</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">转账明细</a>
+						<a href="__APP__">转账明细</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">公司充值</a>
+						<a href="__APP__">公司充值</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">公司扣币</a>
+						<a href="__APP__">公司扣币</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">公司财务</a>
+						<a href="__APP__">公司财务</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">提现处理</a>
+						<a href="__APP__">提现申请</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">提现记录</a>
+						<a href="__APP__">提现记录</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">充值申请</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">充值记录</a>
+						<a href="__APP__">充值记录</a>
 					</li>
 				</ul>
 			</li>
@@ -154,10 +139,13 @@
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">系统设置</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">计划任务</a>
+						<a href="__APP__">计划任务</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__URL__">奖金设置</a>
+						<a href="__APP__">奖金设置</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">系统设置</a>
 					</li>
 				</ul>
 			</li>
@@ -383,7 +371,7 @@
 	</div>
 </nav>
 
-        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div id="page-wrapper" class="white-bg dashbard-1">
             <div class="row border-bottom">
 				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
     <ul class="nav navbar-top-links navbar-right" >
@@ -545,10 +533,10 @@
 </div>
 <div class="footer">
 	<div class="pull-right">
-		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+		By：<a href="#" target="_blank">Rongzi Admin</a>
 	</div>
 	<div>
-		<strong>Copyright</strong> H+ &copy; 2014
+		<strong>Copyright</strong> Rongzi+ &copy; 2016
 	</div>
 </div>
 </div>

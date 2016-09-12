@@ -20,7 +20,7 @@
     <link href="__PUBLIC__/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
     <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
-    <link href="__PUBLIC__/css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="__PUBLIC__/css/cms_style.css?v=2.2.0" rel="stylesheet">
 
 </head>
 
@@ -39,113 +39,79 @@
 			<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active';} ?>">
+					<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
 						<a href="__APP__">首页</a>
 					</li>
 				</ul>
 			</li>
+			<li class="<?php if (MODULE_NAME == 'Consumers') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Consumers' && ACTION_NAME == 'edit_info') {echo 'active';} ?>">
+						<a href="__APP__/Consumers/edit_info">修改资料</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Consumers' && ACTION_NAME == 'edit_password') {echo 'active';} ?>">
+						<a href="__APP__/Consumers/edit_password">修改密码</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<?php if (MODULE_NAME == 'Teams') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-envelope"></i> <span class="nav-label">团队管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'activate') {echo 'active';} ?>">
+						<a href="__APP__/Teams/activate">消费商激活</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'register') {echo 'active';} ?>">
+						<a href="__APP__/Teams/register">注册消费商</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'recommend_relation') {echo 'active';} ?>">
+						<a href="__APP__/Teams/recommend_relation">推荐关系</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'contact_relation') {echo 'active';} ?>">
+						<a href="__APP__/Teams/contact_relation">接点关系</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">奖金管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">奖金明细</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">财务流水</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现申请</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现记录</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">消费商转币</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">币种转换</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">转币记录</a>
+					</li>
+				</ul>
+			</li>
+
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司新闻</a>
-					</li>
-					<!-- <li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'add') {echo 'active';} ?>">
-						<a href="__APP__">添加新闻</a>
-					</li> -->
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Admins') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">管理员列表</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'auth') {echo 'active bcolor';} ?>">
-						<a href="__APP__">权限管理</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'add') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Admins/add">新增管理员</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'edit') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Admins/edit">管理员修改</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Admins/index">管理员列表</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">分销商管理</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">分销商列表</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'activate') {echo 'active';} ?>">
-						<a href="__APP__">分销商激活</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'register') {echo 'active';} ?>">
-						<a href="__APP__">分销商注册</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'recommend_topology') {echo 'active';} ?>">
-						<a href="__APP__">推荐拓扑</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'contact_topology') {echo 'active';} ?>">
-						<a href="__APP__">接点拓扑</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'upgrade') {echo 'active';} ?>">
-						<a href="__APP__">分销商升级</a>
-					</li>
-				</ul>
-			</li>
-
-
-			<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">奖金统计</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">业绩统计</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">财务流水</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">转账明细</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司充值</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司扣币</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司财务</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现申请</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现记录</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">充值记录</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">系统设置</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">计划任务</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">奖金设置</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">系统设置</a>
+						<a href="__APP__">新闻资讯</a>
 					</li>
 				</ul>
 			</li>
@@ -371,17 +337,15 @@
 	</div>
 </nav>
 
-        <div id="page-wrapper" class="white-bg dashbard-1">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
 				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <ul class="nav navbar-top-links navbar-right" >
-        <li >
-            <span class="m-r-sm text-muted welcome-message"  style="color:#ffffff !important;">
-            <strong class="font-bold"><?php echo $_SESSION['Rongzi']['admin']['name'];?></strong>欢迎管理后台
-            <a href="__URL__" title="返回首页"  style="color:#ffffff !important;"><i class="fa fa-home"></i></a></span>
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
         </li>
         <li>
-            <a href="login.html"  style="color:#ffffff !important;">
+            <a href="login.html"  style="color:#000000 !important;">
                 <i class="fa fa-sign-out"></i> 退出
             </a>
         </li>
@@ -391,120 +355,67 @@
 
             </div>
 
-<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
-<div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-10">
+<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
+	<div class="col-lg-10"  style="padding:0px;">
 		<ol class="breadcrumb">
 			<a href="__URL__"><i class="fa fa-home"></i></a>
             <li>
                 <a href="__URL__">首页</a>
             </li>
-            <li>
-                <a>新闻公告</a>
+			<li>
+                <a>团队管理</a>
             </li>
             <li>
-                <strong>公司新闻</strong>
+                <strong>消费商激活</strong>
             </li>
         </ol>
 	</div>
 </div>
-<div class="wrapper wrapper-content animated">
+<div class="wrapper wrapper-content">
 	<div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-12">
 
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-12 m-b-xs">
-							<p>
-                                <button type="button" class="btn btn-w-m btn-danger">新增</button>
-                                <button type="button" class="btn btn-w-m btn-primary">启用</button>
-                                <button type="button" class="btn btn-w-m btn-primary">禁用</button>
-                                <button type="button" class="btn btn-w-m btn-primary">删除</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>管理员名</th>
-                                    <th>登录次数</th>
-                                    <th>最后登录时间</th>
-                                    <th>最后登录IP</th>
-									<th>状态</th>
-									<th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" checked class="i-checks" name="input[]">
-                                    </td>
-                                    <td>1</span>
-									<td>MiMO Show</td>
-                                    </td>
-									<td>2016-09-09 16:21:56</td>
-									<td>1231-23-123-1-23123</td>
-                                    <td>20</td>
-                                    <td>
-										<a href="table_basic.html#">编辑</a>
-										<a href="table_basic.html#">删除</a>
-                                    </td>
-                                </tr>
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5 style="float: none !important;">奖金明细</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-hover no-margins">
+								<thead>
+									<tr>
+										<th>消费商编号</th>
+										<th>消费商姓名</th>
+										<th>推荐人</th>
+										<th>接点人</th>
+										<th>所属报单中心</th>
+										<th>注册级别</th>
+										<th>注册时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>52345</td>
+										<td>523454235</td>
+										<td>52345</td>
+										<td>234234</td>
+										<td>52345</td>
+										<td>523454235</td>
+										<td>52345</td>
+										<td><a href="#">激活</a><a href="#">删除</a></td>
+									</tr>
 
-								<tr>
-                                    <td>
-                                        <input type="checkbox" checked class="i-checks" name="input[]">
-                                    </td>
-                                    <td>2</span>
-									<td>MiMO Show2</td>
-                                    </td>
-									<td>2016-09-09 16:21:56</td>
-									<td>1231-23-123-1-23123</td>
-                                    <td>20</td>
-                                    <td>
-										<a href="table_basic.html#">编辑</a>
-										<a href="table_basic.html#">删除</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-	<div class="row">
-	    <div class="col-sm-12 text-right">
-	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
-	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
-	        </div>
-	    </div>
+		</div>
 	</div>
-
 </div>
 <div class="footer">
 	<div class="pull-right">
@@ -557,14 +468,3 @@
 </body>
 
 </html>
-
-<!-- iCheck -->
-<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
-<script>
-   $(document).ready(function () {
-	   $('.i-checks').iCheck({
-		   checkboxClass: 'icheckbox_square-green',
-		   radioClass: 'iradio_square-green',
-	   });
-   });
-</script>

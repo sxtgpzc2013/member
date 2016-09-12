@@ -45,10 +45,10 @@
 				</ul>
 			</li>
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
+				<a href="__APP__/News/index"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司新闻</a>
+						<a href="__APP__/News/index">公司新闻</a>
 					</li>
 					<!-- <li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'add') {echo 'active';} ?>">
 						<a href="__APP__">添加新闻</a>
@@ -74,17 +74,17 @@
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">分销商管理</span> <span class="fa arrow"></span></a>
+			<li class="<?php if (MODULE_NAME == 'Corps') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Corps/index">分销商列表</a>
+						<a href="__APP__/Corps/index">消费商列表</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'activate') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Corps/activate">分销商激活</a>
+						<a href="__APP__/Corps/activate">消费商激活</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'register') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Corps/register">分销商注册</a>
+						<a href="__APP__/Corps/register">消费商注册</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'recommend_topology') {echo 'active bcolor';} ?>">
 						<a href="__APP__/Corps/recommend_topology">推荐拓扑</a>
@@ -93,7 +93,7 @@
 						<a href="__APP__/Corps/contact_topology">接点拓扑</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'upgrade') {echo 'active';} ?>">
-						<a href="__APP__/Corps/upgrade">分销商升级</a>
+						<a href="__APP__/Corps/upgrade">消费商升级</a>
 					</li>
 				</ul>
 			</li>
@@ -400,10 +400,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>分销商管理</a>
+                <a>消费商管理</a>
             </li>
             <li>
-                <strong>分销商列表</strong>
+                <strong>消费商列表</strong>
             </li>
         </ol>
 	</div>
@@ -575,10 +575,10 @@
 </div>
 <div class="footer">
 	<div class="pull-right">
-		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+		By：<a href="#" target="_blank">Rongzi Admin</a>
 	</div>
 	<div>
-		<strong>Copyright</strong> H+ &copy; 2014
+		<strong>Copyright</strong> Rongzi+ &copy; 2016
 	</div>
 </div>
 </div>

@@ -45,10 +45,10 @@
 				</ul>
 			</li>
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
+				<a href="__APP__/News/index"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司新闻</a>
+						<a href="__APP__/News/index">公司新闻</a>
 					</li>
 					<!-- <li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'add') {echo 'active';} ?>">
 						<a href="__APP__">添加新闻</a>
@@ -69,31 +69,31 @@
 						<a href="__APP__/Admins/edit">管理员修改</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
-						<a href="__APP__/index">管理员列表</a>
+						<a href="__APP__/Admins/index">管理员列表</a>
 					</li>
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">分销商管理</span> <span class="fa arrow"></span></a>
+			<li class="<?php if (MODULE_NAME == 'Corps') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">分销商列表</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/index">消费商列表</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">分销商激活</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'activate') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/activate">消费商激活</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">分销商注册</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'register') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/register">消费商注册</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">推荐拓扑</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'recommend_topology') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/recommend_topology">推荐拓扑</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">接点拓扑</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'contact_topology') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Corps/contact_topology">接点拓扑</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">分销商升级</a>
+					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'upgrade') {echo 'active';} ?>">
+						<a href="__APP__/Corps/upgrade">消费商升级</a>
 					</li>
 				</ul>
 			</li>
@@ -391,6 +391,7 @@
 
             </div>
 
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
 		<ol class="breadcrumb">
@@ -399,144 +400,110 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>新闻公告</a>
+                <a>消费商管理</a>
             </li>
             <li>
-                <strong>公司新闻</strong>
+                <strong>消费商激活</strong>
             </li>
         </ol>
 	</div>
 </div>
-<div class="wrapper wrapper-content">
-
+<div class="wrapper wrapper-content animated">
 	<div class="row">
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-success pull-right"></span>
-					<h5>会员总数</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">40 886,200</h1>
-					<small>会员总数</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-info pull-right"></span>
-					<h5>新增会员</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">275,800</h1>
-
-					<small>新增会员</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right"></span>
-					<h5>充值申请</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">106,120</h1>
-					<small>充值申请</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-danger pull-right"></span>
-					<h5>提现申请</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">80,600</h1>
-
-					<small>提现申请</small>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title" style="text-align: center;">
-							<h5 style="float: none !important;">公司财务</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins">
-								<thead>
-									<tr>
-										<th>总收入</th>
-										<th>总支出</th>
-										<th>总沉淀</th>
-										<th>拨比</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>24234</td>
-										<td>41234</td>
-										<td>41234</td>
-										<td>42314</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+				<div class="row">
+					<div class="col-sm-9 m-b-xs">
+						<p>
+							<button type="button" class="btn btn-w-m btn-danger">新增</button>
+						</p>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title" style="text-align: center;">
-							<h5 style="float: none !important;">最新半个月内公司财务</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins">
-								<thead>
-									<tr>
-										<th>日期</th>
-										<th>总收入</th>
-										<th>总支出</th>
-										<th>总沉淀</th>
-										<th>拨比</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>24234</td>
-										<td>41234</td>
-										<td>41234</td>
-										<td>42314</td>
-										<td>42314</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+				<!-- <div class="ibox-title">
+					<h5 class="ibox-title text-center">消费商</h5>
+				</div> -->
+                <div class="ibox-content">
+					<!-- <h5 class="text-center">消费商列表</h5> -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>消费商编号</th>
+                                    <th>消费商姓名</th>
+                                    <th>推荐人</th>
+                                    <th>接点人</th>
+									<th>所属报单中心</th>
+									<th>注册级别</th>
+									<th>注册时间</th>
+									<th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="i-checks" name="input[]">
+                                    </td>
+                                    <td>1</span>
+									<td>MiMO Show</td>
+                                    </td>
+									<td>3123</td>
+									<td>2</td>
+                                    <td>总裁助理</td>
+									<td>2</td>
+									<td>2</td>
+                                    <td>
+										<a class="btn btn-danger btn-sm">激活</a>
+										<a class="btn btn-info btn-sm">删除</a>
+                                    </td>
+                                </tr>
 
 
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+	<div class="row">
+	    <div class="col-sm-12 text-right">
+	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+	            <ul class="pagination">
+	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+	                    <a href="#">上一页</a></li>
+	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
+	                    <a href="#">1</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">2</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">3</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">4</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">5</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">6</a></li>
+	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
+	                    <a href="#">下一页</a></li>
+	            </ul>
+				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
+	        </div>
+	    </div>
 	</div>
+
 </div>
 <div class="footer">
 	<div class="pull-right">
-		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+		By：<a href="#" target="_blank">Rongzi Admin</a>
 	</div>
 	<div>
-		<strong>Copyright</strong> H+ &copy; 2014
+		<strong>Copyright</strong> Rongzi+ &copy; 2016
 	</div>
 </div>
 </div>
@@ -582,3 +549,14 @@
 </body>
 
 </html>
+
+<!-- iCheck -->
+<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+   $(document).ready(function () {
+	   $('.i-checks').iCheck({
+		   checkboxClass: 'icheckbox_square-green',
+		   radioClass: 'iradio_square-green',
+	   });
+   });
+</script>

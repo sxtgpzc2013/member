@@ -362,68 +362,46 @@
             <li>
                 <a href="__URL__">首页</a>
             </li>
-            <li>
-                <a>新闻公告</a>
-            </li>
-            <li>
-                <strong>公司新闻</strong>
-            </li>
         </ol>
 	</div>
 </div>
 <div class="wrapper wrapper-content">
 
 	<div class="row">
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-success pull-right"></span>
-					<h5>会员总数</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">40 886,200</h1>
-					<small>会员总数</small>
-				</div>
-			</div>
+		<div class="col-lg-2 col-md-offset-3">
+			<div class="widget  p-lg text-center">
+                <div class="m-b-md">
+					<img src="__PUBLIC__/img/tianjiaren.png" alt="" style="width:60px;height:60px"/>
+                    <h1 class="m-xs"></h1>
+                    <h3 class="no-margins" >
+                    注册消费商
+                </h3>
+                </div>
+            </div>
 		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-info pull-right"></span>
-					<h5>新增会员</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">275,800</h1>
+		<div class="col-lg-2">
+			<div class="widget  p-lg text-center">
+                <div class="m-b-md">
+                    <img src="__PUBLIC__/img/qianbao.png" alt="" style="width:60px;height:60px"/>
+                    <h1 class="m-xs"></h1>
+                    <h3 class="no-margins">
+                    申请提现
+                </h3>
+                </div>
+            </div>
+		</div>
+		<div class="col-lg-2">
+			<div class="widget  p-lg text-center">
+                <div class="m-b-md">
+                    <img src="__PUBLIC__/img/money.png" alt="" style="width:60px;height:60px"/>
+                    <h1 class="m-xs"></h1>
+                    <h3 class="no-margins">
+                    消费商转币
+                </h3>
+                </div>
+            </div>
+		</div>
 
-					<small>新增会员</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right"></span>
-					<h5>充值申请</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">106,120</h1>
-					<small>充值申请</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-danger pull-right"></span>
-					<h5>提现申请</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">80,600</h1>
-
-					<small>提现申请</small>
-				</div>
-			</div>
-		</div>
 	</div>
 
 
@@ -432,26 +410,73 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="ibox float-e-margins">
-						<div class="ibox-title" style="text-align: center;">
-							<h5 style="float: none !important;">公司财务</h5>
+						<div class="ibox-title">
+							<h5 style="float: none !important;">消费商信息</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-hover no-margins">
+								<tbody>
+									<tr>
+										<td>消费商编号:1323123</td>
+										<td>消费商姓名:12312312</td>
+										<td>消费商级别:dasdasd</td>
+										<td>消费商头衔:1星会员</td>
+									</tr>
+									<tr>
+										<td>报单币余额:1323123</td>
+										<td>奖金币余额:12312312</td>
+										<td>戎子盾:3123</td>
+										<td>奖励积分:123</td>
+									</tr>
+									<tr>
+										<td>推荐人数:1323123</td>
+										<td>左区业绩:12312312</td>
+										<td>中区业绩:4234234</td>
+										<td>右区业绩:42423</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5 style="float: none !important;">奖金明细</h5>
 						</div>
 						<div class="ibox-content">
 							<table class="table table-hover no-margins">
 								<thead>
 									<tr>
-										<th>总收入</th>
-										<th>总支出</th>
-										<th>总沉淀</th>
-										<th>拨比</th>
+										<th>日期</th>
+										<th>分红</th>
+										<th>管理补贴</th>
+										<th>互助补贴</th>
+										<th>拓展补贴</th>
+										<th>市场补贴</th>
+										<th>消费补贴</th>
+										<th>服务补贴</th>
+										<th>消费提成</th>
+										<th>应发金额累计</th>
+										<th>实发金额累计</th>
+										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>24234</td>
-										<td>41234</td>
-										<td>41234</td>
-										<td>42314</td>
+										<td>52345</td>
+										<td>523454235</td>
+										<td>52345</td>
+										<td>234234</td>
+										<td>52345</td>
+										<td>523454235</td>
+										<td>52345</td>
+										<td>234234</td>
+										<td>52345</td>
+										<td>523454235</td>
+										<td>52345</td>
+										<td><a href="#">查看明细</a></td>
 									</tr>
+
 								</tbody>
 							</table>
 						</div>
@@ -462,27 +487,21 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="ibox float-e-margins">
-						<div class="ibox-title" style="text-align: center;">
-							<h5 style="float: none !important;">最新半个月内公司财务</h5>
+						<div class="ibox-title">
+							<h5 style="float: none !important;">公司新闻</h5>
 						</div>
 						<div class="ibox-content">
 							<table class="table table-hover no-margins">
 								<thead>
 									<tr>
-										<th>日期</th>
-										<th>总收入</th>
-										<th>总支出</th>
-										<th>总沉淀</th>
-										<th>拨比</th>
+										<th>标题</th>
+										<th>时间</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>24234</td>
 										<td>41234</td>
-										<td>41234</td>
-										<td>42314</td>
-										<td>42314</td>
 									</tr>
 								</tbody>
 							</table>

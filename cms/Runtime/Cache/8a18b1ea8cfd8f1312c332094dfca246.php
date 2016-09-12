@@ -4,7 +4,6 @@
 <meta name="Keywords" content="">
 <meta name="Description" content="">
 		<link rel="stylesheet" type="text/css" href="__PUBLIC__/login/global.css?t=<?php echo time();?>">
-		<link rel="stylesheet" type="text/css" href="http://qishidai.com/stylesheets/web/style-2.0.css?v=2014-08-23">
 		<link rel="stylesheet" type="text/css" href="__PUBLIC__/login/form.css">
 		<script src="__PUBLIC__/login/application-be8fd55665ede83da3b72122e0326b30.js" type="text/javascript"></script>
 	</head>

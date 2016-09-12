@@ -2,9 +2,9 @@
 return array(
 	//'配置项'=>'配置值'
 	'DB_TYPE'=>'mysql',
-	'DB_USER'=>'test',
-	'DB_PWD'=>'test',
-	'DB_HOST'=>'182.92.223.88',
+	'DB_USER'=>'root',
+	'DB_PWD'=>'root',
+	'DB_HOST'=>'localhost',
 	'DB_PORT'=>'3306',
 	'DB_PREFIX'=>'rz_',
 	'URL_MODEL' => '1',

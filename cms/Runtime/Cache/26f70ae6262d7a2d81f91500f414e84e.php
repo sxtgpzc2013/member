@@ -20,7 +20,7 @@
     <link href="__PUBLIC__/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
     <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
-    <link href="__PUBLIC__/css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="__PUBLIC__/css/cms_style.css?v=2.2.0" rel="stylesheet">
 
 </head>
 
@@ -39,113 +39,79 @@
 			<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active';} ?>">
+					<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
 						<a href="__APP__">首页</a>
 					</li>
 				</ul>
 			</li>
+			<li class="<?php if (MODULE_NAME == 'Consumers') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Consumers' && ACTION_NAME == 'edit_info') {echo 'active';} ?>">
+						<a href="__APP__/Consumers/edit_info">修改资料</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Consumers' && ACTION_NAME == 'edit_password') {echo 'active';} ?>">
+						<a href="__APP__/Consumers/edit_password">修改密码</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<?php if (MODULE_NAME == 'Teams') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-envelope"></i> <span class="nav-label">团队管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'activate') {echo 'active';} ?>">
+						<a href="__APP__/Teams/activate">消费商激活</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'register') {echo 'active';} ?>">
+						<a href="__APP__/Teams/register">注册消费商</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'recommend_relation') {echo 'active';} ?>">
+						<a href="__APP__/Teams/recommend_relation">推荐关系</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'contact_relation') {echo 'active';} ?>">
+						<a href="__APP__/Teams/contact_relation">接点关系</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">奖金管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">奖金明细</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">财务流水</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现申请</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现记录</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">消费商转币</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">币种转换</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">转币记录</a>
+					</li>
+				</ul>
+			</li>
+
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司新闻</a>
-					</li>
-					<!-- <li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'add') {echo 'active';} ?>">
-						<a href="__APP__">添加新闻</a>
-					</li> -->
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Admins') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">管理员列表</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'auth') {echo 'active bcolor';} ?>">
-						<a href="__APP__">权限管理</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'add') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Admins/add">新增管理员</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'edit') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Admins/edit">管理员修改</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Admins/index">管理员列表</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">分销商管理</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">分销商列表</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'activate') {echo 'active';} ?>">
-						<a href="__APP__">分销商激活</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'register') {echo 'active';} ?>">
-						<a href="__APP__">分销商注册</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'recommend_topology') {echo 'active';} ?>">
-						<a href="__APP__">推荐拓扑</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'contact_topology') {echo 'active';} ?>">
-						<a href="__APP__">接点拓扑</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Corps' && ACTION_NAME == 'upgrade') {echo 'active';} ?>">
-						<a href="__APP__">分销商升级</a>
-					</li>
-				</ul>
-			</li>
-
-
-			<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">奖金统计</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">业绩统计</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">财务流水</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">转账明细</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司充值</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司扣币</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司财务</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现申请</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现记录</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">充值记录</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">系统设置</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">计划任务</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">奖金设置</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">系统设置</a>
+						<a href="__APP__">新闻资讯</a>
 					</li>
 				</ul>
 			</li>
@@ -371,17 +337,15 @@
 	</div>
 </nav>
 
-        <div id="page-wrapper" class="white-bg dashbard-1">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
 				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <ul class="nav navbar-top-links navbar-right" >
-        <li >
-            <span class="m-r-sm text-muted welcome-message"  style="color:#ffffff !important;">
-            <strong class="font-bold"><?php echo $_SESSION['Rongzi']['admin']['name'];?></strong>欢迎管理后台
-            <a href="__URL__" title="返回首页"  style="color:#ffffff !important;"><i class="fa fa-home"></i></a></span>
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
         </li>
         <li>
-            <a href="login.html"  style="color:#ffffff !important;">
+            <a href="login.html"  style="color:#000000 !important;">
                 <i class="fa fa-sign-out"></i> 退出
             </a>
         </li>
@@ -400,10 +364,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>新闻公告</a>
+                <a>消费商管理</a>
             </li>
             <li>
-                <strong>公司新闻</strong>
+                <strong>修改密码</strong>
             </li>
         </ol>
 	</div>
@@ -411,53 +375,114 @@
 <div class="wrapper wrapper-content animated">
 	<div class="row">
         <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5 class="text-center">新增管理员</h5>
+			<div class="panel blank-panel">
+				<div class="ibox-title">
+					<h5>修改密码</h5>
+				</div>
+                <div class="panel-heading">
+                    <div class="panel-options">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs_panels.html#tab-1">修改一级密码</a>
+                            </li>
+                            <li class=""><a data-toggle="tab" href="tabs_panels.html#tab-2">修改二级密码</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+							<div class="ibox">
+				                <form method="get" class="form-horizontal">
+				                <div class="ibox-content" style="border:0px">
+				                        <div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原一级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>新一级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>确认新密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+											<div class="col-sm-4 col-sm-offset-2">
+												<button class="btn btn-warning" type="submit">确认</button>
+												<button type="reset" class="btn btn-outline btn-warning">重置</button>
+												<button class="btn btn-info" type="">返回</button>
+											</div>
+										</div>
+				                </div>
+								</form>
+
+				            </div>
+						</div>
+
+                        <div id="tab-2" class="tab-pane">
+							<div class="ibox">
+				                <form method="get" class="form-horizontal">
+				                <div class="ibox-content" style="border:0px">
+				                        <div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原二级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>新二级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>确认新密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+											<div class="col-sm-4 col-sm-offset-2">
+												<button class="btn btn-warning" type="submit">确认</button>
+												<button type="reset" class="btn btn-outline btn-warning">重置</button>
+												<button class="btn btn-info" type="">返回</button>
+											</div>
+										</div>
+				                </div>
+								</form>
+
+				            </div>
+                        </div>
+                    </div>
 
                 </div>
-                <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*管理员名：</label>
-                            <div class="col-sm-6">
-                                <input id="username" name="username" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*密码：</label>
-                            <div class="col-sm-6">
-                                <input id="password" name="password" class="form-control" type="password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*确认密码：</label>
-                            <div class="col-sm-6">
-                                <input id="confirm_password" name="confirm_password" class="form-control" type="password">
-                            </div>
-							<div class="col-sm-3">
-								<span class="help-block">(不能小于6位数,且不能为纯数字)</span>
-							</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*E-mail：</label>
-                            <div class="col-sm-6">
-                                <input id="email" name="email" class="form-control" type="email">
-                            </div>
-							<div class="col-sm-3">
-								<span class="help-block">(用于找回密码)</span>
-							</div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-3">
-                                <button class="btn btn-primary" type="submit">提交</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+
             </div>
         </div>
     </div>
+
 
 
 </div>
@@ -513,70 +538,13 @@
 
 </html>
 
-<!-- jQuery Validation plugin javascript-->
-<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<!-- iCheck -->
+<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
 <script>
-   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
-   $.validator.setDefaults({
-	   highlight: function (element) {
-		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-	   },
-	   success: function (element) {
-		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
-	   },
-	   errorElement: "span",
-	   errorClass: "help-block m-b-none",
-	   validClass: "help-block m-b-none"
-
-
-   });
-
-	//以下为官方示例
-   $().ready(function () {
-	   // validate signup form on keyup and submit
-	   $("#signupForm").validate({
-		   rules: {
-			   firstname: "required",
-			   lastname: "required",
-			   username: {
-				   required: true
-			   },
-			   password: {
-				   required: true,
-				   minlength: 6
-			   },
-			   confirm_password: {
-				   required: true,
-				   minlength: 5,
-				   equalTo: "#password"
-			   },
-			   email: {
-				   required: true,
-				   email: true
-			   },
-			   topic: {
-				   required: "#newsletter:checked",
-				   minlength: 2
-			   },
-			   agree: "required"
-		   },
-		   messages: {
-			   username: {
-				   required: "请输入管理员名"
-			   },
-			   password: {
-				   required: "请输入您的密码",
-				   minlength: "密码必须6个字符以上"
-			   },
-			   confirm_password: {
-				   required: "请再次输入密码",
-				   minlength: "密码必须5个字符以上",
-				   equalTo: "两次输入的密码不一致"
-			   },
-			   email: "请输入您的E-mail",
-			   agree: "请输入邮箱"
-		   }
+   $(document).ready(function () {
+	   $('.i-checks').iCheck({
+		   checkboxClass: 'icheckbox_square-green',
+		   radioClass: 'iradio_square-green',
 	   });
    });
 </script>
