@@ -10,7 +10,7 @@
  * @time
  * @version 1.0.0
  */
-	class TeamsAction extends CommonAction {
+	class AddressAction extends CommonAction {
 
 		/**
 		 * 构造方法-实例化MODEL
@@ -26,7 +26,7 @@
 		{
 			parent::__construct();
 
-			$this -> model = D('Teams');
+			$this -> model = D('Address');
 		}
 
 	    /**

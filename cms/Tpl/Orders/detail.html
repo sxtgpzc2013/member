@@ -1,15 +1,23 @@
 <include file="public:header" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
 	<div class="col-lg-10"  style="padding:0px;">
 		<ol class="breadcrumb">
 			<a href="__URL__"><i class="fa fa-home"></i></a>
             <li>
-                <a href="__URL__">首页</a>
+                <a href="__URL__">我的商城</a>
+            </li>
+			<li>
+                <a href="__URL__">我的订单</a>
+            </li>
+			<li>
+                <strong>订单详情</strong>
             </li>
         </ol>
 	</div>
 </div>
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content container-fluid">
 
 	<div class="row">
 		<div class="col-lg-2 col-md-offset-3">
@@ -55,54 +63,17 @@
 				<div class="col-lg-12">
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
-							<h5 style="float: none !important;">消费商信息</h5>
+							<h5 style="float: none !important;">我的购物车</h5>
 						</div>
 						<div class="ibox-content">
-							<table class="table table-hover no-margins table-bordered">
-								<tbody>
-									<tr>
-										<td>消费商编号:1323123</td>
-										<td>消费商姓名:12312312</td>
-										<td>消费商级别:dasdasd</td>
-										<td>消费商头衔:1星会员</td>
-									</tr>
-									<tr>
-										<td>报单币余额:1323123</td>
-										<td>奖金币余额:12312312</td>
-										<td>戎子盾:3123</td>
-										<td>奖励积分:123</td>
-									</tr>
-									<tr>
-										<td>推荐人数:1323123</td>
-										<td>左区业绩:12312312</td>
-										<td>中区业绩:4234234</td>
-										<td>右区业绩:42423</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5 style="float: none !important;">奖金明细</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins table-bordered">
+							<table class="table table-hover no-margins table-bordered table-container">
 								<thead>
 									<tr>
-										<th>日期</th>
-										<th>分红</th>
-										<th>管理补贴</th>
-										<th>互助补贴</th>
-										<th>拓展补贴</th>
-										<th>市场补贴</th>
-										<th>消费补贴</th>
-										<th>服务补贴</th>
-										<th>消费提成</th>
-										<th>应发金额累计</th>
-										<th>实发金额累计</th>
-										<th>操作</th>
+										<th>商品详情</th>
+										<th>商品名称</th>
+										<th>奖金币</th>
+										<th>戎子盾</th>
+										<th>数量</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -112,13 +83,14 @@
 										<td>52345</td>
 										<td>234234</td>
 										<td>52345</td>
+									</tr>
+
+									<tr>
+										<td>52345</td>
 										<td>523454235</td>
 										<td>52345</td>
 										<td>234234</td>
 										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td><a href="#">查看明细</a></td>
 									</tr>
 
 								</tbody>
@@ -129,33 +101,72 @@
 			</div>
 
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5 style="float: none !important;">公司新闻</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins table-bordered">
-								<thead>
-									<tr>
-										<th>标题</th>
-										<th>时间</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>24234</td>
-										<td>41234</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+			    <div class="col-sm-6">
+					<div class="ibox-content" style="border:0">
+						<table class="table table-hover no-margins table-bordered">
+							<tbody>
+								<tr>
+									<td>订单号</td>
+									<td>2016312312312312</td>
+								</tr>
+								<tr>
+									<td>收货人姓名</td>
+									<td>523454235</td>
+								</tr>
+								<tr>
+									<td>收货人地址</td>
+									<td>523454235</td>
+								</tr>
+								<tr>
+									<td>订单备注</td>
+									<td>523454235</td>
+								</tr>
+								<tr>
+									<td>物流公司</td>
+									<td>523454235</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+			    </div>
+
+				<div class="col-sm-6">
+					<div class="ibox-content" style="border:0">
+						<table class="table table-hover no-margins table-bordered">
+							<tbody>
+								<tr>
+									<td>会员编号</td>
+									<td>00001</td>
+								</tr>
+								<tr>
+									<td>收货人电话</td>
+									<td>523454235</td>
+								</tr>
+								<tr>
+									<td>订单时间</td>
+									<td>523454235</td>
+								</tr>
+								<tr>
+									<td>物流号</td>
+									<td>523454235</td>
+								</tr>
+								<tr>
+									<td>物流电话</td>
+									<td>523454235</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+			    </div>
+
+				<div class="col-sm-12 text-left">
+					<div class="ibox-content" style="border:0">
+						<button type="button" class="btn btn-w-m btn-warning">确认收货</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
+
 </div>
 <include file="public:footer" />

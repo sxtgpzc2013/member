@@ -116,23 +116,6 @@
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Products' || MODULE_NAME == 'Carts' || MODULE_NAME == 'Orders' || MODULE_NAME == 'Address') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">我的商城</span> <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Products' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__/Products/index">商品列表</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Carts' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__/Carts/index">我的购物车</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Orders' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__/Orders/index">订单管理</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Address' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__/Address/index">地址管理</a>
-					</li>
-				</ul>
-			</li>
 
 			<!-- <li>
 				<a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">v2.0新增</span><span class="fa arrow"></span></a>
@@ -379,157 +362,164 @@
             <li>
                 <a href="__URL__">首页</a>
             </li>
+			<li>
+                <a>团队管理</a>
+            </li>
+            <li>
+                <strong>消费商激活</strong>
+            </li>
         </ol>
 	</div>
 </div>
-<div class="wrapper wrapper-content">
-
-	<div class="row">
-		<div class="col-lg-2 col-md-offset-3">
-			<div class="widget  p-lg text-center">
-                <div class="m-b-md">
-					<img src="__PUBLIC__/img/tianjiaren.png" alt="" style="width:60px;height:60px"/>
-                    <h1 class="m-xs"></h1>
-                    <h3 class="no-margins" >
-                    注册消费商
-                </h3>
-                </div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="nestable-menu">
+                <button type="button" data-action="expand-all" class="btn btn-white btn-sm">展开所有</button>
+                <button type="button" data-action="collapse-all" class="btn btn-white btn-sm">收起所有</button>
             </div>
-		</div>
-		<div class="col-lg-2">
-			<div class="widget  p-lg text-center">
-                <div class="m-b-md">
-                    <img src="__PUBLIC__/img/qianbao.png" alt="" style="width:60px;height:60px"/>
-                    <h1 class="m-xs"></h1>
-                    <h3 class="no-margins">
-                    申请提现
-                </h3>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>推荐关系</h5>
                 </div>
-            </div>
-		</div>
-		<div class="col-lg-2">
-			<div class="widget  p-lg text-center">
-                <div class="m-b-md">
-                    <img src="__PUBLIC__/img/money.png" alt="" style="width:60px;height:60px"/>
-                    <h1 class="m-xs"></h1>
-                    <h3 class="no-margins">
-                    消费商转币
-                </h3>
+                <div class="ibox-content">
+
+                    <p class="m-b-lg">
+                        牛牛 当前共有20代会员
+                    </p>
+
+                    <div class="dd" id="nestable2">
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="1">
+                                <div class="dd-handle">
+                                    <span class="label label-info"><i class="fa fa-users"></i></span> 4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+                                </div>
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="2">
+                                        <div class="dd-handle">
+                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+
+                                        </div>
+										<ol class="dd-list">
+		                                    <li class="dd-item" data-id="2">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                    <li class="dd-item" data-id="3">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                    <li class="dd-item" data-id="4">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                </ol>
+                                    </li>
+                                    <li class="dd-item" data-id="3">
+                                        <div class="dd-handle">
+                                            <span class="label label-info"><i class="fa fa-bolt"></i></span> 筛选
+                                        </div>
+                                    </li>
+                                    <li class="dd-item" data-id="4">
+                                        <div class="dd-handle">
+                                            <span class="label label-info"><i class="fa fa-laptop"></i></span> 电脑
+                                        </div>
+										<ol class="dd-list">
+		                                    <li class="dd-item" data-id="2">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                    <li class="dd-item" data-id="3">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+												<ol class="dd-list">
+				                                    <li class="dd-item" data-id="2">
+				                                        <div class="dd-handle">
+				                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+				                                        </div>
+				                                    </li>
+				                                    <li class="dd-item" data-id="3">
+				                                        <div class="dd-handle">
+				                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+				                                        </div>
+				                                    </li>
+				                                    <li class="dd-item" data-id="4">
+				                                        <div class="dd-handle">
+				                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+				                                        </div>
+				                                    </li>
+				                                </ol>
+		                                    </li>
+		                                    <li class="dd-item" data-id="4">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                </ol>
+                                    </li>
+                                </ol>
+                            </li>
+
+                            <li class="dd-item" data-id="5">
+                                <div class="dd-handle">
+                                    <span class="label label-warning"><i class="fa fa-users"></i></span> 用户
+                                </div>
+								<ol class="dd-list">
+									<li class="dd-item" data-id="2">
+										<div class="dd-handle">
+											<span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+										</div>
+									</li>
+									<li class="dd-item" data-id="3">
+										<div class="dd-handle">
+											<span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+										</div>
+									</li>
+									<li class="dd-item" data-id="4">
+										<div class="dd-handle">
+											<span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+										</div>
+										<ol class="dd-list">
+		                                    <li class="dd-item" data-id="2">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                    <li class="dd-item" data-id="3">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                    <li class="dd-item" data-id="4">
+		                                        <div class="dd-handle">
+		                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+		                                        </div>
+		                                    </li>
+		                                </ol>
+									</li>
+								</ol>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <textarea id="nestable2-output" class="form-control"></textarea>
+
+
                 </div>
+
             </div>
-		</div>
-
-	</div>
-
-
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5 style="float: none !important;">消费商信息</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins table-bordered">
-								<tbody>
-									<tr>
-										<td>消费商编号:1323123</td>
-										<td>消费商姓名:12312312</td>
-										<td>消费商级别:dasdasd</td>
-										<td>消费商头衔:1星会员</td>
-									</tr>
-									<tr>
-										<td>报单币余额:1323123</td>
-										<td>奖金币余额:12312312</td>
-										<td>戎子盾:3123</td>
-										<td>奖励积分:123</td>
-									</tr>
-									<tr>
-										<td>推荐人数:1323123</td>
-										<td>左区业绩:12312312</td>
-										<td>中区业绩:4234234</td>
-										<td>右区业绩:42423</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5 style="float: none !important;">奖金明细</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins table-bordered">
-								<thead>
-									<tr>
-										<th>日期</th>
-										<th>分红</th>
-										<th>管理补贴</th>
-										<th>互助补贴</th>
-										<th>拓展补贴</th>
-										<th>市场补贴</th>
-										<th>消费补贴</th>
-										<th>服务补贴</th>
-										<th>消费提成</th>
-										<th>应发金额累计</th>
-										<th>实发金额累计</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td><a href="#">查看明细</a></td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5 style="float: none !important;">公司新闻</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins table-bordered">
-								<thead>
-									<tr>
-										<th>标题</th>
-										<th>时间</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>24234</td>
-										<td>41234</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
+        </div>
+    </div>
 </div>
 <div class="footer">
 	<div class="pull-right">
@@ -582,3 +572,44 @@
 </body>
 
 </html>
+
+<!-- Custom and plugin javascript -->
+   <script src="__PUBLIC__/js/hplus.js?v=2.2.0"></script>
+   <script src="__PUBLIC__/js/plugins/pace/pace.min.js"></script>
+
+   <!-- Nestable List -->
+   <script src="__PUBLIC__/js/plugins/nestable/jquery.nestable.js"></script>
+   <script>
+	   $(document).ready(function () {
+
+		   var updateOutput = function (e) {
+			   var list = e.length ? e : $(e.target),
+				   output = list.data('output');
+			   if (window.JSON) {
+				   output.val(window.JSON.stringify(list.nestable('serialize'))); //, null, 2));
+			   } else {
+				   output.val('浏览器不支持');
+			   }
+		   };
+
+		   // activate Nestable for list 2
+		   $('#nestable2').nestable({
+			   group: 1
+		   }).on('change', updateOutput);
+
+		   updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+
+		   $('#nestable-menu').on('click', function (e) {
+			   var target = $(e.target),
+				   action = target.data('action');
+			   if (action === 'expand-all') {
+				   $('.dd').nestable('expandAll');
+			   }
+			   if (action === 'collapse-all') {
+				   $('.dd').nestable('collapseAll');
+			   }
+		   });
+
+		    $('.dd').nestable('collapseAll');
+	   });
+   </script>

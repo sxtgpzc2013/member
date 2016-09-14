@@ -1,4 +1,32 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+
+    <title>管理后台</title>
+    <meta name="keywords" content="管理后台">
+    <meta name="description" content="管理后台">
+
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="__PUBLIC__/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="__PUBLIC__/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/cms_style.css?v=2.2.0" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+    	<nav class="navbar-default navbar-static-side" role="navigation">
 	<div class="sidebar-collapse">
 		<ul class="nav" id="side-menu">
 			<li class="nav-header">
@@ -325,3 +353,185 @@
 
 	</div>
 </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
+        </li>
+        <li>
+            <a href="login.html"  style="color:#000000 !important;">
+                <i class="fa fa-sign-out"></i> 退出
+            </a>
+        </li>
+    </ul>
+
+</nav>
+
+            </div>
+
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>消费商管理</a>
+            </li>
+            <li>
+                <strong>修改资料</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <form method="get" class="form-horizontal">
+                <div class="ibox-title">
+                    <h5>修改资料</h5>
+                </div>
+                <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商编号</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商姓名</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商身份证号</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商手机号</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户银行</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户行地址</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"><span style="color:red">*</span>银行卡号</label>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								<button class="btn btn-warning" type="submit">确认</button>
+								<button type="reset" class="btn btn-outline btn-warning">重置</button>
+								<button class="btn btn-info" type="">返回</button>
+							</div>
+						</div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<div class="footer">
+	<div class="pull-right">
+		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+	</div>
+	<div>
+		<strong>Copyright</strong> H+ &copy; 2014
+	</div>
+</div>
+</div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Flot -->
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="__PUBLIC__/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/js/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="__PUBLIC__/js/hplus.js?v=2.2.0"></script>
+<script src="__PUBLIC__/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="__PUBLIC__/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="__PUBLIC__/js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="__PUBLIC__/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="__PUBLIC__/js/demo/sparkline-demo.js"></script>
+</body>
+
+</html>
+
+<!-- iCheck -->
+<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+   $(document).ready(function () {
+	   $('.i-checks').iCheck({
+		   checkboxClass: 'icheckbox_square-green',
+		   radioClass: 'iradio_square-green',
+	   });
+   });
+</script>

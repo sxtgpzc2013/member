@@ -11,7 +11,7 @@
  * @version 1.0.0
  */
 
-	class OrdersModel extends CommonModel
+	class CartsModel extends CommonModel
 	{
 
 	}

@@ -1,16 +1,16 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
- * @last
- * @alter
+ * @last update 2014-06-12
+ * @alter 张睿
  * @version 1.0.0
  *
- * 功能简介：
- * @author
+ * 功能简介：商户后台首页控制器类
+ * @author 张睿
  * @copyright
- * @time
+ * @time 2014-06-12
  * @version 1.0.0
  */
-	class TeamsAction extends CommonAction {
+	class FinancesAction extends CommonAction {
 
 		/**
 		 * 构造方法-实例化MODEL
@@ -26,7 +26,7 @@
 		{
 			parent::__construct();
 
-			$this -> model = D('Teams');
+			$this -> model = D('Finances');
 		}
 
 	    /**
@@ -41,6 +41,6 @@
 		 */
 	    public function index()
 	    {
-			$this->display();
+			$this -> display();
 	    }
 	}
