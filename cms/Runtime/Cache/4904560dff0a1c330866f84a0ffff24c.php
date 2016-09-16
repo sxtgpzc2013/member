@@ -81,7 +81,11 @@
 						<a href="__APP__/Bonus/index">奖金明细</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+<<<<<<< HEAD
+						<a href="__APP__/Bonus/flow">财务流水</a>
+=======
 						<a href="__APP__/Bonus/index">财务流水</a>
+>>>>>>> ed70730ff371011c305651bd3fea9b7e9088746f
 					</li>
 				</ul>
 			</li>
@@ -89,20 +93,20 @@
 			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现申请</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_apply') {echo 'active';} ?>">
+						<a href="__APP__/Finances/cash_apply">提现申请</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_index') {echo 'active';} ?>">
+						<a href="__APP__/Finances/cash_index">提现记录</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">消费商转币</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer') {echo 'active';} ?>">
+						<a href="__APP__/Finances/transfer">消费商转币</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">币种转换</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'convert') {echo 'active';} ?>">
+						<a href="__APP__/Finances/convert">币种转换</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">转币记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/transfer_list">转币记录</a>
 					</li>
 				</ul>
 			</li>
@@ -396,7 +400,7 @@
 
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
-							<h5 style="float: none !important;">奖金明细</h5>
+							<h5 style="float: none !important;">消费商激活</h5>
 						</div>
 						<div class="ibox-content">
 							<table class="table table-hover no-margins table-bordered">

@@ -46,30 +46,26 @@
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+			<li class="<?php if (MODULE_NAME == 'Bonus') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">奖金管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
+					<li class="<?php if (MODULE_NAME == 'Bonus' && (ACTION_NAME == 'index' || ACTION_NAME == 'info')) {echo 'active';} ?>">
 						<a href="__APP__/Bonus/index">奖金明细</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
-<<<<<<< HEAD
+					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'flow') {echo 'active';} ?>">
 						<a href="__APP__/Bonus/flow">财务流水</a>
-=======
-						<a href="__APP__/Bonus/index">财务流水</a>
->>>>>>> ed70730ff371011c305651bd3fea9b7e9088746f
 					</li>
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+			<li class="<?php if (MODULE_NAME == 'Finances') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_apply') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_apply">提现申请</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash') {echo 'active';} ?>">
+						<a href="__APP__/Finances/cash">提现申请</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_index') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_index">提现记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/cash_list">提现记录</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer') {echo 'active';} ?>">
 						<a href="__APP__/Finances/transfer">消费商转币</a>
@@ -87,7 +83,7 @@
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">新闻资讯</a>
+						<a href="__APP__/News/index">新闻资讯</a>
 					</li>
 				</ul>
 			</li>

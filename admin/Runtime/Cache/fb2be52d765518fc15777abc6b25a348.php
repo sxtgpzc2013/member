@@ -34,12 +34,13 @@
             </div>
             <h3>欢迎使用 会员系统</h3>
 
-            <form class="m-t" role="form" action="__APP__/Login/login_do" method="post" >
+            <form class="m-t" role="form" action="__APP__/Login/login" method="post" >
+                <input type="hidden" class="form-control" required="" name="form_key" value="yes">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名" required="" name="corp_username">
+                    <input type="text" class="form-control" placeholder="用户名" required="" name="username">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="" name="corp_password">
+                    <input type="password" class="form-control" placeholder="密码" required="" name="password">
                 </div>
                 <input class="login-txt" id="" name="form_key" size="30" type="hidden" value="yes">
                 <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="lsdV0Sjl8QbKoPLltIOOwEisIzUxNRUNo2liv+O9xIA=">
