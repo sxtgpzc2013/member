@@ -36,11 +36,12 @@
 
             <form class="m-t" role="form" action="__APP__/Login/login_do" method="post" >
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="用户名" required="">
+                    <input type="text" class="form-control" placeholder="用户名" required="" name="corp_username">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="">
+                    <input type="password" class="form-control" placeholder="密码" required="" name="corp_password">
                 </div>
+                <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="lsdV0Sjl8QbKoPLltIOOwEisIzUxNRUNo2liv+O9xIA=">
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
 
