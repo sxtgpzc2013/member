@@ -1,4 +1,32 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+
+    <title>管理后台</title>
+    <meta name="keywords" content="管理后台">
+    <meta name="description" content="管理后台">
+
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="__PUBLIC__/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="__PUBLIC__/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/cms_style.css?v=2.2.0" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+    	<nav class="navbar-default navbar-static-side" role="navigation">
 	<div class="sidebar-collapse">
 		<ul class="nav" id="side-menu">
 			<li class="nav-header">
@@ -53,11 +81,7 @@
 						<a href="__APP__/Bonus/index">奖金明细</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
-<<<<<<< HEAD
-						<a href="__APP__/Bonus/flow">财务流水</a>
-=======
 						<a href="__APP__/Bonus/index">财务流水</a>
->>>>>>> ed70730ff371011c305651bd3fea9b7e9088746f
 					</li>
 				</ul>
 			</li>
@@ -65,20 +89,20 @@
 			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_apply') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_apply">提现申请</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现申请</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_index') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_index">提现记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现记录</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer">消费商转币</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">消费商转币</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'convert') {echo 'active';} ?>">
-						<a href="__APP__/Finances/convert">币种转换</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">币种转换</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer_list') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer_list">转币记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">转币记录</a>
 					</li>
 				</ul>
 			</li>
@@ -329,3 +353,163 @@
 
 	</div>
 </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
+        </li>
+        <li>
+            <a href="login.html"  style="color:#000000 !important;">
+                <i class="fa fa-sign-out"></i> 退出
+            </a>
+        </li>
+    </ul>
+
+</nav>
+
+            </div>
+
+<link rel="stylesheet" href="__PUBLIC__/css/jquery.orgchart.css">
+<link rel="stylesheet" href="__PUBLIC__/css/style2.css">
+<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
+	<div class="col-lg-10"  style="padding:0px;">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+			<li>
+                <a>团队管理</a>
+            </li>
+            <li>
+                <strong>接点关系</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>接点关系</h5>
+                </div>
+                <div class="ibox-content">
+					<div id="chart-container"></div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+	<div class="pull-right">
+		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+	</div>
+	<div>
+		<strong>Copyright</strong> H+ &copy; 2014
+	</div>
+</div>
+</div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Flot -->
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="__PUBLIC__/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/js/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="__PUBLIC__/js/hplus.js?v=2.2.0"></script>
+<script src="__PUBLIC__/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="__PUBLIC__/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="__PUBLIC__/js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="__PUBLIC__/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="__PUBLIC__/js/demo/sparkline-demo.js"></script>
+</body>
+
+</html>
+
+<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="__PUBLIC__/js/html2canvas.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.orgchart.js"></script>
+<script type="text/javascript">
+'use strict';
+(function($){
+  $(function() {
+	var datascource = {
+	  'name': 'COMPANY ONE [BIG BOSS][532人]',
+	  'title': '级别 : 四星消费',
+	  'achievement': '3878789789.00',
+	  'surplus':'123132',
+	  'relationship': { 'children_num': 3 },
+	  'children': [
+		{ 'name': 'Bo Miao', 'title': 'department manager', 'relationship': { 'children_num': 0, 'parent_num': 1,'sibling_num': 1}, 'is_null' : true,
+		  'children': [
+
+		  ]
+		},
+		{ 'name': 'Su Miao', 'title': 'department manager', 'relationship': { 'children_num': 2, 'parent_num': 1,'sibling_num': 1 },
+		  'children': [
+			{ 'name': 'Tie Hua', 'title': 'senior engineer', 'relationship': { 'children_num': 0, 'parent_num': 1,'sibling_num': 1 },'achievement': '3878789789.00','surplus':'123132'},
+			{ 'name': 'Hei Hei', 'title': 'senior engineer', 'relationship': { 'children_num': 2, 'parent_num': 1,'sibling_num': 1 }, 'is_null' : true },
+			{ 'name': 'Hei Hei', 'title': 'senior engineer', 'relationship': { 'children_num': 2, 'parent_num': 1,'sibling_num': 1 },'achievement': '3878789789.00','surplus':'123132'}
+		  ],'achievement': '3878789789.00','surplus':'123132'
+		},
+		{ 'name': 'Yu Jie', 'title': 'department manager', 'relationship': { 'children_num': 0, 'parent_num': 1,'sibling_num': 7 },
+		  'children': [
+			{ 'name': 'Tie Hua', 'title': 'senior engineer', 'relationship': { 'children_num': 0, 'parent_num': 1,'sibling_num': 1 }, 'is_null' : true },
+			{ 'name': 'Hei Hei', 'title': 'senior engineer', 'relationship': { 'children_num': 2, 'parent_num': 1,'sibling_num': 1 },'achievement': '3878789789.00','surplus':'123132'},
+			{ 'name': 'Hei Hei', 'title': 'senior engineer', 'relationship': { 'children_num': 2, 'parent_num': 1,'sibling_num': 1 }, 'is_null' : true }
+		  ],'achievement': '3878789789.00','surplus':'123132'
+		}
+	  ]
+	};
+
+	$('#chart-container').orgchart({
+	  'data' : datascource,
+	  'depth': 3,
+	  'nodeTitle': 'name',
+	  'nodeContent': 'title',
+	  'nodeAchievement': 'achievement',
+	  'nodeSurplus' : 'surplus',
+	  'is_null' : 'is_null'
+	});
+
+  });
+
+})(jQuery);
+</script>

@@ -1,0 +1,149 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>财务管理</a>
+            </li>
+            <li>
+                <strong>提现申请</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="text-center">提现申请</h5>
+
+                </div>
+                <div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm" action="">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*消费商编号:</label>
+                            <div class="col-sm-6">
+                                <span class="help-block">00001[牛牛]</span>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*奖金币余额:</label>
+							<div class="col-sm-6">
+								<span class="help-block">12312313(手续费10%，最低提现金额500,并且必须是1的整数倍)</span>
+							</div>
+						</div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*提取金额：</label>
+                            <div class="col-sm-6">
+                                <input id="money" name="money" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*手机号：</label>
+                            <div class="col-sm-6">
+                                <input id="mobile" name="mobile" class="form-control" type="text">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*银行卡号：</label>
+                            <div class="col-sm-6">
+                                <input id="card_number" name="card_number" class="form-control" type="text">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*开户银行：</label>
+                            <div class="col-sm-6">
+                                <input id="card_bank" name="card_bank" class="form-control" type="text">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*开户行地址：</label>
+                            <div class="col-sm-6">
+                                <input id="card_address" name="card_address" class="form-control" type="text">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*开户人：</label>
+                            <div class="col-sm-6">
+                                <input id="card_user" name="card_user" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-warning" type="submit">确定</button>
+								<button class="btn btn-warning btn-outline" type="reset">重置</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<include file="public:footer" />
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+	$().ready(function () {
+		// validate signup form on keyup and submit
+		$("#signupForm").validate({
+			rules: {
+				money: {
+					required: true
+				},
+				mobile: {
+					required: true,
+					minlength: 11
+				},
+				card_number: {
+					required: true
+				},
+				card_bank: {
+					required: true
+				},
+				card_address: {
+					required: true
+				},
+				card_user: {
+					required: true
+				},
+				agree: "required"
+			},
+			messages: {
+				money: {
+					required: "请输入提取金额"
+				},
+				mobile: {
+					required: "请输入手机号"
+				}
+			}
+		});
+	});
+</script>

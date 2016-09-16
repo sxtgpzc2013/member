@@ -8,10 +8,10 @@
  * @author 张睿
  * @copyright 张睿
  * @time 2014-08-11
- * @version 1.0.0 
+ * @version 1.0.0
  */
 
-	class ProductSortsModel extends CommonModel
+	class DemoModel extends CommonModel
 	{
 		/**
 		 * 查询单条
@@ -20,7 +20,7 @@
 		 *   parameter 	参数
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
-		
+
 	}

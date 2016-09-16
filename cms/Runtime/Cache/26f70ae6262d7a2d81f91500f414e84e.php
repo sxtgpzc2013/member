@@ -1,4 +1,32 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+
+    <title>管理后台</title>
+    <meta name="keywords" content="管理后台">
+    <meta name="description" content="管理后台">
+
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="__PUBLIC__/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="__PUBLIC__/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/cms_style.css?v=2.2.0" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+    	<nav class="navbar-default navbar-static-side" role="navigation">
 	<div class="sidebar-collapse">
 		<ul class="nav" id="side-menu">
 			<li class="nav-header">
@@ -53,11 +81,7 @@
 						<a href="__APP__/Bonus/index">奖金明细</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
-<<<<<<< HEAD
-						<a href="__APP__/Bonus/flow">财务流水</a>
-=======
 						<a href="__APP__/Bonus/index">财务流水</a>
->>>>>>> ed70730ff371011c305651bd3fea9b7e9088746f
 					</li>
 				</ul>
 			</li>
@@ -65,20 +89,20 @@
 			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_apply') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_apply">提现申请</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现申请</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_index') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_index">提现记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现记录</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer">消费商转币</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">消费商转币</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'convert') {echo 'active';} ?>">
-						<a href="__APP__/Finances/convert">币种转换</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">币种转换</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer_list') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer_list">转币记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">转币记录</a>
 					</li>
 				</ul>
 			</li>
@@ -329,3 +353,215 @@
 
 	</div>
 </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
+        </li>
+        <li>
+            <a href="login.html"  style="color:#000000 !important;">
+                <i class="fa fa-sign-out"></i> 退出
+            </a>
+        </li>
+    </ul>
+
+</nav>
+
+            </div>
+
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>消费商管理</a>
+            </li>
+            <li>
+                <strong>修改密码</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+			<div class="panel blank-panel">
+				<div class="ibox-title">
+					<h5>修改密码</h5>
+				</div>
+                <div class="panel-heading">
+                    <div class="panel-options">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs_panels.html#tab-1">修改一级密码</a>
+                            </li>
+                            <li class=""><a data-toggle="tab" href="tabs_panels.html#tab-2">修改二级密码</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+							<div class="ibox">
+				                <form method="get" class="form-horizontal">
+				                <div class="ibox-content" style="border:0px">
+				                        <div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原一级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>新一级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>确认新密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+											<div class="col-sm-4 col-sm-offset-2">
+												<button class="btn btn-warning" type="submit">确认</button>
+												<button type="reset" class="btn btn-outline btn-warning">重置</button>
+												<button class="btn btn-info" type="">返回</button>
+											</div>
+										</div>
+				                </div>
+								</form>
+
+				            </div>
+						</div>
+
+                        <div id="tab-2" class="tab-pane">
+							<div class="ibox">
+				                <form method="get" class="form-horizontal">
+				                <div class="ibox-content" style="border:0px">
+				                        <div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原二级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>新二级密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>确认新密码</label>
+
+				                            <div class="col-sm-7">
+				                                <input type="text" class="form-control">
+				                            </div>
+				                        </div>
+
+										<div class="form-group">
+											<div class="col-sm-4 col-sm-offset-2">
+												<button class="btn btn-warning" type="submit">确认</button>
+												<button type="reset" class="btn btn-outline btn-warning">重置</button>
+												<button class="btn btn-info" type="">返回</button>
+											</div>
+										</div>
+				                </div>
+								</form>
+
+				            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<div class="footer">
+	<div class="pull-right">
+		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+	</div>
+	<div>
+		<strong>Copyright</strong> H+ &copy; 2014
+	</div>
+</div>
+</div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Flot -->
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="__PUBLIC__/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/js/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="__PUBLIC__/js/hplus.js?v=2.2.0"></script>
+<script src="__PUBLIC__/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="__PUBLIC__/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="__PUBLIC__/js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="__PUBLIC__/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="__PUBLIC__/js/demo/sparkline-demo.js"></script>
+</body>
+
+</html>
+
+<!-- iCheck -->
+<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+   $(document).ready(function () {
+	   $('.i-checks').iCheck({
+		   checkboxClass: 'icheckbox_square-green',
+		   radioClass: 'iradio_square-green',
+	   });
+   });
+</script>

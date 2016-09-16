@@ -1,4 +1,32 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+
+    <title>管理后台</title>
+    <meta name="keywords" content="管理后台">
+    <meta name="description" content="管理后台">
+
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="__PUBLIC__/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="__PUBLIC__/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/cms_style.css?v=2.2.0" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+    	<nav class="navbar-default navbar-static-side" role="navigation">
 	<div class="sidebar-collapse">
 		<ul class="nav" id="side-menu">
 			<li class="nav-header">
@@ -53,11 +81,7 @@
 						<a href="__APP__/Bonus/index">奖金明细</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Bonus' && ACTION_NAME == 'index') {echo 'active';} ?>">
-<<<<<<< HEAD
-						<a href="__APP__/Bonus/flow">财务流水</a>
-=======
 						<a href="__APP__/Bonus/index">财务流水</a>
->>>>>>> ed70730ff371011c305651bd3fea9b7e9088746f
 					</li>
 				</ul>
 			</li>
@@ -65,20 +89,20 @@
 			<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_apply') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_apply">提现申请</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现申请</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_index') {echo 'active';} ?>">
-						<a href="__APP__/Finances/cash_index">提现记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">提现记录</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer">消费商转币</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">消费商转币</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'convert') {echo 'active';} ?>">
-						<a href="__APP__/Finances/convert">币种转换</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">币种转换</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer_list') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer_list">转币记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__">转币记录</a>
 					</li>
 				</ul>
 			</li>
@@ -329,3 +353,172 @@
 
 	</div>
 </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
+        </li>
+        <li>
+            <a href="login.html"  style="color:#000000 !important;">
+                <i class="fa fa-sign-out"></i> 退出
+            </a>
+        </li>
+    </ul>
+
+</nav>
+
+            </div>
+
+<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
+	<div class="col-lg-10"  style="padding:0px;">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+			<li>
+                <a>新闻公告</a>
+            </li>
+            <li>
+                <strong>新闻资讯</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5 style="float: none !important;">新闻资讯</h5>
+						</div>
+						<div class="ibox-content">
+							<div class="feed-activity-list">
+
+								<div class="feed-element">
+									<div>
+										<small class="pull-right text-navy">1月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>井幽幽</strong>
+										<div>有人说：“一辈子很长，要跟一个有趣的人在一起”。我想关注我的人，应该是那种喜欢找乐子也乐意分享乐趣的人，你们一定挺优秀的。所以单身的应该在这条留言，互相勾搭一下。特别有钱人又帅可以直接私信我！</div>
+																			</div>
+								</div>
+
+								<div class="feed-element">
+									<div>
+										<small class="pull-right">2月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>马伯庸 </strong>
+										<div>又方便，又防水，手感又好，还可以用手机遥控。简直是拍戏利器，由其是跟老师们搭戏的时候…想想还有点小激动啊，嘿嘿。</div>
+
+									</div>
+								</div>
+
+								<div class="feed-element">
+									<div>
+										<small class="pull-right">5月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>芒果宓 </strong>
+										<div>一个完整的梦。</div>
+
+									</div>
+								</div>
+
+								<div class="feed-element">
+									<div>
+										<small class="pull-right">5月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>刺猬尼克索</strong>
+										<div>哈哈哈哈 你卖什么萌啊! 蠢死了</div>
+
+									</div>
+								</div>
+
+
+								<div class="feed-element">
+									<div>
+										<small class="pull-right">5月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>老刀99</strong>
+										<div>昨天评论里你见过最“温暖和感人”的诗句，整理其中经典100首，值得你收下学习。</div>
+
+									</div>
+								</div>
+								<div class="feed-element">
+									<div>
+										<small class="pull-right">5月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>娱乐小主 </strong>
+										<div>你是否想过记录自己的梦？你是否想过有自己的一个记梦本？小时候写日记，没得写了就写昨晚的梦，后来变成了习惯………翻了一晚上自己做过的梦，想哭，想笑…</div>
+
+									</div>
+								</div>
+								<div class="feed-element">
+									<div>
+										<small class="pull-right">5月前</small>
+										<i class="fa fa-volume-up"></i>&nbsp;<strong>DMG电影 </strong>
+										<div>《和外国男票乘地铁，被中国大妈骂不要脸》妹子实在委屈到不行，中国妹子找外国男友很令人不能接受吗？大家都来说说自己的看法</div>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="footer">
+	<div class="pull-right">
+		By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+	</div>
+	<div>
+		<strong>Copyright</strong> H+ &copy; 2014
+	</div>
+</div>
+</div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Flot -->
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="__PUBLIC__/js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="__PUBLIC__/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/js/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="__PUBLIC__/js/hplus.js?v=2.2.0"></script>
+<script src="__PUBLIC__/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="__PUBLIC__/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="__PUBLIC__/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="__PUBLIC__/js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="__PUBLIC__/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="__PUBLIC__/js/demo/sparkline-demo.js"></script>
+</body>
+
+</html>
