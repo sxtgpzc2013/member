@@ -122,30 +122,28 @@
 		*/
 	   public function delete()
 	   {
-		   $menu_id = intval($_GET['menu_id']);
-
-		   $id = intval($_GET['id']);
+		   $uid = intval($_GET['uid']);
 
 		   //数据包
-		   $data['is_del'] = 1;
+		   $data['status'] = -2;
 
-		   $data['updated_at'] = time();
+		   $data['update_time'] = time();
 
 		   //写入数据库
 		   $params = array(
 
-			   'table_name' => 'products',
+			   'table_name' => 'member',
 
-			   'where' => "id = {$id}",
+			   'where' => "uid = {$uid} AND billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0",
 
 			   'data' => $data
 		   );
 
-		   $info_save = $this -> model -> my_save($params);
+		   $my_save = $this -> model -> my_save($params);
 
-		   if ($info_save == 1)
+		   if ($my_save == 1)
 		   {
-			   redirect(__APP__.'/Products/index/menu_id/'.$menu_id, 0);
+			   redirect(__APP__.'/Teams/activate/', 0);
 		   }
 		   else
 		   {

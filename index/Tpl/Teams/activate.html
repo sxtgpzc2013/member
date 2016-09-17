@@ -49,7 +49,7 @@
 											<td>{$member.billcenternumber}</td>
 											<td>{$member.userrank}</td>
 											<td>{$info['reg_time']|date="Y-m-d H:i:s",###}</td>
-											<td><a class="btn" href="#">激活</a><a class="btn" href="#">删除</a></td>
+											<td><a class="btn" href="#">激活</a><a class="btn" href="__APP__/Teams/delete?uid={$member.uid}">删除</a></td>
 										</tr>
 									</foreach>
 								</tbody>
