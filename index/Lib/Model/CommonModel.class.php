@@ -1,14 +1,14 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-08-04
- * @alter 
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：基础MODEL类
- * @author 
- * @copyright 
+ * @author
+ * @copyright
  * @time 2014-08-04
- * @version 1.0.0 
+ * @version 1.0.0
  */
 
 	class CommonModel extends Model
@@ -20,7 +20,7 @@
 		 *   parameter 	参数
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 		public function my_find(array $parameter)
 		{
@@ -72,7 +72,7 @@
 		 *
 		 * 参数描述：
 		 *  parameter 	参数
-		 *    			
+		 *
 		 *
 		 * 返回值：
 		 *   结果集
@@ -147,7 +147,7 @@
 			$order = $parameter['order'] ? $parameter['order'] : 'id desc';
 
 			$result = $table -> where($parameter['where']) -> order($order) -> limit(1) -> select();
-			
+
 			return $result[0];
 		}
 
@@ -167,7 +167,7 @@
 			$order = $parameter['order'] ? $parameter['order'] : 'id asc';
 
 			$result = $table -> where($parameter['where']) -> order($order) -> limit(1) -> select();
-			
+
 			return $result[0];
 		}
 
@@ -189,11 +189,11 @@
 
 				$table = M($parameter['table_name']);
 
-				$data['result'] = $table -> where($parameter['where']) -> order($parameter['order']) -> page($p.',10') -> select();
+				$data['result'] = $table -> where($parameter['where']) -> order($parameter['order']) -> page($p.',1') -> select();
 
 				$count = $table -> where($parameter['where']) -> count();
 
-				$Page = new Page($count, 10);
+				$Page = new Page($count, 1);
 
 				$data['page'] = $Page -> show();
 
@@ -227,5 +227,5 @@
 			return $result;
 		}
 
-	
+
 	}
