@@ -67,7 +67,7 @@
 
 	    	if (isset($_POST['form_key']) && $_POST['form_key'] == 'yes')
 	    	{
-	    		$data['money'] = isset($_POST['money']) && floatval($_POST['money']) > 0 ? floatval($_POST['money']) : $this -> _back('非法的提现金额');
+	    		$data['money'] = isset($_POST['money']) && floatval($_POST['money']) > 500 && floatval($_POST['money']) <= $member['jiangjinbi'] ? floatval($_POST['money']) : $this -> _back('非法的提现金额');
 
 	    		$data['mobile'] = is_tel($_POST['mobile']) ? htmlspecialchars($_POST['mobile']) : $this -> _back('非法的手机号');
 
