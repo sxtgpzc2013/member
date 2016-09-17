@@ -283,4 +283,63 @@
 
 	    	$this -> display();
 	    }
+
+	    /**
+		 * 币种转换
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function convert()
+	    {
+	    	$params = array(
+
+	    		'table_name' => 'member',
+
+	    		'where' => "uid = {$_SESSION['Rongzi']['user']['uid']}"
+	    	);
+
+	    	$member = $this -> model -> my_find($params);
+
+	    	if (isset($_POST['form_key']) && $_POST['form_key'] == 'yes')
+	    	{
+	    		$transfer_money = isset($_POST['transfer_money']) && intval($_POST['transfer_money']) > 0 && intval($_POST['transfer_money']) <= $member['jiangjinbi'] ? intval($_POST['transfer_money']) : $this -> _back('非法的转币数量');
+
+	    		//这里是转换比例
+	    		$persant = 1;
+
+	    		$params = array(
+
+	    			'table_name' => 'member',
+
+	    			'where' => "uid = {$member['uid']}",
+
+	    			'data' => array(
+
+	    				'jiangjinbi' => $member['jiangjinbi'] - $transfer_money,
+
+	    				'baodanbi' => $member['baodanbi'] + ($persant * $transfer_money)
+	    			)
+	    		);
+
+	    		$member_save = $this -> model -> my_save($params);
+
+	    		if ($member_save)
+	    		{
+	    			redirect(__APP__.'/Finances/convert', 0);
+	    		}
+	    		else
+	    		{
+	    			$this -> _back('转换失败 请稍后重试');
+	    		}
+	    	}
+
+			$this -> assign('member', $member);
+
+	    	$this -> display();
+	    }
 	}
