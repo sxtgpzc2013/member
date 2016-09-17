@@ -250,9 +250,13 @@
 
 	    		$data['usernumber'] = $member['usernumber'];
 
+	    		$data['username'] = $member['realname'];
+
 	    		$data['targetuserid'] = $target_member['uid'];
 
 	    		$data['targetusernumber'] = $target_member['usernumber'];
+
+	    		$data['targetusername'] = $target_member['realname'];
 
 	    		$data['moneytype'] = 0;
 
@@ -339,6 +343,32 @@
 	    	}
 
 			$this -> assign('member', $member);
+
+	    	$this -> display();
+	    }
+
+	    /**
+		 * 转币记录
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function transfer_list()
+	    {
+	    	$params = array(
+
+	    		'table_name' => 'transfer',
+
+	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}"
+	    	);
+
+	    	$transfers = $this -> model -> easy_select($params);
+
+	    	$this -> assign('transfers', $transfers);
 
 	    	$this -> display();
 	    }

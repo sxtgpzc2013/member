@@ -35,22 +35,33 @@
 										<th>转入账户姓名</th>
 										<th>转换类型</th>
 										<th>转币数量</th>
-										<th>转币数量</th>
+										<th>转账状态</th>
 										<th>转币时间</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>报单币</td>
-										<td>52345</td>
-										<td>2016-09-14 15:22</td>
-									</tr>
-
+									<foreach name="transfers" item="transfer">
+										<tr>
+											<td>{$transfer.usernumber}</td>
+											<td>{$transfer.username}</td>
+											<td>{$transfer.targetusernumber}</td>
+											<td>{$transfer.targetusername}</td>
+											<td>
+												<if condition="$transfer['moneytype'] eq 0">
+													报单币
+												</if>
+											</td>
+											<td>{$transfer.money}</td>
+											<td>
+												<if condition="$transfer['status'] eq 0">
+													转账成功
+												<elseif condition="$transfer['status'] eq 1" />
+													转账失败
+												</if>
+											</td>
+											<td>{$transfer.createtime|date="Y-m-d H:i:s",###}</td>
+										</tr>
+									</foreach>
 								</tbody>
 							</table>
 						</div>
