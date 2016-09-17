@@ -57,9 +57,9 @@
 				$data['reg_time'] = time();
 
 				//获取推荐人ID
-
+				$data['tuijianid'] = $this -> get_user_id($data['tuijiannumber']);
 				//获取接点人ID
-
+				$data['parentid'] = $this -> get_user_id($data['parentnumber']);
 				//更新用户资料
 				$params = array(
 
@@ -84,5 +84,17 @@
 
 			$this->display();
 	    }
+
+		/**
+		 * 获取推荐人ID
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		function get_user_id($usernumber){
+
+		}
 
 	}
