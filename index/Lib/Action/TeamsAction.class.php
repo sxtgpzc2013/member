@@ -109,4 +109,48 @@
 
 			$this -> display();
 	    }
+
+		/**
+		* 删除
+		*
+		* 参数描述：
+		*
+		*
+		*
+		* 返回值：
+		*
+		*/
+	   public function delete()
+	   {
+		   $menu_id = intval($_GET['menu_id']);
+
+		   $id = intval($_GET['id']);
+
+		   //数据包
+		   $data['is_del'] = 1;
+
+		   $data['updated_at'] = time();
+
+		   //写入数据库
+		   $params = array(
+
+			   'table_name' => 'products',
+
+			   'where' => "id = {$id}",
+
+			   'data' => $data
+		   );
+
+		   $info_save = $this -> model -> my_save($params);
+
+		   if ($info_save == 1)
+		   {
+			   redirect(__APP__.'/Products/index/menu_id/'.$menu_id, 0);
+		   }
+		   else
+		   {
+			   $this -> _back('删除失败，请重试。');
+		   }
+	   }
+
 	}

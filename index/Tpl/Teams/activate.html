@@ -54,7 +54,14 @@
 									</foreach>
 								</tbody>
 							</table>
-							{$result['page']}
+
+							<div class="col-sm-12 text-right">
+						        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+						            <ul class="pagination">
+						                {$result['page']}
+						            </ul>
+						        </div>
+						    </div>
 						</div>
 					</div>
 				</div>
