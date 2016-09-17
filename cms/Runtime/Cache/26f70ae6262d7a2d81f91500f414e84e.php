@@ -111,7 +111,7 @@
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">新闻资讯</a>
+						<a href="__APP__/News/index">新闻资讯</a>
 					</li>
 				</ul>
 			</li>
@@ -413,31 +413,32 @@
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
 							<div class="ibox">
-				                <form method="get" class="form-horizontal">
+
 				                <div class="ibox-content" style="border:0px">
+									<form class="form-horizontal m-t" id="signupForm" action="__APP__/Consumers/edit_info" method="post">
 				                        <div class="form-group">
-				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原一级密码</label>
+				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原一级密码:</label>
 
-				                            <div class="col-sm-7">
-				                                <input type="text" class="form-control">
+				                            <div class="col-sm-6">
+				                                <input type="text" class="form-control" name="oldpassword">
 				                            </div>
 				                        </div>
-
 										<div class="form-group">
-				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>新一级密码</label>
-
-				                            <div class="col-sm-7">
-				                                <input type="text" class="form-control">
-				                            </div>
-				                        </div>
-
+											<label class="col-sm-2 control-label">*新一级密码:</label>
+											<div class="col-sm-6">
+												<input id="password" name="password" class="form-control" type="password">
+											</div>
+										</div>
 										<div class="form-group">
-				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>确认新密码</label>
+											<label class="col-sm-2 control-label">*确认新密码:</label>
+											<div class="col-sm-6">
+												<input id="confirm_password" name="confirm_password" class="form-control" type="password">
+											</div>
+											<div class="col-sm-2">
+												<span class="help-block">(不能小于6位数,且不能为纯数字)</span>
+											</div>
+										</div>
 
-				                            <div class="col-sm-7">
-				                                <input type="text" class="form-control">
-				                            </div>
-				                        </div>
 
 										<div class="form-group">
 											<div class="col-sm-4 col-sm-offset-2">
@@ -446,16 +447,19 @@
 												<button class="btn btn-info" type="">返回</button>
 											</div>
 										</div>
+
+									</form>
 				                </div>
-								</form>
 
 				            </div>
 						</div>
 
                         <div id="tab-2" class="tab-pane">
 							<div class="ibox">
-				                <form method="get" class="form-horizontal">
 				                <div class="ibox-content" style="border:0px">
+
+									<form class="form-horizontal m-t" id="signupForm1" action="__APP__/Consumers/edit_info" method="post">
+										<input type="hidden" name="form_key" value="yes">
 				                        <div class="form-group">
 				                            <label class="col-sm-2 control-label"><span style="color:red">*</span>原二级密码</label>
 
@@ -487,9 +491,10 @@
 												<button class="btn btn-info" type="">返回</button>
 											</div>
 										</div>
-				                </div>
-								</form>
 
+									</form>
+
+				                </div>
 				            </div>
                         </div>
                     </div>
@@ -555,13 +560,56 @@
 
 </html>
 
-<!-- iCheck -->
-<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
 <script>
-   $(document).ready(function () {
-	   $('.i-checks').iCheck({
-		   checkboxClass: 'icheckbox_square-green',
-		   radioClass: 'iradio_square-green',
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+   $().ready(function () {
+	   // validate signup form on keyup and submit
+	   $("#signupForm").validate({
+		   rules: {
+			   firstname: "required",
+			   lastname: "required",
+			   oldpassword: {
+				   required: true
+			   },
+			   password: {
+				   required: true,
+			   },
+			   confirm_password: {
+				   required: true,
+				   equalTo: "#password"
+			   },
+			   agree: "required"
+		   },
+		   messages: {
+			   oldpassword: {
+				   required: "请输入您的原一级密码"
+			   },
+			   password: {
+				   required: "请输入您的密码"
+			   },
+			   confirm_password: {
+				   required: "请再次输入密码",
+				   equalTo: "两次输入的密码不一致"
+			   }
+		   }
 	   });
    });
 </script>

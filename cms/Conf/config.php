@@ -6,7 +6,7 @@ return array(
 	'DB_PWD'=>'root',
 	'DB_HOST'=>'localhost',
 	'DB_PORT'=>'3306',
-	'DB_PREFIX'=>'rz_',
+	'DB_PREFIX'=>'zx_',
 	'URL_MODEL' => '1',
 	'DB_NAME'=>'rz_data',
 	'APP_DEBUG' => true

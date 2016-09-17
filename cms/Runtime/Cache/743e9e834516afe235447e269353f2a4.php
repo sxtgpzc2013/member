@@ -111,7 +111,7 @@
 				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">新闻资讯</a>
+						<a href="__APP__/News/index">新闻资讯</a>
 					</li>
 				</ul>
 			</li>
@@ -394,77 +394,78 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
 
-                <form method="get" class="form-horizontal">
-                <div class="ibox-title">
-                    <h5>修改资料</h5>
-                </div>
-                <div class="ibox-content">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商编号</label>
+                <form class="form-horizontal m-t" id="signupForm" action="__APP__/Consumers/edit_info" method="post">
+					<input type="hidden" name="form_key" value="yes">
+	                <div class="ibox-title">
+	                    <h5>修改资料</h5>
+	                </div>
+	                <div class="ibox-content">
+	                        <div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商编号</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="usernumber" value="<?php echo ($member['usernumber']); ?>">
+	                            </div>
+	                        </div>
 
-						<div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商姓名</label>
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商姓名</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="realname" value="<?php echo ($member['realname']); ?>">
+	                            </div>
+	                        </div>
 
-						<div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商身份证号</label>
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商身份证号</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="IDcard" value="<?php echo ($member['IDcard']); ?>">
+	                            </div>
+	                        </div>
 
-						<div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商手机号</label>
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商手机号</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="mobile" value="<?php echo ($member['mobile']); ?>">
+	                            </div>
+	                        </div>
 
 
-						<div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户银行</label>
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户银行</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="bankname" value="<?php echo ($member['bankname']); ?>">
+	                            </div>
+	                        </div>
 
-						<div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户行地址</label>
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户行地址</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="bank_adress" value="<?php echo ($member['bank_adress']); ?>">
+	                            </div>
+	                        </div>
 
-						<div class="form-group">
-                            <label class="col-sm-2 control-label"><span style="color:red">*</span>银行卡号</label>
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>银行卡号</label>
 
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="banknumber" value="<?php echo ($member['banknumber']); ?>">
+	                            </div>
+	                        </div>
 
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								<button class="btn btn-warning" type="submit">确认</button>
-								<button type="reset" class="btn btn-outline btn-warning">重置</button>
-								<button class="btn btn-info" type="">返回</button>
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-2">
+									<button class="btn btn-warning" type="submit">确认</button>
+									<button type="reset" class="btn btn-outline btn-warning">重置</button>
+									<button class="btn btn-info" type="">返回</button>
+								</div>
 							</div>
-						</div>
-                </div>
-
+	                </div>
+				</form>
 
             </div>
         </div>
@@ -525,13 +526,54 @@
 
 </html>
 
-<!-- iCheck -->
-<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
 <script>
-   $(document).ready(function () {
-	   $('.i-checks').iCheck({
-		   checkboxClass: 'icheckbox_square-green',
-		   radioClass: 'iradio_square-green',
-	   });
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
    });
+
+	//以下为官方示例
+	$().ready(function () {
+		// validate signup form on keyup and submit
+		$("#signupForm").validate({
+			rules: {
+				usernumber: {
+					required: true
+				},
+				realname: {
+					required: true
+				},
+				IDcard: {
+					required: true
+				},
+				mobile: {
+					required: true
+				},
+				bankname: {
+					required: true
+				},
+				bank_adress: {
+					required: true
+				},
+				banknumber: {
+					required: true
+				},
+				agree: "required"
+			}
+		});
+	});
 </script>

@@ -41,57 +41,49 @@
 		 */
 	    public function login()
 	    {
+			$form_key = htmlspecialchars($_POST['form_key']);
+
+			if ($form_key == 'yes')
+			{
+				$mobile = $_POST['mobile'];
+
+		    	$password = md5(md5($_POST['password']));
+
+		    	$params = array(
+
+		    		'table_name' => 'member',
+
+		    		'where' => "mobile = '{$mobile}' AND psd1 = '{$password}' AND status = 1"
+		    	);
+
+		    	$member = $this -> model -> my_find($params);
+
+		    	if ($member)
+		    	{
+		    		$_SESSION['Rongzi']['user'] = $member;
+
+		    		$data['last_time'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'member',
+
+		    			'where' => "uid = {$member['uid']} AND status = 1",
+
+		    			'data' => $data
+		    		);
+
+		    		$member_save = $this -> model -> my_save($params);
+
+		    		redirect(__APP__."/Index/index", 0);
+		    	}
+		    	else
+		    	{
+		    		$this -> _back('登陆失败，请重试。');
+		    	}
+			}
+
 			$this -> display();
-	    }
-
-	    /**
-		 * 登陆操作
-		 *
-		 * 参数描述：
-		 *
-		 *
-		 *
-		 * 返回值：
-		 *
-		 */
-	    public function login_do()
-	    {
-	    	$username = $_POST['username'];
-
-	    	$password = md5(md5($_POST['password']));
-
-	    	$params = array(
-
-	    		'table_name' => 'corps',
-
-	    		'where' => "mobile = '{$username}' AND password = '{$password}' AND is_del = 0 AND status = 2"
-	    	);
-
-	    	$corp = $this -> model -> my_find($params);
-
-	    	if ($corp)
-	    	{
-	    		$_SESSION['Rongzi']['user'] = $corp;
-
-	    		$data['last_login_time'] = time();
-
-	    		$params = array(
-
-	    			'table_name' => 'corps',
-
-	    			'where' => "id = {$corp['id']} AND is_close = 0",
-
-	    			'data' => $data
-	    		);
-
-	    		$corp_save = $this -> model -> my_save($params);
-
-	    		redirect(__APP__."/Index/index", 0);
-	    	}
-	    	else
-	    	{
-	    		$this -> _back('登陆失败，请重试。');
-	    	}
 	    }
 
 	    /**
