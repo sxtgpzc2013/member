@@ -1,6 +1,6 @@
 <?php
-	define('APP_NAME','cms');
-	define('APP_PATH','./cms/');
+	define('APP_NAME','index');
+	define('APP_PATH','./index/');
 	define('APP_DEBUG',true);
 	require './ThinkPHP/ThinkPHP.php';
 ?>
