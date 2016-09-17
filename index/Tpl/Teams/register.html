@@ -251,7 +251,7 @@
 
 			                    <div class="col-sm-7">
 									<label class="checkbox-inline">
-			                            <input type="checkbox" value="option1" id="inlineCheckbox1"> 我已阅读并同意本协议 <a href="#">查看协议</a>
+			                            <input type="checkbox" value="option1" id="inlineCheckbox1" name="is_free"> 我已阅读并同意本协议 <a href="#">查看协议</a>
 									</label>
 			                    </div>
 			                </div>
@@ -273,3 +273,83 @@
 
 </div>
 <include file="public:footer" />
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+	$().ready(function () {
+		// validate signup form on keyup and submit
+		$("#signupForm").validate({
+			rules: {
+				usernumber: {
+					required: true
+				},
+				realname: {
+					required: true
+				},
+				IDcard: {
+					required: true
+				},
+				mobile: {
+					required: true
+				},
+				bankname: {
+					required: true
+				},
+				bank_adress: {
+					required: true
+				},
+				banknumber: {
+					required: true
+				},
+				ID_address_face: {
+					required: true
+				},
+				red_wine_number: {
+					required: true
+				},
+				tuijiannumber: {
+					required: true
+				},
+				billcenternumber: {
+					required: true
+				},
+				parentnumber: {
+					required: true
+				},
+				psd1: {
+					required: true
+				},
+				confirm_psd1: {
+					required: true
+				},
+				psd2: {
+					required: true
+				},
+				confirm_psd2: {
+					required: true
+				},
+				is_free: {
+					required: true
+				},
+				agree: "required"
+			}
+		});
+	});
+</script>

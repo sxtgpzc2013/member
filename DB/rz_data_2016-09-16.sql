@@ -317,8 +317,11 @@ CREATE TABLE `zx_withdrawal` (
   KEY `status` (`status`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='提现申请表';
 
-
+# 2016-09-17 新增字段
+# --------------------------------------------------------------
 ALTER TABLE zx_member ADD ID_address VARCHAR(200) NOT NULL DEFAULT "" COMMENT "身份证所在地址";
+ALTER TABLE zx_withdrawal ADD bank_adress VARCHAR(255) DEFAULT NULL COMMENT '开户行地址';
+ALTER TABLE zx_withdrawal ADD withdrawals_name VARCHAR(255) DEFAULT NULL COMMENT '提现账户姓名';
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
