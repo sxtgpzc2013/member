@@ -320,8 +320,10 @@ CREATE TABLE `zx_withdrawal` (
 # 2016-09-17 新增字段
 # --------------------------------------------------------------
 ALTER TABLE zx_member ADD ID_address VARCHAR(200) NOT NULL DEFAULT "" COMMENT "身份证所在地址";
-ALTER TABLE zx_withdrawal ADD bank_adress VARCHAR(255) DEFAULT NULL COMMENT '开户行地址';
+ALTER TABLE zx_withdrawal ADD bank_address VARCHAR(255) DEFAULT NULL COMMENT '开户行地址';
 ALTER TABLE zx_withdrawal ADD realname VARCHAR(255) DEFAULT NULL COMMENT '提现账户姓名';
+ALTER TABLE zx_withdrawal ADD arrival_amount DOUBLE(10,2) DEFAULT '0.00' COMMENT '到账金额';
+
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

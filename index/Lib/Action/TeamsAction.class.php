@@ -109,4 +109,46 @@
 
 			$this -> display();
 	    }
+
+		/**
+		* 删除
+		*
+		* 参数描述：
+		*
+		*
+		*
+		* 返回值：
+		*
+		*/
+	   public function delete()
+	   {
+		   $uid = intval($_GET['uid']);
+
+		   //数据包
+		   $data['status'] = -2;
+
+		   $data['update_time'] = time();
+
+		   //写入数据库
+		   $params = array(
+
+			   'table_name' => 'member',
+
+			   'where' => "uid = {$uid} AND billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0",
+
+			   'data' => $data
+		   );
+
+		   $my_save = $this -> model -> my_save($params);
+
+		   if ($my_save == 1)
+		   {
+			   redirect(__APP__.'/Teams/activate/', 0);
+		   }
+		   else
+		   {
+			   $this -> _back('删除失败，请重试。');
+		   }
+	   }
+
 	}
