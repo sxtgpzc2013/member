@@ -39,8 +39,36 @@
 		 * 返回值：
 		 *
 		 */
-	    public function index()
+	    public function registers()
 	    {
+			$form_key = htmlspecialchars($_POST['form_key']);
+
+			if ($form_key == 'yes')
+			{
+				unset($_POST['form_key']);
+
+				//更新用户资料
+				$params = array(
+
+					'table_name' => 'member',
+
+					'where' => "uid = {$uid} AND status = 1",
+
+					'data' => $_POST
+				);
+
+				$member_save = $this -> model -> my_save($params);
+
+				//更新结果处理
+				if($member_save !== false){
+					redirect(__APP__."/Consumers/edit_info", 0);
+				}else{
+					$this -> _back('账户资料修改失败，请重试。');return;
+				}
+			}
+
 			$this->display();
 	    }
+
+
 	}

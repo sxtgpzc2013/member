@@ -43,6 +43,7 @@
 	    {
 			//获取用户数据
 			$uid = $_SESSION['Rongzi']['user']['uid'];
+
 			$form_key = htmlspecialchars($_POST['form_key']);
 
 			if ($form_key == 'yes')
@@ -51,10 +52,14 @@
 
 				//更新用户资料
 				$params = array(
+
 					'table_name' => 'member',
+
 					'where' => "uid = {$uid} AND status = 1",
+
 					'data' => $_POST
 				);
+
 				$member_save = $this -> model -> my_save($params);
 
 				//更新结果处理
@@ -67,12 +72,17 @@
 
 			//查询用户资料数据
 			$params = array(
+
 				'table_name' => 'member',
+
 				'where' => "uid = '{$uid}' AND status = 1"
+
 			);
+
 			$member = $this -> model -> my_find($params);
 
 			$this -> assign('member', $member);
+
 			$this -> display();
 	    }
 	}
