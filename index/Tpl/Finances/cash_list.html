@@ -42,19 +42,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
+									<foreach name="withdrawals" item="withdrawal">
+										<tr>
+											<td>{$withdrawal.usernumber}</td>
+											<td>523454235</td>
+											<td>52345</td>
+											<td>234234</td>
+											<td>52345</td>
+											<td>523454235</td>
+											<td>52345</td>
+											<td>523454235</td>
+											<td>52345</td>
+											<td>52345</td>
+										</tr>
+									</foreach>
 								</tbody>
 							</table>
 						</div>
