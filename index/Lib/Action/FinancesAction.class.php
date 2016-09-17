@@ -105,8 +105,8 @@
 	    		if ($withdrawal_add)
 	    		{
 	    			redirect(__APP__.'/Finances/cash', 0);
-	    		} 
-	    		else 
+	    		}
+	    		else
 	    		{
 	    			$this -> _back('申请失败 请重试');
 	    		}
@@ -366,9 +366,11 @@
 	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}"
 	    	);
 
-	    	$transfers = $this -> model -> easy_select($params);
+	    	$transfers = $this -> model -> order_select($params);
 
-	    	$this -> assign('transfers', $transfers);
+	    	$this -> assign('transfers', $transfers['result']);
+
+			$this -> assign('page', $transfers['page']);
 
 	    	$this -> display();
 	    }
