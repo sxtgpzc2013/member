@@ -46,11 +46,19 @@
 			if ($form_key == 'yes')
 			{
 				$data = $_POST;
+
 				unset($_data['form_key']);
 
 				//处理密码操作
 				$data['psd1'] = md5(md5($data['psd1']));
+
 				$data['psd2'] = md5(md5($data['psd2']));
+
+				$data['reg_time'] = time();
+
+				//获取推荐人ID
+
+				//获取接点人ID
 
 				//更新用户资料
 				$params = array(
@@ -64,91 +72,17 @@
 
 				//更新结果处理
 				if($member_add !== false){
+
 					redirect(__APP__."/Teams/register", 0);
+
 				}else{
+
 					$this -> _back('消费商注册失败，请重试。');return;
+
 				}
 			}
 
 			$this->display();
 	    }
-
-		/**
-		 * 消费商激活
-		 *
-		 * 参数描述：
-		 *
-		 *
-		 *
-		 * 返回值：
-		 *
-		 */
-		public function activate()
-	    {
-			//报单中心ID
-			$billcenterid = $_SESSION['Rongzi']['user']['billcenterid'];
-			//报单中心编号
-			$billcenternumber = $_SESSION['Rongzi']['user']['billcenternumber'];
-
-			//查询用户资料数据
-			$params = array(
-
-				'table_name' => 'member',
-
-				'where' => "billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0"
-
-			);
-
-	    	$data = $this -> model -> order_select($params);
-
-	    	$result['members'] = $data['result'];
-
-			$result['page'] = $data['page'];
-
-	    	$this -> assign('result', $result);
-
-			$this -> display();
-	    }
-
-		/**
-		* 删除
-		*
-		* 参数描述：
-		*
-		*
-		*
-		* 返回值：
-		*
-		*/
-	   public function delete()
-	   {
-		   $uid = intval($_GET['uid']);
-
-		   //数据包
-		   $data['status'] = -2;
-
-		   $data['update_time'] = time();
-
-		   //写入数据库
-		   $params = array(
-
-			   'table_name' => 'member',
-
-			   'where' => "uid = {$uid} AND billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0",
-
-			   'data' => $data
-		   );
-
-		   $my_save = $this -> model -> my_save($params);
-
-		   if ($my_save == 1)
-		   {
-			   redirect(__APP__.'/Teams/activate/', 0);
-		   }
-		   else
-		   {
-			   $this -> _back('删除失败，请重试。');
-		   }
-	   }
 
 	}

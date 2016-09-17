@@ -30,7 +30,7 @@
 		}
 
 	    /**
-		 * 首页
+		 * 修改消费商信息
 		 *
 		 * 参数描述：
 		 *
@@ -82,6 +82,70 @@
 			$member = $this -> model -> my_find($params);
 
 			$this -> assign('member', $member);
+
+			$this -> display();
+	    }
+
+		/**
+		 * 修改消费商信息
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function edit_password()
+	    {
+			//获取用户数据
+			$uid = $_SESSION['Rongzi']['user']['uid'];
+
+			$form_key = htmlspecialchars($_POST['form_key']);
+
+			$form_type = htmlspecialchars($_POST['form_type']);
+
+			if ($form_key == 'yes')
+			{
+				#修改一级密码
+				if($form_type == 'psd1'){
+
+					//判断一级密码是否正确
+					if(md5(md5($_POST['oldpassword'])) != $_SESSION['Rongzi']['user']['psd1']){
+						$this -> _back('一级密码错误');return;
+					}
+
+					$data['psd1'] = md5(md5($_POST['password']));
+
+				}elseif($form_type == 'psd2'){
+
+					//判断二级密码是否正确
+					if(md5(md5($_POST['oldpassword2'])) != $_SESSION['Rongzi']['user']['psd2']){
+						$this -> _back('二级密码错误');return;
+					}
+
+					$data['psd2'] = md5(md5($_POST['password2']));
+				}
+
+				//更新用户资料
+				$params = array(
+
+					'table_name' => 'member',
+
+					'where' => "uid = {$uid} AND status = 1",
+
+					'data' => $data
+				);
+
+				$member_save = $this -> model -> my_save($params);
+
+				//更新结果处理
+				if($member_save !== false){
+					$this->redirect('/Login/out', array(), 2, '密码修改成功请重新登录~');
+				}else{
+					$this -> _back('账户资料修改失败，请重试。');return;
+				}
+			}
 
 			$this -> display();
 	    }
