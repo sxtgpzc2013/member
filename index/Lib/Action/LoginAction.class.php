@@ -96,9 +96,9 @@
 		 * 返回值：
 		 *
 		 */
-	    public function logout()
+	    public function out()
 	    {
-	    	unset($_SESSION['OftenGo']['user']);
+	    	unset($_SESSION['Rongzi']['user']);
 
 	    	redirect(__APP__.'/Login/login', 0);
 	    }

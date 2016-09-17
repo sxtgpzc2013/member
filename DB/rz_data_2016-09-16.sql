@@ -324,6 +324,8 @@ ALTER TABLE zx_withdrawal ADD bank_address VARCHAR(255) DEFAULT NULL COMMENT '�
 ALTER TABLE zx_withdrawal ADD realname VARCHAR(255) DEFAULT NULL COMMENT '提现账户姓名';
 ALTER TABLE zx_withdrawal ADD arrival_amount DOUBLE(10,2) DEFAULT '0.00' COMMENT '到账金额';
 
+ALTER TABLE zx_transfer ADD username VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
+ALTER TABLE zx_transfer ADD targetusername VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
