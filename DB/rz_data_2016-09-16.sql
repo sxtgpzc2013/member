@@ -327,6 +327,25 @@ ALTER TABLE zx_withdrawal ADD arrival_amount DOUBLE(10,2) DEFAULT '0.00' COMMENT
 ALTER TABLE zx_transfer ADD username VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
 ALTER TABLE zx_transfer ADD targetusername VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
 
+# Dump of table zx_news
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_news`;
+
+CREATE TABLE `zx_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '类型',
+  `level` tinyint(2) NOT NULL DEFAULT '0' COMMENT '优先级',
+  `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '新闻内容',
+  `viewnum` int(10) DEFAULT NULL COMMENT '浏览次数',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0 启用 1 禁用',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `is_del` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-正常 1-删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='新闻公告表';
+
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

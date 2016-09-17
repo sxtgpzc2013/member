@@ -45,6 +45,23 @@
 
 			if ($form_key == 'yes')
 			{
+				//查询用户手机号是否注册 查询用户编号是否注册
+				$params = array(
+
+					'table_name' => 'member',
+
+					'where' => "usernumber = '{$_POST['usernumber']}' OR mobile = '{$_POST['mobile']}'"
+
+				);
+
+				$member = $this -> model -> my_find($params);
+
+				if($member){
+
+					$this -> _back('用户编号或手机号已注册');return;
+
+				}
+
 				$data = $_POST;
 
 				unset($_data['form_key']);
@@ -58,8 +75,10 @@
 
 				//获取推荐人ID
 				$data['tuijianid'] = $this -> get_user_id($data['tuijiannumber']);
+
 				//获取接点人ID
 				$data['parentid'] = $this -> get_user_id($data['parentnumber']);
+
 				//更新用户资料
 				$params = array(
 
@@ -86,6 +105,16 @@
 	    }
 
 		/**
+		 * 获取报单中心
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+
+
+		/**
 		 * 获取推荐人ID
 		 *
 		 * 参数描述：@tuijiannumber 推荐人编号
@@ -95,6 +124,26 @@
 		 */
 		function get_user_id($usernumber){
 
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "usernumber = '{$usernumber}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			if($member){
+
+				return $member['uid'];
+
+			}else{
+
+				return 0;
+
+			}
 		}
 
 	}
