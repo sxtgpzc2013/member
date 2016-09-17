@@ -45,15 +45,23 @@
 									<foreach name="withdrawals" item="withdrawal">
 										<tr>
 											<td>{$withdrawal.usernumber}</td>
-											<td>523454235</td>
-											<td>52345</td>
-											<td>234234</td>
-											<td>52345</td>
-											<td>523454235</td>
-											<td>52345</td>
-											<td>523454235</td>
-											<td>52345</td>
-											<td>52345</td>
+											<td>{$withdrawal.realname}</td>
+											<td>{$withdrawal.money}</td>
+											<td>{$withdrawal.fee}</td>
+											<td>{$withdrawal.realname}</td>
+											<td>{$withdrawal.bankname}</td>
+											<td>{$withdrawal.banknumber}</td>
+											<td>{$withdrawal.bankholder}</td>
+											<td>{$withdrawal.createtime|date="Y-m-d H:i:s", ###}</td>
+											<td>
+												<if condition="$withdrawal['status'] eq 0">
+													提现成功
+												<elseif condition="$withdrawal['status'] eq 1" />
+													申请提现
+												<elseif condition="$withdrawal['status'] eq 2" />
+													提现失败
+												</if>
+											</td>
 										</tr>
 									</foreach>
 								</tbody>

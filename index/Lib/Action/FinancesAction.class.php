@@ -79,6 +79,8 @@
 
 	    		$data['bankholder'] = isset($_POST['bankholder']) ? htmlspecialchars($_POST['bankholder']) : $this -> _back('开户人不能为空');
 
+	    		$data['realname'] = $member['realname'];
+
 	    		$data['moneytype'] = 0;
 
 	    		$data['userid'] = $member['uid'];
