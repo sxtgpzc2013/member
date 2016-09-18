@@ -107,12 +107,84 @@
 		/**
 		 * 获取报单中心
 		 *
-		 * 参数描述：@tuijiannumber 推荐人编号
+		 * 参数描述：@usernumber 推荐人编号
 		 *
 		 * 返回值：
 		 *
 		 */
+		 public function get_billcenternumber()
+		 {
 
+			$usernumber = htmlspecialchars($_GET['usernumber']);
+
+			//查询用户资料数据
+ 			$params = array(
+
+ 				'table_name' => 'member',
+
+ 				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill = 1"
+
+ 			);
+
+ 			$member = $this -> model -> my_find($params);
+
+ 			if($member){
+
+				die(json_encode(array("code" => 200, "msg" => "报单中心获取成功", "data" => $member['billcenternumber'])));
+
+ 			}else{
+
+ 				die(json_encode(array("code" => 0, "msg" => "报单中心获取失败", "data" => 0)));
+
+ 			}
+		 }
+
+		 /**
+ 		 * 验证消费者编号
+ 		 *
+ 		 * 参数描述：@usernumber 用户编号
+ 		 *
+ 		 * 返回值：
+ 		 *
+ 		 */
+		 public function get_usernumber()
+		 {
+			 $usernumber = htmlspecialchars($_GET['usernumber']);
+
+ 			//查询用户资料数据
+  			$params = array(
+
+  				'table_name' => 'member',
+
+  				'where' => "usernumber = '{$usernumber}' AND status = 1"
+
+  			);
+
+  			$member = $this -> model -> my_find($params);
+
+  			if($member){
+
+ 				die(json_encode(array("code" => 200, "msg" => "消费者编号已存在", "data" => $member['billcenternumber'])));
+
+  			}else{
+
+  				die(json_encode(array("code" => 0, "msg" => "消费者编号不存在", "data" => 0)));
+
+  			}
+		 }
+
+		 /**
+ 		 * 获取用户接点区
+ 		 *
+ 		 * 参数描述：@usernumber 用户编号
+ 		 *
+ 		 * 返回值：
+ 		 *
+ 		 */
+		 public function get_parentnumber_zone()
+		 {
+
+		 }
 
 		/**
 		 * 获取推荐人ID
