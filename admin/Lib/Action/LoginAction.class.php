@@ -39,7 +39,7 @@
 		 * 返回值：
 		 *
 		 */
-		public function login_do()
+		public function login()
 		{
 			$form_key = htmlspecialchars($_POST['form_key']);
 
@@ -56,7 +56,7 @@
 
 					'where' => "mobile = '{$username}' AND password = '{$password}' AND is_del = 0"
 				);
-
+				
 				$admin_find = $this -> model -> my_find($params);
 
 

@@ -1,0 +1,155 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>消费商管理</a>
+            </li>
+            <li>
+                <strong>修改资料</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <form class="form-horizontal m-t" id="signupForm" action="__APP__/Consumers/edit_info" method="post">
+					<input type="hidden" name="form_key" value="yes">
+	                <div class="ibox-title">
+	                    <h5>修改资料</h5>
+	                </div>
+	                <div class="ibox-content">
+	                        <div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商编号</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="usernumber" value="{$member['usernumber']}">
+	                            </div>
+	                        </div>
+
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商姓名</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="realname" value="{$member['realname']}">
+	                            </div>
+	                        </div>
+
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商身份证号</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="IDcard" value="{$member['IDcard']}">
+	                            </div>
+	                        </div>
+
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商手机号</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="mobile" value="{$member['mobile']}">
+	                            </div>
+	                        </div>
+
+
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户银行</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="bankname" value="{$member['bankname']}">
+	                            </div>
+	                        </div>
+
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>开户行地址</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="bank_adress" value="{$member['bank_adress']}">
+	                            </div>
+	                        </div>
+
+							<div class="form-group">
+	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>银行卡号</label>
+
+	                            <div class="col-sm-7">
+	                                <input type="text" class="form-control" name="banknumber" value="{$member['banknumber']}">
+	                            </div>
+	                        </div>
+
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-2">
+									<button class="btn btn-warning" type="submit">确认</button>
+									<button type="reset" class="btn btn-outline btn-warning">重置</button>
+									<button class="btn btn-info" type="">返回</button>
+								</div>
+							</div>
+	                </div>
+				</form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<include file="public:footer" />
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+	$().ready(function () {
+		// validate signup form on keyup and submit
+		$("#signupForm").validate({
+			rules: {
+				usernumber: {
+					required: true
+				},
+				realname: {
+					required: true
+				},
+				IDcard: {
+					required: true
+				},
+				mobile: {
+					required: true
+				},
+				bankname: {
+					required: true
+				},
+				bank_adress: {
+					required: true
+				},
+				banknumber: {
+					required: true
+				},
+				agree: "required"
+			}
+		});
+	});
+</script>

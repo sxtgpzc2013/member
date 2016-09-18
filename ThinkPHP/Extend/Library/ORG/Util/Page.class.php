@@ -11,7 +11,7 @@
 // +----------------------------------------------------------------------
 
 class Page {
-    
+
     // 分页栏每页显示的页数
     public $rollPage = 5;
     // 页数跳转时要带的参数
@@ -58,7 +58,7 @@ class Page {
             $this->nowPage  =   $this->totalPages;
         }
         $this->firstRow     =   $this->listRows*($this->nowPage-1);
-        if(!empty($url))    $this->url  =   $url; 
+        if(!empty($url))    $this->url  =   $url;
     }
 
     public function setConfig($name,$value) {
@@ -101,13 +101,13 @@ class Page {
         $upRow          =   $this->nowPage-1;
         $downRow        =   $this->nowPage+1;
         if ($upRow>0){
-            $upPage     =   "<a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</a>";
+            $upPage     =   "<li class='paginate_button' aria-controls='editable' tabindex='0'><a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</li></a>";
         }else{
             $upPage     =   '';
         }
 
         if ($downRow <= $this->totalPages){
-            $downPage   =   "<a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</a>";
+            $downPage   =   "<li class='paginate_button' aria-controls='editable' tabindex='0'><a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</li></a>";
         }else{
             $downPage   =   '';
         }
@@ -117,8 +117,8 @@ class Page {
             $prePage    =   '';
         }else{
             $preRow     =   $this->nowPage-$this->rollPage;
-            $prePage    =   "<a href='".str_replace('__PAGE__',$preRow,$url)."' >上".$this->rollPage."页</a>";
-            $theFirst   =   "<a href='".str_replace('__PAGE__',1,$url)."' >".$this->config['first']."</a>";
+            $prePage    =   "<li class='paginate_button previous disabled' aria-controls='editable' tabindex='0' id='editable_previous'><a href='".str_replace('__PAGE__',$preRow,$url)."' >上".$this->rollPage."页</li></a>";
+            $theFirst   =   "<li class='paginate_button previous disabled' aria-controls='editable' tabindex='0' id='editable_previous'><a href='".str_replace('__PAGE__',1,$url)."' >".$this->config['first']."</li></a>";
         }
         if($nowCoolPage == $this->coolPages){
             $nextPage   =   '';
@@ -126,8 +126,8 @@ class Page {
         }else{
             $nextRow    =   $this->nowPage+$this->rollPage;
             $theEndRow  =   $this->totalPages;
-            $nextPage   =   "<a href='".str_replace('__PAGE__',$nextRow,$url)."' >下".$this->rollPage."页</a>";
-            $theEnd     =   "<a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$this->config['last']."</a>";
+            $nextPage   =   "<li class='paginate_button next' aria-controls='editable' tabindex='0' id='editable_next'><a href='".str_replace('__PAGE__',$nextRow,$url)."' >下".$this->rollPage."页</li></a>";
+            $theEnd     =   "<li class='paginate_button next' aria-controls='editable' tabindex='0' id='editable_next'><a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$this->config['last']."</li></a>";
         }
         // 1 2 3 4 5
         $linkPage = "";
@@ -135,13 +135,13 @@ class Page {
             $page       =   ($nowCoolPage-1)*$this->rollPage+$i;
             if($page!=$this->nowPage){
                 if($page<=$this->totalPages){
-                    $linkPage .= "<a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a>";
+                    $linkPage .= "<li class='paginate_button' aria-controls='editable' tabindex='0'><a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</li></a>";
                 }else{
                     break;
                 }
             }else{
                 if($this->totalPages != 1){
-                    $linkPage .= "<span class='current'>".$page."</span>";
+                    $linkPage .= "<li class='paginate_button active' aria-controls='editable' tabindex='0'><a>".$page."</a></li></span>";
                 }
             }
         }
