@@ -37,7 +37,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <!-- <th>#</th> -->
                                     <th>编号</th>
                                     <th>标题</th>
                                     <th>类型</th>
@@ -48,25 +48,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" checked class="i-checks" name="input[]">
-                                    </td>
-                                    <td>1</span>
-									<td>米莫说｜MiMO Show</td>
-                                    </td>
-                                    <td>普通</td>
-                                    <td>1</td>
-									<td>2016-09-09 16:21:56</td>
-									<td>1</td>
-                                    <td>
-										<a href="table_basic.html#">编辑</a>
-										<a href="table_basic.html#">删除</a>
-										<a href="table_basic.html#">启用</a>
-                                    </td>
-                                </tr>
-
-								
+                                <foreach name="result['result']" item="new">
+                                    <tr>
+                                        <!-- <td>
+                                            <input type="checkbox" checked class="i-checks" name="input[]">
+                                        </td> -->
+                                        <td>{$new.id}</span></td>
+    									<td>{$new.title}</td>
+                                        <td>
+                                            <if condition="$new['type'] eq 1">
+                                                公共
+                                            </if>
+                                        </td>
+                                        <td>{$new.level}</td>
+    									<td>{$new.updated_at|date="Y-m-d H:i:s",###}</td>
+    									<td>
+                                            <if condition="$new['status'] eq 0">
+                                                启用
+                                            <elseif condition="$new['status'] eq 1" />
+                                                禁用
+                                            </if>
+                                        </td>
+                                        <td>
+    										<a href="__APP__/News/edit/id/{$new.id}">编辑</a>
+    										<a href="__APP__/News/delete/id/{$new.id}" onclick="return confirm('确认删除吗？')">删除</a>
+                                            <if condition="$new['status'] eq 0">
+    										  <a href="__APP__/News/status/id/{$new.id}/type/0">禁用</a>
+                                            <elseif condition="$new['status'] eq 1" />
+                                                <a href="__APP__/News/status/id/{$new.id}/type/1">启用</a>
+                                            </if>
+                                        </td>
+                                    </tr>
+                                </foreach>
                             </tbody>
                         </table>
                     </div>
@@ -81,24 +94,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                {$result.page}
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>
