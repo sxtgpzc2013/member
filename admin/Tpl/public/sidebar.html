@@ -71,38 +71,38 @@
 			</li>
 
 
-			<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
+			<li class="<?php if (MODULE_NAME == 'Finances') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">奖金统计</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'bonus_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/bonus_list">奖金统计</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">业绩统计</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'performance') {echo 'active';} ?>">
+						<a href="__APP__/Finances/performance">业绩统计</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">财务流水</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'finance_flow') {echo 'active';} ?>">
+						<a href="__APP__/Finances/finance_flow">财务流水</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">转账明细</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/transfer_list">转账明细</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司充值</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'company_recharge') {echo 'active';} ?>">
+						<a href="__APP__/Finances/company_recharge">公司充值</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司扣币</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'company_deduct_money') {echo 'active';} ?>">
+						<a href="__APP__/Finances/company_deduct_money">公司扣币</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">公司财务</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'company_finance_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/company_finance_list">公司财务</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现申请</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash') {echo 'active';} ?>">
+						<a href="__APP__/Finances/cash">提现申请</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">提现记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/cash_list">提现记录</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finance' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__">充值记录</a>
+					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'recharge_list') {echo 'active';} ?>">
+						<a href="__APP__/Finances/recharge_list">充值记录</a>
 					</li>
 				</ul>
 			</li>
@@ -122,6 +122,24 @@
 				</ul>
 			</li>
 
+
+			<li class="<?php if (MODULE_NAME == 'Products' || MODULE_NAME == 'Orders') {echo 'active';} ?>">
+				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">商城</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php if (MODULE_NAME == 'Products' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__/Products/index">商品列表</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Orders' && ACTION_NAME == 'wait') {echo 'active';} ?>">
+						<a href="__APP__/Orders/wait">待发货订单</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Orders' && ACTION_NAME == 'sent') {echo 'active';} ?>">
+						<a href="__APP__/Orders/sent">已发货订单</a>
+					</li>
+					<li class="<?php if (MODULE_NAME == 'Orders' && ACTION_NAME == 'sign') {echo 'active';} ?>">
+						<a href="__APP__/Orders/sign">已签收订单</a>
+					</li>
+				</ul>
+			</li>
 
 			<!-- <li>
 				<a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">v2.0新增</span><span class="fa arrow"></span></a>

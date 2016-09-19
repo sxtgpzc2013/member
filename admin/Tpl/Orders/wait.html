@@ -1,0 +1,89 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>商城</a>
+            </li>
+            <li>
+                <strong>待发货订单</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content" style="border:0">
+					<h3 class="text-center">待发货订单</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>戎子盾</th>
+                                    <th>奖金币</th>
+                                    <th>下单时间</th>
+									<th>状态</th>
+									<th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+									<td>3123</td>
+									<td>2</td>
+                                    <td>112</td>
+									<td>2</td>
+									<td>未发货</td>
+                                    <td>
+										<a class="btn btn-info btn-sm" href="#">发货</a>
+										<a class="btn btn-info btn-sm" href="#">订单详情</a>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+	<div class="row">
+	    <div class="col-sm-12 text-right">
+	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+	            <ul class="pagination">
+	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+	                    <a href="#">上一页</a></li>
+	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
+	                    <a href="#">1</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">2</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">3</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">4</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">5</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">6</a></li>
+	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
+	                    <a href="#">下一页</a></li>
+	            </ul>
+				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
+	        </div>
+	    </div>
+	</div>
+
+</div>
+<include file="public:footer" />
