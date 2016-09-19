@@ -41,6 +41,19 @@
 		 */
 	    public function index()
 	    {
+	    	$params = array(
+
+	    		'table_name' => 'news',
+
+	    		'order' => "level asc",
+
+	    		'where' => "is_del = 0 AND status = 0"
+	    	);
+
+	    	$result = $this -> model -> order_select($params);
+
+	    	$this -> assign('result', $result);
+
 			$this -> display();
 	    }
 	}
