@@ -1,18 +1,18 @@
 <?php if (!defined('THINK_PATH')) exit();
 
 /*********文件描述*********
- * @last 
+ * @last
  * @alter
  * @version 1.0.0
  *
  * 功能简介：
- * @author 
- * @copyright 
- * @time 
+ * @author
+ * @copyright
+ * @time
  * @version 1.0.0
  */
 
-class FinancialsAction extends CommonAction {
+class FinancesAction extends CommonAction {
 
 	/**
 	 * 构造方法-实例化MODEL
@@ -30,7 +30,7 @@ class FinancialsAction extends CommonAction {
 	{
 		parent::__construct();
 
-		$this -> model = D('Financials');
+		$this -> model = D('Finances');
 	}
 
     /**
