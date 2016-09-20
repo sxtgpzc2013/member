@@ -8,10 +8,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>新闻公告</a>
+                <a>系统设置</a>
             </li>
             <li>
-                <strong>公司新闻</strong>
+                <strong>奖金设置</strong>
             </li>
         </ol>
 	</div>
@@ -21,37 +21,105 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5 class="text-center">新增新闻</h5>
+                    <h5 class="text-center">奖金结算规则设置</h5>
 
                 </div>
                 <div class="ibox-content">
 					<form class="form-horizontal m-t" id="signupForm">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*标题:</label>
+                            <label class="col-sm-3 control-label">*分红比例:</label>
                             <div class="col-sm-6">
                                 <input id="title" name="title" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*类型:</label>
-                            <div class="col-sm-6">
-                                <label class="checkbox-inline"><input type="radio" name="type" value="1" id="inlineCheckbox1" checked> 公共</label>
-                            </div>
+                            <label class="col-sm-3 control-label">*拓展补贴:</label>
+							<div class="col-sm-6">
+								<input id="level" name="level" class="form-control" type="text" value="1">
+							</div>
                         </div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">*优先级:</label>
+							<label class="col-sm-3 control-label">*管理补贴:</label>
 							<div class="col-sm-6">
 								<input id="level" name="level" class="form-control" type="text" value="1">
 							</div>
 						</div>
 
 						<div class="form-group">
-                            <label class="col-sm-3 control-label">*新闻内容:</label>
-                            <div class="col-sm-6">
-                                <textarea name="content" rows="8" cols="40" class="form-control"></textarea>
+							<label class="col-sm-3 control-label">*互助补贴:</label>
+							<div class="col-sm-6">
+								<input id="level" name="level" class="form-control" type="text" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*市场补贴:</label>
+							<div class="col-sm-6">
+								<input id="level" name="level" class="form-control" type="text" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*销售补贴:</label>
+							<div class="col-sm-6">
+								<input id="level" name="level" class="form-control" type="text" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*服务补贴:</label>
+							<div class="col-sm-6">
+								<input id="level" name="level" class="form-control" type="text" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*消费提成:</label>
+							<div class="col-sm-6">
+								<input id="level" name="level" class="form-control" type="text" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*商城消费奖比例:</label>
+							<div class="col-sm-6">
+								<div class="form-group">
+                                    <label for="showEasing">自己收入的</label>
+                                    <input id="level" name="level" class="form-control" type="text" value="1">
+                                </div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*提现规则:</label>
+							<!-- <div class="col-sm-6">
+								最低提现金额<input id="level" name="level" class="" type="text" value="1">
+								且必须是<input id="level" name="level" class="" type="text" value="1">的整数倍<br>
+								每次提现有<input id="level" name="level" class="" type="text" value="1">的手续费
+								最高收取<input id="level" name="level" class="" type="text" value="1"><br>
+								提现日期为每月的<input id="level" name="level" class="" type="text" value="1">号
+							</div> -->
+							<div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="showEasing">最低提现金额</label>
+                                    <input id="showEasing" type="text" placeholder="" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="hideEasing">且必须是*的整数倍</label>
+                                    <input id="hideEasing" type="text" placeholder="" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="showMethod">每次提现的手续费</label>
+                                    <input id="showMethod" type="text" placeholder="" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hideMethod">最高收取的手续费</label>
+                                    <input id="hideMethod" type="text" placeholder="" class="form-control" value="">
+                                </div>
+								<div class="form-group">
+                                    <label for="hideMethod">提现日期为每月的*号</label>
+                                    <input id="hideMethod" type="text" placeholder="" class="form-control" value="">
+                                </div>
                             </div>
-                        </div>
+						</div>
+
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <button class="btn btn-primary" type="submit">提交</button>

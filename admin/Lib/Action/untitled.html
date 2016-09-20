@@ -1,0 +1,39 @@
+<?php
+                    // $begintime = reset($data['meetDates']);
+                    // $endtime = end($data['meetDates']);
+                    // $data['meetDates']['begintime'] = reset($begintime);
+                    // $data['meetDates']['endtime'] = end($endtime);
+                    $time_list = array();
+                    $week_list = array();
+                    foreach ($data['meetDates'] as $key => $value) {
+                        $time_list[] = $value[0];
+                        $time_list[] = $value[1];
+                        $week_list[] = $value[0];
+                    }
+                    sort($time_list);
+                    asort($week_list);
+                    $week_list_msg = "";
+                    foreach ($week_list as $key => $value) {
+                       $week_list_msg = $week_list_msg.getTimeWeek($value);
+                    }
+
+                    $begintime = reset($time_list);
+                    $endtime = end($time_list);
+
+                    function getTimeWeek($time, $i = 0) {
+                        $weekarray = array("一", "二", "三", "四", "五", "六", "日");
+                        $oneD = 24 * 60 * 60;
+                        return $weekarray[date("w", $time + $oneD * $i)];
+                    }
+                   
+                ?>
+
+                <?php if($data['datetype'] == 2){ ?>
+                <dd>每天<?php echo date('H:i',$begintime);?>-<?php echo date('H:i',$endtime);?></dd>
+                <?php }else if($data['datetype'] == 3){ ?>
+                <dd>每周<?php echo $week_list_msg; echo date('H:i',$begintime);?>-<?php echo date('H:i',$endtime);?></dd>
+                
+                <?php }else{ ?>
+                <dd><?php echo date('m月d日',$begintime);?>-<?php echo date('m月d日',$endtime);?></dd>
+        
+                <?php } ?>

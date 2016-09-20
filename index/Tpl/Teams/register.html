@@ -32,11 +32,11 @@
 			                    <label class="col-sm-2 control-label">消费商编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="usernumber">
+			                        <input type="text" class="form-control usernumber" name="usernumber">
 			                    </div>
 
 								<div class="col-sm-3">
-			                        <button href="#" class="btn btn-white btn-sm">验证编号</button>
+			                        <a class="btn btn-white get_usernumber">验证编号</a>
 			                    </div>
 			                </div>
 
@@ -164,7 +164,7 @@
 			                    <label class="col-sm-2 control-label">推荐人编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="tuijiannumber">
+			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -176,11 +176,11 @@
 			                    <label class="col-sm-2 control-label">报单中心</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="billcenternumber">
+			                        <input type="text" class="form-control billcenternumber" name="billcenternumber">
 			                    </div>
 
 								<div class="col-sm-3">
-			                        <button href="#" class="btn btn-white btn-sm">获取报单中心</button>
+			                        <a class="btn btn-white get_billcenternumber">获取报单中心</a>
 			                    </div>
 			                </div>
 
@@ -188,7 +188,7 @@
 			                    <label class="col-sm-2 control-label">接点人</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="parentnumber">
+			                        <input type="text" class="form-control parentnumber" name="parentnumber">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -200,10 +200,8 @@
 			                    <label class="col-sm-2 control-label">接点区</label>
 
 			                    <div class="col-sm-7">
-									<select class="form-control" name="zone">
-										<option value="1">左区</option>
-										<option value="2">中区</option>
-										<option value="3">右区</option>
+									<select class="form-control zone" id="zone" name="zone">
+
 									</select>
 			                    </div>
 			                </div>
@@ -251,7 +249,7 @@
 
 			                    <div class="col-sm-7">
 									<label class="checkbox-inline">
-			                            <input type="checkbox" value="option1" id="inlineCheckbox1" name="is_free"> 我已阅读并同意本协议 <a href="#">查看协议</a>
+			                            <input type="checkbox" value="option1" id="inlineCheckbox1" name="is_free"> 我已阅读并同意本协议 <a>查看协议</a>
 									</label>
 			                    </div>
 			                </div>
@@ -348,8 +346,110 @@
 				is_free: {
 					required: true
 				},
+				zone: {
+					required: true
+				},
 				agree: "required"
 			}
 		});
+
+		$('.get_usernumber').click(function(){
+			var usernumber = $('.usernumber').val();
+			if(usernumber == null){
+				alert("请输入用户编号");return false;
+			}
+			$.ajax({
+	            url: "__APP__/Teams/get_usernumber",
+	            type: "get",
+	            data: {
+	                usernumber: usernumber
+	            },
+	            success: function (resdata) {
+					resdata = JSON.parse(resdata);
+	                if (resdata.success == true) {
+						if(resdata.data == 0){
+							alert("用户编号验证成功,可以注册");
+						}else{
+							alert("用户编号已存在,请重新输入用户编号");
+						}
+	                } else {
+	                    alert("编号验证出现错误 请重试");
+	                }
+	            }
+	        });
+		});
+
+		$('.get_billcenternumber').click(function(){
+			var tuijiannumber = $('.tuijiannumber').val();
+			if(tuijiannumber == ""){
+				alert("请输入推荐人编号");return false;
+			}
+			$.ajax({
+	            url: "__APP__/Teams/get_billcenternumber",
+	            type: "get",
+	            data: {
+	                usernumber: tuijiannumber
+	            },
+	            success: function (resdata) {
+					resdata = JSON.parse(resdata);
+	                if (resdata.success == true) {
+						if(resdata.data == 0){
+							alert("用户报单中心获取失败,请重新输入用户编号");
+						}else{
+							$('.billcenternumber').val(resdata.data);
+						}
+	                } else {
+	                    alert("用户报单中心获取错误 请重试");
+	                }
+	            }
+	        });
+		});
+
+		$('.parentnumber').blur(function(){
+
+			var parentnumber = $('.parentnumber').val();
+			if(parentnumber == ""){
+				alert("请输入推荐人编号");return false;
+			}
+			$.ajax({
+	            url: "__APP__/Teams/get_parentnumber_zone",
+	            type: "get",
+				dataType: "JSON",
+	            data: {
+	                usernumber: parentnumber
+	            },
+	            success: function (resdata) {
+	                if (resdata.success == true) {
+						if(resdata.data == ""){
+							alert("用户区间获取失败,请重新输入推荐人用户编号");
+						}else{
+							var zone_list = resdata.data
+							// var zone_list = JSON.stringify(resdata.data);
+							var obj=document.getElementById('zone');
+							obj.innerHTML = "";
+							for(var key in zone_list){
+							   //key是属性,object[key]是值
+							   if(zone_list[key] == 0){
+								   if(key == "left_zone"){
+									   obj.options.add(new Option("左区","1"));
+								   }else if(key == "middle_zone"){
+									   obj.options.add(new Option("中区","2"));
+								   }else if(key == "right_zone"){
+									   obj.options.add(new Option("右区","3"));
+								   }
+							   }
+							}
+
+
+						}
+	                } else {
+	                    alert("用户报单中心获取错误 请重试");
+	                }
+	            }
+	        });
+		});
+
+
+
 	});
 </script>

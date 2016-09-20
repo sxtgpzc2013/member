@@ -7,11 +7,11 @@
  * 功能简介：
  * @author
  * @copyright
- * @time 
+ * @time
  * @version 1.0.0
  */
 
 	class TeamsModel extends CommonModel
 	{
-
+		
 	}

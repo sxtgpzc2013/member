@@ -8,10 +8,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>新闻公告</a>
+                <a>系统设置</a>
             </li>
             <li>
-                <strong>公司新闻</strong>
+                <strong>计划任务</strong>
             </li>
         </ol>
 	</div>
@@ -20,94 +20,100 @@
 	<div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5 class="text-center">新增新闻</h5>
+				<div class="row">
+					<div class="col-sm-9 m-b-xs">
+						<p>
+							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Products/add">新增</a>
+						</p>
+					</div>
+				</div>
 
-                </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*标题:</label>
-                            <div class="col-sm-6">
-                                <input id="title" name="title" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*类型:</label>
-                            <div class="col-sm-6">
-                                <label class="checkbox-inline"><input type="radio" name="type" value="1" id="inlineCheckbox1" checked> 公共</label>
-                            </div>
-                        </div>
+					<h3 class="text-center">计划任务</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>最后运行时间</th>
+                                    <th>下次运行时间</th>
+                                    <th>周</th>
+                                    <th>天</th>
+									<th>时</th>
+									<th>分</th>
+									<th>状态</th>
+									<th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</span>
+									<td>MiMO Show</td>
+                                    </td>
+									<td>3123</td>
+									<td>2</td>
+                                    <td>112</td>
+									<td>2</td>
+									<td>2</td>
+									<td>2</td>
+                                    <td>
+										<a class="btn btn-info btn-sm" >修改</a>
+										<a class="btn btn-info btn-sm" href="#">删除</a>
+                                    </td>
+                                </tr>
 
-						<div class="form-group">
-							<label class="col-sm-3 control-label">*优先级:</label>
-							<div class="col-sm-6">
-								<input id="level" name="level" class="form-control" type="text" value="1">
-							</div>
-						</div>
+								<tr>
+                                    <td>1</span>
+									<td>MiMO Show</td>
+                                    </td>
+									<td>3123</td>
+									<td>2</td>
+                                    <td>112</td>
+									<td>2</td>
+									<td>2</td>
+									<td>2</td>
+                                    <td>
+										<a class="btn btn-info btn-sm" href="#">编辑</a>
+										<a class="btn btn-info btn-sm" href="#">删除</a>
+                                    </td>
+                                </tr>
 
-						<div class="form-group">
-                            <label class="col-sm-3 control-label">*新闻内容:</label>
-                            <div class="col-sm-6">
-                                <textarea name="content" rows="8" cols="40" class="form-control"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-3">
-                                <button class="btn btn-primary" type="submit">提交</button>
-                            </div>
-                        </div>
-                    </form>
+
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
+
     </div>
 
+	<div class="row">
+	    <div class="col-sm-12 text-right">
+	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+	            <ul class="pagination">
+	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+	                    <a href="#">上一页</a></li>
+	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
+	                    <a href="#">1</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">2</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">3</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">4</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">5</a></li>
+	                <li class="paginate_button " aria-controls="editable" tabindex="0">
+	                    <a href="#">6</a></li>
+	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
+	                    <a href="#">下一页</a></li>
+	            </ul>
+				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
+	        </div>
+	    </div>
+	</div>
 
 </div>
 <include file="public:footer" />
-<!-- jQuery Validation plugin javascript-->
-<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
-<script>
-   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
-   $.validator.setDefaults({
-	   highlight: function (element) {
-		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-	   },
-	   success: function (element) {
-		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
-	   },
-	   errorElement: "span",
-	   errorClass: "help-block m-b-none",
-	   validClass: "help-block m-b-none"
-
-
-   });
-
-	//以下为官方示例
-   $().ready(function () {
-	   // validate signup form on keyup and submit
-	   $("#signupForm").validate({
-		   rules: {
-			   title: {
-				   required: true
-			   },
-			   content: {
-				   required: true,
-			   },
-			   type: {
-				   required: true,
-			   },
-			   level: {
-				   required: true,
-				   email: true
-			   },
-			   agree: "required"
-		   },
-		   messages: {
-
-		   }
-	   });
-   });
-</script>

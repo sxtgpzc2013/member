@@ -37,123 +37,31 @@
                         牛牛 当前共有20代会员
                     </p>
 
+
+
+
+
                     <div class="dd" id="nestable2">
-                        <ol class="dd-list">
-                            <li class="dd-item" data-id="1">
-                                <div class="dd-handle">
-                                    <span class="label label-info"><i class="fa fa-users"></i></span> 4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-                                </div>
-                                <ol class="dd-list">
-                                    <li class="dd-item" data-id="2">
-                                        <div class="dd-handle">
-                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
+						<foreach name="recommend_list" item="recommend">
+							<ol class="dd-list">
+	                            <li class="dd-item" data-id="{$recommend.uid}">
+	                                <div class="dd-handle">
+	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} / {$recommend.realname} / 伞下人数：{$recommend.num}人/  用户级别：{$recommend.userrank} / {$recommend.zone}
+	                                </div>
 
-                                        </div>
-										<ol class="dd-list">
-		                                    <li class="dd-item" data-id="2">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                    <li class="dd-item" data-id="3">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                    <li class="dd-item" data-id="4">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                </ol>
-                                    </li>
-                                    <li class="dd-item" data-id="3">
-                                        <div class="dd-handle">
-                                            <span class="label label-info"><i class="fa fa-bolt"></i></span> 筛选
-                                        </div>
-                                    </li>
-                                    <li class="dd-item" data-id="4">
-                                        <div class="dd-handle">
-                                            <span class="label label-info"><i class="fa fa-laptop"></i></span> 电脑
-                                        </div>
-										<ol class="dd-list">
-		                                    <li class="dd-item" data-id="2">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                    <li class="dd-item" data-id="3">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-												<ol class="dd-list">
-				                                    <li class="dd-item" data-id="2">
-				                                        <div class="dd-handle">
-				                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-				                                        </div>
-				                                    </li>
-				                                    <li class="dd-item" data-id="3">
-				                                        <div class="dd-handle">
-				                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-				                                        </div>
-				                                    </li>
-				                                    <li class="dd-item" data-id="4">
-				                                        <div class="dd-handle">
-				                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-				                                        </div>
-				                                    </li>
-				                                </ol>
-		                                    </li>
-		                                    <li class="dd-item" data-id="4">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                </ol>
-                                    </li>
-                                </ol>
-                            </li>
+									<if condition="$recommend['num'] neq 0">
 
-                            <li class="dd-item" data-id="5">
-                                <div class="dd-handle">
-                                    <span class="label label-warning"><i class="fa fa-users"></i></span> 用户
-                                </div>
-								<ol class="dd-list">
-									<li class="dd-item" data-id="2">
-										<div class="dd-handle">
-											<span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-										</div>
-									</li>
-									<li class="dd-item" data-id="3">
-										<div class="dd-handle">
-											<span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-										</div>
-									</li>
-									<li class="dd-item" data-id="4">
-										<div class="dd-handle">
-											<span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-										</div>
-										<ol class="dd-list">
-		                                    <li class="dd-item" data-id="2">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-users"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                    <li class="dd-item" data-id="3">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-bolt"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                    <li class="dd-item" data-id="4">
-		                                        <div class="dd-handle">
-		                                            <span class="label label-info"><i class="fa fa-laptop"></i></span>  4668565 / 牛牛 / 伞下人数：10人/  用户级别：消费商 / 左区
-		                                        </div>
-		                                    </li>
-		                                </ol>
-									</li>
-								</ol>
-                            </li>
-                        </ol>
+										<ol class="dd-list" style="display: none;">
+
+										</ol>
+									</if>
+	                            </li>
+
+
+
+	                        </ol>
+						</foreach>
+
                     </div>
 
                     <textarea id="nestable2-output" class="form-control"></textarea>
@@ -173,7 +81,7 @@
    <!-- Nestable List -->
    <script src="__PUBLIC__/js/plugins/nestable/jquery.nestable.js"></script>
    <script>
-	   $(document).ready(function () {
+	    $(function() {
 
 		   var updateOutput = function (e) {
 			   var list = e.length ? e : $(e.target),
@@ -190,9 +98,10 @@
 			   group: 1
 		   }).on('change', updateOutput);
 
-		   updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+		   //updateOutput($('#nestable2').data('output', $('#nestable2-output')));
 
 		   $('#nestable-menu').on('click', function (e) {
+
 			   var target = $(e.target),
 				   action = target.data('action');
 			   if (action === 'expand-all') {
@@ -203,6 +112,52 @@
 			   }
 		   });
 
+		   $('.dd-item button').on('click', function () {
+			   var uid = $(this).parent().attr('data-id');
+			   var type = $(this).attr('data-action');
+			   var that = this;
+			   if(type == 'expand'){
+				   //进行数据请求
+				      $.ajax({
+				   	   url: "__APP__/Teams/get_recommend_relation",
+				   	   type: "get",
+				   	   dataType: "JSON",
+				   	   data: {
+				   		   uid: uid
+				   	   },
+				   	   success: function (resdata) {
+				   		   if (resdata.success == true) {
+				   			   if(resdata.data == ""){
+				   				   alert("用户区伞下人数获取失败 请重试!");
+				   			   }else{
+								   var recommend_list = resdata.data
+								   for(i=0;i<recommend_list.length;i++){
+									  //$(this).parent().html()
+									  var addHtml = '<li class="dd-item" data-id="'+recommend_list[i]['uid']+'"><button data-action="collapse" type="button" style="display: none;">关闭</button><button data-action="expand" type="button" style="display: block;" onclick="eventfun(obj)" >展开</button>'
+	  	                                +'<div class="dd-handle">'
+	  	                                    +'<span class="label label-info"><i class="fa fa-users"></i></span> '+recommend_list[i]['uid']+' / '+recommend_list[i]['uid']+' / 伞下人数：'+recommend_list[i]['uid']+'人/  用户级别：'+recommend_list[i]['uid']+' / '+recommend_list[i]['uid']
+	  	                                +'</div>'
+  										+'<ol class="dd-list" style="display: none;">'
+
+  										+'</ol>'
+	  	                            +'</li>'
+									  $(that).parent().children(".dd-list").append(addHtml);
+								   }
+
+				   			   }
+				   		   } else {
+				   			   alert("用户报单中心获取错误 请重试");
+				   		   }
+				   	   }
+				      });
+			   }
+
+		   });
 		    $('.dd').nestable('collapseAll');
 	   });
+
+
+	   function eventfun(obj){
+		   alert(obj)
+	   }
    </script>
