@@ -11,7 +11,7 @@
  * @version 1.0.0
  */
 
-class NewsModel extends Model
+class NewsModel extends CommonModel
 {
 
 }
