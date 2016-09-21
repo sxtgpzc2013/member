@@ -33,26 +33,26 @@
 									<th>开户姓名</th>
 									<th>提取金额</th>
 									<th>手续费</th>
-									<th>到账金额</th>
-									<th>提现时间</th>
+									<th>应到金额</th>
+									<th>申请时间</th>
 									<th>提现操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td><a href="#" class="btn">同意</a><a href="#" class="btn">拒绝</a></td>
-
-                                </tr>
-
+                            	<foreach name="result['result']" item="item">
+	                                <tr>
+										<td>{$item.usernumber}</td>
+										<td>{$item.realname}</td>
+										<td>{$item.banknumber}</td>
+										<td>{$item.bankname}</td>
+										<td>{$item.bankholder}</td>
+										<td>￥{$item.money}</td>
+										<td>￥{$item.fee}</td>
+										<td>￥{$item['money'] - $item['fee']}</td>
+										<td>{$item.createtime|date="Y-m-d H:i:s",###}</td>
+										<td><a href="__APP__/Finances/cash_action/id/{$item.id}/type/agreen" class="btn" onclick="return confirm('确认同意吗？')">同意</a><a href="__APP__/Finances/cash_action/id/{$item.id}/type/refuse" class="btn" onclick="return confirm('确认拒绝吗？')">拒绝</a></td>
+	                                </tr>
+	                            </foreach>
                             </tbody>
                         </table>
                     </div>
@@ -67,24 +67,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                {$result.page}
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>

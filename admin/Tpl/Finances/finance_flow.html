@@ -46,7 +46,6 @@
                                 <tr>
                                     <th>相关消费商</th>
                                     <th>目标消费商</th>
-                                    <th>变更前金额</th>
 									<th>变更金额</th>
 									<th>变更后金额</th>
 									<th>变更币种</th>
@@ -59,7 +58,6 @@
 	                                <tr>
 										<td>{$item.realname}</td>
 										<td>{$item.targetrealname}</td>
-										<td>￥{$item['hasmoney']-$item['money']}</td>
 	                                    <td>￥{$item.money}</td>
 	                                    <td>￥{$item.hasmoney}</td>
 										<td>
@@ -100,6 +98,10 @@
 												服务补贴
 											<elseif condition="$item['changetype'] eq 10" />
 												消费提成
+											<elseif condition="$item['changetype'] eq 11" />
+												消费商提现
+											<elseif condition="$item['changetype'] eq 12" />
+												处理提现
 											</if>
 										</td>
 										<td>{$item.createtime|date="Y-m-d H:i:s",###}</td>

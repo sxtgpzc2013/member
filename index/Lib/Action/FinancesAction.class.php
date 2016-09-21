@@ -67,7 +67,7 @@
 
 	    	if (isset($_POST['form_key']) && $_POST['form_key'] == 'yes')
 	    	{
-	    		$data['money'] = isset($_POST['money']) && floatval($_POST['money']) > 500 && floatval($_POST['money']) <= $member['jiangjinbi'] ? floatval($_POST['money']) : $this -> _back('非法的提现金额');
+	    		$data['money'] = isset($_POST['money']) && floatval($_POST['money']) >= 500 && floatval($_POST['money']) <= $member['jiangjinbi'] ? floatval($_POST['money']) : $this -> _back('非法的提现金额');
 
 	    		$data['mobile'] = is_tel($_POST['mobile']) ? htmlspecialchars($_POST['mobile']) : $this -> _back('非法的手机号');
 
@@ -104,6 +104,55 @@
 
 	    		if ($withdrawal_add)
 	    		{
+	    			//扣款
+	    			$member_data['jiangjinbi'] = $member['jiangjinbi'] - $data['money'];
+
+	    			$member_data['update_time'] = time();
+
+	    			$params = array(
+
+	    				'table_name' => 'member',
+
+	    				'where' => "uid = {$member['uid']}",
+
+	    				'data' => $member_data
+	    			);
+
+	    			$member_save = $this -> model -> my_save($params);
+
+	    			//存入流水
+	    			$money_change_data['moneytype'] = 6;
+    			
+					$money_change_data['status'] = $member_save ? 1 : 0;
+
+					$money_change_data['targetrealname'] = '系统';
+					
+					$money_change_data['userid'] = $member['uid'];
+					
+					$money_change_data['usernumber'] = $member['usernumber'];
+					
+					$money_change_data['realname'] = $member['realname'];
+					
+					$money_change_data['changetype'] = 11;
+					
+					$money_change_data['recordtype'] = 0;
+					
+					$money_change_data['money'] = $data['money'];
+					
+					$money_change_data['hasmoney'] = $member_data['jiangjinbi'];
+					
+					$money_change_data['createtime'] = time();
+
+					//存入流水
+					$params = array(
+
+						'table_name' => 'money_change',
+
+						'data' => $money_change_data
+					);
+
+					$money_change_add = $this -> model -> my_add($params);
+
 	    			redirect(__APP__.'/Finances/cash', 0);
 	    		}
 	    		else
