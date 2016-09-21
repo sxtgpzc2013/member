@@ -50,6 +50,7 @@
 									<th>变更金额</th>
 									<th>变更后金额</th>
 									<th>变更币种</th>
+									<th>类型</th>
                                     <th>时间</th>
                                 </tr>
                             </thead>
@@ -74,6 +75,31 @@
 												奖励积分
 											<elseif condition="$item['moneytype'] eq 6" />
 												奖金币
+											</if>
+										</td>
+										<td>
+											<if condition="$item['changetype'] eq 0">
+												未知
+											<elseif condition="$item['changetype'] eq 1" />
+												公司充值
+											<elseif condition="$item['changetype'] eq 2" />
+												公司扣币
+											<elseif condition="$item['changetype'] eq 3" />
+												分红
+											<elseif condition="$item['changetype'] eq 4" />
+												管理补贴
+											<elseif condition="$item['changetype'] eq 5" />
+												互动补贴
+											<elseif condition="$item['changetype'] eq 6" />
+												拓展补贴
+											<elseif condition="$item['changetype'] eq 7" />
+												市场补贴
+											<elseif condition="$item['changetype'] eq 8" />
+												消费补贴
+											<elseif condition="$item['changetype'] eq 9" />
+												服务补贴
+											<elseif condition="$item['changetype'] eq 10" />
+												消费提成
 											</if>
 										</td>
 										<td>{$item.createtime|date="Y-m-d H:i:s",###}</td>
