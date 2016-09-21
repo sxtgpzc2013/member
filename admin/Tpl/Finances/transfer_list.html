@@ -31,47 +31,35 @@
                                     <th>转出账户姓名</th>
                                     <th>转入账户编号</th>
                                     <th>转入账户姓名</th>
-									<th>转换类型</th>
-									<th>到账金额</th>
-									<th>转币数量</th>
-									<th>转币时间</th>
+									<th>币种</th>
+									<th>转账金额</th>
+									<th>状态</th>
+									<th>转账时间</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-                                </tr>
-
-								<tr>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-                                </tr>
-
-
-								<tr>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-                                </tr>
-
+	                            <foreach name="result['result']" item="transfer">
+	                                <tr>
+										<td>{$transfer.usernumber}</td>
+										<td>{$transfer.username}</td>
+										<td>{$transfer.targetusernumber}</td>
+										<td>{$transfer.targetusername}</td>
+										<td>
+											<if condition="$transfer['moneytype'] eq 0">
+												报单币
+											</if>
+										</td>
+										<td>￥{$transfer.money}</td>
+	                                    <td>
+	                                    	<if condition="$transfer['status'] eq 0">
+	                                    		转账成功
+	                                    	<elseif condition="$transfer['status'] eq 1" />
+	                                    		转账失败
+	                                    	</if>
+	                                    </td>
+	                                    <td>{$transfer.createtime|date="Y-m-d H:i:s",###}</td>
+	                                </tr>
+	                            </foreach>
                             </tbody>
                         </table>
                     </div>
@@ -86,24 +74,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                {$result.page}
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>

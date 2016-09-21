@@ -9,7 +9,8 @@ return array(
 	'DB_PREFIX'=>'zx_',
 	'URL_MODEL' => '1',
 	'DB_NAME'=>'rz_data',
-	'APP_DEBUG' => true
+	'APP_DEBUG' => true,
+	'SHOW_PAGE_TRACE'=>true,
 );
 /*
 return array(

@@ -44,25 +44,41 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>日期</th>
                                     <th>相关消费商</th>
                                     <th>目标消费商</th>
                                     <th>变更前金额</th>
 									<th>变更金额</th>
 									<th>变更后金额</th>
 									<th>变更币种</th>
+                                    <th>时间</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-                                </tr>
+                            	<foreach name="result['result']" item="item">
+	                                <tr>
+										<td>{$item.realname}</td>
+										<td>{$item.targetrealname}</td>
+										<td>￥{$item['hasmoney']-$item['money']}</td>
+	                                    <td>￥{$item.money}</td>
+	                                    <td>￥{$item.hasmoney}</td>
+										<td>
+											<if condition="$item['moneytype'] eq 1">
+												现金币
+											<elseif condition="$item['moneytype'] eq 2" />
+												报单币
+											<elseif condition="$item['moneytype'] eq 3" />
+												戎子盾
+											<elseif condition="$item['moneytype'] eq 4" />
+												激活币
+											<elseif condition="$item['moneytype'] eq 5" />
+												奖励积分
+											<elseif condition="$item['moneytype'] eq 6" />
+												奖金币
+											</if>
+										</td>
+										<td>{$item.createtime|date="Y-m-d H:i:s",###}</td>
+	                                </tr>
+	                            </foreach>
                             </tbody>
                         </table>
                     </div>
@@ -77,24 +93,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                {$result.page}
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>
