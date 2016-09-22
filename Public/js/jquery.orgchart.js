@@ -364,25 +364,25 @@
 
   // create node
   function createNode(nodeData, opts) {
-    console.log(nodeData[opts.nodeTitle])
-    if(nodeData[opts.is_null] == true){
+    console.log(nodeData[opts.is_null])
+    if(nodeData[opts.is_null] == "true"){
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
         .addClass('node')
-        .append('<a href="http://www.baidu.com">注册会员</a>')
+        .append('<a href="./register?uid='+nodeData[opts.parentid]+'&zone='+nodeData[opts.zone]+'" style="padding:10px;background:#f3c500;color:#fff;width:100px;min-width:100px;display:block;">注册会员</a>')
     }else{
       // construct the content of node
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
         .addClass('node')
         .append('<div class="title">' + nodeData[opts.nodeTitle] + '</div>')
         .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeData[opts.nodeContent] + '</div>' : '')
-        .append(typeof opts.nodeAchievement !== 'undefined' ? '<div class="content">总:' + nodeData[opts.nodeAchievement] + '&nbsp;&nbsp;余:' + nodeData[opts.nodeAchievement] +'</div>' : '')
-        .append(typeof opts.nodeSurplus !== 'undefined' ? '<div class="content">' + nodeData[opts.nodeSurplus] + '|余单</div>' : '');
-      
+        .append(typeof opts.nodeAchievement !== 'undefined' ? '<div class="content">总:' + nodeData[opts.nodeAchievement]['left'] +"  "+ nodeData[opts.nodeAchievement]['middle'] +"  "+ nodeData[opts.nodeAchievement]['right'] +'</div>' : '')
+        .append(typeof opts.nodeSurplus !== 'undefined' ? '<div class="content">新' + nodeData[opts.nodeSurplus]['left'] + "  " + nodeData[opts.nodeSurplus]['middle'] + "  " + nodeData[opts.nodeSurplus]['right'] + '</div>' : '');
+
     }
-    
+
     // append 4 directions arrows
     if (nodeData.relationship.parent_num > 0) {
-      $nodeDiv.append('<i class="edge topEdge fa"></i>');
+      //$nodeDiv.append('<i class="edge topEdge fa"></i>');
     }
     if(nodeData.relationship.sibling_num > 0) {
       $nodeDiv.append('<i class="edge rightEdge fa"></i>' +
@@ -390,7 +390,7 @@
     }
     if(nodeData.relationship.children_num > 0) {
       $nodeDiv.find('.title').prepend('<i class="fa fa-users symbol"></i>')
-      $nodeDiv.append('<i class="edge bottomEdge fa"></i>');
+      //$nodeDiv.append('<i class="edge bottomEdge fa"></i>');
     }
 
     // define hover event handler
@@ -686,7 +686,7 @@
       }
     );
 
-    // allow user to append dom modification after finishing node create of orgchart 
+    // allow user to append dom modification after finishing node create of orgchart
     if (opts.createNode) {
       opts.createNode($nodeDiv, nodeData);
     }

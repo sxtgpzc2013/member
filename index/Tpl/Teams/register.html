@@ -148,10 +148,10 @@
 
 			                    <div class="col-sm-7">
 									<label class="checkbox-inline">
-			                            <input type="radio" value="option1" id="inlineCheckbox1" name="red_wine_number"> 小戎子1箱
+			                            <input type="radio" value="1" id="inlineCheckbox1" name="red_wine_number"> 小戎子1箱
 									</label>
 									<label class="checkbox-inline">
-			                            <input type="radio" value="option1" id="inlineCheckbox2" name="red_wine_number"> 大戎子1箱
+			                            <input type="radio" value="2" id="inlineCheckbox2" name="red_wine_number"> 大戎子1箱
 									</label>
 			                    </div>
 			                </div>
@@ -164,7 +164,7 @@
 			                    <label class="col-sm-2 control-label">推荐人编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber">
+			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber" value="{$member['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -176,7 +176,7 @@
 			                    <label class="col-sm-2 control-label">报单中心</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control billcenternumber" name="billcenternumber">
+			                        <input type="text" class="form-control billcenternumber" name="billcenternumber" value="{$member['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -188,7 +188,7 @@
 			                    <label class="col-sm-2 control-label">接点人</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control parentnumber" name="parentnumber">
+			                        <input type="text" class="form-control parentnumber" name="parentnumber" value="{$member['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -201,7 +201,22 @@
 
 			                    <div class="col-sm-7">
 									<select class="form-control zone" id="zone" name="zone">
-
+										<?php if($_GET['zone']== 1 && $member['left_zone'] == 0){ ?>
+											<option value="1">左区</option>
+										<?php }elseif($_GET['zone']== 2 && $member['middle_zone'] == 0){ ?>
+											<option value="2">中区</option>
+										<?php }elseif($_GET['zone']== 3 && $member['right_zone'] == 0){ ?>
+											<option value="3">右区</option>
+										<?php } ?>
+										<!-- <if condition="$_GET['zone'] eq 1">
+												{$_GET['zone']}
+											<option value="1">左区</option>
+										<elseif condition="$_GET['zone'] == 2">
+												123
+											<option value="2">中区</option>
+										<elseif condition="$_GET['zone'] eq 3">
+											<option value="3">右区</option>
+										</if> -->
 									</select>
 			                    </div>
 			                </div>

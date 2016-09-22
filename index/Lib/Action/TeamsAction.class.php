@@ -73,11 +73,20 @@
 
 				$data['reg_time'] = time();
 
+				$data['reg_uid'] = $_SESSION['Rongzi']['user']['uid'];
+
 				//获取推荐人ID
 				$data['tuijianid'] = $this -> get_user_id($data['tuijiannumber']);
 
 				//获取接点人ID
 				$data['parentid'] = $this -> get_user_id($data['parentnumber']);
+
+				//报单中心人ID
+				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
+
+				if($data['billcenterid'] == 0){
+					$this -> _back("{$data['billcenternumber']}不是报单中心,消费商注册失败,请重试。");return;
+				}
 
 				//添加用户资料
 				$params = array(
@@ -94,6 +103,19 @@
 					//处理接点区域是否被占
 					$this -> update_user_zone($data);
 
+					$member_id = $member_add;
+
+					//用户接点路径
+					$update_data['contactuserpath'] = $this -> get_user_path($data['parentnumber'], 1).",".$member_id;
+
+					//用户推荐路径
+					$update_data['recommenduserpath'] = $this -> get_user_path($data['tuijiannumber'], 2).",".$member_id;
+
+					//用户报单路径
+					$update_data['billuserpath'] = $this -> get_user_path($data['billcenternumber'], 3).",".$member_id;
+
+					$this -> update_user_path($member_id, $update_data);
+
 					//修改接点人接点区是否被占用处理
 					redirect(__APP__."/Teams/register", 0);
 
@@ -103,6 +125,21 @@
 
 				}
 			}
+
+			//获取用户数据
+			$uid = htmlspecialchars($_GET['uid']) ? htmlspecialchars($_GET['uid']) : $_SESSION['Rongzi']['user']['uid'];
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = '{$uid}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			$this -> assign("member", $member);
 
 			$this -> display();
 	    }
@@ -247,6 +284,117 @@
 		}
 
 		/**
+		 * 获取推荐人ID
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		function get_user_center_id($usernumber){
+
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			if($member){
+
+				return $member['uid'];
+
+			}else{
+
+				return 0;
+
+			}
+		}
+
+		/**
+		 * 获取用户所在位置
+		 *
+		 * 参数描述：@$usernumber 用户编号  type 1 接点 2推荐  3报单
+		 *
+		 * 返回值：
+		 *
+		 */
+		function get_user_path($usernumber, $type){
+
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "usernumber = '{$usernumber}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			if($member){
+
+				if($type == 1){
+					$path = $member['contactuserpath'];
+				}elseif($type == 2){
+					$path = $member['recommenduserpath'];
+				}elseif($type == 3){
+					$path = $member['billuserpath'];
+				}
+
+				if(empty($path)){
+					return 0;
+				}
+
+				return $path;
+
+
+			}else{
+
+				return 0;
+
+			}
+		}
+
+
+		/**
+		 * 修改用户所在位置
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		function update_user_path($uid, $data){
+
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = '{$uid}'",
+
+				'data' => $data
+
+			);
+
+			$member = $this -> model -> my_save($params);
+
+			if($member){
+
+				return true;
+
+			}else{
+
+				return false;
+
+			}
+		}
+		/**
 		 * 更新推荐人接点区间是否被占
 		 *
 		 * 参数描述：@data 用户数据
@@ -303,6 +451,239 @@
 			}
 		}
 
+		/**
+		 * 团队管理推荐关系列表
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+		public function contact_relation()
+		{
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "status = 1 AND uid = {$_SESSION['Rongzi']['user']['uid']} AND usernumber = '{$_SESSION['Rongzi']['user']['usernumber']}'"
+			);
+
+			$contact = $this -> model -> my_find($params);
+
+			$params = array(
+
+				'table_name' => "member",
+
+				'order' => "uid desc",
+
+				'where' => "status = 1 AND parentid = {$contact['uid']} AND parentnumber = '{$contact['usernumber']}'"
+			);
+
+			$contact_children_list = $this -> model -> easy_select($params);
+
+			//拼装输出参数
+			$exp_result['name'] = $contact['realname'];
+
+			$exp_result['title'] = $contact['userrank'];
+
+			$exp_result['achievement'] = array('left' => $contact['leftachievement'], 'middle' => $contact['middleachievement'], 'right' => $contact['rightachievement']);
+
+			$exp_result['achievement_today'] = $this->get_today_achievement($contact['uid']);
+
+			$exp_result['relationship']['children_num'] = $this -> model -> get_count($params);
+
+			$exp_result['relationship']['parent_num'] = 1;
+
+			$exp_children[0] = array(
+				'children' => array(),
+				'relationship' => array('children_num' => 1, 'parent_num' => 0),
+				'is_null' => 'true',
+				'zone' => 1,
+				'parentid' => $contact['uid']
+			);
+
+			$exp_children[1] = array(
+				'children' => array(),
+				'relationship' => array('children_num' => 1, 'parent_num' => 0),
+				'is_null' => 'true',
+				'zone' => 2,
+				'parentid' => $contact['uid']
+			);
+
+
+			$exp_children[2] = array(
+				'children' => array(),
+				'relationship' => array('children_num' => 1, 'parent_num' => 0),
+				'is_null' => 'true',
+				'zone' => 3,
+				'parentid' => $contact['uid']
+			);
+
+			foreach ($contact_children_list as $key => $value) {
+				if($key < 3){
+
+
+					//获取三级下的关系
+					$params = array(
+
+						'table_name' => 'member',
+
+						'where' => "status = 1 AND parentid = {$value['uid']} AND parentnumber = '{$value['usernumber']}'"
+					);
+
+					$children_list = $this -> model -> easy_select($params);
+
+					//$exp_children_children = array();
+
+					$exp_children_children[0] = array(
+						'children' => array(),
+						'relationship' => array('children_num' => 1, 'parent_num' => 0),
+						'is_null' => 'true',
+						'zone' => 1,
+						'parentid' => $value['uid']
+					);
+
+					$exp_children_children[1] = array(
+						'children' => array(),
+						'relationship' => array('children_num' => 1, 'parent_num' => 0),
+						'is_null' => 'true',
+						'zone' => 2,
+						'parentid' => $value['uid']
+					);
+
+
+					$exp_children_children[2] = array(
+						'children' => array(),
+						'relationship' => array('children_num' => 1, 'parent_num' => 0),
+						'is_null' => 'true',
+						'zone' => 3,
+						'parentid' => $value['uid']
+					);
+
+					foreach ($children_list as $ckey => $cvalue) {
+
+						if($cvalue['zone'] == 1){
+							$exp_children_children[0] = array(
+								'children' => array(),
+								'relationship' => array('children_num' => 0, 'parent_num' => 0),
+								'name' => $cvalue['realname'],
+								'title' => $cvalue['uid'],
+								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
+								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
+							);
+						}
+
+						if($cvalue['zone'] == 2){
+							$exp_children_children[1] = array(
+								'children' => array(),
+								'relationship' => array('children_num' => 0, 'parent_num' => 0),
+								'name' => $cvalue['realname'],
+								'title' => $cvalue['uid'],
+								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
+								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
+							);
+						}
+
+
+						if($cvalue['zone'] == 3){
+							$exp_children_children[2] = array(
+								'children' => array(),
+								'relationship' => array('children_num' => 0, 'parent_num' => 0),
+								'name' => $cvalue['realname'],
+								'title' => $cvalue['uid'],
+								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
+								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
+							);
+						}
+					}
+
+					if($value['zone'] == 1){
+						$exp_children[0] = array(
+							'children' => $exp_children_children,
+							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
+							'name' => $value['realname'],
+							'title' => $value['uid'],
+							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
+							'achievement_today' => $this->get_today_achievement($value['uid'])
+						);
+					}
+
+					if($value['zone'] == 2){
+						$exp_children[1] = array(
+							'children' => $exp_children_children,
+							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
+							'name' => $value['realname'],
+							'title' => $value['uid'],
+							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
+							'achievement_today' => $this->get_today_achievement($value['uid'])
+						);
+					}
+
+					if($value['zone'] == 3){
+						$exp_children[2] = array(
+							'children' => $exp_children_children,
+							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
+							'name' => $value['realname'],
+							'title' => $value['uid'],
+							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
+							'achievement_today' => $this->get_today_achievement($value['uid'])
+						);
+					}
+				}
+
+			}
+
+			$exp_result['children'] = $exp_children;
+
+			$this -> assign('exp_result', json_encode($exp_result));
+
+			$this -> display();
+		}
+
+
+		/**
+		 * 获取用户今日最新消费业绩
+		 *
+		 * 参数描述：@uid 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		public function get_today_achievement($uid){
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'achievement_log',
+
+				'where' => "uid = '{$uid}' AND created_at > ".strtotime(date('Y-m-d', time()))." AND created_at < ".time()
+
+			);
+
+			$achievement = $this -> model -> easy_select($params);
+			if($achievement){
+				$achievement_result = array('left' => "0.00", 'middle' => "0.00", 'right' => "0.00");
+
+				foreach ($achievement as $key => $value) {
+					if($value['zone'] == 1){
+						$achievement_result['left'] = $achievement_result['left'] + $value['deduct'];
+					}elseif($value['zone'] == 2){
+						$achievement_result['middle'] = $achievement_result['middle'] + $value['deduct'];
+					}elseif($value['zone'] == 3){
+						$achievement_result['right'] = $achievement_result['right'] + $value['deduct'];
+					}
+				}
+				return $achievement_result;
+			}else{
+
+				return array('left' => "0.00", 'middle' => "0.00", 'right' => "0.00");
+
+			}
+		}
+
+
+
 
 		/**
 		 * 团队管理推荐关系列表
@@ -320,7 +701,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "status = 1 AND tuijianid = {$_SESSION['Rongzi']['user']['uid']} AND tuijiannumber = '{$_SESSION['Rongzi']['user']['usernumber']}'"
+				'where' => "status = 1 AND uid = {$_SESSION['Rongzi']['user']['uid']} AND usernumber = '{$_SESSION['Rongzi']['user']['usernumber']}'"
 			);
 
 			$recommend_list = $this -> model -> easy_select($params);
@@ -336,8 +717,15 @@
 				$recommend_count = $this -> model -> get_count($params);
 
 				$recommend_list[$key]["num"] = $recommend_count;
-			}
 
+				if($value['zone'] == 1){
+					$recommend_list[$key]["zone_name"] = "左区";
+				}else if($value['zone'] == 2){
+					$recommend_list[$key]["zone_name"] = "中区";
+				}else if($value['zone'] == 3){
+					$recommend_list[$key]["zone_name"] = "右区";
+				}
+			}
 			$this -> assign('recommend_list', $recommend_list);
 
 			$this -> display();
@@ -363,11 +751,11 @@
 
 				'table_name' => 'member',
 
-				'where' => "status = 1 AND tuijianid = {$tuijianid}"
+				'where' => "status = 1 AND tuijianid = {$tuijianid} AND uid != {$tuijianid}"
 			);
 
 			$recommend_list = $this -> model -> easy_select($params);
-
+			$recommend_list_result = array();
 			foreach ($recommend_list as $key => $value) {
 				$params = array(
 
@@ -378,10 +766,26 @@
 
 				$recommend_count = $this -> model -> get_count($params);
 
-				$recommend_list[$key]["num"] = $recommend_count;
+				$recommend_list_result[$key]["num"] = $recommend_count;
+
+				$recommend_list_result[$key]["realname"] = $value['realname'];
+
+				$recommend_list_result[$key]["usernumber"] = $value['usernumber'];
+
+				$recommend_list_result[$key]["uid"] = $value['uid'];
+
+				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+
+				if($value['zone'] == 1){
+					$recommend_list_result[$key]["zone_name"] = "左区";
+				}else if($value['zone'] == 2){
+					$recommend_list_result[$key]["zone_name"] = "中区";
+				}else if($value['zone'] == 3){
+					$recommend_list_result[$key]["zone_name"] = "右区";
+				}
 			}
 
-			die(json_encode(array("success" => true, "code" => 200, "msg" => "获取用推荐关系成功", "data" => $recommend_list)));
+			die(json_encode(array("success" => true, "code" => 200, "msg" => "获取用推荐关系成功", "data" => $recommend_list_result)));
 		}
 
 	}

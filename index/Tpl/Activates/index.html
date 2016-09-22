@@ -48,7 +48,7 @@
 											<td>{$member.parentnumber}</td>
 											<td>{$member.billcenternumber}</td>
 											<td>{$member.userrank}</td>
-											<td>{$info['reg_time']|date="Y-m-d H:i:s",###}</td>
+											<td>{$member['reg_time']|date="Y-m-d H:i:s",###}</td>
 											<td><a class="btn" href="__APP__/Activates/activate?uid={$member.uid}">激活</a><a class="btn" href="__APP__/Activates/delete?uid={$member.uid}">删除</a></td>
 										</tr>
 									</foreach>
