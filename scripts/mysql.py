@@ -65,16 +65,19 @@ class db:
         return res
 
     #更新结果
-    def update(self, sql):
+    def dml(self, sql, sql_type):
         flag = False
         if(self._conn):
             try:
                 self._cursor.execute(sql)
+                insert_id = self._conn.insert_id()
                 self._conn.commit()
+                if sql_type == 'insert':
+                    return insert_id
                 flag = True
             except Exception, data:
                 flag = False
-               	print "update database exception, %s" % data
+               	print "dml database exception, %s" % data
 
         return flag
 
