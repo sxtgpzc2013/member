@@ -46,130 +46,141 @@
 							<thead>
 								<tr>
 									<th></th>
-									<th>分红</th>
-									<th>管理补贴</th>
-									<th>互助补贴</th>
-									<th>拓展补贴</th>
-									<th>市场补贴</th>
-									<th>消费补贴</th>
-									<th>服务补贴</th>
-									<th>消费提成</th>
-									<th>应发金额累计</th>
-									<th>实发金额累计</th>
+									<td>奖金币</td>
+									<td>报单币</td>
+									<td>激活币</td>
+									<td>戎子盾</td>
+									<td>爱心基金</td>
+									<td>奖励积分</td>
+									<td>平台管理费</td>
+									<td>税费</td>
+									<td>总奖金</td>
+									<td>实发奖金</td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>奖金币</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>报单币</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>激活币</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>戎子盾</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>爱心基金</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>奖励积分</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>平台管理费</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
-
-								<tr>
-									<td>税费</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-								</tr>
+								<foreach name="result" item="item">
+									<if condition="$item['moneytype'] eq 1">
+										<tr>
+											<th>分红</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 2">
+										<tr>
+											<th>管理补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 3">
+										<tr>
+											<th>互助补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 4">
+										<tr>
+											<th>拓展补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 5">
+										<tr>
+											<th>市场补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 6">
+										<tr>
+											<th>消费补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 7">
+										<tr>
+											<th>服务补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 8">
+										<tr>
+											<th>消费提成</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+								</foreach>
 
 							</tbody>
 						</table>
@@ -185,24 +196,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>
