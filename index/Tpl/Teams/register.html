@@ -22,7 +22,7 @@
 
 
 
-                <form class="form-horizontal m-t" id="signupForm" action="__APP__/Teams/register" method="post">
+                <form class="form-horizontal m-t" id="signupForm" action="__APP__/Teams/register" method="post" enctype = "multipart/form-data">
 					<input type="hidden" name="form_key" value="yes">
 			        <div class="ibox-content" style="border:0">
 						<div class="ibox-title" >
@@ -82,7 +82,8 @@
 			                    <label class="col-sm-2 control-label">上传身份证附件</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" text="身份证正面" name="ID_address_face">
+			                        正面:<input type="file" class="form-control" placeholder="身份证正面" name="ID_address_face"><br>
+									反面:<input type="file" class="form-control" placeholder="身份证反面" name="ID_address_back">
 			                    </div>
 			                </div>
 
@@ -332,6 +333,9 @@
 					required: true
 				},
 				ID_address_face: {
+					required: true
+				},
+				ID_address_back: {
 					required: true
 				},
 				red_wine_number: {

@@ -51,7 +51,7 @@
 					'table_name' => 'member',
 					'where' => "status = 1 AND uid = ".MEMBER_ID
 				);
-				
+
 				$_SESSION['Rongzi']['user'] = $this -> model -> my_find($params);
 
 			}
@@ -136,6 +136,76 @@
 	        }
 		}
 
+
+		/**
+		*[Rongzi]
+		************************************
+		* 多个图片上传封装
+		************************************
+		* @author:qbx(304151978@qq.com)
+		* @time:2016-09-23
+		* @version: 1.0.0
+		***************参数描述*************
+		*   @param width
+		*   @param height
+		*   @param path
+		*   @param prefix
+		*
+		* 返回值：path图片路径 msg图片名字  status上传状态
+		* 使用：$this -> _upload_pic('160,230', '230,121',  "dishes/", 'small_,middle_');
+		* 多参数使用 'width1,width2'  , 'height1,height2' , 存放路径 , '第一个图片前缀,第二个图片前缀'
+		******************************************************
+		* 例子 $pic = $this -> _upload_pic('160,230', '230,121',  "dishes/", 'small_,middle_');
+		*$param['dishes_big_pic']=$pic["path"].''.$pic["msg"];
+		*$param['dishes_middle_pic']=$pic["path"].'middle_'.$pic["msg"];
+		*$param['dishes_small_pic']=$pic["path"].'small_'.$pic["msg"];
+		*/
+		public function _upload_pic_all($path='others')
+		{
+
+			import('ORG.Net.UploadFile');
+			$width = '1000,654,600,130';
+			$height = '570,768,400,130';
+			$prefix = 'b_,m_,s_,l_';
+	        $upload = new UploadFile(); // 实例化上传类
+	        $upload->maxSize =10000000; // 设置附件上传大小
+	        $upload->savePath = './Uploads/images/' . $path . '/'; // 设置附件上传目录
+	        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
+	        // $upload->saveRule = 'time';
+	        $upload->uploadReplace = true; //是否存在同名文件是否覆盖
+	        $upload->thumb = true; //是否对上传文件进行缩略图处理
+	        $upload->thumbMaxWidth = $width; //缩略图处理宽度
+	        $upload->thumbMaxHeight = $height; //缩略图处理高度
+	        $upload->thumbPrefix = $prefix; //缩略图前缀
+
+	        $upload->thumbPath = './Uploads/images/' . $path .'/'; //缩略图保存路径
+	        //$upload->thumbRemoveOrigin = true; //上传图片后删除原图片
+	        $upload->autoSub = false; //是否使用子目录保存图片
+	        $upload->subType = 'date'; //子目录保存规则
+	        //$upload->dateFormat = 'Ymd'; //子目录保存规则为date时时间格式
+
+	        if (!$upload->upload()) {// 上传错误提示错误信息
+	            return array('msg' => $upload->getErrorMsg(), 'status' => 0);
+	        } else {// 上传成功 获取上传文件信息
+	            $info = $upload->getUploadFileInfo();
+
+	            foreach ($info as $key => $value) {
+	            	# code...
+	            	$infos["{$value['key']}"]['status'] = 1;
+	            	$infos["{$value['key']}"]['msg'] = $value['savename'];
+	            }
+
+	            $picname = $infos;
+
+	            return $picname;
+	            //$picname = $info[0]['savename'];
+
+	            //$picname = explode('/', $picname);
+				//$picname = $picname[1];
+	            //$picname = $picname[0] . '/' . $prefix . $picname[1];
+	            //return array('status' => 1, 'old_name' => $info[0]['name'], 'msg' => $picname,'path' => $upload->thumbPath);
+	        }
+		}
 
 		//*****************************************内部方法************************************************
 		/**

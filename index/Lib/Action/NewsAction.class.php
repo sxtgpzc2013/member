@@ -56,4 +56,9 @@
 
 			$this -> display();
 	    }
+
+		public function upload(){
+			$logo = $this -> _upload_pic('products');
+			echo json_encode($logo);
+		}
 	}

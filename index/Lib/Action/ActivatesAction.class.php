@@ -229,11 +229,13 @@ class ActivatesAction extends CommonAction {
 		$contactuserpath_arr = array_reverse(explode(",", $member['contactuserpath']));
 
 		foreach ($contactuserpath_arr as $key => $value) {
+
 			//查询该用户在左区中区还是右区
 			if($contactuserpath_arr[$key] and $contactuserpath_arr[$key+1]){
 
 				# 获取当前用户区间
 				$contact_uid = $contactuserpath_arr[$key];
+
 				//查询当前用户在父类的哪个区间
 				$params = array(
 
@@ -242,10 +244,12 @@ class ActivatesAction extends CommonAction {
 					'where' => "uid = {$contact_uid}"
 
 				);
+
 				$contact = $this -> model -> my_find($params);
 
 				#获取父类用户相关信息
 				$contact_parent_uid = $contactuserpath_arr[$key+1];
+
 				//获取父类相关数据
 				$params = array(
 
@@ -258,11 +262,17 @@ class ActivatesAction extends CommonAction {
 
 
 				if($contact['zone'] == 1){
+
 					$contact_parent_data['leftachievement'] = $contact_parent['leftachievement'] + $deduct;
+
 				}elseif($contact['zone'] == 2){
+
 					$contact_parent_data['middleachievement'] = $contact_parent['middleachievement'] + $deduct;
+
 				}elseif($contact['zone'] == 3){
+
 					$contact_parent_data['rightachievement'] = $contact_parent['rightachievement'] + $deduct;
+
 				}
 
 				$contact_parent_data['num'] = $contact_parent['num'] + 1;
@@ -378,18 +388,31 @@ class ActivatesAction extends CommonAction {
 		$finance = $this -> model -> my_setInc($params);
 
 		$bonusdata = array(
+
 			'touserid' => $member['uid'],
+
 			'tousernumber' => $member['usernumber'],
+
 			'torealname' => $member['realname'],
+
 			'jiangjinbi' => $deduct * 0.02 * 0.55,
+
 			'rongzidun' => $deduct * 0.02 * 0.25,
+
 			'platmoney' => $deduct * 0.02 * 0.02,
+
 			'taxmoney' => $deduct * 0.02 * 0.17,
+
 			'total' => $deduct * 0.02,
+
 			'real_total' => $deduct * 0.02 * 0.8,
+
 			'createdate' => time(),
+
 			'lovemoney' => $deduct * 0.02 * 0.01,
+
 			'moneytype' => 5,
+
 		);
 
 		//添加奖金明细记录

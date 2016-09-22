@@ -419,3 +419,6 @@ ALTER TABLE zx_bonus_count ADD realname VARCHAR(100) NOT NULL DEFAULT '' COMMENT
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 #jenkins http://121.42.26.223:8080/   admin  zxtc999.
+-- 121.42.26.223
+-- abiding  14:53:37
+-- Zhxtch999！@#￥
