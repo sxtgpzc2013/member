@@ -45,6 +45,19 @@ class ProductsAction extends CommonAction {
 	 */
     public function index()
     {
+    	$params = array(
+
+    		'table_name' => 'products',
+
+    		'where' => "is_del = 0",
+
+    		'order' => 'created_at desc'
+    	);
+
+    	$result = $this -> model -> order_select($params);
+
+    	$this -> assign('result', $result);
+
     	$this -> display();
     }
 
