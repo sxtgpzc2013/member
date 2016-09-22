@@ -33,9 +33,9 @@
                 </div>
                 <div class="ibox-content">
 
-                    <p class="m-b-lg">
+                    <!-- <p class="m-b-lg">
                         牛牛 当前共有20代会员
-                    </p>
+                    </p> -->
 
 
 
@@ -46,7 +46,7 @@
 							<ol class="dd-list">
 	                            <li class="dd-item" data-id="{$recommend.uid}">
 	                                <div class="dd-handle">
-	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} / {$recommend.realname} / 伞下人数：{$recommend.num}人/  用户级别：{$recommend.userrank} / {$recommend.zone}
+	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} / {$recommend.realname} / 伞下人数：{$recommend.num}人/  用户级别：{$recommend.userrank} / {$recommend.zone_name}
 	                                </div>
 
 									<if condition="$recommend['num'] neq 0">
@@ -105,59 +105,155 @@
 			   var target = $(e.target),
 				   action = target.data('action');
 			   if (action === 'expand-all') {
-				   $('.dd').nestable('expandAll');
+				   if($(e.target).hasClass('is_load_data')){
+
+						$('.dd').nestable('expandAll');
+				   }else{
+					   liObj = 0
+					   $(e.target).addClass('is_load_data');
+					   withoutClick({$_SESSION['Rongzi']['user']['uid']})
+
+						$('.dd').nestable('expandAll');
+				   }
 			   }
 			   if (action === 'collapse-all') {
 				   $('.dd').nestable('collapseAll');
 			   }
 		   });
 
-		   $('.dd-item button').on('click', function () {
+		//    $('.dd-item button').on('click', function () {
+		// 	   var uid = $(this).parent().attr('data-id');
+		// 	   var type = $(this).attr('data-action');
+		// 	   var that = this;
+		// 	   if(type == 'expand'){
+		// 		   //进行数据请求
+		// 		      $.ajax({
+		// 			   	   url: "__APP__/Teams/get_recommend_relation",
+		// 			   	   type: "get",
+		// 			   	   dataType: "JSON",
+		// 			   	   data: {
+		// 			   		   uid: uid
+		// 			   	   },
+		// 			   	   success: function (resdata) {
+		// 			   		   if (resdata.success == true) {
+		// 			   			   if(resdata.data == ""){
+		// 			   				   alert("用户区伞下人数获取失败 请重试!");
+		// 			   			   }else{
+		   //
+		// 							    var html = template('list', resdata);
+		   //
+		// 								$(that).parent().children(".dd-list").append(html);
+		   //
+		// 								$()
+		// 			   			   }
+		// 			   		   } else {
+		// 			   			   alert("用户报单中心获取错误 请重试");
+		// 			   		   }
+		// 			   	  }
+		// 		      });
+		// 	   }
+		   //
+		   //
+		   //
+		//    });
+
+		   $(".dd-item").on('click','button',function(e){
 			   var uid = $(this).parent().attr('data-id');
-			   var type = $(this).attr('data-action');
-			   var that = this;
-			   if(type == 'expand'){
-				   //进行数据请求
-				      $.ajax({
-				   	   url: "__APP__/Teams/get_recommend_relation",
-				   	   type: "get",
-				   	   dataType: "JSON",
-				   	   data: {
-				   		   uid: uid
-				   	   },
-				   	   success: function (resdata) {
-				   		   if (resdata.success == true) {
-				   			   if(resdata.data == ""){
-				   				   alert("用户区伞下人数获取失败 请重试!");
-				   			   }else{
-								   var recommend_list = resdata.data
-								   for(i=0;i<recommend_list.length;i++){
-									  //$(this).parent().html()
-									  var addHtml = '<li class="dd-item" data-id="'+recommend_list[i]['uid']+'"><button data-action="collapse" type="button" style="display: none;">关闭</button><button data-action="expand" type="button" style="display: block;" onclick="eventfun(obj)" >展开</button>'
-	  	                                +'<div class="dd-handle">'
-	  	                                    +'<span class="label label-info"><i class="fa fa-users"></i></span> '+recommend_list[i]['uid']+' / '+recommend_list[i]['uid']+' / 伞下人数：'+recommend_list[i]['uid']+'人/  用户级别：'+recommend_list[i]['uid']+' / '+recommend_list[i]['uid']
-	  	                                +'</div>'
-  										+'<ol class="dd-list" style="display: none;">'
+			  var type = $(this).attr('data-action');
+			  var that = this;
+			  if(type == 'expand'){
+				  $(that).parent().children(".dd-list").empty();
+				  //进行数据请求
+					 $.ajax({
+						  url: "__APP__/Teams/get_recommend_relation",
+						  type: "get",
+						  dataType: "JSON",
+						  data: {
+							  uid: uid
+						  },
+						  success: function (resdata) {
+							  if (resdata.success == true) {
+								  if(resdata.data == ""){
+									  alert("用户区伞下人数获取失败 请重试!");
+								  }else{
 
-  										+'</ol>'
-	  	                            +'</li>'
-									  $(that).parent().children(".dd-list").append(addHtml);
-								   }
+									   var html = template('list', resdata);
 
-				   			   }
-				   		   } else {
-				   			   alert("用户报单中心获取错误 请重试");
-				   		   }
-				   	   }
-				      });
-			   }
+									   $(that).parent().children(".dd-list").append(html);
+								  }
+							  } else {
+								  alert("用户报单中心获取错误 请重试");
+							  }
+						 }
+					 });
+			  }
+		   	});
 
-		   });
+
 		    $('.dd').nestable('collapseAll');
 	   });
 
 
-	   function eventfun(obj){
-		   alert(obj)
-	   }
+	   // 列出所有级别部门，点击菜单折叠，展开
+		function withoutClick(liObj){
+
+			$(".dd-item[data-id='"+liObj+"']").children(".dd-list").empty();
+			//进行数据请求
+			 $.ajax({
+					url: "__APP__/Teams/get_recommend_relation",
+					type: "get",
+					dataType: "JSON",
+					data: {
+						uid: liObj
+					},
+					success: function (resdata) {
+
+						if (resdata.success == true) {
+							if(resdata.data == "" || resdata.data.length == 0){
+								//alert("用户区伞下人数获取失败 请重试!");
+							}else{
+
+								for (var i = 0; i < resdata.data.length; i++) {
+									withoutClick(resdata.data[i]['uid'])
+
+								}
+
+								var html = template('list', resdata);
+								$(".dd-item[data-id='"+liObj+"']").children(".dd-list").append(html)
+
+
+								 //resdata = new Array()
+							}
+						} else {
+							alert("用户报单中心获取错误 请重试");
+						}
+				   }
+			   });
+			    $('.dd').nestable('expandAll');
+		}
+   </script>
+   <script src="__PUBLIC__/js/template.js"></script>
+   <div id="content"></div>
+
+   <script id="list" type="text/html">
+	   <ul>
+	       {{each data as value i}}
+			   <li class="dd-item" data-id="{{value.uid}}">
+					{{if value.num > 0}}
+				   <button data-action="collapse" type="button" style="display: none;">关闭</button>
+				   <button data-action="expand" type="button" style="display: block;">展开</button>
+				   {{/if}}
+				   <div class="dd-handle">
+					   <span class="label label-info"><i class="fa fa-users"></i></span> {{value.usernumber}} /{{value.realname}} / 伞下人数：{{value.num}}人/  用户级别：{{value.userrank}} /{{value.zone_name}}
+				   </div>
+
+				   {{if value.num > 0}}
+
+					   <ol class="dd-list" style="display: none;">
+
+					   </ol>
+				  {{/if}}
+			   </li>
+	       {{/each}}
+	   </ul>
    </script>

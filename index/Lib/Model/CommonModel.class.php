@@ -68,6 +68,24 @@
 		}
 
 		/**
+		 * 修改方法
+		 *
+		 * 参数描述：
+		 *   parameter 	参数
+		 *
+		 * 返回值：
+		 *   影响行数
+		 */
+		public function my_setInc(array $parameter)
+		{
+			$table = M($parameter['table_name']);
+
+			$result = $table -> where($parameter['where']) -> setInc($parameter['field'], $parameter['data']);
+
+			return $result;
+		}
+
+		/**
 		 * 简单查询
 		 *
 		 * 参数描述：
