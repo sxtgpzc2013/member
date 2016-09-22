@@ -33,11 +33,6 @@ $(document).ready(function () {
         return false;
     });
 
-    // Append config box / Only for demo purpose
-    $.get("skin-config.html", function (data) {
-        $('body').append(data);
-    });
-
     // minimalize menu
     $('.navbar-minimalize').click(function () {
         $("body").toggleClass("mini-navbar");
@@ -78,8 +73,6 @@ $(document).ready(function () {
         }
     })
 
-    $("[data-toggle=popover]")
-        .popover();
 });
 
 
@@ -145,4 +138,3 @@ function WinMove() {
         })
         .disableSelection();
 };
-

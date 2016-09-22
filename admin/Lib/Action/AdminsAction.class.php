@@ -47,13 +47,13 @@
 
 	    		'table_name' => 'admins',
 
-	    		'where' => "id = {$_SESSION['OftenGo']['admin']['id']}"
+	    		'where' => "id = {$_SESSION['Rongzi']['admin']['id']}"
     		);
 
     		$admin_find = $this -> model -> my_find($params);
 
     		//更新SESSION
-    		$_SESSION['OftenGo']['admin'] = $admin_find;
+    		$_SESSION['Rongzi']['admin'] = $admin_find;
 
     		//判断权限
     		if ($admin_find['type_str'] == 'super')
@@ -109,7 +109,7 @@
 	    public function add()
 	    {
 	    	//判断权限
-	    	if ($_SESSION['OftenGo']['admin']['type_str'] != 'super')
+	    	if ($_SESSION['Rongzi']['admin']['type_str'] != 'super')
 	    	{
 	    		$this -> _back('权限不足');
 	    	}
@@ -242,7 +242,7 @@
 
 	    	if ($form_key == 'yes')
 	    	{
-	    		$id = intval($_SESSION['OftenGo']['admin']['id']);
+	    		$id = intval($_SESSION['Rongzi']['admin']['id']);
 
 	    		if (!$id) { $this -> _back('非法操作'); }
 
@@ -311,7 +311,7 @@
 	    public function delete()
 	    {
 	    	//判断权限
-	    	if ($_SESSION['OftenGo']['admin']['type_str'] != 'super') { $this -> _back('权限不够'); }
+	    	if ($_SESSION['Rongzi']['admin']['type_str'] != 'super') { $this -> _back('权限不够'); }
 
 	    	$id = intval($_GET['id']);
 

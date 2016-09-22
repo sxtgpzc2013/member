@@ -28,12 +28,14 @@
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Teams') {echo 'active';} ?>">
+			<li class="<?php if (MODULE_NAME == 'Teams' || MODULE_NAME == 'Activates') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-envelope"></i> <span class="nav-label">团队管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'activate') {echo 'active';} ?>">
-						<a href="__APP__/Teams/activate">消费商激活</a>
+					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
+					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'index') {echo 'active';} ?>">
+						<a href="__APP__/Activates/index">消费商激活</a>
 					</li>
+					<?php } ?>
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'register') {echo 'active';} ?>">
 						<a href="__APP__/Teams/register">注册消费商</a>
 					</li>

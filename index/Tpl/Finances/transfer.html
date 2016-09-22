@@ -21,27 +21,28 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5 class="text-center">提现申请</h5>
+                    <h5 class="text-center">消费商转币</h5>
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm" action="">
+					<form class="form-horizontal m-t" id="signupForm" method="post" action="__ACTION__">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*会员编号:</label>
                             <div class="col-sm-6">
-                                <span class="help-block">00001[牛牛]</span>
+                                <span class="help-block">{$member['usernumber']}[{$member['realname']}]</span>
+                                <input type="hidden" name="form_key" value="yes" />
                             </div>
                         </div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">*报单币余额:</label>
 							<div class="col-sm-6">
-								<span class="help-block">12312313</span>
+								<span class="help-block">￥{$member['baodanbi']}</span>
 							</div>
 						</div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*转入用户编号：</label>
                             <div class="col-sm-6">
-                                <input id="user_number" name="user_number" class="form-control" type="text">
+                                <input id="usernumber" name="targetusernumber" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -56,7 +57,7 @@
 						<div class="form-group">
                             <label class="col-sm-3 control-label">*转币数量：</label>
                             <div class="col-sm-6">
-                                <input id="number" name="number" class="form-control" type="text">
+                                <input id="number" name="money" class="form-control" type="text" value="{$member['baodanbi']}">
                             </div>
                         </div>
 

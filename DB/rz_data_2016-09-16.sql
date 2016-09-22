@@ -324,6 +324,92 @@ ALTER TABLE zx_withdrawal ADD bank_address VARCHAR(255) DEFAULT NULL COMMENT '�
 ALTER TABLE zx_withdrawal ADD realname VARCHAR(255) DEFAULT NULL COMMENT '提现账户姓名';
 ALTER TABLE zx_withdrawal ADD arrival_amount DOUBLE(10,2) DEFAULT '0.00' COMMENT '到账金额';
 
+ALTER TABLE zx_transfer ADD username VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
+ALTER TABLE zx_transfer ADD targetusername VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
+
+# Dump of table zx_news
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_news`;
+
+CREATE TABLE `zx_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '类型',
+  `level` tinyint(2) NOT NULL DEFAULT '0' COMMENT '优先级',
+  `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '新闻内容',
+  `viewnum` int(10) DEFAULT NULL COMMENT '浏览次数',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0 启用 1 禁用',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `is_del` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-正常 1-删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='新闻公告表';
+
+
+
+-- 奖金明细表
+-- -----------------------------
+-- Table structure for `zx_bonus_detail`
+-- -----------------------------
+DROP TABLE IF EXISTS `zx_bonus_detail`;
+CREATE TABLE `zx_bonus_detail` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `touserid` int(10) DEFAULT NULL,
+  `tousernumber` varchar(16) DEFAULT NULL,
+  `torealname` varchar(255) DEFAULT NULL COMMENT '会员真实姓名',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 消费补贴 7 服务补贴 8 消费提成',
+  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '报单币',
+  `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
+  `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
+  `jihuobi` double(10,2) DEFAULT '0.00' COMMENT '激活币',
+  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '奖励积分',
+  `lovemoney` double(10,2) DEFAULT '0.00' COMMENT '爱心基金',
+  `platmoney` double(10,2) DEFAULT '0.00' COMMENT '平台管理费',
+  `taxmoney` double(10,2) DEFAULT '0.00' COMMENT '税费',
+  `total` decimal(10,2) DEFAULT '0.00' COMMENT '总奖金',
+  `real_total` decimal(10,2) DEFAULT '0.00' COMMENT '实发奖金',
+  `createdate` int(11) DEFAULT NULL COMMENT '明细日期',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=493 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='奖金明细表';
+# 2016-09-21 新增字段
+# --------------------------------------------------------------
+ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-报单币 3-戎子盾 4-激活币 5-奖励积分 6-奖金币';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现';
+
+
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现';
+
+
+
+ALTER TABLE zx_member ADD leftachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '左业绩';
+
+ALTER TABLE zx_member ADD middleachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '中业绩';
+
+ALTER TABLE zx_member ADD rightachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '右业绩';
+
+ALTER TABLE zx_member ADD contactuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户接点路径';
+ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户推荐路径';
+ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户报单中心路径';
+
+# 2016-09-22 新增相关
+# Dump of table achievement_log
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_achievement_log`;
+
+CREATE TABLE `zx_achievement_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `zone` tinyint(2) NOT NULL DEFAULT 0 COMMENT '业绩区间',
+  `deduct` DOUBLE(16,2) NOT NULL DEFAULT '0.00' COMMENT '业绩金额',
+  `fromuid` int(10) NOT NULL DEFAULT '0' COMMENT '业绩来源用户',
+  `uid` int(10) NOT NULL DEFAULT '0' COMMENT '业绩用户',
+  `produceuid` int(10) NOT NULL DEFAULT '0' COMMENT '业绩产生用户',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='业绩产生记录表';
+
+ALTER TABLE zx_bonus_count ADD realname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -331,3 +417,5 @@ ALTER TABLE zx_withdrawal ADD arrival_amount DOUBLE(10,2) DEFAULT '0.00' COMMENT
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+#jenkins http://121.42.26.223:8080/   admin  zxtc999.
