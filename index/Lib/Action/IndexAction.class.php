@@ -41,6 +41,32 @@
 		 */
 	    public function index()
 	    {
-			$this -> display();	
+			//获取用户数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$_SESSION['Rongzi']['user']['uid']}"
+
+			);
+
+	    	$member = $this -> model -> my_find($params);
+
+			//获取奖金明细
+			$params = array(
+
+				'table_name' => 'bonus_count',
+
+				'where' => "touserid = {$_SESSION['Rongzi']['user']['uid']}"
+
+			);
+
+	    	$bonus_count = $this -> model -> order_select($params);
+
+			$this -> assign('member', $member);
+
+			$this -> assign('bonus_count', $bonus_count['result']);
+
+			$this -> display();
 	    }
 	}

@@ -229,11 +229,13 @@ class ActivatesAction extends CommonAction {
 		$contactuserpath_arr = array_reverse(explode(",", $member['contactuserpath']));
 
 		foreach ($contactuserpath_arr as $key => $value) {
+
 			//查询该用户在左区中区还是右区
 			if($contactuserpath_arr[$key] and $contactuserpath_arr[$key+1]){
 
 				# 获取当前用户区间
 				$contact_uid = $contactuserpath_arr[$key];
+
 				//查询当前用户在父类的哪个区间
 				$params = array(
 
@@ -242,10 +244,12 @@ class ActivatesAction extends CommonAction {
 					'where' => "uid = {$contact_uid}"
 
 				);
+
 				$contact = $this -> model -> my_find($params);
 
 				#获取父类用户相关信息
 				$contact_parent_uid = $contactuserpath_arr[$key+1];
+
 				//获取父类相关数据
 				$params = array(
 
@@ -258,11 +262,17 @@ class ActivatesAction extends CommonAction {
 
 
 				if($contact['zone'] == 1){
+
 					$contact_parent_data['leftachievement'] = $contact_parent['leftachievement'] + $deduct;
+
 				}elseif($contact['zone'] == 2){
+
 					$contact_parent_data['middleachievement'] = $contact_parent['middleachievement'] + $deduct;
+
 				}elseif($contact['zone'] == 3){
+
 					$contact_parent_data['rightachievement'] = $contact_parent['rightachievement'] + $deduct;
+
 				}
 
 				$contact_parent_data['num'] = $contact_parent['num'] + 1;
@@ -323,6 +333,9 @@ class ActivatesAction extends CommonAction {
 		{
 			$this -> save_market($deduct);
 
+			//更新赠送红酒订单 添加一份订单
+			$this -> save_red_order($member);
+
 			redirect(__APP__.'/Activates/index', 0);
 		}
 		else
@@ -378,18 +391,31 @@ class ActivatesAction extends CommonAction {
 		$finance = $this -> model -> my_setInc($params);
 
 		$bonusdata = array(
+
 			'touserid' => $member['uid'],
+
 			'tousernumber' => $member['usernumber'],
+
 			'torealname' => $member['realname'],
+
 			'jiangjinbi' => $deduct * 0.02 * 0.55,
+
 			'rongzidun' => $deduct * 0.02 * 0.25,
+
 			'platmoney' => $deduct * 0.02 * 0.02,
+
 			'taxmoney' => $deduct * 0.02 * 0.17,
+
 			'total' => $deduct * 0.02,
+
 			'real_total' => $deduct * 0.02 * 0.8,
+
 			'createdate' => time(),
+
 			'lovemoney' => $deduct * 0.02 * 0.01,
+
 			'moneytype' => 5,
+
 		);
 
 		//添加奖金明细记录
@@ -401,6 +427,79 @@ class ActivatesAction extends CommonAction {
 		);
 
 		$bonusdata_add = $this -> model -> my_add($params);
+	}
+
+	//更新报单中心服务市场补贴
+	function save_red_order($member){
+
+		$order['order_code'] = $this -> get_order_number();
+
+		$order['user_id'] = $member['uid'];
+
+		$order['sendName'] = $member['realname'];
+
+		//获取用户默认送货地址
+
+		$order['sendAddress'] = $this -> get_user_default_address($member['uid']);
+
+		$order['memberCode'] = $member['usernumber'];
+
+		$order['sendTel'] = $member['mobile'];
+
+		$order['total_price'] = "0.00";
+
+		$order['notice'] = "注册数字红酒";
+
+		$order['created_at'] = time();
+
+		$params = array(
+
+			'table_name' => 'orders',
+
+			'data' => $order
+		);
+
+		$order_add = $this -> model -> my_add($params);
+
+		if($order_add){
+
+			$order_items['pro_id'] = $member['userrank'];
+
+			$order_items['order_id'] = $order_add;
+
+			$order_items['count'] = 1;
+
+			$order_items['created_at'] = time();
+
+			$params = array(
+
+				'table_name' => 'order_items',
+
+				'data' => $order_items
+			);
+
+			$order_items_add = $this -> model -> my_add($params);
+		}
+
+	}
+
+	//获取用户默认送货地址
+	public function get_user_default_address($uid){
+
+		$params = array(
+
+			'table_name' => 'user_address',
+
+			'where' => "user_id = {$uid} AND is_default = 1 AND is_del = 0"
+		);
+
+		$default_address = $this -> model -> my_find($params);
+
+		if($default_address){
+			return $default_address['address'];
+		}else{
+			return "";
+		}
 	}
 
 }

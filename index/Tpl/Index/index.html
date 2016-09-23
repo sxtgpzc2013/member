@@ -61,22 +61,22 @@
 							<table class="table table-hover no-margins table-bordered">
 								<tbody>
 									<tr>
-										<td>消费商编号:1323123</td>
-										<td>消费商姓名:12312312</td>
-										<td>消费商级别:dasdasd</td>
-										<td>消费商头衔:1星会员</td>
+										<td>消费商编号:{$member['usernumber']}</td>
+										<td>消费商姓名:{$member['usernumber']}</td>
+										<td>消费商级别:{$member['userrank']}</td>
+										<td>消费商头衔:{$member['usertitle']}</td>
 									</tr>
 									<tr>
-										<td>报单币余额:1323123</td>
-										<td>奖金币余额:12312312</td>
-										<td>戎子盾:3123</td>
-										<td>奖励积分:123</td>
+										<td>报单币余额:{$member['baodanbi']}</td>
+										<td>奖金币余额:{$member['jiangjinbi']}</td>
+										<td>戎子盾:{$member['rongzidun']}</td>
+										<td>奖励积分:{$member['jianglijifen']}</td>
 									</tr>
 									<tr>
-										<td>推荐人数:1323123</td>
-										<td>左区业绩:12312312</td>
-										<td>中区业绩:4234234</td>
-										<td>右区业绩:42423</td>
+										<td>推荐人数:{$member['recom_num']}</td>
+										<td>左区业绩:{$member['leftachievement']}</td>
+										<td>中区业绩:{$member['middleachievement']}</td>
+										<td>右区业绩:{$member['rightachievement']}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -106,21 +106,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td><a href="#">查看明细</a></td>
-									</tr>
+									<foreach name="bonus_count" item="bonus">
+										<tr>
 
+											<td>{$bonus['count_date']}</td>
+											<td>{$bonus['bonus1']}</td>
+											<td>{$bonus['bonus2']}</td>
+											<td>{$bonus['bonus3']}</td>
+											<td>{$bonus['bonus4']}</td>
+											<td>{$bonus['bonus5']}</td>
+											<td>{$bonus['bonus6']}</td>
+											<td>{$bonus['bonus7']}</td>
+											<td>{$bonus['bonus8']}</td>
+											<td>{$bonus['total']}</td>
+											<td>{$bonus['real_total']}</td>
+											<td><a href="#">查看明细</a></td>
+										</tr>
+									</foreach>
 								</tbody>
 							</table>
 						</div>

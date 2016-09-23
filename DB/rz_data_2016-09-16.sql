@@ -409,9 +409,15 @@ CREATE TABLE `zx_achievement_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='业绩产生记录表';
 
+<<<<<<< HEAD
 ALTER TABLE zx_bonus_count ADD torealname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
 
 ALTER TABLE zx_products ADD sell_count INT(11) NOT NULL DEFAULT 0 COMMENT '卖出数量' AFTER surplus;
+=======
+ALTER TABLE zx_bonus_count ADD realname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
+ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为赠送红酒产品' AFTER created_at;
+
+>>>>>>> develop
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -421,3 +427,6 @@ ALTER TABLE zx_products ADD sell_count INT(11) NOT NULL DEFAULT 0 COMMENT '卖�
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 #jenkins http://121.42.26.223:8080/   admin  zxtc999.
+-- 121.42.26.223
+-- abiding  14:53:37
+-- Zhxtch999！@#￥
