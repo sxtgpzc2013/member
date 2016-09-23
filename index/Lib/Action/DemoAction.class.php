@@ -1,13 +1,13 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
- * @last update 2014-08-11
+ * @last update  
  * @alter
  * @version 1.0.0
  *
- * 功能简介：商户后台销售型内容管理控制器类
+ * 功能简介： 
  * @author qbx
  * @copyright
- * @time 2014-08-11
+ * @time  
  * @version 1.0.0
  */
 	class DemoAction extends CommonAction {

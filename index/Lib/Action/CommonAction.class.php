@@ -1,11 +1,11 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-06-12
- * @alter 张睿
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：商户后台基类
- * @author 张睿
+ * @author
  * @copyright
  * @time
  * @version 1.0.0
@@ -78,7 +78,7 @@
 	    /**
 		*[Rongzi] (Beta)2014-~  Crm.
 		************************************
-		* 社区送接口上传图片封装
+		*  接口上传图片封装
 		************************************
 		* @author:qbx(304151978@qq.com)
 		* @time:2014-06-12
