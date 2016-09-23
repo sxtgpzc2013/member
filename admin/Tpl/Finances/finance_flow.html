@@ -50,6 +50,7 @@
 									<th>变更后金额</th>
 									<th>变更币种</th>
 									<th>类型</th>
+									<th>变更状态</th>
                                     <th>时间</th>
                                 </tr>
                             </thead>
@@ -102,6 +103,13 @@
 												消费商提现
 											<elseif condition="$item['changetype'] eq 12" />
 												处理提现
+											</if>
+										</td>
+										<td>
+											<if condition="$item['recordtype'] eq 0">
+												减少
+											<elseif condition="$item['recordtype'] eq 1" />
+												增加
 											</if>
 										</td>
 										<td>{$item.createtime|date="Y-m-d H:i:s",###}</td>

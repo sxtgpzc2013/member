@@ -59,20 +59,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>2016-09-13</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>234234</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td>52345</td>
-									<td>523454235</td>
-									<td>52345</td>
-									<td><a href="#">查看明细</a></td>
-								</tr>
-
+								<foreach name="result['result']" item="item">
+									<tr>
+										<td>{$item.count_date|date="Y-m-d H:i:s",###}</td>
+										<td>{$item.tousernumber}</td>
+										<td>{$item.torealname}</td>
+										<td>￥{$item.bonus1}</td>
+										<td>￥{$item.bonus2}</td>
+										<td>￥{$item.bonus3}</td>
+										<td>￥{$item.bonus4}</td>
+										<td>￥{$item.bonus5}</td>
+										<td>￥{$item.bonus6}</td>
+										<td>￥{$item.bonus7}</td>
+										<td>￥{$item.bonus8}</td>
+										<td>￥{$item.total}</td>
+										<td>￥{$item.real_total}</td>
+										<td><a href="__APP__/Finances/bonus_info/id/{$item.id}">查看明细</a></td>
+									</tr>
+								</foreach>
 							</tbody>
 						</table>
                     </div>
@@ -87,24 +91,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                {$result.page}
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>

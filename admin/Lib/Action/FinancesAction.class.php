@@ -49,6 +49,80 @@ class FinancesAction extends CommonAction {
     }
 
     /**
+	 * 奖金统计
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+    public function bonus_list()
+    {
+    	$params = array(
+
+    		'table_name' => 'bonus_count',
+
+    		'where' => "1",
+
+    		'order' => 'count_date desc'
+    	);
+
+    	$result = $this -> model -> order_select($params);
+
+    	$this -> assign('result', $result);
+
+    	$this -> display();
+    }
+
+    /**
+	 * 奖金明细
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+    public function bonus_info()
+    {
+    	$id = isset($_GET['id']) ? intval($_GET['id']) : $this -> _back('非法的参数');
+
+    	$params = array(
+
+    		'table_name' => 'bonus_count',
+
+    		'where' => "id = {$id}"
+    	);
+
+    	$count_find = $this -> model -> my_find($params);
+
+    	if (!$count_find)
+    	{
+    		$this -> _back('没有找到相关记录');
+    	}
+
+    	$that_day = strtotime(date('Y-m-d', $count_find['count_date']));
+
+    	$tomorrow = $that_day + (60 * 60 * 24);
+
+    	$params = array(
+
+    		'table_name' => 'bonus_detail',
+
+    		'where' => "touserid = {$count_find['touserid']} AND createdate >= {$that_day} AND createdate <= {$tomorrow}"
+    	);
+
+    	$result = $this -> model -> easy_select($params);
+
+    	$this -> assign('result', $result);
+
+    	$this -> display();
+    }
+
+    /**
 	 * 财务流水
 	 *
 	 * 参数描述：
