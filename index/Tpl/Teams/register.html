@@ -140,8 +140,29 @@
 			                    </div>
 			                </div>
 
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">默认送货地址</label>
+
+
+								<div class="col-sm-7">
+									<!-- <input type="text" class="form-control" name="send_address"> -->
+									<select id="s_province" class="form-control col-sm-2" style="width:100px;" name="s_province"></select>
+
+									<select id="s_city" class="form-control col-sm-2" style="width:100px;" name="s_city" ></select>
+
+									<select id="s_county" class="form-control col-sm-2" style="width:100px;" name="s_county"></select><br>
+
+									<input type="text" class="form-control col-sm-6" style="width:0 auto;" name="s_address" placeholder="详细地址">
+								</div>
+
+								<div class="col-sm-3">
+			                        <span>(为订单默认收货地址)</span>
+			                    </div>
+			                </div>
+
+
 							<div class="ibox-title">
-								<h5>数字红酒资格</h5>
+								<h3>数字红酒资格</h3>
 							</div>
 
 							<div class="form-group">
@@ -290,6 +311,7 @@
 <!-- jQuery Validation plugin javascript-->
 <script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
 <script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script class="resources library" src="__PUBLIC__/js/area.js" type="text/javascript"></script>
 <script>
    //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
    $.validator.setDefaults({
@@ -366,6 +388,18 @@
 					required: true
 				},
 				zone: {
+					required: true
+				},
+				s_province: {
+					required: true
+				},
+				s_city: {
+					required: true
+				},
+				s_county: {
+					required: true
+				},
+				s_address: {
 					required: true
 				},
 				agree: "required"
@@ -472,3 +506,27 @@
 
 	});
 </script>
+
+
+
+
+<script type="text/javascript">
+
+var Gid  = document.getElementById ;
+
+var showArea = function(){
+
+	Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+
+	Gid('s_city').value + " - 县/区" +
+
+	Gid('s_county').value + "</h3>"
+
+}
+
+Gid('s_county').setAttribute('onchange','showArea()');
+
+</script>
+
+
+<script type="text/javascript">_init_area();</script>

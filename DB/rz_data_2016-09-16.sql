@@ -410,6 +410,8 @@ CREATE TABLE `zx_achievement_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='业绩产生记录表';
 
 ALTER TABLE zx_bonus_count ADD realname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
+ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为赠送红酒产品' AFTER created_at;
+
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

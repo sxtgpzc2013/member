@@ -333,6 +333,9 @@ class ActivatesAction extends CommonAction {
 		{
 			$this -> save_market($deduct);
 
+			//更新赠送红酒订单 添加一份订单
+			$this -> save_red_order($member);
+
 			redirect(__APP__.'/Activates/index', 0);
 		}
 		else
@@ -424,6 +427,79 @@ class ActivatesAction extends CommonAction {
 		);
 
 		$bonusdata_add = $this -> model -> my_add($params);
+	}
+
+	//更新报单中心服务市场补贴
+	function save_red_order($member){
+
+		$order['order_code'] = $this -> get_order_number();
+
+		$order['user_id'] = $member['uid'];
+
+		$order['sendName'] = $member['realname'];
+
+		//获取用户默认送货地址
+
+		$order['sendAddress'] = $this -> get_user_default_address($member['uid']);
+
+		$order['memberCode'] = $member['usernumber'];
+
+		$order['sendTel'] = $member['mobile'];
+
+		$order['total_price'] = "0.00";
+
+		$order['notice'] = "注册数字红酒";
+
+		$order['created_at'] = time();
+
+		$params = array(
+
+			'table_name' => 'orders',
+
+			'data' => $order
+		);
+
+		$order_add = $this -> model -> my_add($params);
+
+		if($order_add){
+
+			$order_items['pro_id'] = $member['userrank'];
+
+			$order_items['order_id'] = $order_add;
+
+			$order_items['count'] = 1;
+
+			$order_items['created_at'] = time();
+
+			$params = array(
+
+				'table_name' => 'order_items',
+
+				'data' => $order_items
+			);
+
+			$order_items_add = $this -> model -> my_add($params);
+		}
+
+	}
+
+	//获取用户默认送货地址
+	public function get_user_default_address($uid){
+
+		$params = array(
+
+			'table_name' => 'user_address',
+
+			'where' => "user_id = {$uid} AND is_default = 1 AND is_del = 0"
+		);
+
+		$default_address = $this -> model -> my_find($params);
+
+		if($default_address){
+			return $default_address['address'];
+		}else{
+			return "";
+		}
 	}
 
 }

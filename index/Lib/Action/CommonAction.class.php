@@ -345,4 +345,12 @@
 			return count($ar[0]);
 		}
 	}
+
+	/**
+	* 生成uniqid订单号
+	*
+	*/
+	public function get_order_number(){
+		return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+	}
 }

@@ -129,6 +129,9 @@
 
 					$this -> update_user_path($member_id, $update_data);
 
+					//添加用户默认地址
+					$this -> add_user_address($member_id, $data);
+
 					//修改接点人接点区是否被占用处理
 					redirect(__APP__."/Teams/register", 0);
 
@@ -156,6 +159,43 @@
 
 			$this -> display();
 	    }
+
+		//添加用户默认地址
+		public function add_user_address($uid, $data)
+		{
+
+			$address_data['user_id'] = $uid;
+
+			$address_data['name'] =  $data['realname'];
+
+			$address_data['mobile'] =  $data['mobile'];
+
+			$address_data['address'] =  $data['s_province'] ." ". $data['s_city'] ." ". $data['s_county'] ." ". $data['s_address'];
+
+			$address_data['area'] =  $data['s_province'] ." ". $data['s_city'] ." ". $data['s_county'];
+
+			$address_data['is_default'] = 1;
+
+			$params = array(
+
+				'table_name' => 'user_address',
+
+				'data' => $address_data
+
+			);
+
+			$address = $this -> model -> my_add($params);
+
+			if($address){
+
+				return true;
+
+			}else{
+
+				return false;
+
+			}
+		}
 
 		/**
 		 * 获取报单中心
