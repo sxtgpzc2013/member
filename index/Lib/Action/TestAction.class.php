@@ -1,26 +1,26 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-09-15
- * @alter 张睿
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：商户后台订单管理控制器类
- * @author 张睿
- * @copyright 
+ * @author
+ * @copyright
  * @time 2014-09-15
- * @version 1.0.0 
+ * @version 1.0.0
  */
-	class OrdersAction extends CommonAction {
+	class TestAction extends CommonAction {
 
 		/**
 		 * 构造方法-实例化MODEL
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 		public function __construct()
 		{
@@ -33,11 +33,11 @@
 		 * 首页
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    public function index()
 	    {
@@ -86,11 +86,11 @@
 		 * 订单详情
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    public function show()
 	    {
@@ -181,11 +181,11 @@
 		 * 获取客户
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_member($member_id)
 	    {
@@ -205,11 +205,11 @@
 		 * 获取桌台
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_rank_tag($rank_tag_id)
 	    {
@@ -230,11 +230,11 @@
 		 * 获取桌号
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_table($table_id)
 	    {
@@ -254,11 +254,11 @@
 		 * 获取审核状态
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_review_name($review)
 	    {
@@ -276,11 +276,11 @@
 		 * 获取支付方式
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_pay_type_name($pay_type)
 	    {
@@ -298,11 +298,11 @@
 		 * 获取状态名称
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_status_name($status)
 	    {
@@ -330,11 +330,11 @@
 		 * 获取来源名称
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_from_name($from_name)
 	    {
@@ -366,11 +366,11 @@
 		 * 获取类型名称
 		 *
 		 * 参数描述：
-		 *   
-		 *   
+		 *
+		 *
 		 *
 		 * 返回值：
-		 *   
+		 *
 		 */
 	    private function _get_type_name($type_str)
 	    {
@@ -391,4 +391,6 @@
 
 	    	return $type_name;
 	    }
+
+
 	}

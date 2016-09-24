@@ -84,6 +84,19 @@
 				//报单中心人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
 
+				$pic = $this -> _upload_pic_all('member');
+
+				if ($pic['ID_address_face']['status'] == 1)
+				{
+					$data['ID_address_face'] = $pic['ID_address_face']['msg'];
+				}
+
+
+				if ($pic['ID_address_back']['status'] == 1)
+				{
+					$data['ID_address_back'] = $pic['ID_address_back']['msg'];
+				}
+
 				if($data['billcenterid'] == 0){
 					$this -> _back("{$data['billcenternumber']}不是报单中心,消费商注册失败,请重试。");return;
 				}
@@ -116,6 +129,9 @@
 
 					$this -> update_user_path($member_id, $update_data);
 
+					//添加用户默认地址
+					$this -> add_user_address($member_id, $data);
+
 					//修改接点人接点区是否被占用处理
 					redirect(__APP__."/Teams/register", 0);
 
@@ -143,6 +159,43 @@
 
 			$this -> display();
 	    }
+
+		//添加用户默认地址
+		public function add_user_address($uid, $data)
+		{
+
+			$address_data['user_id'] = $uid;
+
+			$address_data['name'] =  $data['realname'];
+
+			$address_data['mobile'] =  $data['mobile'];
+
+			$address_data['address'] =  $data['s_province'] ." ". $data['s_city'] ." ". $data['s_county'] ." ". $data['s_address'];
+
+			$address_data['area'] =  $data['s_province'] ." ". $data['s_city'] ." ". $data['s_county'];
+
+			$address_data['is_default'] = 1;
+
+			$params = array(
+
+				'table_name' => 'user_address',
+
+				'data' => $address_data
+
+			);
+
+			$address = $this -> model -> my_add($params);
+
+			if($address){
+
+				return true;
+
+			}else{
+
+				return false;
+
+			}
+		}
 
 		/**
 		 * 获取报单中心
@@ -569,7 +622,7 @@
 								'children' => array(),
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
-								'title' => $cvalue['uid'],
+								'title' => $cvalue['userrank'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -580,7 +633,7 @@
 								'children' => array(),
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
-								'title' => $cvalue['uid'],
+								'title' => $cvalue['userrank'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -592,7 +645,7 @@
 								'children' => array(),
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
-								'title' => $cvalue['uid'],
+								'title' => $cvalue['userrank'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -604,7 +657,7 @@
 							'children' => $exp_children_children,
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
-							'title' => $value['uid'],
+							'title' => $value['userrank'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -615,7 +668,7 @@
 							'children' => $exp_children_children,
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
-							'title' => $value['uid'],
+							'title' => $value['userrank'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -626,7 +679,7 @@
 							'children' => $exp_children_children,
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
-							'title' => $value['uid'],
+							'title' => $value['userrank'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -662,19 +715,31 @@
 			);
 
 			$achievement = $this -> model -> easy_select($params);
+
 			if($achievement){
+
 				$achievement_result = array('left' => "0.00", 'middle' => "0.00", 'right' => "0.00");
 
 				foreach ($achievement as $key => $value) {
+
 					if($value['zone'] == 1){
+
 						$achievement_result['left'] = $achievement_result['left'] + $value['deduct'];
+
 					}elseif($value['zone'] == 2){
+
 						$achievement_result['middle'] = $achievement_result['middle'] + $value['deduct'];
+
 					}elseif($value['zone'] == 3){
+
 						$achievement_result['right'] = $achievement_result['right'] + $value['deduct'];
+
 					}
+
 				}
+
 				return $achievement_result;
+
 			}else{
 
 				return array('left' => "0.00", 'middle' => "0.00", 'right' => "0.00");
@@ -707,6 +772,7 @@
 			$recommend_list = $this -> model -> easy_select($params);
 
 			foreach ($recommend_list as $key => $value) {
+
 				$params = array(
 
 					'table_name' => 'member',
@@ -719,13 +785,20 @@
 				$recommend_list[$key]["num"] = $recommend_count;
 
 				if($value['zone'] == 1){
+
 					$recommend_list[$key]["zone_name"] = "左区";
+
 				}else if($value['zone'] == 2){
+
 					$recommend_list[$key]["zone_name"] = "中区";
+
 				}else if($value['zone'] == 3){
+
 					$recommend_list[$key]["zone_name"] = "右区";
+
 				}
 			}
+
 			$this -> assign('recommend_list', $recommend_list);
 
 			$this -> display();
@@ -755,8 +828,11 @@
 			);
 
 			$recommend_list = $this -> model -> easy_select($params);
+
 			$recommend_list_result = array();
+
 			foreach ($recommend_list as $key => $value) {
+
 				$params = array(
 
 					'table_name' => 'member',
@@ -777,11 +853,17 @@
 				$recommend_list_result[$key]["userrank"] = $value['userrank'];
 
 				if($value['zone'] == 1){
+
 					$recommend_list_result[$key]["zone_name"] = "左区";
+
 				}else if($value['zone'] == 2){
+
 					$recommend_list_result[$key]["zone_name"] = "中区";
+
 				}else if($value['zone'] == 3){
+
 					$recommend_list_result[$key]["zone_name"] = "右区";
+
 				}
 			}
 

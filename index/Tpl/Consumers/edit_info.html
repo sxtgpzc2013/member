@@ -31,7 +31,7 @@
 	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商编号</label>
 
 	                            <div class="col-sm-7">
-	                                <input type="text" class="form-control" name="usernumber" value="{$member['usernumber']}">
+	                                <input type="text" class="form-control" value="{$member['usernumber']}" disabled="true">
 	                            </div>
 	                        </div>
 
@@ -55,7 +55,7 @@
 	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商手机号</label>
 
 	                            <div class="col-sm-7">
-	                                <input type="text" class="form-control" name="mobile" value="{$member['mobile']}">
+	                                <input type="text" class="form-control" value="{$member['mobile']}" disabled="true">
 	                            </div>
 	                        </div>
 
@@ -127,16 +127,10 @@
 		// validate signup form on keyup and submit
 		$("#signupForm").validate({
 			rules: {
-				usernumber: {
-					required: true
-				},
 				realname: {
 					required: true
 				},
 				IDcard: {
-					required: true
-				},
-				mobile: {
 					required: true
 				},
 				bankname: {

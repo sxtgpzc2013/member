@@ -5,7 +5,7 @@
  * @version 1.0.0
  *
  * 功能简介：登陆管理控制器类
- * @author 张睿
+ * @author  
  * @copyright 经常去
  * @time 2014-6-16
  * @version 1.0.0

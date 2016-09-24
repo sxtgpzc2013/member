@@ -5,8 +5,8 @@
  * @version 1.0.0
  *
  * 功能简介：运营后台管理员控制器类
- * @author 张睿
- * @copyright 社区送
+ * @author  
+ * @copyright  
  * @time 2014-08-21
  * @version 1.0.0
  */
