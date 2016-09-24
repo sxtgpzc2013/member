@@ -46,39 +46,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</span>
-									<td>MiMO Show</td>
-                                    </td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>112</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-                                    <td>
-										<a class="btn btn-info btn-sm" href="__APP__/Products/edit">编辑</a>
-										<a class="btn btn-info btn-sm" href="#">删除</a>
-                                    </td>
-                                </tr>
-
-								<tr>
-                                    <td>1</span>
-									<td>MiMO Show</td>
-                                    </td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>112</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-                                    <td>
-										<a class="btn btn-info btn-sm" href="#">编辑</a>
-										<a class="btn btn-info btn-sm" href="#">删除</a>
-                                    </td>
-                                </tr>
-
-
+                            	<foreach name="result['result']" item="item">
+	                                <tr>
+	                                    <td>{$item.id}</td>
+										<td>{$item.name}</td>
+										<td>￥{$item.rprice}</td>
+										<td>￥{$item.jprice}</td>
+										<td>{$item.surplus}件</td>
+	                                    <td>{$item.sell_count}件</td>
+										<td>
+											<if condition="$item['status'] eq 0">
+												启用
+											<elseif condition="$item['status'] eq 1" />
+												禁用
+											</if>
+										</td>
+										<td>{$item.updated_at|date="Y-m-d H:i:s",###}</td>
+	                                    <td>
+											<a class="btn btn-info btn-sm" href="__APP__/Products/edit/id/{$item.id}">编辑</a>
+											<a class="btn btn-info btn-sm" href="__APP__/Products/delete/id/{$item.id}" onclick="return confirm('确认删除吗？')">删除</a>
+	                                    </td>
+	                                </tr>
+	                            </foreach>
                             </tbody>
                         </table>
                     </div>
@@ -93,24 +82,8 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
+	                {$result.page}
 	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
 	        </div>
 	    </div>
 	</div>

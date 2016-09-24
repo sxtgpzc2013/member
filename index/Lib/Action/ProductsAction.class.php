@@ -10,37 +10,50 @@
  * @time
  * @version 1.0.0
  */
-	class ProductsAction extends CommonAction {
+class ProductsAction extends CommonAction {
 
-		/**
-		 * 构造方法-实例化MODEL
-		 *
-		 * 参数描述：
-		 *
-		 *
-		 *
-		 * 返回值：
-		 *
-		 */
-		public function __construct()
-		{
-			parent::__construct();
+	/**
+	 * 构造方法-实例化MODEL
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+	public function __construct()
+	{
+		parent::__construct();
 
-			$this -> model = D('Products');
-		}
-
-	    /**
-		 * 首页
-		 *
-		 * 参数描述：
-		 *
-		 *
-		 *
-		 * 返回值：
-		 *
-		 */
-	    public function index()
-	    {
-			$this->display();
-	    }
+		$this -> model = D('Products');
 	}
+
+    /**
+	 * 首页
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+    public function index()
+    {
+		$params = array(
+
+    		'table_name' => 'products',
+
+    		'where' => "is_del = 0",
+
+    		'order' => 'created_at desc'
+    	);
+
+    	$result = $this -> model -> order_select($params);
+
+    	$this -> assign('result', $result);
+
+    	$this -> display();
+    }
+}
