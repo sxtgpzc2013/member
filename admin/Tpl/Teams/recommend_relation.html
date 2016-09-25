@@ -1,0 +1,259 @@
+<include file="public:header" />
+<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
+	<div class="col-lg-10"  style="padding:0px;">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+			<li>
+                <a>团队管理</a>
+            </li>
+            <li>
+                <strong>推荐关系</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="nestable-menu">
+                <button type="button" data-action="expand-all" class="btn btn-white btn-sm">展开所有</button>
+                <button type="button" data-action="collapse-all" class="btn btn-white btn-sm">收起所有</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>推荐关系</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <!-- <p class="m-b-lg">
+                        牛牛 当前共有20代会员
+                    </p> -->
+
+
+
+
+
+                    <div class="dd" id="nestable2">
+						<foreach name="recommend_list" item="recommend">
+							<ol class="dd-list">
+	                            <li class="dd-item" data-id="{$recommend.uid}">
+	                                <div class="dd-handle">
+	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} / {$recommend.realname} / 伞下人数：{$recommend.num}人/  用户级别：{$recommend.userrank} / {$recommend.zone_name}
+	                                </div>
+
+									<if condition="$recommend['num'] neq 0">
+
+										<ol class="dd-list" style="display: none;">
+
+										</ol>
+									</if>
+	                            </li>
+
+
+
+	                        </ol>
+						</foreach>
+
+                    </div>
+
+                    <textarea id="nestable2-output" class="form-control"></textarea>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<include file="public:footer" />
+<!-- Custom and plugin javascript -->
+   <script src="__PUBLIC__/js/hplus.js?v=2.2.0"></script>
+   <script src="__PUBLIC__/js/plugins/pace/pace.min.js"></script>
+
+   <!-- Nestable List -->
+   <script src="__PUBLIC__/js/plugins/nestable/jquery.nestable.js"></script>
+   <script>
+	    $(function() {
+
+		   var updateOutput = function (e) {
+			   var list = e.length ? e : $(e.target),
+				   output = list.data('output');
+			   if (window.JSON) {
+				   output.val(window.JSON.stringify(list.nestable('serialize'))); //, null, 2));
+			   } else {
+				   output.val('浏览器不支持');
+			   }
+		   };
+
+		   // activate Nestable for list 2
+		   $('#nestable2').nestable({
+			   group: 1
+		   }).on('change', updateOutput);
+
+		   //updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+
+		   $('#nestable-menu').on('click', function (e) {
+
+			   var target = $(e.target),
+				   action = target.data('action');
+			   if (action === 'expand-all') {
+				   if($(e.target).hasClass('is_load_data')){
+
+						$('.dd').nestable('expandAll');
+				   }else{
+					   liObj = 0
+					   $(e.target).addClass('is_load_data');
+					   withoutClick({$_SESSION['Rongzi']['user']['uid']})
+
+						$('.dd').nestable('expandAll');
+				   }
+			   }
+			   if (action === 'collapse-all') {
+				   $('.dd').nestable('collapseAll');
+			   }
+		   });
+
+		//    $('.dd-item button').on('click', function () {
+		// 	   var uid = $(this).parent().attr('data-id');
+		// 	   var type = $(this).attr('data-action');
+		// 	   var that = this;
+		// 	   if(type == 'expand'){
+		// 		   //进行数据请求
+		// 		      $.ajax({
+		// 			   	   url: "__APP__/Teams/get_recommend_relation",
+		// 			   	   type: "get",
+		// 			   	   dataType: "JSON",
+		// 			   	   data: {
+		// 			   		   uid: uid
+		// 			   	   },
+		// 			   	   success: function (resdata) {
+		// 			   		   if (resdata.success == true) {
+		// 			   			   if(resdata.data == ""){
+		// 			   				   alert("用户区伞下人数获取失败 请重试!");
+		// 			   			   }else{
+		   //
+		// 							    var html = template('list', resdata);
+		   //
+		// 								$(that).parent().children(".dd-list").append(html);
+		   //
+		// 								$()
+		// 			   			   }
+		// 			   		   } else {
+		// 			   			   alert("用户报单中心获取错误 请重试");
+		// 			   		   }
+		// 			   	  }
+		// 		      });
+		// 	   }
+		   //
+		   //
+		   //
+		//    });
+
+		   $(".dd-item").on('click','button',function(e){
+			   var uid = $(this).parent().attr('data-id');
+			  var type = $(this).attr('data-action');
+			  var that = this;
+			  if(type == 'expand'){
+				  $(that).parent().children(".dd-list").empty();
+				  //进行数据请求
+					 $.ajax({
+						  url: "__APP__/Teams/get_recommend_relation",
+						  type: "get",
+						  dataType: "JSON",
+						  data: {
+							  uid: uid
+						  },
+						  success: function (resdata) {
+							  if (resdata.success == true) {
+								  if(resdata.data == ""){
+									  alert("用户区伞下人数获取失败 请重试!");
+								  }else{
+
+									   var html = template('list', resdata);
+
+									   $(that).parent().children(".dd-list").append(html);
+								  }
+							  } else {
+								  alert("用户报单中心获取错误 请重试");
+							  }
+						 }
+					 });
+			  }
+		   	});
+
+
+		    $('.dd').nestable('collapseAll');
+	   });
+
+
+	   // 列出所有级别部门，点击菜单折叠，展开
+		function withoutClick(liObj){
+
+			$(".dd-item[data-id='"+liObj+"']").children(".dd-list").empty();
+			//进行数据请求
+			 $.ajax({
+					url: "__APP__/Teams/get_recommend_relation",
+					type: "get",
+					dataType: "JSON",
+					data: {
+						uid: liObj
+					},
+					success: function (resdata) {
+
+						if (resdata.success == true) {
+							if(resdata.data == "" || resdata.data.length == 0){
+								//alert("用户区伞下人数获取失败 请重试!");
+							}else{
+
+								for (var i = 0; i < resdata.data.length; i++) {
+									withoutClick(resdata.data[i]['uid'])
+
+								}
+
+								var html = template('list', resdata);
+								$(".dd-item[data-id='"+liObj+"']").children(".dd-list").append(html)
+
+
+								 //resdata = new Array()
+							}
+						} else {
+							alert("用户报单中心获取错误 请重试");
+						}
+				   }
+			   });
+			    $('.dd').nestable('expandAll');
+		}
+   </script>
+   <script src="__PUBLIC__/js/template.js"></script>
+   <div id="content"></div>
+
+   <script id="list" type="text/html">
+	   <ul>
+	       {{each data as value i}}
+			   <li class="dd-item" data-id="{{value.uid}}">
+					{{if value.num > 0}}
+				   <button data-action="collapse" type="button" style="display: none;">关闭</button>
+				   <button data-action="expand" type="button" style="display: block;">展开</button>
+				   {{/if}}
+				   <div class="dd-handle">
+					   <span class="label label-info"><i class="fa fa-users"></i></span> {{value.usernumber}} /{{value.realname}} / 伞下人数：{{value.num}}人/  用户级别：{{value.userrank}} /{{value.zone_name}}
+				   </div>
+
+				   {{if value.num > 0}}
+
+					   <ol class="dd-list" style="display: none;">
+
+					   </ol>
+				  {{/if}}
+			   </li>
+	       {{/each}}
+	   </ul>
+   </script>

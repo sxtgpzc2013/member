@@ -1,7 +1,17 @@
 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <ul class="nav navbar-top-links navbar-left">
+        <li>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a title="返回首页" style="color:#000000 !important;" href="__APP__/Consumers/edit_info"><img src="__PUBLIC__/images/user.png" alt="" style="width:14px;height:14px;"/></a>Hi {$_SESSION['Rongzi']['user']['realname']}</span>
+        </li>
+        <li>
+            <a href="__APP__/Consumers/edit_info"  style="color:#000000 !important;">
+                <i></i>
+            </a>
+        </li>
+    </ul>
     <ul class="nav navbar-top-links navbar-right">
         <li>
-            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__URL__" title="返回首页" style="color:#000000 !important;"><i class="fa fa-home"></i></a>欢迎管理后台</span>
+            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__APP__/Consumers/edit_info" title="返回首页" style="color:#000000 !important;"><img src="__PUBLIC__/images/user.png" alt="" style="width:14px;height:14px;"/></a>{$_SESSION['Rongzi']['user']['realname']}资料</span>
         </li>
         <li>
             <a href="__APP__/Login/out"  style="color:#000000 !important;">
