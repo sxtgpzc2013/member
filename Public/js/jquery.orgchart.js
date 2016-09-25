@@ -368,7 +368,7 @@
     if(nodeData[opts.is_null] == "true"){
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
         .addClass('node')
-        .append('<a href="./register?uid='+nodeData[opts.parentid]+'&zone='+nodeData[opts.zone]+'" style="padding:10px;background:#f3c500;color:#fff;width:100px;min-width:100px;display:block;">注册会员</a>')
+        .append('<a href="./register?uid='+nodeData[opts.parentid]+'&zone='+nodeData[opts.zone]+'" style="padding:2px;background:#f3c500;color:#fff;width:40px;min-width:60px;display:block;">注册会员</a>')
     }else{
       // construct the content of node
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})

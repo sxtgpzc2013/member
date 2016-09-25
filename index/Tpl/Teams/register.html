@@ -24,6 +24,7 @@
 
                 <form class="form-horizontal m-t" id="signupForm" action="__APP__/Teams/register" method="post" enctype = "multipart/form-data">
 					<input type="hidden" name="form_key" value="yes">
+					<input type="hidden" name="red_wine_number" value="0" class="red_wine_number">
 			        <div class="ibox-content" style="border:0">
 						<div class="ibox-title" >
 							<h5>基本信息</h5>
@@ -32,8 +33,9 @@
 			                    <label class="col-sm-2 control-label">消费商编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control usernumber" name="usernumber">
-			                    </div>
+			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}">
+									<span id="cname-error" class="help-block m-b-none usernumber_err" style="display:none;">必填</span>
+								</div>
 
 								<div class="col-sm-3">
 			                        <a class="btn btn-white get_usernumber">验证编号</a>
@@ -52,13 +54,20 @@
 			                    <label class="col-sm-2 control-label">消费商级别</label>
 
 			                    <div class="col-sm-7">
-			                        <select class="form-control" name="userrank">
+			                        <select class="form-control userrank" name="userrank">
 										<option value="1">普通消费商 1980</option>
 										<option value="2">银卡消费商 1万</option>
 										<option value="3">金卡消费商 3万</option>
 										<option value="4">钻卡消费商 5万</option>
 			                        </select>
 			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">数字红酒</label>
+
+			                    <label class="col-sm-6 control-label" style="text-align:left;"><span class="red_wine_number_span">0</span>个数字红酒资格</label>
+								<input type="hidden" name="red_wine_number" value="0" class="red_wine_number">
 			                </div>
 
 							<div class="form-group">
@@ -141,6 +150,14 @@
 			                </div>
 
 							<div class="form-group">
+								<label class="col-sm-2 control-label">赠送</label>
+
+								<label class="col-sm-8 control-label" style="text-align:left;">戎子经典<span class="red_wine_number_give">2瓶</span></label>
+
+
+							</div>
+
+							<div class="form-group">
 			                    <label class="col-sm-2 control-label">默认送货地址</label>
 
 
@@ -161,7 +178,7 @@
 			                </div>
 
 
-							<div class="ibox-title">
+							<!-- <div class="ibox-title">
 								<h3>数字红酒资格</h3>
 							</div>
 
@@ -176,7 +193,7 @@
 			                            <input type="radio" value="3" id="inlineCheckbox2" name="red_wine_number"> 大戎子1箱
 									</label>
 			                    </div>
-			                </div>
+			                </div> -->
 
 							<div class="ibox-title">
 								<h3>关系信息</h3>
@@ -198,7 +215,9 @@
 			                    <label class="col-sm-2 control-label">报单中心</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control billcenternumber" name="billcenternumber" value="{$member['usernumber']}">
+			                        <input type="text" class="form-control billcenternumber" name="billcenternumber"
+									value="<if condition="$member['isbill'] eq 1">{$member['usernumber']}<else/>{$member['billcenternumber']}</if>">
+
 			                    </div>
 
 								<div class="col-sm-3">
@@ -286,8 +305,51 @@
 
 			                    <div class="col-sm-7">
 									<label class="checkbox-inline">
-			                            <input type="checkbox" value="option1" id="inlineCheckbox1" name="is_free"> 我已阅读并同意本协议 <a>查看协议</a>
+			                            <input type="checkbox" value="option1" id="inlineCheckbox1" name="is_free"> 我已阅读并同意本协议 <a  data-toggle="modal" data-target="#myModal">查看协议</a>
 									</label>
+									<!-- <div class="text-center">
+	                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	                                        打开示例窗口
+	                                    </button>
+	                                </div> -->
+									<div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+		                                <div class="modal-dialog modal-lg">
+		                                    <div class="modal-content">
+		                                        <div class="modal-header">
+		                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		                                            <h4 class="modal-title">戎子酒庄会员注册协议</h4>
+		                                        </div>
+		                                        <div class="modal-body">
+		                                            <p>一、一般规定</p>
+														   <p>1. 本服务协议双方为戎子酒庄与戎子酒庄用户(以下简称“用户”)。本服务协议用于规 范双方之间全部的法律关系及权利义务，具有合同效力。</p>
+														   <p>2.您在使用戎子酒庄营销系统提供的各项服务的同时，承诺接受并遵守各项相关规则的规定。戎子酒庄有权根据需要不时的制定、修改各类规则，此类规则会在发布后或经您确认后生效，亦成为本协议一部分。</p>
+														   <p>3.请您务必在注册之前认真阅读全部服务协议内容，如有任何疑问，可向戎子酒庄咨询。</p>
+														   <p>4.无论您事实上是否在注册之前认真阅读了本服务协议，只要您点击协议正本下方的"接受"按钮并按照戎子酒庄注册程序成功注册为用户，您的行为仍然表示您同意并签署了本服务协议。</p>
+														<p>二、用户资格</p>
+														<p>适用本协议注册的用户，应当具备的资格是：</p>
+														 <p> 1.必须是具备《中华人民共和国民法通则》规定的完全民事行为能力的自然人、合法证照的组织单位。无民事行为能力人、限制民事行为能力人以及无合法证照的组织不得注册并使用戎子酒庄营销系统</p>
+														  <p>2.所有注册会员为消费定量的1万、3万、5万的红酒才能成为消费商，其保值增值分红或其他奖励为附加权益。
+														<p>三、用户的权利义务</p>
+														  <p>1.用户有权根据《戎子酒庄用户服务协议书》使用戎子酒庄营销系统服务功能，享受戎子酒庄有关活动以及有权优先享受戎子酒庄营销系统提供的其他的信息服务。</p>
+														 <p> 2.用户使用戎子酒庄营销系统时如遇到问题，可以向戎子酒庄相关部门进行咨询要求解答。</p>
+														 <p> 3.会员有参会加公司业务学习、技能培训的权利，会员有依法、依规，制定地方营销政策的权利，会员有依法、依规，组织各网点学习交流的权利，会员要积极开拓公司产品的销售市场，扩大产品的市场份</p>
+															额，协助公司在当地开展市场推广工作。</p>
+														 <p> 4.用户应根据本协议的规定，及时向戎子酒庄支付服务费用, 并按照国家的税收规定向</p>
+														<p>四、争议解决</p>
+														<p>  因本协议产生的争议或与本协议相关争议，戎子酒庄与用户可以协商解决。如协商不成或不愿意协商，任何任何一方均可向戎子酒庄营销系统总部办公场所所在地的人民法院提起诉讼。</p>
+														<p>五、其他协议内容</p>
+														<p>  1.除非本协议有特殊规定外，就本协议相关事项进行联系，双方应当使用电子邮件方式。用户的电子邮箱以注册时填写的电子邮箱为准。戎子酒庄各相关部门的电子邮箱以戎子酒庄营销系统上的注明为准。</p>
+														<p>   2.点击接受本协议并正确提交注册程序所需要的资料后，本协议在戎子酒庄与您之间成立并立即生效。</p>
+
+		                                        </div>
+
+		                                        <div class="modal-footer">
+		                                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+		                                            <button type="button" class="btn btn-primary">保存</button>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
 			                    </div>
 			                </div>
 
@@ -360,9 +422,6 @@
 				ID_address_back: {
 					required: true
 				},
-				red_wine_number: {
-					required: true
-				},
 				tuijiannumber: {
 					required: true
 				},
@@ -419,14 +478,17 @@
 	            },
 	            success: function (resdata) {
 					resdata = JSON.parse(resdata);
+
+						$(".usernumber_err").show();
 	                if (resdata.success == true) {
 						if(resdata.data == 0){
-							alert("用户编号验证成功,可以注册");
+							$(".usernumber_err").html("用户编号验证成功,可以注册");
 						}else{
-							alert("用户编号已存在,请重新输入用户编号");
+
+							$(".usernumber_err").html("用户编号已存在,请重新输入用户编号");
 						}
 	                } else {
-	                    alert("编号验证出现错误 请重试");
+						$(".usernumber_err").html("编号验证出现错误 请重试");
 	                }
 	            }
 	        });
@@ -456,6 +518,31 @@
 	                }
 	            }
 	        });
+		});
+
+		$(".userrank").change(function(){
+			//1瓶 1箱 3箱 5箱
+			//red_wine_number_span red_wine_number_give
+			//red_wine_number
+			if($(this).val() == 1){
+				$('.red_wine_number_give').html("1瓶")
+				$('.red_wine_number_span').html(0)
+				$('.red_wine_number').val(0)
+			}else if($(this).val() == 2){
+				$('.red_wine_number_give').html("1箱")
+				$('.red_wine_number_span').html(0)
+				$('.red_wine_number').val(0)
+			}else if($(this).val() == 3){
+				$('.red_wine_number_give').html("3箱")
+				$('.red_wine_number_span').html(1)
+				$('.red_wine_number').val(1)
+
+			}else if($(this).val() == 4){
+				$('.red_wine_number_give').html("5箱")
+				$('.red_wine_number_span').html(3)
+				$('.red_wine_number').val(3)
+			}
+
 		});
 
 		$('.parentnumber').blur(function(){
