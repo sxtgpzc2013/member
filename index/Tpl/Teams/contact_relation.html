@@ -27,7 +27,7 @@
                     <h5>接点关系</h5>
                 </div>
                 <div class="ibox-content">
-					<div id="chart-container"></div>
+					<div id="chart-container" style="overflow:scroll"></div>
 
 
 
@@ -50,7 +50,7 @@
 
 	$('#chart-container').orgchart({
 	  'data' : datascource,
-	  'depth': 3,
+	  'depth': 4,
 	  'nodeTitle': 'name',
 	  'nodeContent': 'title',
 	  'nodeAchievement': 'achievement',
