@@ -41,6 +41,54 @@
 		 */
 	    public function index()
 	    {
+	    	$keys = array_keys($_SESSION['Rongzi']['cart']);
+
+	    	$params = array(
+
+	    		'table_name' => 'products',
+
+	    		'where' => "is_del = 0 AND status = 0 AND id IN(".implode(',', $keys).")"
+	    	);
+
+	    	$result = $this -> model -> easy_select($params);
+
+	    	foreach ($result as $k => $v)
+	    	{
+	    		if (isset($_SESSION['Rongzi']['cart'][$v['id']]['count']) && $_SESSION['Rongzi']['cart'][$v['id']]['count'] > 0)
+	    		{
+	    			$result[$k]['count'] = $_SESSION['Rongzi']['cart'][$v['id']]['count'];
+
+	    			$result[$k]['total_jprice'] = $result[$k]['count'] * $v['jprice'];
+
+	    			$result[$k]['total_rprice'] = $result[$k]['count'] * $v['rprice'];
+	    		}
+	    		else
+	    		{
+	    			unset($result[$k]);
+	    		}
+	    	}
+
+	    	$this -> assign('result', $result);
+
 			$this->display();
+	    }
+
+	    /**
+		 * 删除
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function delete()
+	    {
+	    	$id = isset($_GET['id']) ? intval($_GET['id']) : $this -> _back('非法操作');
+
+	    	unset($_SESSION['Rongzi']['cart'][$id]);
+
+	    	redirect(__APP__.'/Carts/index', 0);
 	    }
 	}

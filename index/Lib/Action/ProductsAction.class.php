@@ -56,4 +56,55 @@ class ProductsAction extends CommonAction {
 
     	$this -> display();
     }
+
+    /**
+	 * 加入购物车
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+    public function join_cart()
+    {
+    	$id = isset($_GET['id']) ? intval($_GET['id']) : $this -> _back('非法操作');
+
+    	//查询这个商品
+    	$params = array(
+
+    		'table_name' => 'products',
+
+    		'where' => "id = {$id} AND surplus > 0 AND status = 0 AND is_del = 0"
+    	);
+
+    	$product_find = $this -> model -> my_find($params);
+
+    	if (!$product_find)
+    	{
+    		$this -> _back('没有找到相关商品');
+    	}
+
+    	//校验是否已存在购物车
+    	if (isset($_SESSION['Rongzi']['cart'][$id]))
+    	{
+    		$_SESSION['Rongzi']['cart'][$id]['count'] += 1;
+    	}
+    	else
+    	{
+    		$_SESSION['Rongzi']['cart'][$id] = array(
+
+    			'id' => $id,
+
+    			'count' => 1,
+
+    			'name' => $product_find['name'],
+
+    			'products_code' => $product_find['products_code']
+    		);
+    	}
+
+    	redirect(__APP__.'/Carts/index', 0);
+    }
 }

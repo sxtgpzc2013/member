@@ -65,9 +65,9 @@
 								<thead>
 									<tr>
 										<th>商品编号</th>
-										<th>商品类别</th>
+										<!-- <th>商品类别</th> -->
 										<th>商品名称</th>
-										<th>商品单价</th>
+										<!-- <th>商品单价</th> -->
 										<th>购买数量</th>
 										<th>所需奖金币</th>
 										<th>所需戎子盾</th>
@@ -75,17 +75,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td><a href="#">删除</a></td>
-									</tr>
-
+									<foreach name="result" item="item">
+										<tr>
+											<td>{$item.products_code}</td>
+											<td>{$item.name}</td>
+											<td>{$item.count}</td>
+											<td>￥{$item.total_jprice}</td>
+											<td>￥{$item.total_rprice}</td>
+											<td><a href="__APP__/Carts/delete/id/{$item['id']}" onclick="return confirm('确认删除吗?')">删除</a></td>
+										</tr>
+									</foreach>
 								</tbody>
 							</table>
 						</div>

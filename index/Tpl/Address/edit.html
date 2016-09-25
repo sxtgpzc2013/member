@@ -29,32 +29,33 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*收件人姓名：</label>
                             <div class="col-sm-6">
-                                <input id="name" name="name" class="form-control" type="text">
+                                <input id="name" name="name" class="form-control" type="text" value="{$result.name}" />
                                 <input type="hidden" name="form_key" value="yes" />
+                                <input type="hidden" name="id" value="{$result.id}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*所属地区：</label>
                             <div class="col-sm-6">
-                                <input id="area" name="area" class="form-control" type="text">
+                                <input id="area" name="area" class="form-control" type="text" value="{$result.area}">
                             </div>
                         </div>
 						<div class="form-group">
                             <label class="col-sm-3 control-label">*详细地址：</label>
                             <div class="col-sm-6">
-                                <input id="address" name="address" class="form-control" type="text">
+                                <input id="address" name="address" class="form-control" type="text" value="{$result.address}">
                             </div>
                         </div>
 						<div class="form-group">
                             <label class="col-sm-3 control-label">*联系方式：</label>
                             <div class="col-sm-6">
-                                <input id="mobile" name="mobile" class="form-control" type="text">
+                                <input id="mobile" name="mobile" class="form-control" type="text" value="{$result.mobile}">
                             </div>
                         </div>
 						<div class="form-group">
                             <label class="col-sm-3 control-label">*设为默认：</label>
                             <div class="col-sm-6">
-                                <input id="is_default" name="is_default" class="form-control" type="checkbox">
+                                <input id="is_default" name="is_default" class="form-control" type="checkbox" <if condition="$result['is_default'] eq 1">checked="checked"</if>>
                             </div>
                         </div>
                         <div class="form-group">
