@@ -212,7 +212,7 @@ CREATE TABLE `zx_member` (
   `jihuobi` double(10,2) DEFAULT '0.00' COMMENT '激活币',
   `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '奖励积分',
   `isfull` tinyint(2) DEFAULT '0' COMMENT '分红是否封顶',
-  `status` int(8) DEFAULT '0' COMMENT '用户状态：-2 删除 ，-1 死了，0 未激活 1 已经激活 ',
+  `status` int(8) DEFAULT '0' COMMENT '用户状态：-2 删除 ，-1 死了，0 未激活 1 已经激活 -3 账号冻结 -4 账号禁用',
   `bankname` varchar(1000) DEFAULT '' COMMENT '银行名称',
   `bankholder` varchar(50) DEFAULT '' COMMENT '开户人姓名',
   `banknumber` varchar(20) DEFAULT NULL COMMENT '银行卡号',
@@ -409,15 +409,11 @@ CREATE TABLE `zx_achievement_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='业绩产生记录表';
 
-<<<<<<< HEAD
+
 ALTER TABLE zx_bonus_count ADD torealname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
-
 ALTER TABLE zx_products ADD sell_count INT(11) NOT NULL DEFAULT 0 COMMENT '卖出数量' AFTER surplus;
-=======
-ALTER TABLE zx_bonus_count ADD realname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
 ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为赠送红酒产品' AFTER created_at;
-
->>>>>>> develop
+ALTER TABLE zx_member CHANGE status status int(8) DEFAULT '0' COMMENT '用户状态：-2 账号冻结 ，-1 删除，0 未激活 1 已经激活';
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

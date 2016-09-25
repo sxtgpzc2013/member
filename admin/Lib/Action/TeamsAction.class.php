@@ -617,20 +617,6 @@
 
 					foreach ($children_list as $ckey => $cvalue) {
 
-						//获取四级下的关系
-						$params = array(
-
-							'table_name' => 'member',
-
-							'where' => "status = 1 AND parentid = {$cvalue['uid']} AND parentnumber = '{$cvalue['usernumber']}'"
-						);
-
-						$four_children_list = $this -> model -> easy_select($params);
-
-						foreach ($four_children_list as $fkey => $fvalue) {
-							# code...
-						}
-
 						if($cvalue['zone'] == 1){
 							$exp_children_children[0] = array(
 								'children' => array(),
@@ -865,30 +851,6 @@
 				$recommend_list_result[$key]["uid"] = $value['uid'];
 
 				$recommend_list_result[$key]["userrank"] = $value['userrank'];
-
-				$recommend_list_result[$key]["usertitle"] = $value['usertitle'];
-
-				$recommend_list_result[$key]["leftachievement"] = $value['leftachievement'];
-
-				$recommend_list_result[$key]["middleachievement"] = $value['middleachievement'];
-
-				$recommend_list_result[$key]["rightachievement"] = $value['rightachievement'];
-
-				$recommend_list_result[$key]["achievement"] = $value['achievement'];
-
-				$recommend_list_result[$key]["userrank"] = $value['userrank'];
-
-				$recommend_list_result[$key]["achievement"] = $value['achievement'];
-
-				$recommend_list_result[$key]["baodanbi"] = $value['baodanbi'];
-
-				$recommend_list_result[$key]["jianglijifen"] = $value['jianglijifen'];
-
-				$recommend_list_result[$key]["jiangjinbi"] = $value['jiangjinbi'];
-
-				$recommend_list_result[$key]["rongzidun"] = $value['rongzidun'];
-
-				$recommend_list_result[$key]["ringzidun"] = $value['ringzidun'];
 
 				if($value['zone'] == 1){
 

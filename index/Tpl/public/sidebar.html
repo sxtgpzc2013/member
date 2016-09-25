@@ -4,12 +4,15 @@
 			<li class="nav-header">
 
 				<div class="logo-element">
-					Rongzi
+					<img src="__PUBLIC__/images/logo.jpg" alt="" style="width:100%"/>
 				</div>
 
 			</li>
 			<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span> <span class="fa arrow"></span></a>
+				<a href="index.html">
+					<i class="fa fa-home"></i>
+
+					<span class="nav-label">首页</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Index' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
 						<a href="__APP__">首页</a>
@@ -17,7 +20,7 @@
 				</ul>
 			</li>
 			<li class="<?php if (MODULE_NAME == 'Consumers') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Consumers' && ACTION_NAME == 'edit_info') {echo 'active';} ?>">
 						<a href="__APP__/Consumers/edit_info">修改资料</a>
@@ -29,7 +32,7 @@
 			</li>
 
 			<li class="<?php if (MODULE_NAME == 'Teams' || MODULE_NAME == 'Activates') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-envelope"></i> <span class="nav-label">团队管理</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-group"></i> <span class="nav-label">团队管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
 					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'index') {echo 'active';} ?>">
@@ -49,7 +52,7 @@
 			</li>
 
 			<li class="<?php if (MODULE_NAME == 'Bonus') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">奖金管理</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-cny"></i> <span class="nav-label">奖金管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Bonus' && (ACTION_NAME == 'index' || ACTION_NAME == 'info')) {echo 'active';} ?>">
 						<a href="__APP__/Bonus/index">奖金明细</a>
@@ -61,7 +64,7 @@
 			</li>
 
 			<li class="<?php if (MODULE_NAME == 'Finances') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash') {echo 'active';} ?>">
 						<a href="__APP__/Finances/cash">提现申请</a>
@@ -82,7 +85,7 @@
 			</li>
 
 			<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-newspaper-o"></i> <span class="nav-label">新闻公告</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'News' && ACTION_NAME == 'index') {echo 'active';} ?>">
 						<a href="__APP__/News/index">新闻资讯</a>
@@ -91,7 +94,7 @@
 			</li>
 
 			<li class="<?php if (MODULE_NAME == 'Products' || MODULE_NAME == 'Carts' || MODULE_NAME == 'Orders' || MODULE_NAME == 'Address') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-columns"></i> <span class="nav-label">我的商城</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-shopping-cart"></i> <span class="nav-label">我的商城</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Products' && ACTION_NAME == 'index') {echo 'active';} ?>">
 						<a href="__APP__/Products/index">商品列表</a>

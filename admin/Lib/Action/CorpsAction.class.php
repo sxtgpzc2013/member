@@ -7,7 +7,7 @@
  * 功能简介：
  * @author
  * @copyright
- * @time  
+ * @time
  * @version 1.0.0
  */
 	class CorpsAction extends CommonAction {
@@ -43,6 +43,29 @@
 		 */
 	    public function index()
 	    {
+			$where = "";
+
+			if($_GET['usernumber']){
+				$where = "usernumber = ". htmlspecialchars($_GET['usernumber']);
+			}
+
+			//获取所有用户数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => $where,
+
+				'order' => "uid desc"
+
+			);
+
+	    	$data = $this -> model -> order_select($params);
+
+	    	$this -> assign('members', $data['result']);
+
+			$this -> assign('page', $data['page']);
+
 	    	$this -> display();
 	    }
 
