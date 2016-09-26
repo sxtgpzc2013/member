@@ -1,11 +1,11 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-06-12
- * @alter  
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：商户后台登陆控制器类
- * @author  
+ * @author
  * @copyright
  * @time 2014-06-12
  * @version 1.0.0
@@ -45,7 +45,7 @@
 
 			if ($form_key == 'yes')
 			{
-				$mobile = $_POST['mobile'];
+				$usernumber = $_POST['usernumber'];
 
 		    	$password = md5(md5($_POST['password']));
 
@@ -53,7 +53,7 @@
 
 		    		'table_name' => 'member',
 
-		    		'where' => "mobile = '{$mobile}' AND psd1 = '{$password}' AND status = 1"
+		    		'where' => "usernumber = '{$usernumber}' AND psd1 = '{$password}' AND status = 1"
 		    	);
 
 		    	$member = $this -> model -> my_find($params);

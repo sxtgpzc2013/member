@@ -55,7 +55,7 @@
 	                            <label class="col-sm-2 control-label"><span style="color:red">*</span>消费商手机号</label>
 
 	                            <div class="col-sm-7">
-	                                <input type="text" class="form-control" value="{$member['mobile']}" disabled="true">
+	                                <input type="text" class="form-control" value="{$member['mobile']}" name="mobile">
 	                            </div>
 	                        </div>
 
@@ -140,6 +140,9 @@
 					required: true
 				},
 				banknumber: {
+					required: true
+				},
+				mobile: {
 					required: true
 				},
 				agree: "required"
