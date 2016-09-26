@@ -21,7 +21,7 @@
 				<div class="ibox-title" >
 					<h5>填写并核对订单信息</h5>
 				</div>
-                <form class="form-horizontal m-t" id="signupForm" action="" method="post" enctype = "multipart/form-data">
+                <form class="form-horizontal m-t" id="signupForm" action="__ACTION__" method="post" enctype = "multipart/form-data">
 					<input type="hidden" name="form_key" value="yes">
 			        <div class="ibox-content" style="border:0">
 
@@ -29,30 +29,21 @@
 			                    <label class="col-sm-2 control-label">收货人信息</label>
 
 			                    <div class="col-sm-7">
-									<div class="radio">
-                                        <label>
-                                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">收货地址1</label>
-                                    </div>
-
-									<div class="radio">
-                                        <label>
-                                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">收货地址2</label>
-                                    </div>
-
-									<div class="radio">
-                                        <label>
-                                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">收货地址3</label>
-                                    </div>
-
+			                    	<foreach name="result['address']" item="address">
+										<div class="radio">
+	                                        <label>
+	                                            <input type="radio" <if condition="$address['is_default'] eq 1">checked="checked"</if> value="{$address.id}" id="optionsRadios1" name="address_id">{$address.name}-{$address.address}</label>
+	                                    </div>
+	                                </foreach>
 			                    </div>
 
 								<div class="col-sm-3">
-			                        <a class="btn">新增收货地址</a>
+			                        <a href="__APP__/Address/add" class="btn">新增收货地址</a>
 			                    </div>
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">全部商品[100]</label>
+			                    <label class="col-sm-2 control-label">全部商品</label>
 
 			                    <div class="col-sm-10">
 									<div class="table-responsive m-t">
@@ -68,61 +59,40 @@
 		                                        </tr>
 		                                    </thead>
 		                                    <tbody>
-		                                        <tr>
-													<td>
-		                                                <img src="__PUBLIC__/img/a8.jpg" alt="" style="width:100px;height:100px;"/>
-		                                            </td>
-		                                            <td>
-		                                                <div><strong>尚都比拉2013冬装新款女装 韩版修身呢子大衣 秋冬气质羊毛呢外套</strong>
-		                                                </div>
-		                                            </td>
-		                                            <td>1</td>
-		                                            <td> 26.00</td>
-		                                            <td> 1.20</td>
-		                                            <td> 31,98</td>
-		                                        </tr>
-		                                        <tr>
-													<td>
-		                                                <img src="__PUBLIC__/img/a8.jpg" alt="" style="width:100px;height:100px;"/>
-		                                            </td>
-		                                            <td>
-		                                                <div><strong>11*11夏娜 新款斗篷毛呢外套 女秋冬呢子大衣 韩版大码宽松呢大衣</strong>
-		                                                </div>
-		                                                
-		                                            </td>
-		                                            <td>2</td>
-		                                            <td> 80.00</td>
-		                                            <td> 1.20</td>
-		                                            <td> 196.80</td>
-		                                        </tr>
-		                                        <tr>
-													<td>
-		                                                <img src="__PUBLIC__/img/a8.jpg" alt="" style="width:100px;height:100px;"/>
-		                                            </td>
-		                                            <td>
-		                                                <div><strong>2013秋装 新款女装韩版学生秋冬加厚加绒保暖开衫卫衣 百搭女外套</strong>
-		                                                </div>
-		                                            </td>
-		                                            <td>3</td>
-		                                            <td> 420.00</td>
-		                                            <td> 1.20</td>
-		                                            <td> 1033.20</td>
-		                                        </tr>
-
+	                                        	<foreach name="result['products']" item="product">
+			                                        <tr>
+														<td>
+			                                                <img src="__PUBLIC__/img/a8.jpg" alt="" style="width:100px;height:100px;"/>
+			                                            </td>
+			                                            <td>
+			                                                <div><strong>{$product.name}</strong>
+			                                                </div>
+			                                            </td>
+			                                            <td>{$product.count}</td>
+			                                            <td> {$product.total_jprice}</td>
+			                                            <td> {$product.total_rprice}</td>
+			                                            <td> {$product['total_jprice']+$product['total_rprice']}</td>
+			                                        </tr>
+			                                    </foreach>
 		                                    </tbody>
 		                                </table>
 
 										<table class="table invoice-total">
 			                                <tbody>
 			                                    <tr>
-			                                        <td><strong>戎子盾：</strong>
-			                                        </td>
-			                                        <td> 1026.00</td>
-			                                    </tr>
-			                                    <tr>
 			                                        <td><strong>奖金币：</strong>
 			                                        </td>
-			                                        <td> 235.98</td>
+			                                        <td> {$result.total_jprice}</td>
+			                                    </tr>
+			                                    <tr>
+			                                        <td><strong>戎子盾：</strong>
+			                                        </td>
+			                                        <td> {$result.total_rprice}</td>
+			                                    </tr>
+			                                    <tr>
+			                                        <td><strong>总计：</strong>
+			                                        </td>
+			                                        <td> {$result.total_price}</td>
 			                                    </tr>
 
 			                                </tbody>
@@ -141,7 +111,7 @@
 			                    <label class="col-sm-2 control-label">添加订单备注</label>
 
 			                    <div class="col-sm-7">
-									<textarea name="name" cols="70">我是商品</textarea>
+									<textarea name="notice" cols="70"></textarea>
 			                    </div>
 
 								<div class="col-sm-3">
