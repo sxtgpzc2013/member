@@ -1,13 +1,13 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
- * @last update 2016-09-16
+ * @last update 2014-06-12
  * @alter
  * @version 1.0.0
  *
- * 功能简介：后台基类
- * @author
- * @copyright
- * @time 2016-09-16
+ * 功能简介：商户后台基类
+ * @author 张睿
+ * @copyright 社区送
+ * @time 2014-06-12
  * @version 1.0.0
  */
 	Load('extend');//插件
@@ -60,11 +60,11 @@
 	    }
 
 	    /**
-		*[Rongzi] (Beta)2014-~   Crm.
+		*[Rongzi] (Beta)2014-~ 社区送 Crm.
 		************************************
-		* 戎子接口上传图片封装
+		* 经常去APP接口上传图片封装
 		************************************
-		* @author  :qbx(304151978@qq.com)
+		* @author
 		* @time:2014-06-12
 		* @version: 1.0.0
 		***************参数描述*************
@@ -121,11 +121,11 @@
 		}
 
 		 /**
-		*[Rongzi] (Beta)2014-~   Crm.
+		*[Rongzi] (Beta)2014-~ 社区送 Crm.
 		************************************
-		* 戎子接口上传图片封装
+		* 经常去APP接口上传图片封装
 		************************************
-		* @author  :qbx(304151978@qq.com)
+		* @author
 		* @time:2014-06-12
 		* @version: 1.0.0
 		***************参数描述*************
@@ -191,11 +191,11 @@
 		}
 
 		    /**
-		*[Rongzi] (Beta)2014-~   Crm.
+		*[Rongzi] (Beta)2014-~ 社区送 Crm.
 		************************************
-		* 戎子 上传封装
+		* 经常去APP 上传封装
 		************************************
-		* @author  :qbx(304151978@qq.com)
+		* @author
 		* @time:2014-06-12
 		* @version: 1.0.0
 		***************参数描述*************
@@ -309,7 +309,7 @@
 		************************************
 		* 获取汉字首字母
 		************************************
-		* @author  :qbx
+		* @author 张睿:qbx
 		* @time:2014-07-21
 		* @version: 1.0.0
 		***************功能描述*************
@@ -349,4 +349,20 @@
 		     if($asc>=-11055&&$asc<=-10247) return 'Z';
 		     return null;
 	 	}
+
+		/**
+		* 生成uniqid订单号
+		*
+		*/
+		public function get_order_number(){
+			return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+		}
+
+		/**
+		* 生成uniqid订单号
+		*
+		*/
+		public function get_user_number(){
+			return rand(0,9).substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 6).rand(0,9);
+		}
 	}

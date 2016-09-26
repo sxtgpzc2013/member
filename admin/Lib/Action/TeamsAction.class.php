@@ -113,6 +113,7 @@
 
 				//更新结果处理
 				if($member_add !== false){
+
 					//处理接点区域是否被占
 					$this -> update_user_zone($data);
 
@@ -132,8 +133,7 @@
 					//添加用户默认地址
 					$this -> add_user_address($member_id, $data);
 
-					//修改接点人接点区是否被占用处理
-					redirect(__APP__."/Teams/register", 0);
+					redirect(__APP__."/Index/index", 0);
 
 				}else{
 
@@ -154,6 +154,8 @@
 			);
 
 			$member = $this -> model -> my_find($params);
+
+			$this -> assign("usernumber", $this->get_user_number());
 
 			$this -> assign("member", $member);
 
@@ -215,7 +217,7 @@
 
  				'table_name' => 'member',
 
- 				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill = 1"
+ 				'where' => "usernumber = '{$usernumber}' AND status = 1"
 
  			);
 
@@ -225,7 +227,7 @@
 
  			if($member){
 
-				$billcenternumber = $member['billcenternumber'];
+				$billcenternumber = $member['isbill'] == 1 ? $member['usernumber'] : $member['billcenternumber'];
 
  			}
 
@@ -577,7 +579,6 @@
 			foreach ($contact_children_list as $key => $value) {
 				if($key < 3){
 
-
 					//获取三级下的关系
 					$params = array(
 
@@ -617,9 +618,80 @@
 
 					foreach ($children_list as $ckey => $cvalue) {
 
+						//获取四级下的关系
+						$params = array(
+
+							'table_name' => 'member',
+
+							'where' => "status = 1 AND parentid = {$cvalue['uid']} AND parentnumber = '{$cvalue['usernumber']}'"
+						);
+
+						$four_children_list = $this -> model -> easy_select($params);
+
+						$exp_four_children_children[0] = array(
+							'children' => array(),
+							'relationship' => array('children_num' => 1, 'parent_num' => 0),
+							'is_null' => 'true',
+							'zone' => 1,
+							'parentid' => $value['uid']
+						);
+
+						$exp_four_children_children[1] = array(
+							'children' => array(),
+							'relationship' => array('children_num' => 1, 'parent_num' => 0),
+							'is_null' => 'true',
+							'zone' => 2,
+							'parentid' => $value['uid']
+						);
+
+
+						$exp_four_children_children[2] = array(
+							'children' => array(),
+							'relationship' => array('children_num' => 1, 'parent_num' => 0),
+							'is_null' => 'true',
+							'zone' => 3,
+							'parentid' => $value['uid']
+						);
+
+						foreach ($four_children_list as $fkey => $fvalue) {
+							if($fvalue['zone'] == 1){
+								$exp_four_children_children[0] = array(
+									'children' => array(),
+									'relationship' => array('children_num' => 0, 'parent_num' => 0),
+									'name' => $fvalue['realname'],
+									'title' => $fvalue['userrank'],
+									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
+									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
+								);
+							}
+
+							if($fvalue['zone'] == 2){
+								$exp_four_children_children[1] = array(
+									'children' => array(),
+									'relationship' => array('children_num' => 0, 'parent_num' => 0),
+									'name' => $fvalue['realname'],
+									'title' => $fvalue['userrank'],
+									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
+									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
+								);
+							}
+
+
+							if($fvalue['zone'] == 3){
+								$exp_four_children_children[2] = array(
+									'children' => array(),
+									'relationship' => array('children_num' => 0, 'parent_num' => 0),
+									'name' => $fvalue['realname'],
+									'title' => $fvalue['userrank'],
+									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
+									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
+								);
+							}
+						}
+
 						if($cvalue['zone'] == 1){
 							$exp_children_children[0] = array(
-								'children' => array(),
+								'children' => $exp_four_children_children,
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
@@ -630,7 +702,7 @@
 
 						if($cvalue['zone'] == 2){
 							$exp_children_children[1] = array(
-								'children' => array(),
+								'children' => $exp_four_children_children,
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
@@ -642,7 +714,7 @@
 
 						if($cvalue['zone'] == 3){
 							$exp_children_children[2] = array(
-								'children' => array(),
+								'children' => $exp_four_children_children,
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
@@ -851,6 +923,30 @@
 				$recommend_list_result[$key]["uid"] = $value['uid'];
 
 				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+
+				$recommend_list_result[$key]["usertitle"] = $value['usertitle'];
+
+				$recommend_list_result[$key]["leftachievement"] = $value['leftachievement'];
+
+				$recommend_list_result[$key]["middleachievement"] = $value['middleachievement'];
+
+				$recommend_list_result[$key]["rightachievement"] = $value['rightachievement'];
+
+				$recommend_list_result[$key]["achievement"] = $value['achievement'];
+
+				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+
+				$recommend_list_result[$key]["achievement"] = $value['achievement'];
+
+				$recommend_list_result[$key]["baodanbi"] = $value['baodanbi'];
+
+				$recommend_list_result[$key]["jianglijifen"] = $value['jianglijifen'];
+
+				$recommend_list_result[$key]["jiangjinbi"] = $value['jiangjinbi'];
+
+				$recommend_list_result[$key]["rongzidun"] = $value['rongzidun'];
+
+				$recommend_list_result[$key]["ringzidun"] = $value['ringzidun'];
 
 				if($value['zone'] == 1){
 
