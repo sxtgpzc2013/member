@@ -1,11 +1,11 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-06-12
- * @alter  
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：商户后台首页控制器类
- * @author  
+ * @author
  * @copyright
  * @time 2014-06-12
  * @version 1.0.0
@@ -62,6 +62,13 @@
 			);
 
 	    	$bonus_count = $this -> model -> order_select($params);
+
+			$userrank = array("","一","二","三","四","五","六","七");
+
+			$member["userrank"] = $userrank[$member['userrank']];
+
+			$member["usertitle"] = $userrank[$member['usertitle']];
+
 
 			$this -> assign('member', $member);
 

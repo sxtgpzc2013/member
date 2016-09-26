@@ -379,7 +379,8 @@ ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT
 
 
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现';
-
+ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
+ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
 
 
 ALTER TABLE zx_member ADD leftachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '左业绩';
@@ -414,6 +415,8 @@ ALTER TABLE zx_bonus_count ADD torealname VARCHAR(100) NOT NULL DEFAULT '' COMME
 ALTER TABLE zx_products ADD sell_count INT(11) NOT NULL DEFAULT 0 COMMENT '卖出数量' AFTER surplus;
 ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为赠送红酒产品' AFTER created_at;
 ALTER TABLE zx_member CHANGE status status int(8) DEFAULT '0' COMMENT '用户状态：-2 账号冻结 ，-1 删除，0 未激活 1 已经激活';
+
+
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

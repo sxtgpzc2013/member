@@ -1,171 +1,181 @@
 <include file="public:header" />
-<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
-	<div class="col-lg-10"  style="padding:0px;">
-		<ol class="breadcrumb">
-			<a href="__URL__"><i class="fa fa-home"></i></a>
-            <li>
-                <a href="__URL__">首页</a>
-            </li>
-			<li>
-                <a>奖金管理</a>
-            </li>
-            <li>
-                <strong>奖金明细</strong>
-            </li>
-            <li>
-                <strong>查看明细</strong>
-            </li>
-        </ol>
-	</div>
-</div>
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content animated">
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="col-lg-12">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+				<div class="row">
+					<div class="col-sm-6 m-b-xs">
+						<p>
+							<button type="button" class="btn btn-w-m btn-danger">导出数据</button>
+						</p>
+					</div>
+					<div class="col-sm-6 text-right">
+							<input type="text" placeholder="2016-09-17" class="input-sm">
+							<button type="button" class="btn btn-sm btn-primary"> 查询</button>
 
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5 style="float: none !important;">奖金明细</h5>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-hover no-margins">
-								<thead>
-									<tr>
-										<th></th>
-										<th>分红</th>
-										<th>管理补贴</th>
-										<th>互助补贴</th>
-										<th>拓展补贴</th>
-										<th>市场补贴</th>
-										<th>消费补贴</th>
-										<th>服务补贴</th>
-										<th>消费提成</th>
-										<th>应发金额累计</th>
-										<th>实发金额累计</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>奖金币</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>报单币</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>激活币</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>戎子盾</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>爱心基金</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>奖励积分</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>平台管理费</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-									<tr>
-										<td>税费</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
 					</div>
 				</div>
-			</div>
 
+
+                <div class="ibox-content">
+					<h3 class="text-center">奖金明细</h3>
+                    <div class="table-responsive">
+						<table class="table table-hover no-margins">
+							<thead>
+								<tr>
+									<th>奖金币</th>
+									<th>报单币</th>
+									<th>激活币</th>
+									<th>戎子盾</th>
+									<th>爱心基金</th>
+									<th>奖励积分</th>
+									<th>平台管理费</th>
+									<th>税费</th>
+									<th>总奖金</th>
+									<th>实发奖金</th>
+								</tr>
+							</thead>
+							<tbody>
+								<foreach name="result['result']" item="item">
+									<if condition="$item['moneytype'] eq 1">
+										<tr>
+											<th>分红</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 2">
+										<tr>
+											<th>管理补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 3">
+										<tr>
+											<th>互助补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 4">
+										<tr>
+											<th>拓展补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 5">
+										<tr>
+											<th>市场补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 6">
+										<tr>
+											<th>消费补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 7">
+										<tr>
+											<th>服务补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 8">
+										<tr>
+											<th>消费提成</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+								</foreach>
+
+							</tbody>
+						</table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+	<div class="col-sm-12 text-right">
+		<div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+			<ul class="pagination">
+				{$result['page']}
+			</ul>
 		</div>
 	</div>
+
 </div>
 <include file="public:footer" />

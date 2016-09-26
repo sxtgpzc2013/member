@@ -10,7 +10,7 @@
                 <a>奖金管理</a>
             </li>
             <li>
-                <strong>奖金明细</strong>
+                <strong>奖金统计</strong>
             </li>
         </ol>
 	</div>
@@ -43,20 +43,25 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>2016-09-13</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>234234</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td><a href="#">查看明细</a></td>
-									</tr>
+									<tbody>
+										<foreach name="result['result']" item="bonus">
+											<tr>
 
+												<td>{$bonus['count_date']}</td>
+												<td>{$bonus['bonus1']}</td>
+												<td>{$bonus['bonus2']}</td>
+												<td>{$bonus['bonus3']}</td>
+												<td>{$bonus['bonus4']}</td>
+												<td>{$bonus['bonus5']}</td>
+												<td>{$bonus['bonus6']}</td>
+												<td>{$bonus['bonus7']}</td>
+												<td>{$bonus['bonus8']}</td>
+												<td>{$bonus['total']}</td>
+												<td>{$bonus['real_total']}</td>
+												<td><a href="__APP__/Bonus/info?id={$bonus['id']}">查看明细</a></td>
+											</tr>
+										</foreach>
+									</tbody>
 								</tbody>
 							</table>
 						</div>
@@ -64,6 +69,14 @@
 				</div>
 			</div>
 
+		</div>
+
+		<div class="col-sm-12 text-right">
+			<div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+				<ul class="pagination">
+					{$result['page']}
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
