@@ -629,7 +629,15 @@
 						$four_children_list = $this -> model -> easy_select($params);
 
 						$exp_four_children_children[0] = array(
-							'children' => array(),
+							'children' => array(
+								"0" =>  array(
+									'children' => array(),
+									'relationship' => array('children_num' => 1, 'parent_num' => 0),
+									'is_null' => 'true',
+									'zone' => 1,
+									'parentid' => $value['uid']
+								)
+							),
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 1,
