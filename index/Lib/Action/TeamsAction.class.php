@@ -877,6 +877,31 @@
 					$recommend_list[$key]["zone_name"] = "右区";
 
 				}
+
+				$recommend_list[$key]["leftachievement"] = intval($value['leftachievement']);
+
+				$recommend_list[$key]["middleachievement"] = intval($value['middleachievement']);
+
+				$recommend_list[$key]["rightachievement"] = intval($value['rightachievement']);
+
+				$recommend_list[$key]["achievement"] = intval($value['achievement']);
+
+				$recommend_list[$key]["jianglijifen"] = intval($value['jianglijifen']);
+
+				$recommend_list[$key]["baodanbi"] = intval($value['baodanbi']);
+
+				$recommend_list[$key]["jiangjinbi"] = intval($value['jiangjinbi']);
+
+				$recommend_list[$key]["rongzidun"] = intval($value['rongzidun']);
+
+				$recommend_list[$key]["jihuobi"] = intval($value['jihuobi']);
+
+				$userrank = array("","一","二","三","四","五","六","七");
+
+				$recommend_list[$key]["userrank"] = $userrank[$value['userrank']];
+
+				$recommend_list[$key]["usertitle"] = $userrank[$value['userrank']];
+
 			}
 
 			$this -> assign('recommend_list', $recommend_list);
@@ -930,31 +955,29 @@
 
 				$recommend_list_result[$key]["uid"] = $value['uid'];
 
-				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+				$recommend_list_result[$key]["leftachievement"] = intval($value['leftachievement']);
 
-				$recommend_list_result[$key]["usertitle"] = $value['usertitle'];
+				$recommend_list_result[$key]["middleachievement"] = intval($value['middleachievement']);
 
-				$recommend_list_result[$key]["leftachievement"] = $value['leftachievement'];
+				$recommend_list_result[$key]["rightachievement"] = intval($value['rightachievement']);
 
-				$recommend_list_result[$key]["middleachievement"] = $value['middleachievement'];
+				$recommend_list_result[$key]["achievement"] = intval($value['achievement']);
 
-				$recommend_list_result[$key]["rightachievement"] = $value['rightachievement'];
+				$recommend_list_result[$key]["jianglijifen"] = intval($value['jianglijifen']);
 
-				$recommend_list_result[$key]["achievement"] = $value['achievement'];
+				$recommend_list_result[$key]["baodanbi"] = intval($value['baodanbi']);
 
-				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+				$recommend_list_result[$key]["jiangjinbi"] = intval($value['jiangjinbi']);
 
-				$recommend_list_result[$key]["achievement"] = $value['achievement'];
+				$recommend_list_result[$key]["rongzidun"] = intval($value['rongzidun']);
 
-				$recommend_list_result[$key]["baodanbi"] = $value['baodanbi'];
+				$recommend_list_result[$key]["jihuobi"] = intval($value['jihuobi']);
 
-				$recommend_list_result[$key]["jianglijifen"] = $value['jianglijifen'];
+				$userrank = array("","一","二","三","四","五","六","七");
 
-				$recommend_list_result[$key]["jiangjinbi"] = $value['jiangjinbi'];
+				$recommend_list_result[$key]["userrank"] = $userrank[$value['userrank']];
 
-				$recommend_list_result[$key]["rongzidun"] = $value['rongzidun'];
-
-				$recommend_list_result[$key]["ringzidun"] = $value['ringzidun'];
+				$recommend_list_result[$key]["usertitle"] = $userrank[$value['userrank']];
 
 				if($value['zone'] == 1){
 

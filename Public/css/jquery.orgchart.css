@@ -80,7 +80,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-color: rgba(217, 83, 79, 0.8);
+  background-color: #f3c500;
   color: #fff;
   border-radius: 4px 4px 0 0;
 }
@@ -179,22 +179,22 @@
 }
 
 .orgchart .down {
-  background-color: rgba(217, 83, 79, 0.8);
+  background-color: #f3c500;
   margin: 0px auto;
   height: 20px;
   width: 2px;
 }
 
 .orgchart td.top {
-  border-top: 2px solid rgba(217, 83, 79, 0.8);
+  border-top: 2px solid #f3c500;
 }
 
 .orgchart td.left {
-  border-left: 1px solid rgba(217, 83, 79, 0.8);
+  border-left: 1px solid #f3c500;
 }
 
 .orgchart td.right {
-  border-right: 1px solid rgba(217, 83, 79, 0.8);
+  border-right: 1px solid #f3c500;
 }
 
 /* node cell */
