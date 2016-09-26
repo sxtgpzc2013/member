@@ -65,30 +65,48 @@
 								<thead>
 									<tr>
 										<th>订单号</th>
-										<th>戎子盾</th>
-										<th>奖金币</th>
+										<th>总价</th>
 										<th>下单时间</th>
 										<th>状态</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>52345</td>
-										<td>523454235</td>
-										<td>52345</td>
-										<td>2016-09-14 17:31:51</td>
-										<td>已发货</td>
-										<td><a href="#" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;<a href="#" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
-									</tr>
-									<tr>
+									<foreach name="result['result']" item="item">
+										<tr>
+											<td>{$item.order_code}</td>
+											<td>￥{$item.total_price}</td>
+											<td>{$item.created_at|date="Y-m-d H:i:s",###}</td>
+											<td>
+												<if condition="$item['status'] eq 0">
+													未付款
+												<elseif condition="$item['status'] eq 1" />
+													已付款
+												<elseif condition="$item['status'] eq 2" />
+													已发货
+												<elseif condition="$item['status'] eq 3" />
+													已完成
+												<elseif condition="$item['status'] eq 4" />
+													换货处理中
+												<elseif condition="$item['status'] eq 5" />
+													退货处理中
+												<elseif condition="$item['status'] eq 6" />
+													等待用户邮寄
+												</if>
+											</td>
+											<td>
+												<a href="#" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;
+												<a href="__APP__/Orders/detail/id/{$item.id}" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
+										</tr>
+									</foreach>
+									<!-- <tr>
 										<td>52345</td>
 										<td>523454235</td>
 										<td>52345</td>
 										<td>234234</td>
 										<td>未发货</td>
 										<td><a class="btn btn-sm col-lg-2">已签收</a>&nbsp;&nbsp;<a href="#" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -100,22 +118,8 @@
 			    <div class="col-sm-12 text-right">
 			        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 			            <ul class="pagination">
-			                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-			                    <a href="#">上一页</a></li>
-			                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-			                    <a href="#">1</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">2</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">3</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">4</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">5</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">6</a></li>
+			                {$result.page}
 			            </ul>
-						<div class="dataTables_info">共 57 项</div>
 			        </div>
 			    </div>
 			</div>
