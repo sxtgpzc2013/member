@@ -61,7 +61,7 @@
 			);
 
 	    	$data = $this -> model -> order_select($params);
-
+			
 	    	$this -> assign('members', $data['result']);
 
 			$this -> assign('page', $data['page']);

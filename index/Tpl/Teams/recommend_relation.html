@@ -1,4 +1,9 @@
 <include file="public:header" />
+<style media="screen">
+	.orgchart td.right{
+		width:800px !important;
+	}
+</style>
 <div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
 	<div class="col-lg-10"  style="padding:0px;">
 		<ol class="breadcrumb">
@@ -36,11 +41,6 @@
                     <!-- <p class="m-b-lg">
                         牛牛 当前共有20代会员
                     </p> -->
-
-
-
-
-
                     <div class="dd" id="nestable2">
 						<foreach name="recommend_list" item="recommend">
 							<ol class="dd-list">
@@ -48,7 +48,7 @@
 	                                <div class="dd-handle">
 	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} [{$recommend.realname}][伞下人数：{$recommend.num}人][用户级别：{$recommend.userrank}级消费][用户级别：{$recommend.usertitle}星会员]
 										[左区业绩：{$recommend.leftachievement}][中区业绩：{$recommend.middleachievement}][右区业绩：{$recommend.rightachievement}][总业绩：{$recommend.achievement}]
-										[奖励积分：{$recommend.jianglijifen}][报单币：{$recommend.baodanbi}][奖金币：{$recommend.jiangjinbi}][戎子盾：{$recommend.rongzidun}]
+										[奖励积分：{$recommend.jianglijifen}][报单币：{$recommend.baodanbi}][奖金币：{$recommend.jiangjinbi}][戎子盾：{$recommend.rongzidun}][激活币：{$recommend.jihuobi}]
 	                                </div>
 
 									<if condition="$recommend['num'] neq 0">

@@ -345,7 +345,7 @@
 
 		                                        <div class="modal-footer">
 		                                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-		                                            <button type="button" class="btn btn-primary">保存</button>
+		                                            <!-- <button type="button" class="btn btn-primary">保存</button> -->
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -356,7 +356,7 @@
 							<div class="form-group">
 								<div class="col-sm-4 col-sm-offset-2">
 									<button class="btn btn-primary" type="submit">保存内容</button>
-									<button class="btn btn-white" type="submit">取消</button>
+									<!-- <button class="btn btn-white" type="reset">取消</button> -->
 								</div>
 							</div>
 			        </div>
@@ -444,7 +444,8 @@
 					required: true
 				},
 				is_free: {
-					required: true
+					required: true,
+					message:"131"
 				},
 				zone: {
 					required: true
@@ -462,7 +463,12 @@
 					required: true
 				},
 				agree: "required"
-			}
+			},
+			messages: {
+				   is_free: {
+                        required: "如需注册请同意消费商注册协议",
+                    },
+			   }
 		});
 
 		$('.get_usernumber').click(function(){
