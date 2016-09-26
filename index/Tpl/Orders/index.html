@@ -94,7 +94,9 @@
 													等待用户邮寄
 												</if>
 											</td>
-											<td><a href="#" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;<a href="#" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
+											<td>
+												<a href="#" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;
+												<a href="__APP__/Orders/detail/id/{$item.id}" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
 										</tr>
 									</foreach>
 									<!-- <tr>
@@ -116,22 +118,8 @@
 			    <div class="col-sm-12 text-right">
 			        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 			            <ul class="pagination">
-			                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-			                    <a href="#">上一页</a></li>
-			                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-			                    <a href="#">1</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">2</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">3</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">4</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">5</a></li>
-			                <li class="paginate_button " aria-controls="editable" tabindex="0">
-			                    <a href="#">6</a></li>
+			                {$result.page}
 			            </ul>
-						<div class="dataTables_info">共 57 项</div>
 			        </div>
 			    </div>
 			</div>

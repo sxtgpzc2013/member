@@ -418,6 +418,13 @@ ALTER TABLE zx_member CHANGE status status int(8) DEFAULT '0' COMMENT '用户状
 # 2016-09-25
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现 13-消费';
 
+# 2016-09-26
+ALTER TABLE zx_order_items ADD name VARCHAR(255) NOT NULL DEFAULT '' COMMENT '名称' AFTER pro_id;
+ALTER TABLE zx_order_items ADD logo VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'LOGO' AFTER name;
+ALTER TABLE zx_order_items ADD content TEXT NOT NULL DEFAULT '' COMMENT '详情' AFTER logo;
+ALTER TABLE zx_order_items ADD unit_jprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-奖金币' AFTER content;
+ALTER TABLE zx_order_items ADD unit_rprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-戎子盾' AFTER unit_jprice;
+
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

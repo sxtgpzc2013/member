@@ -243,6 +243,16 @@
 
 	    				$item_data['pro_id'] = $v['id'];
 
+	    				$item_data['name'] = $product_find['name'];
+
+	    				$item_data['logo'] = $product_find['logo'];
+
+	    				$item_data['content'] = $product_find['content'];
+
+	    				$item_data['unit_jprice'] = $product_find['jprice'];
+
+	    				$item_data['unit_rprice'] = $product_find['rprice'];
+
 	    				$item_data['order_id'] = $order_add;
 
 	    				$item_data['rprice'] = $v['total_rprice'];
@@ -604,5 +614,56 @@
 	    	$this -> assign('result', $result);
 
 	    	$this -> display();
+	    }
+
+	    /**
+		 * 详情
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function detail()
+	    {
+	    	$id = isset($_GET['id']) ? intval($_GET['id']) : $this -> _back('缺少必要参数');
+
+	    	$params = array(
+
+	    		'table_name' => 'orders',
+
+	    		'where' => "id = {$id} AND is_del = 0"
+	    	);
+
+	    	$result['order'] = $this -> model -> my_find($params);
+
+	    	if (!$result['order'])
+	    	{
+	    		$this -> _back('无效或已被删除的订单');
+	    	}
+
+	    	$params = array(
+
+	    		'table_name' => 'order_items',
+
+	    		'where' => "order_id = {$id} AND is_del = 0"
+	    	);
+
+	    	$result['items'] = $this -> model -> easy_select($params);
+
+	    	$params = array(
+
+	    		'table_name' => 'member',
+
+	    		'where' => "uid = {$_SESSION['Rongzi']['user']['uid']}"
+	    	);
+
+	    	$result['member'] = $this -> model -> my_find($params);
+
+	    	$this -> assign('result', $result);
+
+			$this -> display();
 	    }
 	}
