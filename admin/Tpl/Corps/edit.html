@@ -23,12 +23,16 @@
 				<div class="row">
 					<div class="col-sm-9 m-b-xs">
 						<p>
-							<button type="button" class="btn btn-w-m btn-danger">新增</button>
-							<button type="button" class="btn btn-w-m btn-primary">重置密码</button>
-							<button type="button" class="btn btn-w-m btn-primary">修改资料</button>
-							<button type="button" class="btn btn-w-m btn-primary">设为报单中心</button>
-							<button type="button" class="btn btn-w-m btn-primary">修改消费商级别</button>
-							<button type="button" class="btn btn-w-m btn-primary">修改消费商职务</button>
+							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Teams/register">新增</a>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_password?uid={$_GET['uid']}">重置密码</a>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改资料</a>
+							<if condition="$member['isbill'] eq 1">
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}">取消报单中心</a>
+							<else/>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}">设为报单中心</a>
+							</if>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改消费商级别</a>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改消费商职务</a>
 						</p>
 					</div>
 
@@ -57,16 +61,15 @@
                             <tbody>
                                 <tr>
 
-                                    <td>1</span>
-									<td>MiMO Show</td>
-                                    </td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
+                                    <td>{$member['usernumber']}</td>
+									<td>{$member['realname']}</td>
+									<td>{$member['IDcard']}</td>
+									<td>{$member['mobile']}</td>
+									<td>{$member['userrank']}星会员</td>
+                                    <td>{$billmember['realname']}</td>
+									<td>{$member['leftachievement']}</td>
+									<td>{$member['middleachievement']}</td>
+									<td>{$member['rightachievement']}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -80,19 +83,19 @@
                             <tr>
                                 <td><small>推荐人</small>
                                 </td>
-                                <td>青衣5858</td>
+                                <td>{$recommendmember['realname']}[{$recommendmember['usernumber']}]</td>
                             </tr>
                             <tr>
                                 <td>报单中心</td>
-								<td>青衣5858</td>
+								<td>{$billmember['realname']}[{$billmember['usernumber']}]</td>
                             </tr>
 							<tr>
                                 <td>接点人</td>
-								<td>青衣5858</td>
+								<td>{$parentmember['realname']}[{$parentmember['usernumber']}]</td>
                             </tr>
 							<tr>
                                 <td>接点区</td>
-								<td>青衣5858</td>
+								<td>{$member['zone']}</td>
                             </tr>
 
                         </tbody>

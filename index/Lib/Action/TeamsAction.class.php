@@ -977,7 +977,7 @@
 
 				$recommend_list_result[$key]["userrank"] = $userrank[$value['userrank']];
 
-				$recommend_list_result[$key]["usertitle"] = $userrank[$value['userrank']];
+				$recommend_list_result[$key]["usertitle"] = $userrank[$value['usertitle']];
 
 				if($value['zone'] == 1){
 
