@@ -132,9 +132,22 @@
 											</if>
 										</td>
 	                                    <td>
-											<a class="btn btn-info btn-sm">编辑</a>
-											<a class="btn btn-danger btn-sm">冻结</a>
-											<a class="btn btn-danger btn-sm">删除</a>
+
+											<if condition="$member['status'] eq 1">
+												<a class="btn btn-info btn-sm" href="__APP__/Corps/edit?uid={$member['uid']}">编辑</a>
+											</if>
+											<if condition="$member['status'] eq -2">
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/nofreeze?uid={$member['uid']}">取消冻结</a>
+											<else/>
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/freeze?uid={$member['uid']}">冻结</a>
+											</if>
+
+											<if condition="$member['status'] eq -1">
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/nodelete?uid={$member['uid']}">恢复</a>
+											<else/>
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/delete?uid={$member['uid']}">删除</a>
+											</if>
+
 
 	                                    </td>
 	                                </tr>

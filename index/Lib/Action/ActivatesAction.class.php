@@ -192,19 +192,48 @@ class ActivatesAction extends CommonAction {
 					break;
 			}
 
-			if(intval($member['baodanbi']) < $deduct/2){
-				$this -> _back("账户激活币不足{$member['baodanbi']}");return;
+			//获取报单中心数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$member['billcenterid']} AND isbill = 1"
+
+			);
+
+			$billmember = $this -> model -> my_find($params);
+
+			if(intval($billmember['baodanbi']) < $deduct/2){
+				$this -> _back("账户激活币不足{$billmember['baodanbi']}");return;
 			}
 
-			if(intval($member['jihuobi']) < $deduct/2){
-				$this -> _back("账户激活币不足{$member['jihuobi']}");return;
+			if(intval($billmember['jihuobi']) < $deduct/2){
+				$this -> _back("账户激活币不足{$billmember['jihuobi']}");return;
 			}
 
 			//报单币余额计算
-			$data['baodanbi'] = intval($member['baodanbi']) - $deduct/2;
+			$billdata['baodanbi'] = intval($billmember['baodanbi']) - $deduct/2;
 
 			//激活币余额计算
-			$data['jihuobi'] = intval($member['jihuobi']) - $deduct/2;
+			$billdata['jihuobi'] = intval($billmember['jihuobi']) - $deduct/2;
+
+			//更新报单中心相应数据
+			$billparams = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$member['billcenterid']}",
+
+				'data' => $billdata
+			);
+
+			$bill_member_save = $this -> model -> my_save($billparams);
+
+			if ($bill_member_save == 1){
+
+			}else{
+				$this -> _back('报单中心激活数据保存失败，请重试。');
+			}
 
 		}else{
 			$this -> _back('激活账号获取失败，请重试。');

@@ -61,7 +61,7 @@
 			);
 
 	    	$data = $this -> model -> order_select($params);
-			
+
 	    	$this -> assign('members', $data['result']);
 
 			$this -> assign('page', $data['page']);
@@ -69,8 +69,9 @@
 	    	$this -> display();
 	    }
 
-	    /**
-		 * 新增
+
+		/**
+		 * 消费商修改相关页面
 		 *
 		 * 参数描述：
 		 *
@@ -79,23 +80,223 @@
 		 * 返回值：
 		 *
 		 */
-	    public function add()
+	    public function edit()
 	    {
-	    	$form_key = htmlspecialchars($_POST['form_key']);
+			$uid = intval($_GET['uid']);
 
-	    	if ($form_key == 'yes')
-	    	{
+			//获取用户数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid} AND status = 1"
+
+			);
+
+	    	$member = $this -> model -> my_find($params);
+
+			$userrank = array("","一","二","三","四","五","六","七");
+
+			$member["userrank"] = $userrank[$member['userrank']];
+
+			$member["usertitle"] = $userrank[$member['usertitle']];
+
+			$zone = array("1" => "左", "2" => "中", "3" => "右");
+
+			$member["zone"] = $zone[$member['zone']];
 
 
-	    	}
+			//获取报单中心数据
+			$params = array(
 
-	    	$this -> assign('result', $result);
+				'table_name' => 'member',
+
+				'where' => "uid = {$member['billcenterid']} AND status = 1"
+
+			);
+
+	    	$billmember = $this -> model -> my_find($params);
+
+			//获取推荐人数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$member['tuijianid']} AND status = 1"
+
+			);
+
+	    	$recommendmember = $this -> model -> my_find($params);
+
+			//获取接点人数据 parentid
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$member['parentid']} AND status = 1"
+
+			);
+
+	    	$parentmember = $this -> model -> my_find($params);
+
+	    	$this -> assign('member', $member);
+
+			$this -> assign('billmember', $billmember);
+
+			$this -> assign('recommendmember', $recommendmember);
+
+			$this -> assign('parentmember', $parentmember);
 
 	    	$this -> display();
 	    }
 
+
+		/**
+		 * 设置为报单中心
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function set_bill_center()
+	    {
+			$uid = intval($_GET['uid']);
+
+			$data['update_time'] = time();
+
+			$data['isbill'] = 1;
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}",
+
+				'data' => $data
+			);
+
+			$my_save = $this -> model -> my_save($params);
+
+			if ($my_save == 1){
+				$this -> redirect("/Corps/edit?uid=".$uid);
+			}else{
+				$this -> _back('消费商报单中心设置失败失败');
+			}
+	    }
+
+		/**
+		 * 设置为报单中心
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function no_set_bill_center()
+	    {
+			$uid = intval($_GET['uid']);
+
+			$data['update_time'] = time();
+
+			$data['isbill'] = 0;
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}",
+
+				'data' => $data
+			);
+
+			$my_save = $this -> model -> my_save($params);
+
+			if ($my_save == 1){
+				$this -> redirect("/Corps/edit?uid=".$uid);
+			}else{
+				$this -> _back('消费商报单中心取消失败');
+			}
+	    }
+
 	    /**
-		 * 删除
+		 * 冻结消费商
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function freeze()
+	    {
+			$uid = intval($_GET['uid']);
+
+			$data['update_time'] = time();
+
+			$data['status'] = -2;
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}",
+
+				'data' => $data
+			);
+
+			$my_save = $this -> model -> my_save($params);
+
+			if ($my_save == 1){
+				$this -> redirect("/Corps/index");
+			}else{
+				$this -> _back('冻结消费商失败');
+			}
+	    }
+
+		/**
+		 * 冻结消费商
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function nofreeze()
+	    {
+			$uid = intval($_GET['uid']);
+
+			$data['update_time'] = time();
+
+			$data['status'] = 1;
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}",
+
+				'data' => $data
+			);
+
+			$my_save = $this -> model -> my_save($params);
+
+			if ($my_save == 1){
+				$this -> redirect("/Corps/index");
+			}else{
+				$this -> _back('冻结消费商失败');
+			}
+	    }
+
+	    /**
+		 * 删除消费商
 		 *
 		 * 参数描述：
 		 *
@@ -106,6 +307,63 @@
 		 */
 	    public function delete()
 	    {
+			$uid = intval($_GET['uid']);
 
+			$data['update_time'] = time();
+
+			$data['status'] = -1;
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}",
+
+				'data' => $data
+			);
+
+			$my_save = $this -> model -> my_save($params);
+
+			if ($my_save == 1){
+				$this -> redirect("/Corps/index");
+			}else{
+				$this -> _back('删除消费商失败');
+			}
+	    }
+
+		/**
+		 * 删除消费商
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function nodelete()
+	    {
+			$uid = intval($_GET['uid']);
+
+			$data['update_time'] = time();
+
+			$data['status'] = 1;
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}",
+
+				'data' => $data
+			);
+
+			$my_save = $this -> model -> my_save($params);
+
+			if ($my_save == 1){
+				$this -> redirect("/Corps/index");
+			}else{
+				$this -> _back('删除消费商失败');
+			}
 	    }
 	}
