@@ -265,7 +265,6 @@ CREATE TABLE `zx_money_change` (
   `changetype` int(6) unsigned NOT NULL DEFAULT '0' COMMENT '变更类型 ：',
   `recordtype` int(2) DEFAULT NULL COMMENT '记录类型：减少（0），增加（1）',
   `money` double(10,2) DEFAULT '0.00' COMMENT '变更金额',
-  `hasmoney` double(10,2) DEFAULT '0.00' COMMENT '账户余额',
   `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `status` (`status`) USING BTREE
@@ -374,7 +373,7 @@ CREATE TABLE `zx_bonus_detail` (
 ) ENGINE=MyISAM AUTO_INCREMENT=493 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='奖金明细表';
 # 2016-09-21 新增字段
 # --------------------------------------------------------------
-ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-报单币 3-戎子盾 4-激活币 5-奖励积分 6-奖金币';
+ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-报单币 3-戎子盾 4-激活币 5-奖励积分 6-爱心基金 7 平台管理费 8税费';
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现';
 
 
@@ -426,6 +425,7 @@ ALTER TABLE zx_order_items ADD logo VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'LO
 ALTER TABLE zx_order_items ADD content TEXT NOT NULL DEFAULT '' COMMENT '详情' AFTER logo;
 ALTER TABLE zx_order_items ADD unit_jprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-奖金币' AFTER content;
 ALTER TABLE zx_order_items ADD unit_rprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-戎子盾' AFTER unit_jprice;
+
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -50,7 +50,7 @@
 
 					'table_name' => 'member',
 
-					'where' => "usernumber = '{$_POST['usernumber']}' OR mobile = '{$_POST['mobile']}'"
+					'where' => "usernumber = '{$_POST['usernumber']}'"
 
 				);
 
