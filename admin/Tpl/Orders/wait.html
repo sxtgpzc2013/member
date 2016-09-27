@@ -28,6 +28,8 @@
                             <thead>
                                 <tr>
                                     <th>订单号</th>
+                                    <th>奖金币</th>
+                                    <th>戎子盾</th>
                                     <th>总价</th>
                                     <th>下单时间</th>
 									<th>状态</th>
@@ -38,7 +40,9 @@
                             	<foreach name="result['result']" item="item">
 	                                <tr>
 										<td>{$item.order_code}</td>
-										<td>{$item.total_price}</td>
+										<td>￥{$item.total_jprice}</td>
+										<td>￥{$item.total_rprice}</td>
+										<td>￥{$item.total_price}</td>
 	                                    <td>{$item.created_at|date="Y-m-d H:i:s",###}</td>
 										<td>已付款</td>
 	                                    <td>
