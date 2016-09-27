@@ -65,6 +65,8 @@
 								<thead>
 									<tr>
 										<th>订单号</th>
+										<th>奖金币</th>
+										<th>戎子盾</th>
 										<th>总价</th>
 										<th>下单时间</th>
 										<th>状态</th>
@@ -75,6 +77,8 @@
 									<foreach name="result['result']" item="item">
 										<tr>
 											<td>{$item.order_code}</td>
+											<td>￥{$item.total_jprice}</td>
+											<td>￥{$item.total_rprice}</td>
 											<td>￥{$item.total_price}</td>
 											<td>{$item.created_at|date="Y-m-d H:i:s",###}</td>
 											<td>
@@ -95,7 +99,9 @@
 												</if>
 											</td>
 											<td>
-												<a href="#" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;
+												<if condition="$item['status'] eq 2">
+													<a href="__APP__/Orders/sign/id/{$item.id}" onclick="return confirm('确认签收吗？')" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;
+												</if>
 												<a href="__APP__/Orders/detail/id/{$item.id}" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
 										</tr>
 									</foreach>

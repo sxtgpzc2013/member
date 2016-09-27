@@ -172,6 +172,10 @@
 
 	    		$data['total_price'] = $result['total_price'];
 
+	    		$data['total_jprice'] = $result['total_jprice'];
+
+	    		$data['total_rprice'] = $result['total_rprice'];
+
 	    		$data['notice'] = isset($_POST['notice']) ? htmlspecialchars($_POST['notice']) : '';
 
 	    		$data['status'] = 1;
