@@ -25,7 +25,7 @@
 					<h5>会员总数</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">40 886,200</h1>
+					<h1 class="no-margins">{$result['member_count']}</h1>
 					<small>会员总数</small>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 					<h5>新增会员</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">275,800</h1>
+					<h1 class="no-margins">{$result['today_member_count']}</h1>
 
 					<small>新增会员</small>
 				</div>
@@ -50,7 +50,7 @@
 					<h5>充值申请</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">106,120</h1>
+					<h1 class="no-margins">{$result['money_change']}</h1>
 					<small>充值申请</small>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 					<h5>提现申请</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">80,600</h1>
+					<h1 class="no-margins">{$result['withdrawal']}</h1>
 
 					<small>提现申请</small>
 				</div>
@@ -90,9 +90,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>24234</td>
-										<td>41234</td>
-										<td>41234</td>
+										<td>{$result['finance']['income']}</td>
+										<td>{$result['finance']['expend']}</td>
+										<td>{$result['finance']['income']/$result['finance']['expend']}</td>
 									</tr>
 								</tbody>
 							</table>
