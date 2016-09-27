@@ -103,7 +103,7 @@ def fenhong():
 					values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
 				""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, fenhong, real_total, yes_second)
 				#  插入明细表
-				zx_bonus_detail = conn.dml(zx_bonus_detail_sql, 'insert')
+ 				conn.dml(zx_bonus_detail_sql, 'insert')
 
 				# 奖金币流水
 				jiangjinbi_change_sql = """
