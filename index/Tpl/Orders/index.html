@@ -95,7 +95,9 @@
 												</if>
 											</td>
 											<td>
-												<a href="#" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;
+												<if condition="$item['status'] eq 2">
+													<a href="__APP__/Orders/sign/id/{$item.id}" onclick="return confirm('确认签收吗？')" class="btn btn-warning btn-sm col-lg-2">签收</a>&nbsp;&nbsp;
+												</if>
 												<a href="__APP__/Orders/detail/id/{$item.id}" class="btn btn-warning btn-sm btn-outline">订单详情</a></td>
 										</tr>
 									</foreach>

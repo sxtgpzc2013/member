@@ -48,5 +48,31 @@ class OrdersAction extends CommonAction {
     	$this -> display();
     }
 
+    /**
+	 * 待发货订单
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+    public function wait()
+    {
+    	$params = array(
 
+    		'table_name' => 'orders',
+
+    		'where' => "is_del = 0 AND status = 1",
+
+    		'order' => 'created_at desc'
+    	);
+
+    	$result = $this -> model -> order_select($params);
+
+    	$this -> assign('result', $result);
+
+    	$this -> display();
+    }
 }

@@ -425,6 +425,10 @@ ALTER TABLE zx_order_items ADD content TEXT NOT NULL DEFAULT '' COMMENT '详情'
 ALTER TABLE zx_order_items ADD unit_jprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-奖金币' AFTER content;
 ALTER TABLE zx_order_items ADD unit_rprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-戎子盾' AFTER unit_jprice;
 
+# 2016-09-27
+ALTER TABLE zx_orders ADD total_jprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '奖金币总额' AFTER total_price;
+ALTER TABLE zx_orders ADD total_rprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '戎子盾总额' AFTER total_jprice;
+
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
