@@ -68,11 +68,11 @@
 
 				$data = $_POST;
 
-				foreach ($data as $key => $value) {
-					if(empty($value)){
-						$this -> _back('请完善数据后再提交！');return;
-					}
-				}
+				// foreach ($data as $key => $value) {
+				// 	if(empty($value)){
+				// 		$this -> _back('请完善数据后再提交！');return;
+				// 	}
+				// }
 
 				unset($_data['form_key']);
 
