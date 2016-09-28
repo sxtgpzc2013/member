@@ -201,7 +201,7 @@
 			$where = "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}";
 
 			if($start && $stop){
-				$where = "createtime >= ".strtotime($start)." AND createtime <= ".(strtotime($stop)+24*60*60) . "AND (userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']} )";
+				$where = "createtime >= ".strtotime($start)." AND createtime <= ".(strtotime($stop)+24*60*60) . " AND (userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']} )";
 			}
 
 	    	$params = array(
