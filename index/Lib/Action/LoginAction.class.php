@@ -57,7 +57,7 @@
 		    	);
 
 		    	$member = $this -> model -> my_find($params);
-				
+
 		    	if ($member)
 		    	{
 		    		$_SESSION['Rongzi']['user'] = $member;
@@ -99,6 +99,8 @@
 	    public function out()
 	    {
 	    	unset($_SESSION['Rongzi']['user']);
+
+			unset($_SESSION['Rongzi']['twopwd']);
 
 	    	redirect(__APP__.'/Login/login', 0);
 	    }

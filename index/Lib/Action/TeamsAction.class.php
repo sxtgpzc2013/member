@@ -67,7 +67,7 @@
 				}
 
 				$data = $_POST;
-
+var_dump($data);exit;
 				// foreach ($data as $key => $value) {
 				// 	if(empty($value)){
 				// 		$this -> _back('请完善数据后再提交！');return;

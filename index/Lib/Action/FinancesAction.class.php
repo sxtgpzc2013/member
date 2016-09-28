@@ -599,8 +599,7 @@
 
 			if ($form_key == 'yes')
 			{
-				echo "121";exit;
-				$usernumber = $_POST['usernumber'];
+				$usernumber = $_SESSION['Rongzi']['user']['usernumber'];
 
 		    	$password = md5(md5($_POST['password']));
 
