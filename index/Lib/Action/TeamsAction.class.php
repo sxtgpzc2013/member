@@ -164,7 +164,6 @@
 				'where' => "uid = '{$uid}' AND status = 1"
 
 			);
-
 			$member = $this -> model -> my_find($params);
 
 			$this -> assign("usernumber", $this->get_user_number());
@@ -680,19 +679,11 @@
 						$four_children_list = $this -> model -> easy_select($params);
 
 						$exp_four_children_children[0] = array(
-							'children' => array(
-								"0" =>  array(
-									'children' => array(),
-									'relationship' => array('children_num' => 1, 'parent_num' => 0),
-									'is_null' => 'true',
-									'zone' => 1,
-									'parentid' => $value['uid']
-								)
-							),
+							'children' => array(),
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 1,
-							'parentid' => $value['uid']
+							'parentid' => $cvalue['uid']
 						);
 
 						$exp_four_children_children[1] = array(
@@ -700,7 +691,7 @@
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 2,
-							'parentid' => $value['uid']
+							'parentid' => $cvalue['uid']
 						);
 
 
@@ -709,7 +700,7 @@
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 3,
-							'parentid' => $value['uid']
+							'parentid' => $cvalue['uid']
 						);
 
 						foreach ($four_children_list as $fkey => $fvalue) {

@@ -848,7 +848,7 @@ class ActivatesAction extends CommonAction {
 
 		$order['status'] = 1;
 
-		$order['notice'] = "注册数字红酒";
+		$order['notice'] = "注册消费商赠送";
 
 		$order['created_at'] = time();
 
