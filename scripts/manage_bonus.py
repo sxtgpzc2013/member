@@ -10,6 +10,10 @@ if sys.getdefaultencoding() != default_encoding:
     sys.setdefaultencoding(default_encoding)
 
 conn = mysql.db()
+now = datetime.datetime.now()
+now_second = datetime.datetime.now().strftime('%s')
+yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
+yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
 def compare(x, y, z):
 	values = []
@@ -52,10 +56,6 @@ def insert_money_change_jianglijifen(moneytype, uid, usernumber, realname, chang
 
 # 管理补贴
 def member():
-	now = datetime.datetime.now()
-	now_second = datetime.datetime.now().strftime('%s')
-	yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
-	
 	member_sql = """
 		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3
 	"""
@@ -70,7 +70,7 @@ def member():
 			usernumber = member['usernumber']
 			realname = member['realname']
 			if usertitle > 0:
-				managerbonus()
+				managerbonus(usernumber, usertitle)
 
 			value = compare(member['leftachievement'], member['middleachievement'], member['rightachievement'])
 			if value > 100000 and value < 300000:
@@ -99,7 +99,7 @@ def member():
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 			elif value > 2000000 and value < 5000000:
 				title = 4
-				jianglijifen = 60000
+				jianglijifen = 60000     
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
@@ -124,13 +124,63 @@ def member():
 
 	conn.close()
 
+# 通过子usernumber获取父接点人
+def getparentnumber(usernumber):
+	sql = """
+		select parentnumber from zx_member where FIND_IN_SET(usernumber, getJiedianList(%s))
+	"""  % (usernumber)
+
+	return conn.query(sql)
+
+# 通过父usernumber获取子推荐
+def gettuijiannumber_child(usernumber):
+	#获取子的级别金额, 需要 usernumber, userrank, value
+	sql = """
+		select m.usernumber, r.value from zx_member as m 
+		left join zx_bonus_rule as r on m.userrank = r.key
+		where FIND_IN_SET(m.usernumber, getChildList(%s))
+		and m.usernumber <> %s and m.status = 1 and m.proxy_state = 1 and from_unixtime(m.active_time, '%%Y-%%m-%%d') = '%s' and r.category = 'userrank'
+	"""  % (usernumber, usernumber, yes_time)
+
+	return conn.query(sql)
+
+# 通过子usernumber获取父推荐
+def gettuijiannumber_parent(usernumber):
+	sql = """
+		select tuijiannumber from zx_member where FIND_IN_SET(usernumber, getJiedianList(%s))
+	"""  % (usernumber)
+
+	return conn.query(sql)
+
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
-def managerbonus():
-	
-	
-#互助奖，享受管理补贴的代数的奖励#互助奖，享受管理补贴的代数的奖励
+def managerbonus(usernumber, usertitle):
+	# 管理奖比例
+	managercash_rule_sql = """
+		select `key`, value from zx_bonus_rule where category = 'managercash' and `key` = %s
+	""" % (usertitle)
+	result = conn.query(managercash_rule_sql)
+	if result and len(result) == 1:
+		managercash = result[0]['value']
+
+	# 获取usernumber 的 左 中 右 消费商
+	parentmembers = """
+		select uid, usernumber, usertitle from zx_member where parentnumber = %s
+	""" % (usernumber)
+
+	#获取按激活时间的子推荐
+	for parentmember in parentnumbers:
+		usernumber = parentmember['usernumber']
+		value = parentmember['value']
+		tuijiannumbers_child = gettuijiannumber_child(usernumber)
+		for tuijiannumber_child in tuijiannumbers_child:
+			usernumber = tuijiannumber['usernumber']
+			tuijiannumbers_parent = gettuijiannumber_parent(usernumber)
+			for tuijiannumber_parent in tuijiannumbers_parent:
+				pass
+
+#互助奖，享受管理补贴的代数的奖励
 def leaderbonus():
 	pass
 
 if __name__ == '__main__':
-	member()
+	print getparentnumber(100)
