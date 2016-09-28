@@ -65,10 +65,11 @@
 
 			$userrank = array("","一","二","三","四","五","六","七");
 
-			$member["userrank"] = $userrank[$member['userrank']];
-
 			$member["usertitle"] = $userrank[$member['usertitle']];
 
+			$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+			$member["userrank"] = $userrank_content[$member['userrank']];
 
 			$this -> assign('member', $member);
 
