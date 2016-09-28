@@ -370,11 +370,24 @@
         .addClass('node')
         .append('<a href="./register?uid='+nodeData[opts.parentid]+'&zone='+nodeData[opts.zone]+'" style="padding:2px;background:#f3c500;color:#fff;width:100%;min-width:60px;display:block;">注册会员</a>')
     }else{
+
+
+        var nodeContent = ""
+        if(nodeData[opts.nodeContent] == "1"){
+            nodeContent = "普卡"
+        }else if(nodeData[opts.nodeContent] == "2"){
+            nodeContent = "银卡"
+        }else if(nodeData[opts.nodeContent] == "3"){
+            nodeContent = "金卡"
+        }else if(nodeData[opts.nodeContent] == "4"){
+            nodeContent = "钻卡"
+        }
+
       // construct the content of node
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
         .addClass('node')
         .append('<div class="title">' + nodeData[opts.nodeTitle] + '</div>')
-        .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeData[opts.nodeContent] + '星级会员</div>' : '')
+        .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeContent + '</div>' : '')
         .append(typeof opts.nodeAchievement !== 'undefined' ? '<div class="content">总:' + parseInt(nodeData[opts.nodeAchievement]['left']) +"  "+ parseInt(nodeData[opts.nodeAchievement]['middle']) +"  "+ parseInt(nodeData[opts.nodeAchievement]['right']) +'</div>' : '')
         .append(typeof opts.nodeSurplus !== 'undefined' ? '<div class="content">新' + parseInt(nodeData[opts.nodeSurplus]['left']) + "  " + parseInt(nodeData[opts.nodeSurplus]['middle']) + "  " + parseInt(nodeData[opts.nodeSurplus]['right']) + '</div>' : '');
 

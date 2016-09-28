@@ -66,6 +66,14 @@
 
 				unset($_data['form_key']);
 
+				$data['proxy_state'] = 1;
+
+				if($data['userrank'] == 1){
+
+					$data['proxy_state'] = 0;
+
+				}
+
 				//处理密码操作
 				$data['psd1'] = md5(md5($data['psd1']));
 
@@ -898,9 +906,12 @@
 
 				$userrank = array("","一","二","三","四","五","六","七");
 
-				$recommend_list[$key]["userrank"] = $userrank[$value['userrank']];
-
 				$recommend_list[$key]["usertitle"] = $userrank[$value['userrank']];
+
+				$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+				$recommend_list[$key]["userrank"] = $userrank_content[$value['userrank']];
+
 
 			}
 

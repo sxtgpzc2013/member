@@ -360,6 +360,9 @@ class ActivatesAction extends CommonAction {
 
 		if ($my_save == 1)
 		{
+			//更新上级伞下人数
+			$this -> save_member_num($member);
+
 			//更新市场补贴
 			$this -> save_market_subsidy($deduct);
 
@@ -713,6 +716,36 @@ class ActivatesAction extends CommonAction {
 
 			}
 
+		}
+	}
+
+	//更新伞下人数
+	function save_member_num($expand_member){
+		//获取当前用户接点数据
+		$expand = array_reverse(explode(",", $expand_member['contactuserpath']));
+
+		$offset = array_search($expand_member['uid'], $expand, true);
+
+		if($offset !== false){
+			unset($expand[$offset]);
+		}
+
+		$expand_slice = array_slice($expand, 0, 3);
+
+		//更新上级所有人的伞下人数
+		foreach ($expand_slice as $key => $value) {
+
+			$params = array(
+				'table_name' => 'finance',
+
+				'where' => "uid = {$value}",
+
+				'field' => 'num',
+
+				'data' => 1
+			);
+
+			$this -> model -> my_setInc($params);
 		}
 	}
 

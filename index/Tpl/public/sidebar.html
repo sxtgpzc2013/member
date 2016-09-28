@@ -39,9 +39,13 @@
 						<a href="__APP__/Activates/index">消费商激活</a>
 					</li>
 					<?php } ?>
+
+					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'register') {echo 'active';} ?>">
 						<a href="__APP__/Teams/register">注册消费商</a>
 					</li>
+					<?php } ?>
+					
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'recommend_relation') {echo 'active';} ?>">
 						<a href="__APP__/Teams/recommend_relation">推荐关系</a>
 					</li>
