@@ -57,6 +57,25 @@ class ActivatesAction extends CommonAction {
 
     	$data = $this -> model -> order_select($params);
 
+		foreach ($data['result'] as $key => $value) {
+			if($value['userrank'] == 1){
+				$data['result'][$key]['money'] = 1980;
+			}
+
+			if($value['userrank'] == 2){
+				$data['result'][$key]['money'] = 10000;
+			}
+
+
+			if($value['userrank'] == 3){
+				$data['result'][$key]['money'] = 30000;
+			}
+
+			if($value['userrank'] == 4){
+				$data['result'][$key]['money'] = 50000;
+			}
+		}
+
     	$result['members'] = $data['result'];
 
 		$result['page'] = $data['page'];

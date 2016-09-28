@@ -551,6 +551,8 @@
 
 			$exp_result['title'] = $contact['userrank'];
 
+			$exp_result['usernumber'] = $contact['usernumber'];
+
 			$exp_result['achievement'] = array('left' => $contact['leftachievement'], 'middle' => $contact['middleachievement'], 'right' => $contact['rightachievement']);
 
 			$exp_result['achievement_today'] = $this->get_today_achievement($contact['uid']);
@@ -676,6 +678,7 @@
 									'relationship' => array('children_num' => 0, 'parent_num' => 0),
 									'name' => $fvalue['realname'],
 									'title' => $fvalue['userrank'],
+									'usernumber' => $fvalue['usernumber'],
 									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
 									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
 								);
@@ -687,6 +690,7 @@
 									'relationship' => array('children_num' => 0, 'parent_num' => 0),
 									'name' => $fvalue['realname'],
 									'title' => $fvalue['userrank'],
+									'usernumber' => $fvalue['usernumber'],
 									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
 									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
 								);
@@ -699,6 +703,7 @@
 									'relationship' => array('children_num' => 0, 'parent_num' => 0),
 									'name' => $fvalue['realname'],
 									'title' => $fvalue['userrank'],
+									'usernumber' => $fvalue['usernumber'],
 									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
 									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
 								);
@@ -711,6 +716,7 @@
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
+								'usernumber' => $cvalue['usernumber'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -722,6 +728,7 @@
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
+								'usernumber' => $cvalue['usernumber'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -734,6 +741,7 @@
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
+								'usernumber' => $cvalue['usernumber'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -746,6 +754,7 @@
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
 							'title' => $value['userrank'],
+							'usernumber' => $value['usernumber'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -757,6 +766,7 @@
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
 							'title' => $value['userrank'],
+							'usernumber' => $value['usernumber'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -768,6 +778,7 @@
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
 							'title' => $value['userrank'],
+							'usernumber' => $value['usernumber'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);

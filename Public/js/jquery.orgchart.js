@@ -386,7 +386,7 @@
       // construct the content of node
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
         .addClass('node')
-        .append('<div class="title">' + nodeData[opts.nodeTitle] + '</div>')
+        .append('<div class="title">' + nodeData[opts.nodeNumber]+ '['+ nodeData[opts.nodeTitle] + ']</div>')
         .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeContent + '</div>' : '')
         .append(typeof opts.nodeAchievement !== 'undefined' ? '<div class="content">总:' + parseInt(nodeData[opts.nodeAchievement]['left']) +"  "+ parseInt(nodeData[opts.nodeAchievement]['middle']) +"  "+ parseInt(nodeData[opts.nodeAchievement]['right']) +'</div>' : '')
         .append(typeof opts.nodeSurplus !== 'undefined' ? '<div class="content">新' + parseInt(nodeData[opts.nodeSurplus]['left']) + "  " + parseInt(nodeData[opts.nodeSurplus]['middle']) + "  " + parseInt(nodeData[opts.nodeSurplus]['right']) + '</div>' : '');
