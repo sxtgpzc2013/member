@@ -62,6 +62,10 @@
 
 				}
 
+				if($_POST['zone'] == "" || $_POST["zone"] == 0){
+					$this -> _back('推荐人区间为空,请重新选择推荐人！');return;
+				}
+
 				$data = $_POST;
 
 				unset($_data['form_key']);
@@ -84,10 +88,10 @@
 				$data['reg_uid'] = $_SESSION['Rongzi']['user']['uid'];
 
 				//获取推荐人ID
-				$data['tuijianid'] = $this -> get_user_id($data['tuijiannumber']);
+				$data['tuijianid'] = $this -> get_recommend_user_id($data['tuijiannumber']);
 
 				//获取接点人ID
-				$data['parentid'] = $this -> get_user_id($data['parentnumber']);
+				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber']);
 
 				//报单中心人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
@@ -322,7 +326,7 @@
 		 * 返回值：
 		 *
 		 */
-		function get_user_id($usernumber){
+		function get_recommend_user_id($usernumber){
 
 			//查询用户资料数据
 			$params = array(
@@ -348,6 +352,43 @@
 
 		/**
 		 * 获取推荐人ID
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		function get_contact_user_id($usernumber){
+
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "usernumber = '{$usernumber}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			if($member){
+
+				if($member['left_zone'] == 1 && $member['middle_zone'] == 1 && $member['right_zone'] == 1 ){
+					$this -> _back('接点人区间已满,请重新选择推荐人！');return;
+				}else{
+
+					return $member['uid'];
+				}
+
+			}else{
+
+				return 0;
+
+			}
+		}
+
+		/**
+		 * 获取报单中心ID
 		 *
 		 * 参数描述：@tuijiannumber 推荐人编号
 		 *
