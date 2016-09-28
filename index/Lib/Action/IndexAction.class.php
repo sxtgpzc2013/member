@@ -71,9 +71,22 @@
 
 			$member["userrank"] = $userrank_content[$member['userrank']];
 
+			//获取用户推荐人数
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "tuijianid = {$_SESSION['Rongzi']['user']['uid']}"
+
+			);
+
+	    	$recommend_count = $this -> model -> get_count($params);
+
 			$this -> assign('member', $member);
 
 			$this -> assign('bonus_count', $bonus_count['result']);
+
+			$this -> assign('recommend_count', $recommend_count);
 
 			$this -> display();
 	    }
