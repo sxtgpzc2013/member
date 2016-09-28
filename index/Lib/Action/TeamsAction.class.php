@@ -541,7 +541,7 @@
 
 				'order' => "uid desc",
 
-				'where' => "status = 1 AND parentid = {$contact['uid']} AND parentnumber = '{$contact['usernumber']}'"
+				'where' => "status = 1 AND parentid = {$contact['uid']} AND parentnumber = '{$contact['usernumber']}' AND uid != {$contact['uid']} "
 			);
 
 			$contact_children_list = $this -> model -> easy_select($params);
