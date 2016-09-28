@@ -393,102 +393,102 @@
 	//以下为官方示例
 	$().ready(function () {
 		// validate signup form on keyup and submit
-		$("#signupForm").validate({
-			rules: {
-				usernumber: {
-					required: true
-				},
-				realname: {
-					required: true
-				},
-				IDcard: {
-					required: true
-				},
-				mobile: {
-					required: true
-				},
-				bankname: {
-					required: true
-				},
-				bank_adress: {
-					required: true
-				},
-				banknumber: {
-					required: true
-				},
-				ID_address_face: {
-					required: true
-				},
-				ID_address_back: {
-					required: true
-				},
-				tuijiannumber: {
-					required: true
-				},
-				billcenternumber: {
-					required: true
-				},
-				parentnumber: {
-					required: true
-				},
-				psd1: {
-					required: true,
-					minlength: 6
-				},
-				confirm_psd1: {
-					required: true,
-					minlength: 6
-				},
-				psd2: {
-					required: true,
-					minlength: 6
-				},
-				confirm_psd2: {
-					required: true,
-					minlength: 6
-				},
-				is_free: {
-					required: true
-				},
-				zone: {
-					required: true
-				},
-				s_province: {
-					required: true
-				},
-				s_city: {
-					required: true
-				},
-				s_county: {
-					required: true
-				},
-				s_address: {
-					required: true
-				},
-				agree: "required"
-			},
-			messages: {
-				is_free: {
-					required: "如需注册请同意消费商注册协议",
-				},
-				psd1: {
-					required: "请输入您的密码",
-					minlength: "密码必须6位数以上"
-				},
-				confirm_psd1: {
-					required: "请输入您的密码",
-					minlength: "密码必须6位数以上"
-				},
-				psd2: {
-					required: "请输入您的密码",
-					minlength: "密码必须6位数以上"
-				},
-				confirm_psd2: {
-					required: "请输入您的密码",
-					minlength: "密码必须6位数以上"
-				}
-			}
-		});
+		// $("#signupForm").validate({
+		// 	rules: {
+		// 		usernumber: {
+		// 			required: true
+		// 		},
+		// 		realname: {
+		// 			required: true
+		// 		},
+		// 		IDcard: {
+		// 			required: true
+		// 		},
+		// 		mobile: {
+		// 			required: true
+		// 		},
+		// 		bankname: {
+		// 			required: true
+		// 		},
+		// 		bank_adress: {
+		// 			required: true
+		// 		},
+		// 		banknumber: {
+		// 			required: true
+		// 		},
+		// 		ID_address_face: {
+		// 			required: true
+		// 		},
+		// 		ID_address_back: {
+		// 			required: true
+		// 		},
+		// 		tuijiannumber: {
+		// 			required: true
+		// 		},
+		// 		billcenternumber: {
+		// 			required: true
+		// 		},
+		// 		parentnumber: {
+		// 			required: true
+		// 		},
+		// 		psd1: {
+		// 			required: true,
+		// 			minlength: 6
+		// 		},
+		// 		confirm_psd1: {
+		// 			required: true,
+		// 			minlength: 6
+		// 		},
+		// 		psd2: {
+		// 			required: true,
+		// 			minlength: 6
+		// 		},
+		// 		confirm_psd2: {
+		// 			required: true,
+		// 			minlength: 6
+		// 		},
+		// 		is_free: {
+		// 			required: true
+		// 		},
+		// 		zone: {
+		// 			required: true
+		// 		},
+		// 		s_province: {
+		// 			required: true
+		// 		},
+		// 		s_city: {
+		// 			required: true
+		// 		},
+		// 		s_county: {
+		// 			required: true
+		// 		},
+		// 		s_address: {
+		// 			required: true
+		// 		},
+		// 		agree: "required"
+		// 	},
+		// 	messages: {
+		// 		is_free: {
+		// 			required: "如需注册请同意消费商注册协议",
+		// 		},
+		// 		psd1: {
+		// 			required: "请输入您的密码",
+		// 			minlength: "密码必须6位数以上"
+		// 		},
+		// 		confirm_psd1: {
+		// 			required: "请输入您的密码",
+		// 			minlength: "密码必须6位数以上"
+		// 		},
+		// 		psd2: {
+		// 			required: "请输入您的密码",
+		// 			minlength: "密码必须6位数以上"
+		// 		},
+		// 		confirm_psd2: {
+		// 			required: "请输入您的密码",
+		// 			minlength: "密码必须6位数以上"
+		// 		}
+		// 	}
+		// });
 
 		$('.get_usernumber').click(function(){
 			var usernumber = $('.usernumber').val();

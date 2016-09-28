@@ -27,6 +27,14 @@
 			parent::__construct();
 
 			$this -> model = D('Bonus');
+
+			if(ACTION_NAME != "password"){
+				if($_SESSION['Rongzi']['twopwd']){
+
+				}else{
+					redirect(__APP__.'/Finances/password?callback='.urlencode($this -> get_url()), 0);
+				}
+			}
 		}
 
 		/**
