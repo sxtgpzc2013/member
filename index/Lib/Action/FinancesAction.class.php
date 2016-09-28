@@ -27,6 +27,26 @@
 			parent::__construct();
 
 			$this -> model = D('Finances');
+
+			if(ACTION_NAME != "password"){
+				if($_SESSION['Rongzi']['twopwd']){
+
+				}else{
+					redirect(__APP__.'/Finances/password?callback='.urlencode($this -> get_url()), 0);
+				}
+			}
+
+		}
+
+		/**
+		* 获取当前页面完整URL地址
+		*/
+		function get_url() {
+		   $sys_protocal = isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://';
+		   $php_self = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
+		   $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+		   $relate_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $php_self.(isset($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : $path_info);
+		   return $sys_protocal.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$relate_url;
 		}
 
 	    /**
@@ -45,7 +65,7 @@
 	    }
 
 	    /**
-		 * 首页
+		 * cash
 		 *
 		 * 参数描述：
 		 *
@@ -561,5 +581,65 @@
 			$this -> assign('page', $transfers['page']);
 
 	    	$this -> display();
+	    }
+
+		/**
+		 * 二级密码登陆页
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function password()
+	    {
+			$form_key = htmlspecialchars($_POST['form_key']);
+
+			if ($form_key == 'yes')
+			{
+				echo "121";exit;
+				$usernumber = $_POST['usernumber'];
+
+		    	$password = md5(md5($_POST['password']));
+
+		    	$params = array(
+
+		    		'table_name' => 'member',
+
+		    		'where' => "usernumber = '{$usernumber}' AND psd2 = '{$password}' AND status = 1"
+		    	);
+
+		    	$member = $this -> model -> my_find($params);
+
+		    	if ($member)
+		    	{
+		    		$_SESSION['Rongzi']['twopwd'] = true;
+
+		    		$data['last_time'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'member',
+
+		    			'where' => "uid = {$member['uid']} AND status = 1",
+
+		    			'data' => $data
+		    		);
+
+		    		$member_save = $this -> model -> my_save($params);
+
+					$call_back = urldecode($_POST['call_back']);
+
+		    		redirect($call_back, 0);
+		    	}
+		    	else
+		    	{
+		    		$this -> _back('登陆失败，请重试。');
+		    	}
+			}
+
+			$this -> display();
 	    }
 	}

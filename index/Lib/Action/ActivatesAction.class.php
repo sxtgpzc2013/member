@@ -377,7 +377,8 @@ class ActivatesAction extends CommonAction {
 				);
 				$contact_parent = $this -> model -> my_find($params);
 
-
+				$contact_parent_data = array();
+				
 				if($contact['zone'] == 1){
 
 					$contact_parent_data['leftachievement'] = $contact_parent['leftachievement'] + $deduct;
@@ -456,14 +457,12 @@ class ActivatesAction extends CommonAction {
 			//更新上级伞下人数
 			//$this -> save_member_num($member);
 
-			//用户为1不享受补贴
-			if($billcenterid != 1){
-				//更新市场补贴
-				$this -> save_market_subsidy($deduct);
+			//更新市场补贴
+			$this -> save_market_subsidy($deduct);
 
-				//更新拓展补贴
-				$this -> save_expand_subsidy($member, $deduct);
-			}
+			//更新拓展补贴
+			$this -> save_expand_subsidy($member, $deduct);
+
 			//更新赠送红酒订单 添加一份订单
 			$this -> save_red_order($member);
 
@@ -613,15 +612,17 @@ class ActivatesAction extends CommonAction {
 
 			$money_change_data['moneytype'] = $value['moneytype'];
 
-			//添加财务明细记录
-			$params = array(
+			if($value !== 1){
+				//添加财务明细记录
+				$params = array(
 
-				'table_name' => 'money_change',
+					'table_name' => 'money_change',
 
-				'data' => $money_change_data
-			);
+					'data' => $money_change_data
+				);
 
-			$money_change_add = $this -> model -> my_add($params);
+				$money_change_add = $this -> model -> my_add($params);
+			}
 
 		}
 
@@ -635,8 +636,11 @@ class ActivatesAction extends CommonAction {
 
 		$offset = array_search($expand_member['uid'], $expand, true);
 
-		if($offset !== false){
+		$admin_offset = array_search(1, $expand, true);
+
+		if($offset !== false && $admin_offset !== false){
 			unset($expand[$offset]);
+			unset($expand[$admin_offset]);
 		}
 
 		$expand_slice = array_slice($expand, 0, 3);
