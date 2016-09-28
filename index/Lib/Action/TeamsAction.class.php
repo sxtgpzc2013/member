@@ -545,7 +545,25 @@
 
 			if($member){
 
-				return true;
+				$params = array(
+
+					'table_name' => 'member',
+
+					'where' => "uid = {$uid}",
+
+					'field' => 'znum',
+
+					'data' => 1
+				);
+
+				$setInc = $this -> model -> my_setInc($params);
+
+				if($setInc){
+					return true;
+				}else{
+					return false;
+				}
+
 
 			}else{
 

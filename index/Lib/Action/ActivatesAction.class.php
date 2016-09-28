@@ -755,7 +755,7 @@ class ActivatesAction extends CommonAction {
 		foreach ($expand_slice as $key => $value) {
 
 			$params = array(
-				'table_name' => 'finance',
+				'table_name' => 'member',
 
 				'where' => "uid = {$value}",
 
