@@ -1,11 +1,11 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-06-12
- * @alter  
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：商户后台首页控制器类
- * @author  
+ * @author
  * @copyright
  * @time 2014-06-12
  * @version 1.0.0
@@ -122,25 +122,25 @@
 
 	    			//存入流水
 	    			$money_change_data['moneytype'] = 6;
-    			
+
 					$money_change_data['status'] = $member_save ? 1 : 0;
 
 					$money_change_data['targetrealname'] = '系统';
-					
+
 					$money_change_data['userid'] = $member['uid'];
-					
+
 					$money_change_data['usernumber'] = $member['usernumber'];
-					
+
 					$money_change_data['realname'] = $member['realname'];
-					
+
 					$money_change_data['changetype'] = 11;
-					
+
 					$money_change_data['recordtype'] = 0;
-					
+
 					$money_change_data['money'] = $data['money'];
-					
+
 					$money_change_data['hasmoney'] = $member_data['jiangjinbi'];
-					
+
 					$money_change_data['createtime'] = time();
 
 					//存入流水
@@ -324,6 +324,75 @@
 
 	    		if ($transfer_add)
 	    		{
+
+					//增加财务流水
+					$data['money'] = $money;
+
+					$data['moneytype'] = 2;
+
+					$data['changetype'] = 14;
+
+					$data['realname'] = "{$member['realname']}";
+
+					$data['targetrealname'] = "{$target_member['realname']}";
+
+					$data['status'] = 1;
+
+					$data['targetuserid'] = $target_member['uid'];
+
+					$data['targetusernumber'] = $target_member['usernumber'];
+
+					$data['userid'] = $member['uid'];
+
+					$data['usernumber'] = $member['usernumber'];
+
+					$data['recordtype'] = 0;
+
+		    		$data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $data
+		    		);
+
+		    		$transfer_flow = $this -> model -> my_add($params);
+
+
+					$to_data['money'] = $money;
+
+					$to_data['moneytype'] = 2;
+
+					$to_data['changetype'] = 14;
+
+					$to_data['realname'] = "{$target_member['realname']}";
+
+					$to_data['targetrealname'] = "{$member['realname']}";
+
+					$to_data['status'] = 1;
+
+					$to_data['targetuserid'] = $member['uid'];
+
+					$to_data['targetusernumber'] = $member['usernumber'];
+
+					$to_data['userid'] = $target_member['uid'];
+
+					$to_data['usernumber'] = $target_member['usernumber'];
+
+					$to_data['recordtype'] = 1;
+
+		    		$to_data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $to_data
+		    		);
+
+					$to_transfer_flow = $this -> model -> my_add($params);
+
 	    			redirect(__APP__.'/Finances/transfer', 0);
 	    		}
 	    		else
@@ -412,8 +481,10 @@
 
 	    		'table_name' => 'transfer',
 
-	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}"
-	    	);
+	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}",
+
+				'order' => "createtime desc"
+			);
 
 	    	$transfers = $this -> model -> order_select($params);
 

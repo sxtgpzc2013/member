@@ -57,7 +57,7 @@
 		                                    <td>￥{$item.money}</td>
 											<td>
 												<if condition="$item['moneytype'] eq 1">
-													现金币
+													奖金币
 												<elseif condition="$item['moneytype'] eq 2" />
 													报单币
 												<elseif condition="$item['moneytype'] eq 3" />
@@ -67,7 +67,11 @@
 												<elseif condition="$item['moneytype'] eq 5" />
 													奖励积分
 												<elseif condition="$item['moneytype'] eq 6" />
-													奖金币
+													爱心基金
+												<elseif condition="$item['moneytype'] eq 7" />
+													平台管理费
+												<elseif condition="$item['moneytype'] eq 8" />
+													税费
 												</if>
 											</td>
 											<td>
@@ -97,6 +101,10 @@
 													消费商提现
 												<elseif condition="$item['changetype'] eq 12" />
 													处理提现
+												<elseif condition="$item['changetype'] eq 13" />
+													消费
+												<elseif condition="$item['changetype'] eq 14" />
+													币种转换
 												</if>
 											</td>
 											<td>

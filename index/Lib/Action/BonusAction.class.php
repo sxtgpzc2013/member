@@ -198,10 +198,10 @@
 
 			$stop = htmlspecialchars($_GET['stop']);
 
-			$where = "1";
+			$where = "userid = {$_SESSION['Rongzi']['user']['uid']}";
 
 			if($start && $stop){
-				$where = "createtime >= ".strtotime($start)." AND createtime <= ".(strtotime($stop)+24*60*60);
+				$where = "userid = {$_SESSION['Rongzi']['user']['uid']} AND createtime >= ".strtotime($start)." AND createtime <= ".(strtotime($stop)+24*60*60);
 			}
 
 	    	$params = array(
