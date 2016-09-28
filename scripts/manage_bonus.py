@@ -124,33 +124,24 @@ def member():
 
 	conn.close()
 
-# 通过子usernumber获取父接点人
-def getparentnumber(usernumber):
-	sql = """
-		select parentnumber from zx_member where FIND_IN_SET(usernumber, getJiedianList(%s))
-	"""  % (usernumber)
-
-	return conn.query(sql)
-
 # 通过父usernumber获取子推荐
 def gettuijiannumber_child(usernumber):
 	#获取子的级别金额, 需要 usernumber, userrank, value
 	sql = """
-		select m.usernumber, r.value from zx_member as m 
-		left join zx_bonus_rule as r on m.userrank = r.key
-		where FIND_IN_SET(m.usernumber, getChildList(%s))
-		and m.usernumber <> %s and m.status = 1 and m.proxy_state = 1 and from_unixtime(m.active_time, '%%Y-%%m-%%d') = '%s' and r.category = 'userrank'
-	"""  % (usernumber, usernumber, yes_time)
+		select recommenduserpath from zx_member where usernumber = %s
+	"""  % (usernumber)
+	childs = conn.query(sql)
 
-	return conn.query(sql)
+	return childs
 
 # 通过子usernumber获取父推荐
 def gettuijiannumber_parent(usernumber):
 	sql = """
-		select tuijiannumber from zx_member where FIND_IN_SET(usernumber, getJiedianList(%s))
+		select recommenduserpath from zx_member where usernumber = %s
 	"""  % (usernumber)
+	parents = conn.query(sql)
 
-	return conn.query(sql)
+	return parents
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(usernumber, usertitle):
@@ -183,4 +174,5 @@ def leaderbonus():
 	pass
 
 if __name__ == '__main__':
-	print getparentnumber(100)
+	print gettuijiannumber_child(100)
+	print gettuijiannumber_parent(101)
