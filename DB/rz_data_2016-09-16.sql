@@ -161,13 +161,15 @@ CREATE TABLE `zx_bonus_count` (
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `zx_bonus_rule`;
-
 CREATE TABLE `zx_bonus_rule` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT '' COMMENT '规则名称',
-  `money` double(10,2) DEFAULT '0.00' COMMENT '报单金额(单级别)',
+  `category` varchar(255) DEFAULT '' COMMENT '类别',
+  `key` int(4) DEFAULT '0' COMMENT '级别',
+  `value` double(10,2) DEFAULT '0' COMMENT '数值',
+  `createtime` varchar(255) DEFAULT '' COMMENT '时间',
+  `remark` varchar(255) DEFAULT '' COMMENT '注释',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='奖金规则表';
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='奖金规则表';
 
 
 
