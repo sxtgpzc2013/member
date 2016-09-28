@@ -67,7 +67,7 @@
 				}
 
 				$data = $_POST;
-				
+
 				// foreach ($data as $key => $value) {
 				// 	if(empty($value)){
 				// 		$this -> _back('请完善数据后再提交！');return;
@@ -103,7 +103,7 @@
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
 
 				$pic = $this -> _upload_pic_all('member');
-
+// var_dump($pic);exit;
 				if ($pic['ID_address_face']['status'] == 1)
 				{
 					$data['ID_address_face'] = $pic['ID_address_face']['msg'];
