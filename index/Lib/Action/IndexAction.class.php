@@ -76,7 +76,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "tuijianid = {$_SESSION['Rongzi']['user']['uid']}"
+				'where' => "tuijianid = {$_SESSION['Rongzi']['user']['uid']} AND uid != {$_SESSION['Rongzi']['user']['uid']}"
 
 			);
 
