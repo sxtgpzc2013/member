@@ -922,16 +922,16 @@
 
 			foreach ($recommend_list as $key => $value) {
 
-				$params = array(
-
-					'table_name' => 'member',
-
-					'where' => "status = 1 AND tuijianid = {$value['uid']} AND tuijiannumber = '{$value['usernumber']}'"
-				);
-
-				$recommend_count = $this -> model -> get_count($params);
-
-				$recommend_list[$key]["num"] = $recommend_count;
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "status = 1 AND tuijianid = {$value['uid']} AND tuijiannumber = '{$value['usernumber']}'"
+				// );
+				//
+				// $recommend_count = $this -> model -> get_count($params);
+				//
+				// $recommend_list[$key]["num"] = $recommend_count;
 
 				if($value['zone'] == 1){
 
@@ -1010,16 +1010,16 @@
 
 			foreach ($recommend_list as $key => $value) {
 
-				$params = array(
-
-					'table_name' => 'member',
-
-					'where' => "status = 1 AND tuijianid = {$value['uid']}"
-				);
-
-				$recommend_count = $this -> model -> get_count($params);
-
-				$recommend_list_result[$key]["num"] = $recommend_count;
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "status = 1 AND tuijianid = {$value['uid']}"
+				// );
+				//
+				// $recommend_count = $this -> model -> get_count($params);
+				//
+				// $recommend_list_result[$key]["num"] = $recommend_count;
 
 				$recommend_list_result[$key]["realname"] = $value['realname'];
 

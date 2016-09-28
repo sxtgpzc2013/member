@@ -57,7 +57,7 @@
 		    	);
 
 		    	$member = $this -> model -> my_find($params);
-
+				
 		    	if ($member)
 		    	{
 		    		$_SESSION['Rongzi']['user'] = $member;

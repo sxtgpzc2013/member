@@ -249,6 +249,75 @@ class ActivatesAction extends CommonAction {
 			$bill_member_save = $this -> model -> my_save($billparams);
 
 			if ($bill_member_save == 1){
+				//记录报单中心消费流水 奖金币 报单币的流水
+
+				//增加财务流水
+				$flow_data['money'] = $deduct/2;
+
+				$flow_data['moneytype'] = 1;
+
+				$flow_data['changetype'] = 2;
+
+				$flow_data['realname'] = "{$billmember['realname']}";
+
+				$flow_data['targetrealname'] = "戎子";
+
+				$flow_data['status'] = 1;
+
+				$flow_data['targetuserid'] = 1;
+
+				$flow_data['targetusernumber'] = 1;
+
+				$flow_data['userid'] = $billmember['uid'];
+
+				$flow_data['usernumber'] = $billmember['usernumber'];
+
+				$flow_data['recordtype'] = 0;
+
+				$flow_data['createtime'] = time();
+
+				$params = array(
+
+					'table_name' => 'money_change',
+
+					'data' => $flow_data
+				);
+
+				$transfer_flow = $this -> model -> my_add($params);
+
+				$to_data['money'] = $deduct/2;
+
+				$to_data['moneytype'] = 2;
+
+				$to_data['changetype'] = 2;
+
+				$to_data['realname'] = "{$billmember['realname']}";
+
+				$to_data['targetrealname'] = "戎子";
+
+				$to_data['status'] = 1;
+
+				$to_data['targetuserid'] = 1;
+
+				$to_data['targetusernumber'] = 1;
+
+				$to_data['userid'] = $billmember['uid'];
+
+				$to_data['usernumber'] = $billmember['usernumber'];
+
+				$to_data['recordtype'] = 0;
+
+				$to_data['createtime'] = time();
+
+				$params = array(
+
+					'table_name' => 'money_change',
+
+					'data' => $to_data
+				);
+
+				$to_transfer_flow = $this -> model -> my_add($params);
+
 
 			}else{
 				$this -> _back('报单中心激活数据保存失败，请重试。');
@@ -385,7 +454,7 @@ class ActivatesAction extends CommonAction {
 		if ($my_save == 1)
 		{
 			//更新上级伞下人数
-			$this -> save_member_num($member);
+			//$this -> save_member_num($member);
 
 			//更新市场补贴
 			$this -> save_market_subsidy($deduct);
@@ -754,22 +823,22 @@ class ActivatesAction extends CommonAction {
 			unset($expand[$offset]);
 		}
 
-		$expand_slice = array_slice($expand, 0, 3);
+		//$expand_slice = array_slice($expand, 0, 1);
 
 		//更新上级所有人的伞下人数
-		foreach ($expand_slice as $key => $value) {
+		foreach ($expand as $key => $value) {
 
-			$params = array(
-				'table_name' => 'member',
-
-				'where' => "uid = {$value}",
-
-				'field' => 'num',
-
-				'data' => 1
-			);
-
-			$this -> model -> my_setInc($params);
+			// $params = array(
+			// 	'table_name' => 'member',
+			//
+			// 	'where' => "uid = {$value}",
+			//
+			// 	'field' => 'num',
+			//
+			// 	'data' => 0
+			// );
+			//
+			// $result = $this -> model -> my_setInc($params);
 		}
 	}
 
