@@ -381,7 +381,11 @@ ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币�
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
 
 
+<<<<<<< HEAD
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
+=======
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现 13-消费 14-消费商转币 15-币种转换';
+>>>>>>> 2a1d93dbf9dc67aef4852ffe0a8d8ef84417ce5a
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
 

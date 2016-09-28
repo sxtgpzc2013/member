@@ -1,11 +1,11 @@
 <?php if (!defined('THINK_PATH')) exit();//判断是否加载thinkphp,如果否则退出
 /*********文件描述*********
  * @last update 2014-06-12
- * @alter  
+ * @alter
  * @version 1.0.0
  *
  * 功能简介：商户后台首页控制器类
- * @author  
+ * @author
  * @copyright
  * @time 2014-06-12
  * @version 1.0.0
@@ -27,6 +27,26 @@
 			parent::__construct();
 
 			$this -> model = D('Finances');
+
+			if(ACTION_NAME != "password"){
+				if($_SESSION['Rongzi']['twopwd']){
+
+				}else{
+					redirect(__APP__.'/Finances/password?callback='.urlencode($this -> get_url()), 0);
+				}
+			}
+
+		}
+
+		/**
+		* 获取当前页面完整URL地址
+		*/
+		function get_url() {
+		   $sys_protocal = isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://';
+		   $php_self = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
+		   $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+		   $relate_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $php_self.(isset($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : $path_info);
+		   return $sys_protocal.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$relate_url;
 		}
 
 	    /**
@@ -45,7 +65,7 @@
 	    }
 
 	    /**
-		 * 首页
+		 * cash
 		 *
 		 * 参数描述：
 		 *
@@ -122,25 +142,25 @@
 
 	    			//存入流水
 	    			$money_change_data['moneytype'] = 6;
-    			
+
 					$money_change_data['status'] = $member_save ? 1 : 0;
 
 					$money_change_data['targetrealname'] = '系统';
-					
+
 					$money_change_data['userid'] = $member['uid'];
-					
+
 					$money_change_data['usernumber'] = $member['usernumber'];
-					
+
 					$money_change_data['realname'] = $member['realname'];
-					
+
 					$money_change_data['changetype'] = 11;
-					
+
 					$money_change_data['recordtype'] = 0;
-					
+
 					$money_change_data['money'] = $data['money'];
-					
+
 					$money_change_data['hasmoney'] = $member_data['jiangjinbi'];
-					
+
 					$money_change_data['createtime'] = time();
 
 					//存入流水
@@ -324,6 +344,75 @@
 
 	    		if ($transfer_add)
 	    		{
+
+					//增加财务流水
+					$data['money'] = $money;
+
+					$data['moneytype'] = 2;
+
+					$data['changetype'] = 14;
+
+					$data['realname'] = "{$member['realname']}";
+
+					$data['targetrealname'] = "{$target_member['realname']}";
+
+					$data['status'] = 1;
+
+					$data['targetuserid'] = $target_member['uid'];
+
+					$data['targetusernumber'] = $target_member['usernumber'];
+
+					$data['userid'] = $member['uid'];
+
+					$data['usernumber'] = $member['usernumber'];
+
+					$data['recordtype'] = 0;
+
+		    		$data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $data
+		    		);
+
+		    		$transfer_flow = $this -> model -> my_add($params);
+
+
+					$to_data['money'] = $money;
+
+					$to_data['moneytype'] = 2;
+
+					$to_data['changetype'] = 14;
+
+					$to_data['realname'] = "{$target_member['realname']}";
+
+					$to_data['targetrealname'] = "{$member['realname']}";
+
+					$to_data['status'] = 1;
+
+					$to_data['targetuserid'] = $member['uid'];
+
+					$to_data['targetusernumber'] = $member['usernumber'];
+
+					$to_data['userid'] = $target_member['uid'];
+
+					$to_data['usernumber'] = $target_member['usernumber'];
+
+					$to_data['recordtype'] = 1;
+
+		    		$to_data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $to_data
+		    		);
+
+					$to_transfer_flow = $this -> model -> my_add($params);
+
 	    			redirect(__APP__.'/Finances/transfer', 0);
 	    		}
 	    		else
@@ -383,6 +472,74 @@
 
 	    		if ($member_save)
 	    		{
+					//增加财务流水
+					$data['money'] = $transfer_money;
+
+					$data['moneytype'] = 1;
+
+					$data['changetype'] = 15;
+
+					$data['realname'] = "{$member['realname']}";
+
+					$data['targetrealname'] = "{$member['realname']}";
+
+					$data['status'] = 1;
+
+					$data['targetuserid'] = $member['uid'];
+
+					$data['targetusernumber'] = $member['usernumber'];
+
+					$data['userid'] = $member['uid'];
+
+					$data['usernumber'] = $member['usernumber'];
+
+					$data['recordtype'] = 0;
+
+		    		$data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $data
+		    		);
+
+		    		$transfer_flow = $this -> model -> my_add($params);
+
+
+					$to_data['money'] = $transfer_money;
+
+					$to_data['moneytype'] = 2;
+
+					$to_data['changetype'] = 15;
+
+					$to_data['realname'] = "{$member['realname']}";
+
+					$to_data['targetrealname'] = "{$member['realname']}";
+
+					$to_data['status'] = 1;
+
+					$to_data['targetuserid'] = $member['uid'];
+
+					$to_data['targetusernumber'] = $member['usernumber'];
+
+					$to_data['userid'] = $member['uid'];
+
+					$to_data['usernumber'] = $member['usernumber'];
+
+					$to_data['recordtype'] = 1;
+
+		    		$to_data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $to_data
+		    		);
+
+					$to_transfer_flow = $this -> model -> my_add($params);
+
 	    			redirect(__APP__.'/Finances/convert', 0);
 	    		}
 	    		else
@@ -412,8 +569,10 @@
 
 	    		'table_name' => 'transfer',
 
-	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}"
-	    	);
+	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']} OR targetuserid = {$_SESSION['Rongzi']['user']['uid']}",
+
+				'order' => "createtime desc"
+			);
 
 	    	$transfers = $this -> model -> order_select($params);
 
@@ -422,5 +581,65 @@
 			$this -> assign('page', $transfers['page']);
 
 	    	$this -> display();
+	    }
+
+		/**
+		 * 二级密码登陆页
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function password()
+	    {
+			$form_key = htmlspecialchars($_POST['form_key']);
+
+			if ($form_key == 'yes')
+			{
+				echo "121";exit;
+				$usernumber = $_POST['usernumber'];
+
+		    	$password = md5(md5($_POST['password']));
+
+		    	$params = array(
+
+		    		'table_name' => 'member',
+
+		    		'where' => "usernumber = '{$usernumber}' AND psd2 = '{$password}' AND status = 1"
+		    	);
+
+		    	$member = $this -> model -> my_find($params);
+
+		    	if ($member)
+		    	{
+		    		$_SESSION['Rongzi']['twopwd'] = true;
+
+		    		$data['last_time'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'member',
+
+		    			'where' => "uid = {$member['uid']} AND status = 1",
+
+		    			'data' => $data
+		    		);
+
+		    		$member_save = $this -> model -> my_save($params);
+
+					$call_back = urldecode($_POST['call_back']);
+
+		    		redirect($call_back, 0);
+		    	}
+		    	else
+		    	{
+		    		$this -> _back('登陆失败，请重试。');
+		    	}
+			}
+
+			$this -> display();
 	    }
 	}

@@ -922,16 +922,16 @@
 
 			foreach ($recommend_list as $key => $value) {
 
-				$params = array(
-
-					'table_name' => 'member',
-
-					'where' => "status = 1 AND tuijianid = {$value['uid']} AND tuijiannumber = '{$value['usernumber']}'"
-				);
-
-				$recommend_count = $this -> model -> get_count($params);
-
-				$recommend_list[$key]["num"] = $recommend_count;
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "status = 1 AND tuijianid = {$value['uid']} AND tuijiannumber = '{$value['usernumber']}'"
+				// );
+				//
+				// $recommend_count = $this -> model -> get_count($params);
+				//
+				// $recommend_list[$key]["num"] = $recommend_count;
 
 				if($value['zone'] == 1){
 
@@ -965,7 +965,7 @@
 
 				$recommend_list[$key]["jihuobi"] = intval($value['jihuobi']);
 
-				$userrank = array("","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
+				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
 
 				$recommend_list[$key]["usertitle"] = $userrank[$value['userrank']];
 
@@ -1010,16 +1010,16 @@
 
 			foreach ($recommend_list as $key => $value) {
 
-				$params = array(
-
-					'table_name' => 'member',
-
-					'where' => "status = 1 AND tuijianid = {$value['uid']}"
-				);
-
-				$recommend_count = $this -> model -> get_count($params);
-
-				$recommend_list_result[$key]["num"] = $recommend_count;
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "status = 1 AND tuijianid = {$value['uid']}"
+				// );
+				//
+				// $recommend_count = $this -> model -> get_count($params);
+				//
+				// $recommend_list_result[$key]["num"] = $recommend_count;
 
 				$recommend_list_result[$key]["realname"] = $value['realname'];
 
@@ -1045,7 +1045,7 @@
 
 				$recommend_list_result[$key]["jihuobi"] = intval($value['jihuobi']);
 
-				$userrank = array("","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
+				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
 
 				$userrank_content = array("","普卡","银卡","金卡","钻卡");
 
