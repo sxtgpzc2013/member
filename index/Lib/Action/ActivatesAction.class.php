@@ -456,12 +456,14 @@ class ActivatesAction extends CommonAction {
 			//更新上级伞下人数
 			//$this -> save_member_num($member);
 
-			//更新市场补贴
-			$this -> save_market_subsidy($deduct);
+			//用户为1不享受补贴
+			if($billcenterid != 1){
+				//更新市场补贴
+				$this -> save_market_subsidy($deduct);
 
-			//更新拓展补贴
-			$this -> save_expand_subsidy($member, $deduct);
-
+				//更新拓展补贴
+				$this -> save_expand_subsidy($member, $deduct);
+			}
 			//更新赠送红酒订单 添加一份订单
 			$this -> save_red_order($member);
 
