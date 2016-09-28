@@ -249,8 +249,11 @@ class ActivatesAction extends CommonAction {
 			$bill_member_save = $this -> model -> my_save($billparams);
 
 			if ($bill_member_save == 1){
-				//记录报单中心消费流水 奖金币 报单币的流水
 
+				//更新公司总收入
+				$this -> add_finance($deduct);
+
+				//记录报单中心消费流水 奖金币 报单币的流水
 				//增加财务流水
 				$flow_data['money'] = $deduct/2;
 
@@ -861,6 +864,22 @@ class ActivatesAction extends CommonAction {
 			'where' => "id = 1",
 
 			'field' => 'expend',
+
+			'data' => $data
+		);
+
+		$finance = $this -> model -> my_setInc($params);
+	}
+
+	//增加公司总收入
+	function add_finance($data){
+
+		$params = array(
+			'table_name' => 'finance',
+
+			'where' => "id = 1",
+
+			'field' => 'income',
 
 			'data' => $data
 		);
