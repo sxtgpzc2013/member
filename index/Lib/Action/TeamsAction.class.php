@@ -1051,6 +1051,8 @@
 
 				$recommend_list_result[$key]["jihuobi"] = intval($value['jihuobi']);
 
+				$recommend_list_result[$key]["num"] = intval($value['num']);
+
 				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
 
 				$userrank_content = array("","普卡","银卡","金卡","钻卡");
