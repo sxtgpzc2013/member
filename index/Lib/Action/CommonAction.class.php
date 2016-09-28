@@ -178,7 +178,7 @@
 	        $upload->thumbMaxHeight = $height; //缩略图处理高度
 	        $upload->thumbPrefix = $prefix; //缩略图前缀
 
-	        $upload->thumbPath = './Uploads/images/' . $path .'/'; //缩略图保存路径
+	        $upload->thumbPath = '../Uploads/images/' . $path .'/'; //缩略图保存路径
 	        //$upload->thumbRemoveOrigin = true; //上传图片后删除原图片
 	        $upload->autoSub = false; //是否使用子目录保存图片
 	        $upload->subType = 'date'; //子目录保存规则
