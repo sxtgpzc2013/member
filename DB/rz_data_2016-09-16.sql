@@ -242,6 +242,8 @@ CREATE TABLE `zx_member` (
   `num` int(10) DEFAULT '0' COMMENT '伞下人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
+  `static_fenghong` double(10,2) DEFAULT '0.00' COMMENT '静态分红',
+  `dynamic_fenhong` double(10,2) DEFAULT '0.00' COMMENT '动态分红'
   PRIMARY KEY (`uid`),
   UNIQUE KEY `usernumber` (`usernumber`) USING BTREE,
   KEY `status` (`status`) USING BTREE,
@@ -376,10 +378,10 @@ CREATE TABLE `zx_bonus_detail` (
 # 2016-09-21 新增字段
 # --------------------------------------------------------------
 ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-报单币 3-戎子盾 4-激活币 5-奖励积分 6-爱心基金 7 平台管理费 8税费';
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
 
 
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
 
