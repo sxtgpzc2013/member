@@ -271,7 +271,7 @@
 			                    <label class="col-sm-2 control-label">一级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="psd1">
+			                        <input type="text" class="form-control" name="psd1" minlength="6">
 			                    </div>
 			                </div>
 
@@ -279,7 +279,7 @@
 			                    <label class="col-sm-2 control-label">确认一级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="confirm_psd1">
+			                        <input type="text" class="form-control" name="confirm_psd1" minlength="6">
 			                    </div>
 			                </div>
 
@@ -287,7 +287,7 @@
 			                    <label class="col-sm-2 control-label">二级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="psd2">
+			                        <input type="text" class="form-control" name="psd2" minlength="6">
 			                    </div>
 			                </div>
 
@@ -295,7 +295,7 @@
 			                    <label class="col-sm-2 control-label">确认二级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="confirm_psd2">
+			                        <input type="text" class="form-control" name="confirm_psd2" minlength="6">
 			                    </div>
 			                </div>
 
@@ -432,16 +432,20 @@
 					required: true
 				},
 				psd1: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				confirm_psd1: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				psd2: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				confirm_psd2: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				is_free: {
 					required: true
@@ -464,10 +468,26 @@
 				agree: "required"
 			},
 			messages: {
-				   is_free: {
-                        required: "如需注册请同意消费商注册协议",
-                    },
-			   }
+				is_free: {
+					required: "如需注册请同意消费商注册协议",
+				},
+				psd1: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				confirm_psd1: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				psd2: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				confirm_psd2: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				}
+			}
 		});
 
 		$('.get_usernumber').click(function(){
