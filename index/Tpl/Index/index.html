@@ -87,6 +87,10 @@
 									<tr>
 										<td>数字红酒资格:{$member['red_wine_number']}</td>
 										<td>激活币:{$member['jihuobi']}</td>
+										<if condition="$member['isbill'] == 1">
+											<td>报单中心:服务中心</td>
+										</if>
+
 									</tr>
 								</tbody>
 							</table>
