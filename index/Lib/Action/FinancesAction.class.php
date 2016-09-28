@@ -452,6 +452,74 @@
 
 	    		if ($member_save)
 	    		{
+					//增加财务流水
+					$data['money'] = $transfer_money;
+
+					$data['moneytype'] = 1;
+
+					$data['changetype'] = 15;
+
+					$data['realname'] = "{$member['realname']}";
+
+					$data['targetrealname'] = "{$member['realname']}";
+
+					$data['status'] = 1;
+
+					$data['targetuserid'] = $member['uid'];
+
+					$data['targetusernumber'] = $member['usernumber'];
+
+					$data['userid'] = $member['uid'];
+
+					$data['usernumber'] = $member['usernumber'];
+
+					$data['recordtype'] = 0;
+
+		    		$data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $data
+		    		);
+
+		    		$transfer_flow = $this -> model -> my_add($params);
+
+
+					$to_data['money'] = $transfer_money;
+
+					$to_data['moneytype'] = 2;
+
+					$to_data['changetype'] = 15;
+
+					$to_data['realname'] = "{$member['realname']}";
+
+					$to_data['targetrealname'] = "{$member['realname']}";
+
+					$to_data['status'] = 1;
+
+					$to_data['targetuserid'] = $member['uid'];
+
+					$to_data['targetusernumber'] = $member['usernumber'];
+
+					$to_data['userid'] = $member['uid'];
+
+					$to_data['usernumber'] = $member['usernumber'];
+
+					$to_data['recordtype'] = 1;
+
+		    		$to_data['createtime'] = time();
+
+		    		$params = array(
+
+		    			'table_name' => 'money_change',
+
+		    			'data' => $to_data
+		    		);
+
+					$to_transfer_flow = $this -> model -> my_add($params);
+
 	    			redirect(__APP__.'/Finances/convert', 0);
 	    		}
 	    		else
