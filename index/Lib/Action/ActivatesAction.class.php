@@ -477,142 +477,142 @@ class ActivatesAction extends CommonAction {
 	//更新报单中心服务市场补贴
 	function save_market_subsidy($deduct){
 		//用户ID
-		$uid = $_SESSION['Rongzi']['user']['uid'];
+		$uid = intval($_SESSION['Rongzi']['user']['uid']);
 
-		//获取报单中心数据
-		$params = array(
+		if($uid != 1){
+			//获取报单中心数据
+			$params = array(
 
-			'table_name' => 'member',
+				'table_name' => 'member',
 
-			'where' => "uid = {$uid}"
-		);
+				'where' => "uid = {$uid}"
+			);
 
-		$member = $this -> model -> my_find($params);
+			$member = $this -> model -> my_find($params);
 
-		//获取市场补贴比例
-		$marketratio = $this -> get_market_ratio();
+			//获取市场补贴比例
+			$marketratio = $this -> get_market_ratio();
 
-		$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
+			$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
 
-		$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
+			$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
 
-		//保存报单中心金额
-		$params = array(
+			//保存报单中心金额
+			$params = array(
 
-			'table_name' => 'member',
+				'table_name' => 'member',
 
-			'where' => "uid = {$uid}",
+				'where' => "uid = {$uid}",
 
-			'data' => $data
-		);
+				'data' => $data
+			);
 
-		$marke_save = $this -> model -> my_save($params);
+			$marke_save = $this -> model -> my_save($params);
 
-		//扣除公司金额
-		$this -> save_finance($deduct * $marketratio);
+			//扣除公司金额
+			$this -> save_finance($deduct * $marketratio);
 
-		$bonusdata = array(
+			$bonusdata = array(
 
-			'touserid' => $member['uid'],
+				'touserid' => $member['uid'],
 
-			'tousernumber' => $member['usernumber'],
+				'tousernumber' => $member['usernumber'],
 
-			'torealname' => $member['realname'],
+				'torealname' => $member['realname'],
 
-			'jiangjinbi' => $deduct * $marketratio * 0.55,
+				'jiangjinbi' => $deduct * $marketratio * 0.55,
 
-			'rongzidun' => $deduct * $marketratio * 0.25,
+				'rongzidun' => $deduct * $marketratio * 0.25,
 
-			'platmoney' => $deduct * $marketratio * 0.02,
+				'platmoney' => $deduct * $marketratio * 0.02,
 
-			'taxmoney' => $deduct * $marketratio * 0.17,
+				'taxmoney' => $deduct * $marketratio * 0.17,
 
-			'total' => $deduct * $marketratio,
+				'total' => $deduct * $marketratio,
 
-			'real_total' => $deduct * $marketratio * 0.8,
+				'real_total' => $deduct * $marketratio * 0.8,
 
-			'createdate' => strtotime(date("Y-m-d", time())),
+				'createdate' => strtotime(date("Y-m-d", time())),
 
-			'lovemoney' => $deduct * $marketratio * 0.01,
+				'lovemoney' => $deduct * $marketratio * 0.01,
 
-			'moneytype' => 5
+				'moneytype' => 5
 
-		);
+			);
 
-		//添加奖金明细记录
-		$params = array(
+			//添加奖金明细记录
+			$params = array(
 
-			'table_name' => 'bonus_detail',
+				'table_name' => 'bonus_detail',
 
-			'data' => $bonusdata
-		);
+				'data' => $bonusdata
+			);
 
-		$bonusdata_add = $this -> model -> my_add($params);
+			$bonusdata_add = $this -> model -> my_add($params);
 
-		//添加到财务流水 money_change
-		$money_change_data['changetype'] = 7;
+			//添加到财务流水 money_change
+			$money_change_data['changetype'] = 7;
 
-		$money_change_data['realname'] = "戎子";
+			$money_change_data['realname'] = "戎子";
 
-		$money_change_data['status'] = 1;
+			$money_change_data['status'] = 1;
 
-		$money_change_data['targetrealname'] = $member['realname'];
+			$money_change_data['targetrealname'] = $member['realname'];
 
-		$money_change_data['targetuserid'] = $member['uid'];
+			$money_change_data['targetuserid'] = $member['uid'];
 
-		$money_change_data['targetusernumber'] = $member['usernumber'];
+			$money_change_data['targetusernumber'] = $member['usernumber'];
 
-		$money_change_data['userid'] = 1;
+			$money_change_data['userid'] = 1;
 
-		$money_change_data['usernumber'] = 1;
+			$money_change_data['usernumber'] = 1;
 
-		$money_change_data['createtime'] = time();
+			$money_change_data['createtime'] = time();
 
-		//jiangjinbi rongzidun platmoney taxmoney lovemoney
+			//jiangjinbi rongzidun platmoney taxmoney lovemoney
 
-		$add_array = array(
-			"0" => array(
-				'name' => "jiangjinbi",
-				'moneytype' => 1,
-				'ratio' => "0.55",
-				'recordtype' => 1
-			),
-			"1" => array(
-				'name' => "rongzidun",
-				'moneytype' => 3,
-				'ratio' => "0.25",
-				'recordtype' => 1
-			),
-			"2" => array(
-				'name' => "platmoney",
-				'moneytype' => 7,
-				'ratio' => "0.02",
-				'recordtype' => 0
-			),
-			"3" => array(
-				'name' => "taxmoney",
-				'moneytype' => 8,
-				'ratio' => "0.17",
-				'recordtype' => 0
-			),
-			"4" => array(
-				'name' => "lovemoney",
-				'moneytype' => 6,
-				'ratio' => "0.01",
-				'recordtype' => 0
-			),
-		);
+			$add_array = array(
+				"0" => array(
+					'name' => "jiangjinbi",
+					'moneytype' => 1,
+					'ratio' => "0.55",
+					'recordtype' => 1
+				),
+				"1" => array(
+					'name' => "rongzidun",
+					'moneytype' => 3,
+					'ratio' => "0.25",
+					'recordtype' => 1
+				),
+				"2" => array(
+					'name' => "platmoney",
+					'moneytype' => 7,
+					'ratio' => "0.02",
+					'recordtype' => 0
+				),
+				"3" => array(
+					'name' => "taxmoney",
+					'moneytype' => 8,
+					'ratio' => "0.17",
+					'recordtype' => 0
+				),
+				"4" => array(
+					'name' => "lovemoney",
+					'moneytype' => 6,
+					'ratio' => "0.01",
+					'recordtype' => 0
+				),
+			);
 
-		foreach ($add_array as $key => $value) {
+			foreach ($add_array as $key => $value) {
 
 
-			$money_change_data['recordtype'] = $value['recordtype'];
+				$money_change_data['recordtype'] = $value['recordtype'];
 
-			$money_change_data['money'] = $deduct * $marketratio * $value['ratio'];
+				$money_change_data['money'] = $deduct * $marketratio * $value['ratio'];
 
-			$money_change_data['moneytype'] = $value['moneytype'];
+				$money_change_data['moneytype'] = $value['moneytype'];
 
-			if($value !== 1){
 				//添加财务明细记录
 				$params = array(
 
@@ -622,9 +622,10 @@ class ActivatesAction extends CommonAction {
 				);
 
 				$money_change_add = $this -> model -> my_add($params);
-			}
 
+			}
 		}
+
 
 	}
 
