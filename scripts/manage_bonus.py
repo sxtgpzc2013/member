@@ -399,12 +399,14 @@ def getuservalue(parents):
 	for uid in parents:
 		val = []
 		sql = """
-			select uid, usertitle from zx_member where uid = %s
+			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key 
+			where m.uid = %s and category = 'managercash'
 		""" % (uid)
 		result = conn.query(sql)
 		if result and result[0]['usertitle'] != 0:
 			val.append(result[0]['uid'])
 			val.append(result[0]['usertitle'])
+			val.append(result[0]['value'])
 			members.append(val)
 
 	return members
@@ -430,15 +432,27 @@ def getmembervalue(uid):
 	results = conn.query(sql)
 	if results:
 		value = results[0]['value']
-
 	return value
 
 # 极差算法
-def jicha(uid, maxmanagercash, memberlevels):
-	i = 5
+def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
+	maxmanagercash = maxmanagercash
+	i = 0
 	for member in memberlevels:
-		print member
+		member_uid = member[0]
+		member_title = member[1]
+		member_value = member[2]
 
+		if member_title > usertitle:
+			leadercash = value * maxmanagercash / 100
+		elif member_title == usertitle:
+			leadercash = value * maxmanagercash / 100
+		elif member_title < usertitle:
+			leadercash = value * member_value / 100
+			maxmanagercash -= member_value
+
+		print maxmanagercash
+		i = member_title
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
@@ -460,13 +474,15 @@ def managerbonus(uid, usertitle):
 			value = getmembervalue(child)
 			# 获取推荐的人的父级 
 			parents = gettuijiannumber_parent(child)
-			# 极差
-			# 赛选有星级的会员 uid, usertitle
-			memberlevels = getuservalue(parents)
-			jicha(uid, maxmanagercash, memberlevels)
+			for k, v in enumerate(parents):
+				if int(v) == int(uid):
+					# 极差
+					# 赛选有星级的会员 uid, usertitle
+					memberlevels = getuservalue(parents[0:k+1])
+					jicha(uid, usertitle, value, maxmanagercash, memberlevels)
 			break
 		break
 
 
 if __name__ == '__main__':
-	print managerbonus(170, 2)
+	managerbonus(170, 2)
