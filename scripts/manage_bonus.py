@@ -436,15 +436,15 @@ def getmembervalue(uid):
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
-	print "uid", uid
 	# 先获取会员管理比例的最大值
 	maxmanagercash = getmaxmanagercash(usertitle)
-	print maxmanagercash
+
 	# 获取会员 的 左 中 右 消费商
 	sql = """
 		select uid from zx_member where parentid = %s
 	""" % (uid)
 	members = conn.query(sql)
+	print members
 	for member in members:
 		member_uid = member['uid']
 		# 获取消费商推荐的人
