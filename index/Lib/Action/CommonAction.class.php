@@ -107,7 +107,7 @@
 			$prefix = 'b_,m_,s_,l_';
 	        $upload = new UploadFile(); // 实例化上传类
 	        $upload->maxSize =10000000; // 设置附件上传大小
-	        $upload->savePath = './Uploads/images/' . $path . '/'; // 设置附件上传目录
+	        $upload->savePath = '../Uploads/images/' . $path . '/'; // 设置附件上传目录
 	        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
 	        // $upload->saveRule = 'time';
 	        $upload->uploadReplace = true; //是否存在同名文件是否覆盖
@@ -116,7 +116,7 @@
 	        $upload->thumbMaxHeight = $height; //缩略图处理高度
 	        $upload->thumbPrefix = $prefix; //缩略图前缀
 
-	        $upload->thumbPath = './Uploads/images/' . $path .'/'; //缩略图保存路径
+	        $upload->thumbPath = '../Uploads/images/' . $path .'/'; //缩略图保存路径
 	        //$upload->thumbRemoveOrigin = true; //上传图片后删除原图片
 	        $upload->autoSub = false; //是否使用子目录保存图片
 	        $upload->subType = 'date'; //子目录保存规则
@@ -169,7 +169,7 @@
 			$prefix = 'b_,m_,s_,l_';
 	        $upload = new UploadFile(); // 实例化上传类
 	        $upload->maxSize =10000000; // 设置附件上传大小
-	        $upload->savePath = './Uploads/images/' . $path . '/'; // 设置附件上传目录
+	        $upload->savePath = '../Uploads/images/' . $path . '/'; // 设置附件上传目录
 	        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
 	        // $upload->saveRule = 'time';
 	        $upload->uploadReplace = true; //是否存在同名文件是否覆盖
@@ -395,5 +395,17 @@
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 		$objWriter->save('php://output');
 		exit;
+	}
+
+
+	/**
+	* 获取当前页面完整URL地址
+	*/
+	function get_url() {
+	   $sys_protocal = isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://';
+	   $php_self = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
+	   $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+	   $relate_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $php_self.(isset($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : $path_info);
+	   return $sys_protocal.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$relate_url;
 	}
 }

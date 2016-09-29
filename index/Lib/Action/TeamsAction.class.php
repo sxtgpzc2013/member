@@ -67,7 +67,7 @@
 				}
 
 				$data = $_POST;
-				
+
 				// foreach ($data as $key => $value) {
 				// 	if(empty($value)){
 				// 		$this -> _back('请完善数据后再提交！');return;
@@ -1050,6 +1050,8 @@
 				$recommend_list_result[$key]["rongzidun"] = intval($value['rongzidun']);
 
 				$recommend_list_result[$key]["jihuobi"] = intval($value['jihuobi']);
+
+				$recommend_list_result[$key]["num"] = intval($value['num']);
 
 				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
 
