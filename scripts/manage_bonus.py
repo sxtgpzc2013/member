@@ -405,8 +405,9 @@ def getuservalue(parents):
 		if result and result[0]['usertitle'] != 0:
 			val.append(result[0]['uid'])
 			val.append(result[0]['usertitle'])
-
-		members.append(val)
+			value = getmembervalue(result[0]['uid'])
+			val.append(value)
+			members.append(val)
 
 	return members
 
@@ -450,12 +451,10 @@ def managerbonus(uid, usertitle):
 		# 获取消费商推荐的人
 		childs = gettuijiannumber_child(member_uid)
 		for child in childs:
-			# 获取推荐的人的父级, 推荐人对应级别的金额
-			value = getmembervalue(child)
 			# 获取推荐的人的父级 
 			parents = gettuijiannumber_parent(child)
 			# 极差
-			# 赛选有星级的会员
+			# 赛选有星级的会员 uid, usertitle
 			memberlevels = getuservalue(parents)
 
 
