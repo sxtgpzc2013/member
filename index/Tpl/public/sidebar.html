@@ -20,7 +20,7 @@
 				</ul>
 			</li>
 			<li class="<?php if (MODULE_NAME == 'Consumers') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">消费商管理</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">信息管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li class="<?php if (MODULE_NAME == 'Consumers' && ACTION_NAME == 'edit_info') {echo 'active';} ?>">
 						<a href="__APP__/Consumers/edit_info">修改资料</a>
@@ -32,7 +32,7 @@
 			</li>
 
 			<li class="<?php if (MODULE_NAME == 'Teams' || MODULE_NAME == 'Activates') {echo 'active';} ?>">
-				<a href="index.html"><i class="fa fa-group"></i> <span class="nav-label">团队管理</span> <span class="fa arrow"></span></a>
+				<a href="index.html"><i class="fa fa-group"></i> <span class="nav-label">市场管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
 					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'index') {echo 'active';} ?>">
@@ -74,7 +74,7 @@
 						<a href="__APP__/Finances/cash_list">提现记录</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer') {echo 'active';} ?>">
-						<a href="__APP__/Finances/transfer">消费商转币</a>
+						<a href="__APP__/Finances/transfer">系统内部转账</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'convert') {echo 'active';} ?>">
 						<a href="__APP__/Finances/convert">奖金币转报单币</a>
