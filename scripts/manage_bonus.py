@@ -71,7 +71,7 @@ def member():
 			realname = member['realname']
 			# 判断是星级的会员
 			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
-				managerbonus(uid, usertitle)
+				managerbonus(uid)
 
 			value = compare(member['leftachievement'], member['middleachievement'], member['rightachievement'])
 			if value > 100000 and value < 300000:
@@ -172,16 +172,34 @@ def gettuijiannumber_parent(uid):
 
 	return parents[-2::-1]
 
-def getusertitle(uid):
+def getuservalue(uid):
 	usertitle = 0
+	managercash = 0
 	sql = """
-		select usertitle from zx_member where uid = %s
+		select m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r 
+		on m.usertitle = r.key where m.uid = %s and r.category = 'managercash'
 	""" % (uid)
+
 	result = conn.query(sql)
+	print result
 	if result:
 		usertitle = result[0]['usertitle']
+		managercash = result[0]['value']
 
-	return usertitle
+	return usertitle, managercash
+
+def getmaxmanagercash(parents, uid):
+	managercashs = []
+	for _uid in uids:
+		if int(_uid) == int(uid):
+			usertitle, managercash = getuservalue(uid)
+			managercashs.append(managercash)
+			break
+
+		usertitle, managercash = getuservalue(uid)
+		managercashs.append(managercash)
+
+	return max(managercashs)
 
 # 获取会员的级别对应的金额
 def getmembervalue(uid):
@@ -195,44 +213,74 @@ def getmembervalue(uid):
 		value = results[0]['value']
 
 	return value
+ 
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
-def managerbonus(uid, usertitle):
-	managercash = 0
-	managercash_rule_sql = """
-		select `key`, value from zx_bonus_rule where category = 'managercash' and `key` = %s
-	""" % (usertitle)
-	result = conn.query(managercash_rule_sql)
-
-	# 获取管理奖的比例
-	if result and len(result) == 1:
-		managercash = result[0]['value']
-
+def managerbonus(uid):
 	# 获取会员 的 左 中 右 消费商
 	members = """
-		select uid, usertitle from zx_member where parentid = %s
+		select uid from zx_member where parentid = %s
 	""" % (uid)
 
+	break
 	for member in members:
 		member_uid = member['uid']
-		member_usertitle = member['usertitle']
 		# 获取消费商推荐的人
 		childs = gettuijiannumber_child(member_uid)
 		for child in childs:
-			# 获取推荐的人的父级
+			# 获取推荐的人的父级, 推荐人对应级别的金额
+			value = getmembervalue(child)
+			# 获取推荐的人的父级 
 			parents = gettuijiannumber_parent(child)
-			for tuijian_uid in parents:
-				usertitle = getusertitle(tuijian_uid)
-				if uid == tuijiannumber:
+			# 先获取会员管理比例的最大值
+			maxmanagercash = getmaxmanagercash(parents, uid)
+
+			for parent_uid in parents:
+				if int(parent_uid) == uid:
+					usertitle, managercash = getuservalue(parent_uid)
+					if usertitle == 1:
+						cash = value * maxmanagercash / 100
+						maxmanagercash -= 5
+					elif usertitle == 2:
+						cash = value * maxmanagercash / 100
+						maxmanagercash -= 10
+					elif usertitle == 3:
+						cash = value * maxmanagercash / 100
+						maxmanagercash -= 15
+					elif usertitle == 4:
+						cash = value * maxmanagercash / 100
+						maxmanagercash -= 20
+					elif usertitle == 5:
+						cash = value * maxmanagercash / 100
+						maxmanagercash -= 25
+					elif usertitle == 6:
+						cash = value * maxmanagercash / 100
+						maxmanagercash -= 30
 					break
-				else:
-					pass
+
+				usertitle, managercash = getuservalue(parent_uid)
+				if usertitle == 1:
+					cash = value * maxmanagercash / 100
+					maxmanagercash -= 5
+				elif usertitle == 2:
+					cash = value * maxmanagercash / 100
+					maxmanagercash -= 10
+				elif usertitle == 3:
+					cash = value * maxmanagercash / 100
+					maxmanagercash -= 15
+				elif usertitle == 4:
+					cash = value * maxmanagercash / 100
+					maxmanagercash -= 20
+				elif usertitle == 5:
+					cash = value * maxmanagercash / 100
+					maxmanagercash -= 25
+				elif usertitle == 6:
+					cash = value * maxmanagercash / 100
+					maxmanagercash -= 30
 
 #互助奖，享受管理补贴的代数的奖励
 def leaderbonus():
 	pass
 
 if __name__ == '__main__':
-	print getmembervalue(102)
-
-
+	print getuservalue(3)
