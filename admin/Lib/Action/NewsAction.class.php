@@ -81,7 +81,7 @@
 
 	    		$data['level'] = isset($_POST['level']) ? intval($_POST['level']) : $this -> _back('请填写优先级');
 
-	    		$data['content'] = isset($_POST['content']) ? htmlspecialchars($_POST['content']) : $this -> _back('请填写新闻内容');
+	    		$data['content'] = isset($_POST['content']) ? $_POST['content'] : $this -> _back('请填写新闻内容');
 
 	    		$data['viewnum'] = 0;
 
@@ -160,7 +160,7 @@
 
 	    		$data['level'] = isset($_POST['level']) ? intval($_POST['level']) : $this -> _back('请填写优先级');
 
-	    		$data['content'] = isset($_POST['content']) ? htmlspecialchars($_POST['content']) : $this -> _back('请填写新闻内容');
+	    		$data['content'] = isset($_POST['content']) ? $_POST['content'] : $this -> _back('请填写新闻内容');
 
 	    		$data['updated_at'] = time();
 
