@@ -134,7 +134,7 @@ def member_active_time(uid):
 	results = conn.query(sql)
 	if results:
 		return False
-	else
+	else:
 		flag = True
 
 	return flag
@@ -150,11 +150,12 @@ def gettuijiannumber_child(uid):
 		for result in results:
 			_childs = result['recommenduserpath'].split(',')[::-1]
 			for _child in _childs:
-				if _child == usernumber:
+				if int(_child) == int(uid):
 					break
-				else:
-					status = member_active_time(_child)
-					if status:
+				
+				status = member_active_time(_child)
+				if status:
+					if _child not in childs:
 						childs.append(_child)
 
 	return childs
@@ -167,7 +168,7 @@ def gettuijiannumber_parent(uid):
 	"""  % (uid)
 	results = conn.query(sql)
 	if results:
-		parents = result[0]['recommenduserpath'].split(',')
+		parents = results[0]['recommenduserpath'].split(',')
 
 	return parents[-2::-1]
 
@@ -181,6 +182,19 @@ def getusertitle(uid):
 		usertitle = result[0]['usertitle']
 
 	return usertitle
+
+# 获取会员的级别对应的金额
+def getmembervalue(uid):
+	value = 0
+	sql = """
+		select r.value from zx_member as m left join zx_bonus_rule as r on m.userrank = r.key
+		where r.category = 'userrank'
+	"""
+	results = conn.query(sql)
+	if results:
+		value = results[0]['value']
+
+	return value
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
@@ -219,6 +233,6 @@ def leaderbonus():
 	pass
 
 if __name__ == '__main__':
-	print gettuijiannumber_child(102)
+	print getmembervalue(102)
 
 
