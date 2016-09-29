@@ -405,8 +405,6 @@ def getuservalue(parents):
 		if result and result[0]['usertitle'] != 0:
 			val.append(result[0]['uid'])
 			val.append(result[0]['usertitle'])
-			value = getmembervalue(result[0]['uid'])
-			val.append(value)
 			members.append(val)
 
 	return members
@@ -435,6 +433,13 @@ def getmembervalue(uid):
 
 	return value
 
+# 极差算法
+def jicha(uid, maxmanagercash, memberlevels):
+	i = 5
+	for member in memberlevels:
+		print member
+
+
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
 	# 先获取会员管理比例的最大值
@@ -451,11 +456,16 @@ def managerbonus(uid, usertitle):
 		# 获取消费商推荐的人
 		childs = gettuijiannumber_child(member_uid)
 		for child in childs:
+			# 获取推荐人的级别金额
+			value = getmembervalue(child)
 			# 获取推荐的人的父级 
 			parents = gettuijiannumber_parent(child)
 			# 极差
 			# 赛选有星级的会员 uid, usertitle
 			memberlevels = getuservalue(parents)
+			jicha(uid, maxmanagercash, memberlevels)
+			break
+		break
 
 
 if __name__ == '__main__':
