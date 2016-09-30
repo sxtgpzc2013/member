@@ -36,7 +36,7 @@
 		//use Think;
 			echo("Congratulations!\n");
 			system("python ./scripts/manage_bonus.py", $ret);
-   			system("python ./scripts/achievement.py", $ret);
+   			system("python ./scripts/achievement.py", $ret2);
 			// $program="/usr/bin/python ./astro.py"; #注意使用绝对路径
 			// exec ($program);
 		}
