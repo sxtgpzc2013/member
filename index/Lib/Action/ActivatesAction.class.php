@@ -74,6 +74,10 @@ class ActivatesAction extends CommonAction {
 			if($value['userrank'] == 4){
 				$data['result'][$key]['money'] = 50000;
 			}
+
+			$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+			$data['result'][$key]["userrank"] = $userrank_content[$value['userrank']];
 		}
 
     	$result['members'] = $data['result'];
