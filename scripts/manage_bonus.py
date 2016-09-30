@@ -100,7 +100,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
 			taxmoney_award = managercash * taxmoney_rate
 
 	real_total = managercash - lovemoney_award - platmoney_award - taxmoney_award
-	sql = """
+	zx_member_sql = """
 		update zx_member set jiangjinbi = jiangjinbi + %s, rongzidun = rongzidun + %s where usernumber = %s
 	""" % (jiangjinbi_award, rongzidun_award, usernumber)
 	zx_member = conn.dml(zx_member_sql, 'update')
