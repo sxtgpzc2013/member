@@ -354,7 +354,7 @@ class ActivatesAction extends CommonAction {
 		foreach ($contactuserpath_arr as $key => $value) {
 
 			//查询该用户在左区中区还是右区
-			if($contactuserpath_arr[$key] and $contactuserpath_arr[$key+1]){
+			if($contactuserpath_arr[$key] && $contactuserpath_arr[$key+1] && $member['userrank'] != 1){
 
 				# 获取当前用户区间
 				$contact_uid = $contactuserpath_arr[$key];
