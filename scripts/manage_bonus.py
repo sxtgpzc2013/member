@@ -440,7 +440,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 def update_achievement_status(uid):
 	sql = """
 		update zx_member set achievementstatus = 1 where uid = %s
-	""" % (usernumber)
+	""" % (uid)
 
 	status = conn.dml(sql, 'update')
 	return status
