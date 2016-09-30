@@ -951,7 +951,7 @@
 
 				}else if($value['zone'] == 3){
 
-					$recommend_list[$key]["zone_name"] = "右区";
+					$recommend_list[$key]["zone_name"] = "C部";
 
 				}
 
@@ -1073,7 +1073,7 @@
 
 				}else if($value['zone'] == 3){
 
-					$recommend_list_result[$key]["zone_name"] = "右区";
+					$recommend_list_result[$key]["zone_name"] = "C部";
 
 				}
 			}

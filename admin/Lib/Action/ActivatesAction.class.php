@@ -230,7 +230,7 @@ class ActivatesAction extends CommonAction {
 
 		foreach ($contactuserpath_arr as $key => $value) {
 
-			//查询该用户在A部B部还是右区
+			//查询该用户在A部B部还是C部
 			if($contactuserpath_arr[$key] and $contactuserpath_arr[$key+1]){
 
 				# 获取当前用户区间
