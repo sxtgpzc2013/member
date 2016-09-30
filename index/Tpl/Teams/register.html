@@ -33,7 +33,7 @@
 			                    <label class="col-sm-2 control-label">销费商编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}">
+			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}" minlength="8">
 									<span id="cname-error" class="help-block m-b-none usernumber_err" style="display:none;">必填</span>
 								</div>
 
@@ -74,16 +74,7 @@
 			                    <label class="col-sm-2 control-label">销费商身份证号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="IDcard">
-			                    </div>
-			                </div>
-
-
-							<div class="form-group">
-			                    <label class="col-sm-2 control-label">销费商身份证所在区域</label>
-
-			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="ID_address">
+			                        <input type="text" class="form-control" name="IDcard" minlength="18">
 			                    </div>
 			                </div>
 
@@ -109,22 +100,9 @@
 
 			                    <div class="col-sm-7">
 									<select class="form-control" name="bankname">
-										<option value="1">中国工商银行</option>
-										<option value="2">中国农业银行</option>
-										<option value="3">中国银行</option>
-										<option value="4">中国建设银行</option>
-										<option value="5">国家开发银行</option>
-										<option value="6">中国进出口银行</option>
-										<option value="7">中国农业发展银行</option>
-										<option value="8">交通银行</option>
-										<option value="9">中信银行</option>
-										<option value="10">中国光大银行</option>
-										<option value="11">华夏银行</option>
-										<option value="12">中国民生银行</option>
-										<option value="13">广东发展银行</option>
-										<option value="14">深圳发展银行</option>
-										<option value="15">招商银行</option>
-										<option value="16">北京银行</option>
+										<option value="1">中国农业银行</option>
+										<option value="2">中国建设银行</option>
+
 									</select>
 			                    </div>
 			                </div>
@@ -414,12 +392,6 @@
 					required: true
 				},
 				banknumber: {
-					required: true
-				},
-				ID_address_face: {
-					required: true
-				},
-				ID_address_back: {
 					required: true
 				},
 				tuijiannumber: {
