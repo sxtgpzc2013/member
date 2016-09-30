@@ -82,19 +82,6 @@
 
 	    	$recommend_count = $this -> model -> get_count($params);
 
-			$params = array(
-
-	    		'table_name' => 'news',
-
-	    		'order' => "level asc",
-
-	    		'where' => "is_del = 0 AND status = 0"
-	    	);
-
-	    	$news = $this -> model -> order_select($params);
-
-	    	$this -> assign('news', $news['result']);
-
 			$this -> assign('member', $member);
 
 			$this -> assign('bonus_count', $bonus_count['result']);
