@@ -71,7 +71,7 @@
 
 
 		/**
-		 * 消费商修改相关页面
+		 * 销费商修改相关页面
 		 *
 		 * 参数描述：
 		 *
@@ -106,7 +106,7 @@
 			$member["zone"] = $zone[$member['zone']];
 
 
-			//获取报单中心数据
+			//获取代理商编号数据
 			$params = array(
 
 				'table_name' => 'member',
@@ -128,7 +128,7 @@
 
 	    	$recommendmember = $this -> model -> my_find($params);
 
-			//获取接点人数据 parentid
+			//获取位置编号数据 parentid
 			$params = array(
 
 				'table_name' => 'member',
@@ -152,7 +152,7 @@
 
 
 		/**
-		 * 设置为报单中心
+		 * 设置为代理商编号
 		 *
 		 * 参数描述：
 		 *
@@ -183,12 +183,12 @@
 			if ($my_save == 1){
 				$this -> redirect("/Corps/edit?uid=".$uid);
 			}else{
-				$this -> _back('消费商报单中心设置失败失败');
+				$this -> _back('销费商代理商编号设置失败失败');
 			}
 	    }
 
 		/**
-		 * 设置为报单中心
+		 * 设置为代理商编号
 		 *
 		 * 参数描述：
 		 *
@@ -219,12 +219,12 @@
 			if ($my_save == 1){
 				$this -> redirect("/Corps/edit?uid=".$uid);
 			}else{
-				$this -> _back('消费商报单中心取消失败');
+				$this -> _back('销费商代理商编号取消失败');
 			}
 	    }
 
 	    /**
-		 * 冻结消费商
+		 * 冻结销费商
 		 *
 		 * 参数描述：
 		 *
@@ -255,12 +255,12 @@
 			if ($my_save == 1){
 				$this -> redirect("/Corps/index");
 			}else{
-				$this -> _back('冻结消费商失败');
+				$this -> _back('冻结销费商失败');
 			}
 	    }
 
 		/**
-		 * 冻结消费商
+		 * 冻结销费商
 		 *
 		 * 参数描述：
 		 *
@@ -291,12 +291,12 @@
 			if ($my_save == 1){
 				$this -> redirect("/Corps/index");
 			}else{
-				$this -> _back('冻结消费商失败');
+				$this -> _back('冻结销费商失败');
 			}
 	    }
 
 	    /**
-		 * 删除消费商
+		 * 删除销费商
 		 *
 		 * 参数描述：
 		 *
@@ -327,12 +327,12 @@
 			if ($my_save == 1){
 				$this -> redirect("/Corps/index");
 			}else{
-				$this -> _back('删除消费商失败');
+				$this -> _back('删除销费商失败');
 			}
 	    }
 
 		/**
-		 * 删除消费商
+		 * 删除销费商
 		 *
 		 * 参数描述：
 		 *
@@ -363,7 +363,7 @@
 			if ($my_save == 1){
 				$this -> redirect("/Corps/index");
 			}else{
-				$this -> _back('删除消费商失败');
+				$this -> _back('删除销费商失败');
 			}
 	    }
 	}

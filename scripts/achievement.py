@@ -56,7 +56,7 @@ def update_member(usertitle, jianglijifen, usernumber):
 
 	return conn.dml(sql, 'update')
 
-# 插入奖励积分明细
+# 插入福利积分明细
 def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen):
 	sql = """
 		insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jianglijifen, createdate) 
@@ -65,7 +65,7 @@ def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jiang
 
 	return conn.dml(sql, 'insert')
 
-# 插入奖励积分流水
+# 插入福利积分流水
 def insert_money_change_jianglijifen(moneytype, uid, usernumber, realname, changetype, recordtype, jianglijifen):
 	sql = """
 		insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)

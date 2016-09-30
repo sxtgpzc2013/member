@@ -30,7 +30,7 @@
 		}
 
 	    /**
-		 * 消费商注册
+		 * 销费商注册
 		 *
 		 * 参数描述：
 		 *
@@ -96,10 +96,10 @@
 				//获取推荐人ID
 				$data['tuijianid'] = $this -> get_recommend_user_id($data['tuijiannumber']);
 
-				//获取接点人ID
+				//获取位置编号ID
 				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber']);
 
-				//报单中心人ID
+				//代理商编号人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
 
 				$pic = $this -> _upload_pic_all('member');
@@ -116,7 +116,7 @@
 				}
 
 				if($data['billcenterid'] == 0){
-					$this -> _back("{$data['billcenternumber']}不是报单中心,消费商注册失败,请重试。");return;
+					$this -> _back("{$data['billcenternumber']}不是代理商编号,销费商注册失败,请重试。");return;
 				}
 
 				//添加用户资料
@@ -132,7 +132,7 @@
 				//更新结果处理
 				if($member_add !== false){
 
-					//处理接点区域是否被占
+					//处理位置部门域是否被占
 					$this -> update_user_zone($data);
 
 					$member_id = $member_add;
@@ -155,7 +155,7 @@
 
 				}else{
 
-					$this -> _back('消费商注册失败，请重试。');return;
+					$this -> _back('销费商注册失败，请重试。');return;
 
 				}
 			}
@@ -217,7 +217,7 @@
 		}
 
 		/**
-		 * 获取报单中心
+		 * 获取代理商编号
 		 *
 		 * 参数描述：@usernumber 推荐人编号
 		 *
@@ -248,7 +248,7 @@
 
  			}
 
-			die(json_encode(array("success" => true, "code" => 200, "msg" => "报单中心获取成功", "data" => $billcenternumber)));
+			die(json_encode(array("success" => true, "code" => 200, "msg" => "代理商编号获取成功", "data" => $billcenternumber)));
 		 }
 
 		 /**
@@ -286,7 +286,7 @@
 		 }
 
 		 /**
- 		 * 获取用户接点区
+ 		 * 获取用户位置部门
  		 *
  		 * 参数描述：@usernumber 用户编号
  		 *
@@ -320,7 +320,7 @@
 
    			}
 
- 			die(json_encode(array("success" => true, "code" => 200, "msg" => "获取用户接点区", "data" => $data)));
+ 			die(json_encode(array("success" => true, "code" => 200, "msg" => "获取用户位置部门", "data" => $data)));
 		 }
 
 		/**
@@ -379,7 +379,7 @@
 			if($member){
 
 				if($member['left_zone'] == 1 && $member['middle_zone'] == 1 && $member['right_zone'] == 1 ){
-					$this -> _back('接点人区间已满,请重新选择推荐人！');return;
+					$this -> _back('位置编号区间已满,请重新选择推荐人！');return;
 				}else{
 
 					return $member['uid'];
@@ -393,7 +393,7 @@
 		}
 
 		/**
-		 * 获取报单中心ID
+		 * 获取代理商编号ID
 		 *
 		 * 参数描述：@tuijiannumber 推荐人编号
 		 *
@@ -504,7 +504,7 @@
 			}
 		}
 		/**
-		 * 更新推荐人接点区间是否被占
+		 * 更新推荐人位置部门间是否被占
 		 *
 		 * 参数描述：@data 用户数据
 		 *
@@ -516,20 +516,20 @@
 
 			switch ($userdata['zone']) {
 				case '1':
-					# 左区...
+					# A部...
 					$zone_name = 'left_zone';
 					break;
 				case '2':
-					# 左区...
+					# A部...
 					$zone_name = 'middle_zone';
 					break;
 				case '3':
-					# 左区...
+					# A部...
 					$zone_name = 'right_zone';
 					break;
 
 				default:
-					# 左区...
+					# A部...
 					$zone_name = 'left_zone';
 					break;
 			}
@@ -943,15 +943,15 @@
 
 				if($value['zone'] == 1){
 
-					$recommend_list[$key]["zone_name"] = "左区";
+					$recommend_list[$key]["zone_name"] = "A部";
 
 				}else if($value['zone'] == 2){
 
-					$recommend_list[$key]["zone_name"] = "中区";
+					$recommend_list[$key]["zone_name"] = "B部";
 
 				}else if($value['zone'] == 3){
 
-					$recommend_list[$key]["zone_name"] = "右区";
+					$recommend_list[$key]["zone_name"] = "C部";
 
 				}
 
@@ -1065,15 +1065,15 @@
 
 				if($value['zone'] == 1){
 
-					$recommend_list_result[$key]["zone_name"] = "左区";
+					$recommend_list_result[$key]["zone_name"] = "A部";
 
 				}else if($value['zone'] == 2){
 
-					$recommend_list_result[$key]["zone_name"] = "中区";
+					$recommend_list_result[$key]["zone_name"] = "B部";
 
 				}else if($value['zone'] == 3){
 
-					$recommend_list_result[$key]["zone_name"] = "右区";
+					$recommend_list_result[$key]["zone_name"] = "C部";
 
 				}
 			}

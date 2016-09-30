@@ -30,7 +30,7 @@ class ActivatesAction extends CommonAction {
 	}
 
 	/**
-	 * 消费商激活列表
+	 * 销费商激活列表
 	 *
 	 * 参数描述：
 	 *
@@ -41,9 +41,9 @@ class ActivatesAction extends CommonAction {
 	 */
 	public function index()
     {
-		//报单中心ID
+		//代理商编号ID
 		$billcenterid = $_SESSION['Rongzi']['user']['uid'];
-		//报单中心编号
+		//代理商编号编号
 		$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
 
 		//查询用户资料数据
@@ -200,7 +200,7 @@ class ActivatesAction extends CommonAction {
 				$this -> _back("账户激活币不足{$member['jihuobi']}");return;
 			}
 
-			//报单币余额计算
+			//注册币余额计算
 			$data['baodanbi'] = intval($member['baodanbi']) - $deduct/2;
 
 			//激活币余额计算
@@ -210,10 +210,10 @@ class ActivatesAction extends CommonAction {
 			$this -> _back('激活账号获取失败，请重试。');
 		}
 
-		//报单中心ID
+		//代理商编号ID
 		$billcenterid = $_SESSION['Rongzi']['user']['uid'];
 
-		//报单中心编号
+		//代理商编号编号
 		$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
 
 		//数据包
@@ -230,7 +230,7 @@ class ActivatesAction extends CommonAction {
 
 		foreach ($contactuserpath_arr as $key => $value) {
 
-			//查询该用户在左区中区还是右区
+			//查询该用户在A部B部还是C部
 			if($contactuserpath_arr[$key] and $contactuserpath_arr[$key+1]){
 
 				# 获取当前用户区间
@@ -333,7 +333,7 @@ class ActivatesAction extends CommonAction {
 		{
 			$this -> save_market($deduct);
 
-			//更新赠送红酒订单 添加一份订单
+			//更新消费套餐红酒订单 添加一份订单
 			$this -> save_red_order($member);
 
 			redirect(__APP__.'/Activates/index', 0);
@@ -344,12 +344,12 @@ class ActivatesAction extends CommonAction {
 		}
 	}
 
-	//更新报单中心服务市场补贴
+	//更新代理商编号服务市场补贴
 	function save_market($deduct){
 		//用户ID
 		$uid = $_SESSION['Rongzi']['user']['uid'];
 
-		//获取报单中心数据
+		//获取代理商编号数据
 		$params = array(
 
 			'table_name' => 'member',
@@ -363,7 +363,7 @@ class ActivatesAction extends CommonAction {
 
 		$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * 0.02 * 0.55;
 
-		//保存报单中心金额
+		//保存代理商编号金额
 		$params = array(
 
 			'table_name' => 'member',
@@ -429,7 +429,7 @@ class ActivatesAction extends CommonAction {
 		$bonusdata_add = $this -> model -> my_add($params);
 	}
 
-	//更新报单中心服务市场补贴
+	//更新代理商编号服务市场补贴
 	function save_red_order($member){
 
 		$order['order_code'] = $this -> get_order_number();
@@ -448,7 +448,7 @@ class ActivatesAction extends CommonAction {
 
 		$order['total_price'] = "0.00";
 
-		$order['notice'] = "注册消费商";
+		$order['notice'] = "注册销费商";
 
 		$order['created_at'] = time();
 

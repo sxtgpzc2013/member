@@ -11,7 +11,7 @@
                 <a>信息管理</a>
             </li>
             <li>
-                <strong>消费商列表</strong>
+                <strong>销费商列表</strong>
             </li>
         </ol>
 	</div>
@@ -27,35 +27,35 @@
 							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_password?uid={$_GET['uid']}">重置密码</a>
 							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改资料</a>
 							<if condition="$member['isbill'] eq 1">
-								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}">取消报单中心</a>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}">取消代理商编号</a>
 							<else/>
-								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}">设为报单中心</a>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}">设为代理商编号</a>
 							</if>
-							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改消费商级别</a>
-							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改消费商职务</a>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改销费商级别</a>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改销费商职务</a>
 						</p>
 					</div>
 
 				</div>
 
 				<!-- <div class="ibox-title">
-					<h5 class="ibox-title text-center">消费商</h5>
+					<h5 class="ibox-title text-center">销费商</h5>
 				</div> -->
                 <div class="ibox-content">
-					<!-- <h5 class="text-center">消费商列表</h5> -->
+					<!-- <h5 class="text-center">销费商列表</h5> -->
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>消费商编号</th>
-                                    <th>消费商姓名</th>
+                                    <th>销费商编号</th>
+                                    <th>销费商姓名</th>
                                     <th>身份证号</th>
                                     <th>手机号码</th>
-									<th>消费商级别</th>
-									<th>报单中心</th>
-									<th>左区三个月业绩</th>
-									<th>中区三个月业绩</th>
-									<th>右区三个月业绩</th>
+									<th>销费商级别</th>
+									<th>代理商编号</th>
+									<th>A部三个月业绩</th>
+									<th>B部三个月业绩</th>
+									<th>C部三个月业绩</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,7 +76,7 @@
                     </div>
 
 					<div class="ibox-title" style="padding-left:5px">
-                        <h5>关系信息</h5>
+                        <h5>运营信息</h5>
                     </div>
                     <table class="table table-hover">
                         <tbody>
@@ -86,15 +86,15 @@
                                 <td>{$recommendmember['realname']}[{$recommendmember['usernumber']}]</td>
                             </tr>
                             <tr>
-                                <td>报单中心</td>
+                                <td>代理商编号</td>
 								<td>{$billmember['realname']}[{$billmember['usernumber']}]</td>
                             </tr>
 							<tr>
-                                <td>接点人</td>
+                                <td>位置编号</td>
 								<td>{$parentmember['realname']}[{$parentmember['usernumber']}]</td>
                             </tr>
 							<tr>
-                                <td>接点区</td>
+                                <td>位置部门</td>
 								<td>{$member['zone']}</td>
                             </tr>
 
