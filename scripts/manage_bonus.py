@@ -12,9 +12,6 @@ if sys.getdefaultencoding() != default_encoding:
 conn = mysql.db()
 now = datetime.datetime.now()
 now_second = datetime.datetime.now().strftime('%s')
-yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
-yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
-
 
 def rate():
 	rate_sql = """
@@ -33,10 +30,10 @@ def rate():
 			{'category': 'platmoney', 'value': 2}, 
 			{'category': 'taxmoney', 'value': 17}
 		)
-	return ratesZQ
+	return rates
 
 # 插入管理补贴明细,流水
-def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
+def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 	# 比率配比
 	rates = rate()
 	jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award = 0, 0, 0, 0, 0
@@ -70,7 +67,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
 		zx_bonus_detail_sql = """
 			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
-		""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, yes_second)
+		""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, now_second)
 		#  插入明细表
 		conn.dml(zx_bonus_detail_sql, 'insert')
 		jiangjinbi_change_sql = """
@@ -105,8 +102,10 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
 	else:
 		print "member is null"
 
+	print "管理奖成功"
+
 # 插入互助补贴明细,流水
-def insert_bonus_detail_3(uid, usernumber, realname, leadercash, now_second):
+def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 	# 比率配比
 	rates = rate()
 	jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award = 0, 0, 0, 0, 0
@@ -140,7 +139,7 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash, now_second):
 		zx_bonus_detail_sql = """
 			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
-		""" % (uid, usernumber, realname, 3, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, leadercash, real_total, yes_second)
+		""" % (uid, usernumber, realname, 3, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, leadercash, real_total, now_second)
 		#  插入明细表
 		conn.dml(zx_bonus_detail_sql, 'insert')
 
@@ -175,6 +174,8 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash, now_second):
 		conn.dml(taxmoney_change_sql, 'insert')
 	else:
 		print "member is null"
+
+	print "互助奖成功"
 
 def getmemberinfo(uid):
 	sql = """
@@ -237,7 +238,7 @@ def leaderbonus(uid, managercash):
 			elif i == 3:
 				leadercash = managercash * rate3 / 100
 
-			insert_bonus_detail_3(uid, usernumber, realname, leadercash, now_second)
+			insert_bonus_detail_3(uid, usernumber, realname, leadercash)
 		
 # 管理补贴 和 互助补贴
 def main():
@@ -258,16 +259,16 @@ def main():
 
 	conn.close()
 
-def member_active_time(uid):
+def member_achievement_status(uid):
 	flag = False
 	sql = """
-		select active_time from zx_member where uid = %s and achievementstatus = 0 and from_unixtime(active_time, '%%Y-%%m-%%d') = '%s'
-	""" % (uid, yes_time)
+		select active_time from zx_member where uid = %s and achievementstatus = 0 
+	""" % (uid)
 	results = conn.query(sql)
 	if results:
-		return False
+		return True
 	else:
-		flag = True
+		flag = False
 
 	return flag
 
@@ -285,7 +286,7 @@ def gettuijiannumber_child(uid):
 				if int(_child) == int(uid):
 					break
 				
-				status = member_active_time(_child)
+				status = member_achievement_status(_child)
 				if status:
 					if _child not in childs:
 						childs.append(_child)
@@ -342,6 +343,7 @@ def getmembervalue(uid):
 	results = conn.query(sql)
 	if results:
 		value = results[0]['value']
+
 	return value
 
 # 极差算法
@@ -370,20 +372,20 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 					break
 				else:
 					if member_title > int(usertitle):
 						managercash = value * maxmanagercash / 100
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 						break
 					elif member_title == int(usertitle): 
 						managercash = value * member_value / 100
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 						break
 					elif member_title < int(usertitle):
 						_member_value = member_value - i
@@ -391,7 +393,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						maxmanagercash -= _member_value
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 						
 		elif index == 0:
 			member_uid = int(memberlevels[index][0])
@@ -401,32 +403,32 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				managercash = value * maxmanagercash / 100
 				result = getmemberinfo(member_uid)	
 				if result:
-					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 			else:
 				if member_title > int(usertitle):
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 					break
 				elif member_title == int(usertitle):
 					managercash = value * member_value / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 					break
 				elif member_title < int(usertitle):
 					managercash = value * member_value / 100
 					maxmanagercash -= member_value
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
 	return True
 
 #更新会员的业绩状态
 def update_achievement_status(uid):
 	sql = """
-		update zx_member set achievementstatus = 1 where uid = %s and achievementstatus != 1
+		update zx_member set achievementstatus = 1 where uid = %s
 	""" % (usernumber)
 
 	status = conn.dml(sql, 'update')
@@ -459,8 +461,6 @@ def managerbonus(uid, usertitle):
 					status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
 					if status:
 						update_achievement_status(child)
-
-
 
 if __name__ == '__main__':
 	#lists = [[170, 2L, 5.0], [171L, 1L, 10.0], [173L, 1L, 15.0], [174L, 2L, 20.0]]

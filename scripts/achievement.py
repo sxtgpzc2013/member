@@ -12,7 +12,6 @@ if sys.getdefaultencoding() != default_encoding:
 conn = mysql.db()
 now = datetime.datetime.now()
 now_second = datetime.datetime.now().strftime('%s')
-yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
 
 def compare(x, y, z):
 	values = []
@@ -33,13 +32,13 @@ def compare(x, y, z):
 
 #更新会员的业绩状态
 def update_achievement_status(usernumber):
+	status = True
 	sql = """
-		select uid from zx_member where parentid = %s and achievementstatus =
+		select uid from zx_member where parentid = %s
 	""" % (usernumber)
 
 	results = conn.query(sql)
-	status = False
-
+	
 	if results:
 		for result in results:
 			uid = result['uid']
@@ -47,9 +46,7 @@ def update_achievement_status(usernumber):
 				update zx_member set achievementstatus = 1 where uid = %s
 			""" % (uid)
 			status = conn.dml(update_sql, 'update')
-
-	return status
-
+	print "更新会员管理奖业绩状态成功"
 
 def update_member(usertitle, jianglijifen, usernumber):
 	sql = """
@@ -59,20 +56,20 @@ def update_member(usertitle, jianglijifen, usernumber):
 	return conn.dml(sql, 'update')
 
 # 插入奖励积分明细
-def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen, yes_second):
+def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen):
 	sql = """
 		insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jianglijifen, createdate) 
 		values (%s, %s, '%s', %s, %s, %s)
-	""" % (uid, usernumber, realname, moneytype, jianglijifen, yes_second)
+	""" % (uid, usernumber, realname, moneytype, jianglijifen, now_second)
 
 	return conn.dml(sql, 'insert')
 
 # 插入奖励积分流水
-def insert_money_change_jianglijifen(moneytype, uid, usernumber, realname, changetype, recordtype, jianglijifen, createtime):
+def insert_money_change_jianglijifen(moneytype, uid, usernumber, realname, changetype, recordtype, jianglijifen):
 	sql = """
 		insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 		values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-	""" % (moneytype, 1, uid, usernumber, realname, 1, 1, '戎子', changetype, recordtype, jianglijifen, createtime)
+	""" % (moneytype, 1, uid, usernumber, realname, 1, 1, '戎子', changetype, recordtype, jianglijifen, now_second)
 
 	return conn.dml(sql, 'insert')
 
@@ -100,8 +97,8 @@ def main():
 					if achievementstatus:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
-							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
+							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen)
+							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 300000 and value < 800000: 
 				title = 2				
 				jianglijifen = 9000
@@ -110,8 +107,8 @@ def main():
 					if achievementstatus:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
-							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
+							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen)
+							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 800000 and value < 2000000:
 				title = 3
 				jianglijifen = 24000
@@ -120,8 +117,8 @@ def main():
 					if achievementstatus:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
-							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
+							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen)
+							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 2000000 and value < 5000000:
 				title = 4
 				jianglijifen = 60000     
@@ -130,8 +127,8 @@ def main():
 					if achievementstatus:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
-							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
+							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen)
+							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 5000000 and value < 8000000:
 				title = 5
 				jianglijifen = 150000
@@ -140,8 +137,8 @@ def main():
 					if achievementstatus:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
-							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
+							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen)
+							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 8000000:
 				title = 6
 				jianglijifen = 240000
@@ -150,8 +147,8 @@ def main():
 					if achievementstatus:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
-							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
+							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen)
+							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 
 	conn.close()
 
