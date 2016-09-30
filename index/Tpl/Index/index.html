@@ -121,7 +121,7 @@
 									<foreach name="bonus_count" item="bonus">
 										<tr>
 
-											<td>{$bonus['count_date']}</td>
+											<td>{$bonus['count_date']|date="Y-m-d",###}</td>
 											<td>{$bonus['bonus1']}</td>
 											<td>{$bonus['bonus2']}</td>
 											<td>{$bonus['bonus3']}</td>
