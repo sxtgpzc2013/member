@@ -29,6 +29,16 @@
 			$this -> model = D('Orders');
 		}
 
+		public function test(){
+		//	echo 'hello';
+		//shell_exec("python ./scripts/manage_bonus.py");
+			echo("Congratulations!\n");
+   $cmd = system("python ./scripts/manage_bonus.py", $ret);
+   var_dump($ret);
+			// $program="/usr/bin/python ./astro.py"; #注意使用绝对路径
+			// exec ($program);
+		}
+
 	    /**
 		 * 首页
 		 *

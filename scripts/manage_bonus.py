@@ -24,10 +24,10 @@ def rate():
 		rates = rates
 	else:
 		rates = (
-			{'category': 'rongzidun', 'value': 25}, 
-			{'category': 'jiangjinbi', 'value': 55}, 
-			{'category': 'lovemoney', 'value': 1}, 
-			{'category': 'platmoney', 'value': 2}, 
+			{'category': 'rongzidun', 'value': 25},
+			{'category': 'jiangjinbi', 'value': 55},
+			{'category': 'lovemoney', 'value': 1},
+			{'category': 'platmoney', 'value': 2},
 			{'category': 'taxmoney', 'value': 17}
 		)
 	return rates
@@ -65,7 +65,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 		""" % (managercash, now_second)
 		# 明细
 		zx_bonus_detail_sql = """
-			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
+			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
 		""" % (uid, usernumber, realname, 2, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, now_second)
 		#  插入明细表
@@ -137,7 +137,7 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 		""" % (leadercash, now_second)
 		# 明细
 		zx_bonus_detail_sql = """
-			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
+			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
 		""" % (uid, usernumber, realname, 3, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, leadercash, real_total, now_second)
 		#  插入明细表
@@ -205,8 +205,8 @@ def leaderbonus(uid, managercash):
 				rate3 = rate['value']
 	else:
 		rates = (
-			{'key': '1', 'value': 15}, 
-			{'key': '3', 'value': 10}, 
+			{'key': '1', 'value': 15},
+			{'key': '3', 'value': 10},
 			{'key': '5', 'value': 5}
 		)
 		for rate in rates:
@@ -218,7 +218,7 @@ def leaderbonus(uid, managercash):
 				rate3 = rate['value']
 
 	_uids = gettuijiannumber_parent(uid)
-	
+
 	for i, v in enumerate(uids):
 		if int(v) == 1:
 			del uids[i]
@@ -249,11 +249,34 @@ def leaderbonus(uid, managercash):
 				leadercash = managercash * rate3 / 100
 
 			insert_bonus_detail_3(uid, usernumber, realname, leadercash)
+<<<<<<< HEAD
 		
+=======
+
+# 管理补贴 和 互助补贴
+def main():
+	sql = """
+		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
+	"""
+	members = conn.query(sql)
+	if members:
+		for member in members:
+			usernumber = member['usernumber']
+			usertitle = member['usertitle']
+			uid = member['uid']
+			usernumber = member['usernumber']
+			realname = member['realname']
+			# 判断是星级的会员
+			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
+				managerbonus(uid, usertitle)
+
+	conn.close()
+
+>>>>>>> 38714b04e629f52360ef7c11efe9e41c69a3fa84
 def member_achievement_status(uid):
 	flag = False
 	sql = """
-		select active_time from zx_member where uid = %s and achievementstatus = 0 
+		select active_time from zx_member where uid = %s and achievementstatus = 0
 	""" % (uid)
 	result = conn.query(sql)
 	if result:
@@ -276,7 +299,7 @@ def gettuijiannumber_child(uid):
 			for _child in _childs:
 				if int(_child) == int(uid):
 					break
-				
+
 				status = member_achievement_status(_child)
 				if status:
 					if _child not in childs:
@@ -301,7 +324,7 @@ def getuservalue(parents):
 	for uid in parents:
 		val = []
 		sql = """
-			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key 
+			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
 			where m.uid = %s and category = 'managercash' and m.userrank != 1
 		""" % (uid)
 		result = conn.query(sql)
@@ -347,9 +370,9 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 			member_uid = int(memberlevels[index][0])
 			member_title = int(memberlevels[index][1])
 			member_value = int(memberlevels[index][2])
-			i = 0	
+			i = 0
 			for x in range(0, index):
-				if member_title > int(memberlevels[x][1]):		
+				if member_title > int(memberlevels[x][1]):
 					flag = True
 				elif member_title == int(memberlevels[x][1]):
 					flag = False
@@ -371,50 +394,50 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						managercash = value * maxmanagercash / 100
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 						break
-					elif member_title == int(usertitle): 
+					elif member_title == int(usertitle):
 						managercash = value * member_value / 100
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 						break
 					elif member_title < int(usertitle):
 						_member_value = member_value - i
-						managercash = value * _member_value / 100 
+						managercash = value * _member_value / 100
 						maxmanagercash -= _member_value
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
-						
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+
 		elif index == 0:
 			member_uid = int(memberlevels[index][0])
 			member_title = int(memberlevels[index][1])
 			member_value = int(memberlevels[index][2])
 			if member_uid == int(uid):
 				managercash = value * maxmanagercash / 100
-				result = getmemberinfo(member_uid)	
+				result = getmemberinfo(member_uid)
 				if result:
-					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
+					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 			else:
 				if member_title > int(usertitle):
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 					break
 				elif member_title == int(usertitle):
 					managercash = value * member_value / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 					break
 				elif member_title < int(usertitle):
 					managercash = value * member_value / 100
 					maxmanagercash -= member_value
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 	return True
 
 #更新会员的业绩状态
@@ -443,7 +466,7 @@ def managerbonus(uid, usertitle):
 		for child in childs:
 			# 获取推荐人的级别金额
 			value = getmembervalue(child)
-			# 获取推荐的人的父级 
+			# 获取推荐的人的父级
 			parents = gettuijiannumber_parent(child)
 			for k, v in enumerate(parents):
 				if int(v) == int(uid):
