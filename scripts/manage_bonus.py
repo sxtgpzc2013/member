@@ -217,11 +217,19 @@ def leaderbonus(uid, managercash):
 			elif rate['key'] == 3:
 				rate3 = rate['value']
 
-	uids = gettuijiannumber_parent(uid)[0:3]
+	uids = gettuijiannumber_parent(uid)
 	
 	for i, v in enumerate(uids):
 		if int(v) == 1:
 			del uids[i]
+		else:
+			# 过滤掉普卡
+			filter_member_sql = """
+				select uid from zx_member where uid = %s and userrank = 1
+			""" % (v)
+			result = conn.query(filter_member_sql)
+			if result:
+				del uids[i]
 	i = 0
 	leadercash = 0
 	for uid in uids:
@@ -264,8 +272,8 @@ def member_achievement_status(uid):
 	sql = """
 		select active_time from zx_member where uid = %s and achievementstatus = 0 
 	""" % (uid)
-	results = conn.query(sql)
-	if results:
+	result = conn.query(sql)
+	if result:
 		return True
 	else:
 		flag = False
@@ -299,9 +307,9 @@ def gettuijiannumber_parent(uid):
 	sql = """
 		select recommenduserpath from zx_member where uid = %s
 	"""  % (uid)
-	results = conn.query(sql)
-	if results:
-		parents = results[0]['recommenduserpath'].split(',')
+	result = conn.query(sql)
+	if result:
+		parents = result[0]['recommenduserpath'].split(',')
 
 	return parents[-2::-1]
 
@@ -311,7 +319,7 @@ def getuservalue(parents):
 		val = []
 		sql = """
 			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key 
-			where m.uid = %s and category = 'managercash'
+			where m.uid = %s and category = 'managercash' and m.userrank != 1
 		""" % (uid)
 		result = conn.query(sql)
 		if result and result[0]['usertitle'] != 0:
@@ -340,9 +348,9 @@ def getmembervalue(uid):
 		select r.value from zx_member as m left join zx_bonus_rule as r on m.userrank = r.key
 		where r.category = 'userrank' and m.uid = %s
 	""" % (uid)
-	results = conn.query(sql)
-	if results:
-		value = results[0]['value']
+	result = conn.query(sql)
+	if result:
+		value = result[0]['value']
 
 	return value
 

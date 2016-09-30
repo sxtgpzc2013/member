@@ -37,17 +37,17 @@ def update_achievement_status(uid):
 		select uid from zx_member where parentid = %s
 	""" % (uid)
 
-	results = conn.query(sql)
+	result = conn.query(sql)
 	
-	if results:
-		for result in results:
+	if result:
+		for result in result:
 			uid = result['uid']
 			update_sql = """
 				update zx_member set achievementstatus = 1 where uid = %s
 			""" % (uid)
 			status = conn.dml(update_sql, 'update')
 
-	print "更新会员管理奖业绩状态成功"
+	return status
 
 def update_member(usertitle, jianglijifen, usernumber):
 	sql = """
@@ -78,7 +78,7 @@ def insert_money_change_jianglijifen(moneytype, uid, usernumber, realname, chang
 # 计算会员头衔
 def main():
 	sql = """
-		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
+		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1 and userrank != 1
 	"""
 	members = conn.query(sql)
 	if members:
