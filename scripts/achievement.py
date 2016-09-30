@@ -31,11 +31,11 @@ def compare(x, y, z):
 		return 0
 
 #更新会员的业绩状态
-def update_achievement_status(usernumber):
+def update_achievement_status(uid):
 	status = True
 	sql = """
 		select uid from zx_member where parentid = %s
-	""" % (usernumber)
+	""" % (uid)
 
 	results = conn.query(sql)
 	
@@ -46,7 +46,7 @@ def update_achievement_status(usernumber):
 				update zx_member set achievementstatus = 1 where uid = %s
 			""" % (uid)
 			status = conn.dml(update_sql, 'update')
-			
+
 	print "更新会员管理奖业绩状态成功"
 
 def update_member(usertitle, jianglijifen, usernumber):
@@ -94,7 +94,7 @@ def main():
 				title = 1
 				jianglijifen = 3000
 				if usertitle == 0:
-					achievement_status = update_achievement_status(usernumber)
+					achievement_status = update_achievement_status(uid)
 					if achievement_status:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
@@ -104,7 +104,7 @@ def main():
 				title = 2				
 				jianglijifen = 9000
 				if usertitle == 0 or usertitle == 1:
-					achievement_status = update_achievement_status(usernumber)
+					achievement_status = update_achievement_status(uid)
 					if achievement_status:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
@@ -114,7 +114,7 @@ def main():
 				title = 3
 				jianglijifen = 24000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2:
-					achievement_status = update_achievement_status(usernumber)
+					achievement_status = update_achievement_status(uid)
 					if achievement_status:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
@@ -124,7 +124,7 @@ def main():
 				title = 4
 				jianglijifen = 60000     
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3:
-					achievement_status = update_achievement_status(usernumber)
+					achievement_status = update_achievement_status(uid)
 					if achievement_status:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
@@ -134,7 +134,7 @@ def main():
 				title = 5
 				jianglijifen = 150000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4:
-					achievement_status = update_achievement_status(usernumber)
+					achievement_status = update_achievement_status(uid)
 					if achievement_status:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
@@ -144,7 +144,7 @@ def main():
 				title = 6
 				jianglijifen = 240000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5:
-					achievement_status = update_achievement_status(usernumber)
+					achievement_status = update_achievement_status(uid)
 					if achievement_status:
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
