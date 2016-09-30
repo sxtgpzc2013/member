@@ -30,7 +30,7 @@ class ActivatesAction extends CommonAction {
 	}
 
 	/**
-	 * 消费商激活列表
+	 * 销费商激活列表
 	 *
 	 * 参数描述：
 	 *
@@ -41,9 +41,9 @@ class ActivatesAction extends CommonAction {
 	 */
 	public function index()
     {
-		//报单中心ID
+		//代理商编号ID
 		$billcenterid = $_SESSION['Rongzi']['user']['uid'];
-		//报单中心编号
+		//代理商编号编号
 		$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
 
 		//查询用户资料数据
@@ -211,7 +211,7 @@ class ActivatesAction extends CommonAction {
 					break;
 			}
 
-			//获取报单中心数据
+			//获取代理商编号数据
 			$params = array(
 
 				'table_name' => 'member',
@@ -230,13 +230,13 @@ class ActivatesAction extends CommonAction {
 				$this -> _back("账户激活币不足{$billmember['jihuobi']}");return;
 			}
 
-			//报单币余额计算
+			//注册币余额计算
 			$billdata['baodanbi'] = intval($billmember['baodanbi']) - $deduct/2;
 
 			//激活币余额计算
 			$billdata['jihuobi'] = intval($billmember['jihuobi']) - $deduct/2;
 
-			//更新报单中心相应数据
+			//更新代理商编号相应数据
 			$billparams = array(
 
 				'table_name' => 'member',
@@ -250,10 +250,13 @@ class ActivatesAction extends CommonAction {
 
 			if ($bill_member_save == 1){
 
+				//更新用户上级位置部门
+				$this -> update_znum($member['parentid']);
+
 				//更新公司总收入
 				$this -> add_finance($deduct);
 
-				//记录报单中心消费流水 奖金币 报单币的流水
+				//记录代理商编号消费流水 奖金币 注册币的流水
 				//增加财务流水
 				$flow_data['money'] = $deduct/2;
 
@@ -323,17 +326,17 @@ class ActivatesAction extends CommonAction {
 
 
 			}else{
-				$this -> _back('报单中心激活数据保存失败，请重试。');
+				$this -> _back('代理商编号激活数据保存失败，请重试。');
 			}
 
 		}else{
 			$this -> _back('激活账号获取失败，请重试。');
 		}
 
-		//报单中心ID
+		//代理商编号ID
 		$billcenterid = $_SESSION['Rongzi']['user']['uid'];
 
-		//报单中心编号
+		//代理商编号编号
 		$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
 
 		//数据包
@@ -350,7 +353,7 @@ class ActivatesAction extends CommonAction {
 
 		foreach ($contactuserpath_arr as $key => $value) {
 
-			//查询该用户在左区中区还是右区
+			//查询该用户在A部B部还是C部
 			if($contactuserpath_arr[$key] and $contactuserpath_arr[$key+1]){
 
 				# 获取当前用户区间
@@ -466,7 +469,7 @@ class ActivatesAction extends CommonAction {
 			//更新拓展补贴
 			$this -> save_expand_subsidy($member, $deduct);
 
-			//更新赠送红酒订单 添加一份订单
+			//更新消费套餐红酒订单 添加一份订单
 			$this -> save_red_order($member);
 
 			redirect(__APP__.'/Activates/index', 0);
@@ -477,13 +480,13 @@ class ActivatesAction extends CommonAction {
 		}
 	}
 
-	//更新报单中心服务市场补贴
+	//更新代理商编号服务市场补贴
 	function save_market_subsidy($deduct){
 		//用户ID
 		$uid = intval($_SESSION['Rongzi']['user']['uid']);
 
 		if($uid != 1){
-			//获取报单中心数据
+			//获取代理商编号数据
 			$params = array(
 
 				'table_name' => 'member',
@@ -500,7 +503,7 @@ class ActivatesAction extends CommonAction {
 
 			$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
 
-			//保存报单中心金额
+			//保存代理商编号金额
 			$params = array(
 
 				'table_name' => 'member',
@@ -632,6 +635,21 @@ class ActivatesAction extends CommonAction {
 
 	}
 
+	function update_znum($uid){
+		//更新代理商编号接点数
+		$params = array(
+
+			'table_name' => 'member',
+
+			'where' => "uid = {$uid}",
+
+			'field' => 'znum',
+
+			'data' => 1
+		);
+
+		$setInc = $this -> model -> my_setInc($params);
+	}
 	//更新拓展补贴
 	public function save_expand_subsidy($expand_member, $deduct){
 
@@ -655,7 +673,7 @@ class ActivatesAction extends CommonAction {
 		//处理几级拓展补贴
 		foreach ($expand_slice as $key => $value) {
 
-			//一级消费商
+			//一级销费商
 			if($key == 0){
 				//获取拓展比例
 				$expand_ratio = $this -> get_expand_ratio(1);
@@ -680,7 +698,7 @@ class ActivatesAction extends CommonAction {
 			$uid = intval($value);
 
 			if($uid != 1){
-				//获取报单中心数据
+				//获取代理商编号数据
 				$params = array(
 
 					'table_name' => 'member',
@@ -694,7 +712,7 @@ class ActivatesAction extends CommonAction {
 
 				$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
 
-				//保存报单中心金额
+				//保存代理商编号金额
 				$params = array(
 
 					'table_name' => 'member',
@@ -930,7 +948,7 @@ class ActivatesAction extends CommonAction {
 		}
 	}
 
-	//更新报单中心服务市场补贴
+	//更新代理商编号服务市场补贴
 	function save_red_order($member){
 
 		$order['order_code'] = $this -> get_order_number();
@@ -951,7 +969,7 @@ class ActivatesAction extends CommonAction {
 
 		$order['status'] = 1;
 
-		$order['notice'] = "注册消费商赠送";
+		$order['notice'] = "注册销费商消费套餐";
 
 		$order['created_at'] = time();
 

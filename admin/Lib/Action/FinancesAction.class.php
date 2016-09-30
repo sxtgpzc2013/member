@@ -192,7 +192,7 @@ class FinancesAction extends CommonAction {
     {
     	if (isset($_POST['form_key']) && htmlspecialchars($_POST['form_key']) == 'yes')
     	{
-    		$usernumber = isset($_POST['usernumber']) ? intval($_POST['usernumber']) : $this -> _back('非法的消费商');
+    		$usernumber = isset($_POST['usernumber']) ? intval($_POST['usernumber']) : $this -> _back('非法的销费商');
 
     		$money = isset($_POST['money']) ? floatval($_POST['money']) : $this -> _back('非法的金额');
 
@@ -210,7 +210,7 @@ class FinancesAction extends CommonAction {
 
     		if (!$member_find)
     		{
-    			$this -> _back('无效的消费商');
+    			$this -> _back('无效的销费商');
     		}
 
     		//查询当前登陆者
@@ -240,7 +240,7 @@ class FinancesAction extends CommonAction {
 
     				break;
 
-    			case 2 : //报单币
+    			case 2 : //注册币
 
     				$data['baodanbi'] = $member_find['baodanbi'] + $money;
 
@@ -270,7 +270,7 @@ class FinancesAction extends CommonAction {
 
     				break;
 
-    			case 5 : //奖励积分
+    			case 5 : //福利积分
 
     				$data['jianglijifen'] = $member_find['jianglijifen'] + $money;
 
@@ -357,7 +357,7 @@ class FinancesAction extends CommonAction {
     {
     	if (isset($_POST['form_key']) && htmlspecialchars($_POST['form_key']) == 'yes')
     	{
-    		$usernumber = isset($_POST['usernumber']) ? intval($_POST['usernumber']) : $this -> _back('非法的消费商');
+    		$usernumber = isset($_POST['usernumber']) ? intval($_POST['usernumber']) : $this -> _back('非法的销费商');
 
     		$money = isset($_POST['money']) ? floatval($_POST['money']) : $this -> _back('非法的金额');
 
@@ -375,7 +375,7 @@ class FinancesAction extends CommonAction {
 
     		if (!$member_find)
     		{
-    			$this -> _back('无效的消费商');
+    			$this -> _back('无效的销费商');
     		}
 
     		//查询当前登陆者
@@ -405,7 +405,7 @@ class FinancesAction extends CommonAction {
 
     				break;
 
-    			case 2 : //报单币
+    			case 2 : //注册币
 
     				$data['baodanbi'] = $member_find['baodanbi'] - $money;
 
@@ -435,7 +435,7 @@ class FinancesAction extends CommonAction {
 
     				break;
 
-    			case 5 : //奖励积分
+    			case 5 : //福利积分
 
     				$data['jianglijifen'] = $member_find['jianglijifen'] - $money;
 

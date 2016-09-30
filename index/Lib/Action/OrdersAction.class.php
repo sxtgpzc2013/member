@@ -386,7 +386,7 @@
 
 	    			$rongzidun_money_change_add = $this -> model -> my_add($params);
 
-	    			//获取消费补贴比例
+	    			//获取销售补贴比例
 	    			$params = array(
 
 	    				'table_name' => 'bonus_rule',

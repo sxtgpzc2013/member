@@ -146,9 +146,9 @@ CREATE TABLE `zx_bonus_count` (
   `bonus3` decimal(10,2) DEFAULT '0.00' COMMENT '互助补贴',
   `bonus4` decimal(10,2) DEFAULT '0.00' COMMENT '拓展补贴',
   `bonus5` decimal(10,2) DEFAULT '0.00' COMMENT '市场补贴',
-  `bonus6` decimal(10,2) DEFAULT '0.00' COMMENT '消费补贴',
+  `bonus6` decimal(10,2) DEFAULT '0.00' COMMENT '销售补贴',
   `bonus7` decimal(10,2) DEFAULT '0.00' COMMENT '服务补贴',
-  `bonus8` decimal(10,2) DEFAULT '0.00' COMMENT '消费提成',
+  `bonus8` decimal(10,2) DEFAULT '0.00' COMMENT '服务补贴',
   `total` decimal(10,2) DEFAULT '0.00' COMMENT '总奖金',
   `real_total` decimal(10,2) DEFAULT '0.00' COMMENT '实发奖金',
   `count_date` int(8) DEFAULT NULL COMMENT '统计日期',
@@ -201,18 +201,18 @@ CREATE TABLE `zx_member` (
   `usertitle` int(255) DEFAULT '0' COMMENT '用户头衔',
   `tuijianid` int(10) NOT NULL DEFAULT '0' COMMENT '推荐人ID',
   `tuijiannumber` char(16) NOT NULL DEFAULT '0' COMMENT '推荐人帐号',
-  `parentid` int(10) NOT NULL DEFAULT '0' COMMENT '接点人ID',
-  `parentnumber` char(16) NOT NULL DEFAULT '0' COMMENT '接点人帐号',
+  `parentid` int(10) NOT NULL DEFAULT '0' COMMENT '位置编号ID',
+  `parentnumber` char(16) NOT NULL DEFAULT '0' COMMENT '位置编号帐号',
   `reg_uid` mediumint(8) DEFAULT '0' COMMENT '注册人id',
   `active_uid` mediumint(8) DEFAULT '0' COMMENT '激活人id',
-  `billcenterid` mediumint(8) DEFAULT '1' COMMENT '报单中心ID',
-  `billcenternumber` mediumint(8) DEFAULT '1' COMMENT '报单中心账号',
-  `isbill` tinyint(3) DEFAULT '0' COMMENT '是否是报单中心:0不是，1报单中心',
-  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '报单币',
+  `billcenterid` mediumint(8) DEFAULT '1' COMMENT '代理商编号ID',
+  `billcenternumber` mediumint(8) DEFAULT '1' COMMENT '代理商编号账号',
+  `isbill` tinyint(3) DEFAULT '0' COMMENT '是否是代理商编号:0不是，1代理商编号',
+  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
   `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
   `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
   `jihuobi` double(10,2) DEFAULT '0.00' COMMENT '激活币',
-  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '奖励积分',
+  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '福利积分',
   `isfull` tinyint(2) DEFAULT '0' COMMENT '分红是否封顶',
   `status` int(8) DEFAULT '0' COMMENT '用户状态：-2 删除 ，-1 死了，0 未激活 1 已经激活 -3 账号冻结 -4 账号禁用',
   `bankname` varchar(1000) DEFAULT '' COMMENT '银行名称',
@@ -232,13 +232,14 @@ CREATE TABLE `zx_member` (
   `psd1` varchar(32) DEFAULT NULL COMMENT '一级密码',
   `psd2` varchar(32) DEFAULT NULL COMMENT '二级密码',
   `recom_num` int(8) DEFAULT '0' COMMENT '推荐人数',
-  `zone` int(4) DEFAULT '1' COMMENT '左区（1），中区(2), 右区（3）',
-  `znum` mediumint(10) DEFAULT '0' COMMENT '接点人数',
-  `left_zone` tinyint(1) DEFAULT '0' COMMENT '左区是否被占',
-  `middle_zone` tinyint(1) DEFAULT '0' COMMENT '中区是否被占',
-  `right_zone` tinyint(1) DEFAULT '0' COMMENT '右区是否被占',
+  `zone` int(4) DEFAULT '1' COMMENT 'A部（1），B部(2), C部（3）',
+  `znum` mediumint(10) DEFAULT '0' COMMENT '位置编号数',
+  `left_zone` tinyint(1) DEFAULT '0' COMMENT 'A部是否被占',
+  `middle_zone` tinyint(1) DEFAULT '0' COMMENT 'B部是否被占',
+  `right_zone` tinyint(1) DEFAULT '0' COMMENT 'C部是否被占',
   `proxy_state` tinyint(2) DEFAULT '0' COMMENT '分红状态， 0 不分红，1 分红',
   `achievement` double(16,2) DEFAULT '0.00' COMMENT '总业绩',
+  `achievementstatus` tinyint(1) DEFAULT '0' COMMENT '业绩分红状态 0： 不计算头衔升级的销费商  1： 计算头衔升级推荐销费商',
   `num` int(10) DEFAULT '0' COMMENT '伞下人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
@@ -287,7 +288,7 @@ CREATE TABLE `zx_transfer` (
   `usernumber` char(16) DEFAULT '' COMMENT '用户编号',
   `targetuserid` int(10) DEFAULT '0' COMMENT '目标用户id',
   `targetusernumber` char(16) DEFAULT '' COMMENT '目标用户编号',
-  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '转账类型 0 报单币',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '转账类型 0 注册币',
   `money` double(10,2) DEFAULT '0.00' COMMENT '转币金额',
   `status` int(4) DEFAULT '0' COMMENT '转账提现状态 0 转账成功 ，1 转账失败',
   `createtime` int(10) DEFAULT NULL COMMENT '更新时间',
@@ -361,12 +362,12 @@ CREATE TABLE `zx_bonus_detail` (
   `touserid` int(10) DEFAULT NULL,
   `tousernumber` varchar(16) DEFAULT NULL,
   `torealname` varchar(255) DEFAULT NULL COMMENT '会员真实姓名',
-  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 消费补贴 7 服务补贴 8 消费提成',
-  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '报单币',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 销售补贴 7 服务补贴 8 服务补贴',
+  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
   `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
   `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
   `jihuobi` double(10,2) DEFAULT '0.00' COMMENT '激活币',
-  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '奖励积分',
+  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '福利积分',
   `lovemoney` double(10,2) DEFAULT '0.00' COMMENT '爱心基金',
   `platmoney` double(10,2) DEFAULT '0.00' COMMENT '平台管理费',
   `taxmoney` double(10,2) DEFAULT '0.00' COMMENT '税费',
@@ -377,14 +378,14 @@ CREATE TABLE `zx_bonus_detail` (
 ) ENGINE=MyISAM AUTO_INCREMENT=493 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='奖金明细表';
 # 2016-09-21 新增字段
 # --------------------------------------------------------------
-ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-报单币 3-戎子盾 4-激活币 5-奖励积分 6-爱心基金 7 平台管理费 8税费';
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
+ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-注册币 3-戎子盾 4-激活币 5-福利积分 6-爱心基金 7 平台管理费 8税费';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
 
 
 <<<<<<< HEAD
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
 =======
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
 >>>>>>> 2a1d93dbf9dc67aef4852ffe0a8d8ef84417ce5a
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
@@ -398,7 +399,7 @@ ALTER TABLE zx_member ADD rightachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '
 
 ALTER TABLE zx_member ADD contactuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户接点路径';
 ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户推荐路径';
-ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户报单中心路径';
+ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
 
 # 2016-09-22 新增相关
 # Dump of table achievement_log
@@ -420,12 +421,12 @@ CREATE TABLE `zx_achievement_log` (
 
 ALTER TABLE zx_bonus_count ADD torealname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
 ALTER TABLE zx_products ADD sell_count INT(11) NOT NULL DEFAULT 0 COMMENT '卖出数量' AFTER surplus;
-ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为赠送红酒产品' AFTER created_at;
+ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为消费套餐红酒产品' AFTER created_at;
 ALTER TABLE zx_member CHANGE status status int(8) DEFAULT '0' COMMENT '用户状态：-2 账号冻结 ，-1 删除，0 未激活 1 已经激活';
 
 
 # 2016-09-25
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现 13-消费';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现 13-消费';
 
 # 2016-09-26
 ALTER TABLE zx_order_items ADD name VARCHAR(255) NOT NULL DEFAULT '' COMMENT '名称' AFTER pro_id;

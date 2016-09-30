@@ -36,12 +36,12 @@
 				<ul class="nav nav-second-level">
 					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
 					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'index') {echo 'active';} ?>">
-						<a href="__APP__/Activates/index">激活消费商</a>
+						<a href="__APP__/Activates/index">激活销费商</a>
 					</li>
 					<?php } ?>
 
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'register') {echo 'active';} ?>">
-						<a href="__APP__/Teams/register">注册消费商</a>
+						<a href="__APP__/Teams/register">注册销费商</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'recommend_relation') {echo 'active';} ?>">
 						<a href="__APP__/Teams/recommend_relation">推荐关系</a>
@@ -77,7 +77,7 @@
 						<a href="__APP__/Finances/transfer">系统内部转账</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'convert') {echo 'active';} ?>">
-						<a href="__APP__/Finances/convert">奖金币转报单币</a>
+						<a href="__APP__/Finances/convert">奖金币转注册币</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'transfer_list') {echo 'active';} ?>">
 						<a href="__APP__/Finances/transfer_list">转币记录</a>

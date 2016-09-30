@@ -10,7 +10,7 @@
                 <a>信息管理</a>
             </li>
             <li>
-                <strong>消费商注册</strong>
+                <strong>销费商注册</strong>
             </li>
         </ol>
 	</div>
@@ -30,7 +30,7 @@
 							<h5>基本信息</h5>
 						</div>
 			                <div class="form-group">
-			                    <label class="col-sm-2 control-label">消费商编号</label>
+			                    <label class="col-sm-2 control-label">销费商编号</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}">
@@ -43,7 +43,7 @@
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">消费商姓名</label>
+			                    <label class="col-sm-2 control-label">销费商姓名</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control" name="realname">
@@ -51,14 +51,14 @@
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">消费商级别</label>
+			                    <label class="col-sm-2 control-label">销费商级别</label>
 
 			                    <div class="col-sm-7">
 			                        <select class="form-control userrank" name="userrank">
-										<option value="1">普通消费商 1980</option>
-										<option value="2">银卡消费商 1万</option>
-										<option value="3">金卡消费商 3万</option>
-										<option value="4">钻卡消费商 5万</option>
+										<option value="1">普卡消费商 1980</option>
+										<option value="2">银卡销费商 1万</option>
+										<option value="3">金卡销费商 3万</option>
+										<option value="4">钻卡销费商 5万</option>
 			                        </select>
 			                    </div>
 			                </div>
@@ -71,7 +71,7 @@
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">消费商身份证号</label>
+			                    <label class="col-sm-2 control-label">销费商身份证号</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control" name="IDcard">
@@ -80,7 +80,7 @@
 
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">消费商身份证所在区域</label>
+			                    <label class="col-sm-2 control-label">销费商身份证所在区域</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control" name="ID_address">
@@ -97,7 +97,7 @@
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">消费商手机号</label>
+			                    <label class="col-sm-2 control-label">销费商手机号</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control" name="mobile">
@@ -145,12 +145,12 @@
 			                    </div>
 
 								<div class="col-sm-3">
-			                        <span>(开户人必须是消费商姓名)</span>
+			                        <span>(开户人必须是销费商姓名)</span>
 			                    </div>
 			                </div>
 
 							<div class="form-group">
-								<label class="col-sm-2 control-label">赠送</label>
+								<label class="col-sm-2 control-label">消费套餐</label>
 
 								<label class="col-sm-8 control-label" style="text-align:left;">戎子经典<span class="red_wine_number_give">2瓶</span></label>
 
@@ -196,7 +196,7 @@
 			                </div> -->
 
 							<div class="ibox-title">
-								<h3>关系信息</h3>
+								<h3>运营信息</h3>
 			                </div>
 
 							<div class="form-group">
@@ -207,12 +207,12 @@
 			                    </div>
 
 								<div class="col-sm-3">
-									<span>(如何修改推荐人请重新获取报单中心)</span>
+									<span>(如何修改推荐人请重新获取代理商编号)</span>
 								</div>
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">报单中心</label>
+			                    <label class="col-sm-2 control-label">代理商编号</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control billcenternumber" name="billcenternumber"
@@ -221,42 +221,42 @@
 			                    </div>
 
 								<div class="col-sm-3">
-			                        <a class="btn btn-white get_billcenternumber">获取报单中心</a>
+			                        <a class="btn btn-white get_billcenternumber">获取代理商编号</a>
 			                    </div>
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">接点人</label>
+			                    <label class="col-sm-2 control-label">位置编号</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control parentnumber" name="parentnumber" value="{$member['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
-									<span>(如何修改接点人,公司将会按先左后右排位)</span>
+									<span>(如何修改位置编号,公司将会按先左后右排位)</span>
 								</div>
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">接点区</label>
+			                    <label class="col-sm-2 control-label">位置部门</label>
 
 			                    <div class="col-sm-7">
 									<select class="form-control zone" id="zone" name="zone">
 										<?php if($_GET['zone']== 1 && $member['left_zone'] == 0){ ?>
-											<option value="1">左区</option>
+											<option value="1">A部</option>
 										<?php }elseif($_GET['zone']== 2 && $member['middle_zone'] == 0){ ?>
-											<option value="2">中区</option>
+											<option value="2">B部</option>
 										<?php }elseif($_GET['zone']== 3 && $member['right_zone'] == 0){ ?>
-											<option value="3">右区</option>
+											<option value="3">C部</option>
 										<?php } ?>
 										<!-- <if condition="$_GET['zone'] eq 1">
 												{$_GET['zone']}
-											<option value="1">左区</option>
+											<option value="1">A部</option>
 										<elseif condition="$_GET['zone'] == 2">
 												123
-											<option value="2">中区</option>
+											<option value="2">B部</option>
 										<elseif condition="$_GET['zone'] eq 3">
-											<option value="3">右区</option>
+											<option value="3">C部</option>
 										</if> -->
 									</select>
 			                    </div>
@@ -328,7 +328,7 @@
 														<p>二、用户资格</p>
 														<p>适用本协议注册的用户，应当具备的资格是：</p>
 														 <p> 1.必须是具备《中华人民共和国民法通则》规定的完全民事行为能力的自然人、合法证照的组织单位。无民事行为能力人、限制民事行为能力人以及无合法证照的组织不得注册并使用戎子酒庄营销系统</p>
-														  <p>2.所有注册会员为消费定量的1万、3万、5万的红酒才能成为消费商，其保值增值分红或其他奖励为附加权益。
+														  <p>2.所有注册会员为消费定量的1万、3万、5万的红酒才能成为销费商，其保值增值分红或其他奖励为附加权益。
 														<p>三、用户的权利义务</p>
 														  <p>1.用户有权根据《戎子酒庄用户服务协议书》使用戎子酒庄营销系统服务功能，享受戎子酒庄有关活动以及有权优先享受戎子酒庄营销系统提供的其他的信息服务。</p>
 														 <p> 2.用户使用戎子酒庄营销系统时如遇到问题，可以向戎子酒庄相关部门进行咨询要求解答。</p>
@@ -509,12 +509,12 @@
 					resdata = JSON.parse(resdata);
 	                if (resdata.success == true) {
 						if(resdata.data == 0){
-							alert("用户报单中心获取失败,请重新输入用户编号");
+							alert("用户代理商编号获取失败,请重新输入用户编号");
 						}else{
 							$('.billcenternumber').val(resdata.data);
 						}
 	                } else {
-	                    alert("用户报单中心获取错误 请重试");
+	                    alert("用户代理商编号获取错误 请重试");
 	                }
 	            }
 	        });
@@ -571,11 +571,11 @@
 							   //key是属性,object[key]是值
 							   if(zone_list[key] == 0){
 								   if(key == "left_zone"){
-									   obj.options.add(new Option("左区","1"));
+									   obj.options.add(new Option("A部","1"));
 								   }else if(key == "middle_zone"){
-									   obj.options.add(new Option("中区","2"));
+									   obj.options.add(new Option("B部","2"));
 								   }else if(key == "right_zone"){
-									   obj.options.add(new Option("右区","3"));
+									   obj.options.add(new Option("C部","3"));
 								   }
 							   }
 							}
@@ -583,7 +583,7 @@
 
 						}
 	                } else {
-	                    alert("用户报单中心获取错误 请重试");
+	                    alert("用户代理商编号获取错误 请重试");
 	                }
 	            }
 	        });
