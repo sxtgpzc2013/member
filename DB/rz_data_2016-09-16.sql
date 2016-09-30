@@ -362,7 +362,7 @@ CREATE TABLE `zx_bonus_detail` (
   `touserid` int(10) DEFAULT NULL,
   `tousernumber` varchar(16) DEFAULT NULL,
   `torealname` varchar(255) DEFAULT NULL COMMENT '会员真实姓名',
-  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 销售补贴 7 服务补贴 8 二次销售补贴',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 销售补贴 7 服务补贴 8 二次销售补贴 9 福利积分',
   `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
   `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
   `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',

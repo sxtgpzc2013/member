@@ -67,7 +67,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 		zx_bonus_detail_sql = """
 			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
-		""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, now_second)
+		""" % (uid, usernumber, realname, 2, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, now_second)
 		#  插入明细表
 		conn.dml(zx_bonus_detail_sql, 'insert')
 		jiangjinbi_change_sql = """
