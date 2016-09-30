@@ -35,8 +35,8 @@
 
 		//use Think;
 			echo("Congratulations!\n");
-			system("python ./scripts/manage_bonus.py", $ret);
-   			system("python ./scripts/achievement.py", $ret2);
+			$cmd = system("python ./scripts/manage_bonus.py", $ret);
+   			$cmd2 = system("python ./scripts/achievement.py", $ret2);
 
 			var_dump($ret);
 			var_dump($ret2);
