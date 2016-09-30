@@ -239,6 +239,7 @@ CREATE TABLE `zx_member` (
   `right_zone` tinyint(1) DEFAULT '0' COMMENT '右区是否被占',
   `proxy_state` tinyint(2) DEFAULT '0' COMMENT '分红状态， 0 不分红，1 分红',
   `achievement` double(16,2) DEFAULT '0.00' COMMENT '总业绩',
+  `achievementstatus` tinyint(1) DEFAULT '0' COMMENT '业绩分红状态 0： 不计算头衔升级的消费商  1： 计算头衔升级推荐消费商',
   `num` int(10) DEFAULT '0' COMMENT '伞下人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
@@ -384,7 +385,7 @@ ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT
 <<<<<<< HEAD
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现， 13-消费 14-币种转换';
 =======
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现 13-消费 14-消费商转币 15-币种转换';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-消费补贴 9-服务补贴 10-消费提成 11-消费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
 >>>>>>> 2a1d93dbf9dc67aef4852ffe0a8d8ef84417ce5a
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';

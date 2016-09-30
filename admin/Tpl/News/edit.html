@@ -51,12 +51,22 @@
 						<div class="form-group">
                             <label class="col-sm-3 control-label">*新闻内容:</label>
                             <div class="col-sm-6">
-                                <textarea name="content" rows="8" cols="40" class="form-control">{$result.content}</textarea>
+                                <!-- <textarea name="content" rows="8" cols="40" class="form-control">{$result.content}</textarea> -->
+                                <div class="ibox-content gray-bg">
+
+                                    <div class="summernote"  style="height: auto;min-height: 300px;" name="content">
+                                        {$result.content}
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+                        <textarea name="content" rows="8" cols="40" class="content_code" style="display:none">
+
+                        </textarea>
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <button class="btn btn-primary" type="submit">提交</button>
+                                <button class="btn btn-primary" type="submit" onclick="save()">提交</button>
                             </div>
                         </div>
                     </form>
@@ -71,6 +81,28 @@
 <!-- jQuery Validation plugin javascript-->
 <script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
 <script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script src="__PUBLIC__/js/plugins/summernote/summernote.min.js"></script>
+<script src="__PUBLIC__/js/plugins/summernote/summernote-zh-CN.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.summernote').summernote({
+            lang: 'zh-CN'
+        });
+    });
+    // var edit = function () {
+    //     $("#eg").addClass("no-padding");
+    //     $('.click2edit').summernote({
+    //         lang: 'zh-CN',
+    //         focus: true
+    //     });
+    // };
+    var save = function () {
+        var aHTML = $('.summernote').code(); //save HTML If you need(aHTML: array).
+        $('.content_code').val(aHTML)
+    };
+
+</script>
 <script>
    //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
    $.validator.setDefaults({

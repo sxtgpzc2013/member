@@ -16,7 +16,6 @@ def rate():
 		select category, value from zx_bonus_rule where category in ('rongzidun', 'jiangjinbi', 'lovemoney', 'platmoney', 'taxmoney')
 	"""
 	rates = conn.query(rate_sql)
-	conn.close()
 
 	if rates:
 		rates = rates
@@ -48,7 +47,7 @@ def fenhong():
 	member_sql = """
 					select m.uid, m.usernumber, m.realname, m.userrank, m.jiangjinbi, m.rongzidun, r.value from zx_member as m left join zx_bonus_rule as r
 					on m.userrank = r.key
-	 				where m.userrank != 1 and m.status = 1 and m.proxy_state = 1 and r.category = 'userrank'
+	 				where m.userrank != 1 and m.status = 1 and m.proxy_state = 1 and r.category = 'userrank' and m.usernumber != 1
 	"""
 	members = conn.query(member_sql)
 
@@ -116,25 +115,25 @@ def fenhong():
 				rongzidun_change_sql = """
 					insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 					values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-				""" % (1, 3, uid, usernumber, realname, 1, 1, '戎子', 3, 1, rongzidun_award, now_second)
+				""" % (3, 3, uid, usernumber, realname, 1, 1, '戎子', 3, 1, rongzidun_award, now_second)
 				conn.dml(rongzidun_change_sql, 'insert')
 				# 爱心基金流水
 				lovemoney_change_sql = """
 					insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 					values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-				""" % (1, 6, uid, usernumber, realname, 1, 1, '戎子', 3, 0, lovemoney_award, now_second)
+				""" % (6, 6, uid, usernumber, realname, 1, 1, '戎子', 3, 0, lovemoney_award, now_second)
 				conn.dml(lovemoney_change_sql, 'insert')
 				# 平台管理费流水
 				platmoney_change_sql = """
 					insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 					values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-				""" % (1, 7, uid, usernumber, realname, 1, 1, '戎子', 3, 0, platmoney_award, now_second)
+				""" % (7, 7, uid, usernumber, realname, 1, 1, '戎子', 3, 0, platmoney_award, now_second)
 				conn.dml(platmoney_change_sql, 'insert')
 				# 税费流水
 				taxmoney_change_sql = """
 					insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 					values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-				""" % (1, 8, uid, usernumber, realname, 1, 1, '戎子', 3, 0, taxmoney_award, now_second)
+				""" % (8, 8, uid, usernumber, realname, 1, 1, '戎子', 3, 0, taxmoney_award, now_second)
 				conn.dml(taxmoney_change_sql, 'insert')
 	else:
 		print "member is null"
