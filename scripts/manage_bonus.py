@@ -462,20 +462,20 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)
 					break
 				else:
 					if member_title > int(usertitle):
 						managercash = value * maxmanagercash / 100
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 						break
 					elif member_title == int(usertitle): 
 						managercash = value * member_value / 100
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 						break
 					elif member_title < int(usertitle):
 						_member_value = member_value - i
@@ -483,7 +483,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						maxmanagercash -= _member_value
 						result = getmemberinfo(member_uid)
 						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 						
 		elif index == 0:
 			member_uid = int(memberlevels[index][0])
@@ -493,26 +493,26 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				managercash = value * maxmanagercash / 100
 				result = getmemberinfo(member_uid)	
 				if result:
-					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 			else:
 				if member_title > int(usertitle):
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 					break
 				elif member_title == int(usertitle):
 					managercash = value * member_value / 100
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 					break
 				elif member_title < int(usertitle):
 					managercash = value * member_value / 100
 					maxmanagercash -= member_value
 					result = getmemberinfo(member_uid)
 					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 	return True
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
