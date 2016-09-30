@@ -11,6 +11,9 @@ return array(
 	'DB_NAME'=>'rz_data',
 	'APP_DEBUG' => true,
 	'SHOW_PAGE_TRACE'=>true,
+	'LOG_RECORD' => true, // 开启日志记录
+	'LOG_LEVEL'  =>'EMERG,ALERT,CRIT,ERR',
+	'LOG_TYPE' =>  'File'
 );
 /*
 return array(
