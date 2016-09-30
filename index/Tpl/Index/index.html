@@ -132,7 +132,7 @@
 											<td>{$bonus['bonus8']}</td>
 											<td>{$bonus['total']}</td>
 											<td>{$bonus['real_total']}</td>
-											<td><a href="#">查看明细</a></td>
+											<td><a href="__APP__/Bonus/info?id={$bonus['id']}">查看明细</a></td>
 										</tr>
 									</foreach>
 								</tbody>
@@ -157,10 +157,12 @@
 									</tr>
 								</thead>
 								<tbody>
+									<foreach name="news" item="item">
 									<tr>
-										<td>24234</td>
-										<td>41234</td>
+										<td>{$item.title}</td>
+										<td>{$item.content}</td>
 									</tr>
+									</foreach>
 								</tbody>
 							</table>
 						</div>
