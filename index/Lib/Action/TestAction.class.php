@@ -32,11 +32,14 @@
 		public function test(){
 		//	echo 'hello';
 		//shell_exec("python ./scripts/manage_bonus.py");
-		Log::record("13131");
+
 		//use Think;
 			echo("Congratulations!\n");
 			system("python ./scripts/manage_bonus.py", $ret);
    			system("python ./scripts/achievement.py", $ret2);
+
+			var_dump($ret);
+			var_dump($ret2)
 			// $program="/usr/bin/python ./astro.py"; #注意使用绝对路径
 			// exec ($program);
 		}
