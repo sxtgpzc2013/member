@@ -307,7 +307,7 @@ def main():
 					if status:
 						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
-			elif value > 300000 and value < 800000: 
+			elif value >= 300000 and value < 800000: 
 				title = 2				
 				jianglijifen = 9000
 				if usertitle == 0 or usertitle == 1:
@@ -315,7 +315,7 @@ def main():
 					if status:
 						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
-			elif value > 800000 and value < 2000000:
+			elif value >= 800000 and value < 2000000:
 				title = 3
 				jianglijifen = 24000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2:
@@ -323,7 +323,7 @@ def main():
 					if status:
 						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
-			elif value > 2000000 and value < 5000000:
+			elif value >= 2000000 and value < 5000000:
 				title = 4
 				jianglijifen = 60000     
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3:
@@ -331,7 +331,7 @@ def main():
 					if status:
 						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
-			elif value > 5000000 and value < 8000000:
+			elif value >= 5000000 and value < 8000000:
 				title = 5
 				jianglijifen = 150000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4:
@@ -339,7 +339,7 @@ def main():
 					if status:
 						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
-			elif value > 8000000:
+			elif value >= 8000000:
 				title = 6
 				jianglijifen = 240000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5:
@@ -473,6 +473,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						break
 					elif member_title == int(usertitle): 
 						managercash = value * member_value / 100
+						result = getmemberinfo(member_uid)
 						if result:
 							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
 						break
@@ -480,6 +481,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						_member_value = member_value - i
 						managercash = value * _member_value / 100 
 						maxmanagercash -= _member_value
+						result = getmemberinfo(member_uid)
 						if result:
 							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
 						
@@ -488,23 +490,27 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 			member_title = int(memberlevels[index][1])
 			member_value = int(memberlevels[index][2])
 			if member_uid == int(uid):
-				managercash = value * maxmanagercash / 100	
+				managercash = value * maxmanagercash / 100
+				result = getmemberinfo(member_uid)	
 				if result:
 					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
 			else:
 				if member_title > int(usertitle):
 					managercash = value * maxmanagercash / 100
+					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
 					break
 				elif member_title == int(usertitle):
 					managercash = value * member_value / 100
+					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
 					break
 				elif member_title < int(usertitle):
 					managercash = value * member_value / 100
 					maxmanagercash -= member_value
+					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
 	return True
