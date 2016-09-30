@@ -551,24 +551,26 @@
 
 			if($member){
 
-				$params = array(
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "uid = {$uid}",
+				//
+				// 	'field' => 'znum',
+				//
+				// 	'data' => 1
+				// );
+				//
+				// $setInc = $this -> model -> my_setInc($params);
+				//
+				// if($setInc){
+				// 	return true;
+				// }else{
+				// 	return false;
+				// }
 
-					'table_name' => 'member',
-
-					'where' => "uid = {$uid}",
-
-					'field' => 'znum',
-
-					'data' => 1
-				);
-
-				$setInc = $this -> model -> my_setInc($params);
-
-				if($setInc){
-					return true;
-				}else{
-					return false;
-				}
+				return true;
 
 
 			}else{
@@ -973,7 +975,7 @@
 
 				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
 
-				$recommend_list[$key]["usertitle"] = $userrank[$value['userrank']];
+				$recommend_list[$key]["usertitle"] = $userrank[$value['usertitle']];
 
 				$userrank_content = array("","普卡","银卡","金卡","钻卡");
 

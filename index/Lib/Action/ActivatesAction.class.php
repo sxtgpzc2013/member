@@ -250,6 +250,9 @@ class ActivatesAction extends CommonAction {
 
 			if ($bill_member_save == 1){
 
+				//更新用户上级接点区
+				$this -> update_znum($member['parentid']);
+
 				//更新公司总收入
 				$this -> add_finance($deduct);
 
@@ -632,6 +635,21 @@ class ActivatesAction extends CommonAction {
 
 	}
 
+	function update_znum($uid){
+		//更新报单中心接点数
+		$params = array(
+
+			'table_name' => 'member',
+
+			'where' => "uid = {$uid}",
+
+			'field' => 'znum',
+
+			'data' => 1
+		);
+
+		$setInc = $this -> model -> my_setInc($params);
+	}
 	//更新拓展补贴
 	public function save_expand_subsidy($expand_member, $deduct){
 
