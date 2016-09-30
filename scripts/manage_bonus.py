@@ -284,7 +284,7 @@ def leaderbonus(uid, managercash):
 # 管理补贴 和 互助补贴
 def main():
 	sql = """
-		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3
+		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
 	"""
 	members = conn.query(sql)
 	if members:
@@ -299,7 +299,7 @@ def main():
 				managerbonus(uid, usertitle)
 
 			value = compare(member['leftachievement'], member['middleachievement'], member['rightachievement'])
-			if value > 100000 and value < 300000:
+			if value >= 100000 and value < 300000:
 				title = 1
 				jianglijifen = 3000
 				if usertitle == 0:
