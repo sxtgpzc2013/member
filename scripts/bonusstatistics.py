@@ -12,7 +12,7 @@ if sys.getdefaultencoding() != default_encoding:
 conn = mysql.db()
 now = datetime.datetime.now()
 now_time = datetime.datetime.now().strftime('%s')
-yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%d-%m')
+yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
 
 def money_change(uid, usernumber):
