@@ -11,7 +11,7 @@
                 <a>信息管理</a>
             </li>
             <li>
-                <strong>消费商列表</strong>
+                <strong>销费商列表</strong>
             </li>
         </ol>
 	</div>
@@ -45,7 +45,7 @@
 							</form>
 						<!-- <div class="input-group">
 							<form role="form" class="form-inline" action="./" method="get">
-								<input type="text" placeholder="请输入消费商编码" class="input-sm form-control"> <span class="input-group-btn">
+								<input type="text" placeholder="请输入销费商编码" class="input-sm form-control"> <span class="input-group-btn">
 								<button type="button" class="btn btn-sm btn-primary"> 查询</button> </span>
 							</form>
 
@@ -55,29 +55,29 @@
 				</div>
 
 				<!-- <div class="ibox-title">
-					<h5 class="ibox-title text-center">消费商</h5>
+					<h5 class="ibox-title text-center">销费商</h5>
 				</div> -->
                 <div class="ibox-content">
-					<!-- <h5 class="text-center">消费商列表</h5> -->
+					<!-- <h5 class="text-center">销费商列表</h5> -->
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th>消费商编号</th>
-                                    <th>消费商姓名</th>
-                                    <th>消费商级别</th>
-									<th>消费商职务</th>
+                                    <th>销费商编号</th>
+                                    <th>销费商姓名</th>
+                                    <th>销费商级别</th>
+									<th>销费商职务</th>
 									<th>数字红酒资格</th>
 									<th>奖金币</th>
-									<th>报单币</th>
+									<th>注册币</th>
 									<th>戎子盾</th>
-									<th>奖励积分</th>
+									<th>福利积分</th>
 									<th>推荐人</th>
-									<th>接点人</th>
-									<th>所属报单中心</th>
+									<th>位置编号</th>
+									<th>所属代理商编号</th>
 									<th>注册时间</th>
-									<th>消费商状态</th>
+									<th>销费商状态</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
@@ -91,13 +91,13 @@
 										<td>{$member['realname']}</td>
 										<td>{$member['userrank']}
 											<if condition="$member['userrank'] eq 1">
-												普通消费商
+												普卡消费商
 											<elseif condition="$member['userrank'] eq 2"/>
-												银卡消费商
+												银卡销费商
 											<elseif condition="$member['userrank'] eq 3"/>
-												金卡消费商
+												金卡销费商
 											<elseif condition="$member['userrank'] eq 4"/>
-												钻卡消费商
+												钻卡销费商
 											<else/>
 												无
 											</if>

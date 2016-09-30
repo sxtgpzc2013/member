@@ -82,7 +82,7 @@ def fenhong():
 
 			# real_total 实发奖金
 			real_total = fenhong - lovemoney_award - platmoney_award - taxmoney_award
-			# 消费商虚拟币增加
+			# 销费商虚拟币增加
 			zx_member_sql = """
 				update zx_member set jiangjinbi = jiangjinbi + %s, rongzidun = rongzidun + %s where usernumber = %s
 			""" % (jiangjinbi_award, rongzidun_award, usernumber)

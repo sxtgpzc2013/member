@@ -36,16 +36,16 @@
 				</div>
 
 				<!-- <div class="ibox-title">
-					<h5 class="ibox-title text-center">消费商</h5>
+					<h5 class="ibox-title text-center">销费商</h5>
 				</div> -->
                 <div class="ibox-content">
-					<!-- <h5 class="text-center">消费商列表</h5> -->
+					<!-- <h5 class="text-center">销费商列表</h5> -->
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>相关消费商</th>
-                                    <th>目标消费商</th>
+                                    <th>相关销费商</th>
+                                    <th>目标销费商</th>
 									<th>变更金额</th>
 									<th>变更后金额</th>
 									<th>变更币种</th>
@@ -65,13 +65,13 @@
 											<if condition="$item['moneytype'] eq 1">
 												现金币
 											<elseif condition="$item['moneytype'] eq 2" />
-												报单币
+												注册币
 											<elseif condition="$item['moneytype'] eq 3" />
 												戎子盾
 											<elseif condition="$item['moneytype'] eq 4" />
 												激活币
 											<elseif condition="$item['moneytype'] eq 5" />
-												奖励积分
+												福利积分
 											<elseif condition="$item['moneytype'] eq 6" />
 												奖金币
 											</if>
@@ -94,13 +94,13 @@
 											<elseif condition="$item['changetype'] eq 7" />
 												市场补贴
 											<elseif condition="$item['changetype'] eq 8" />
-												消费补贴
+												销售补贴
 											<elseif condition="$item['changetype'] eq 9" />
 												服务补贴
 											<elseif condition="$item['changetype'] eq 10" />
-												消费提成
+												服务补贴
 											<elseif condition="$item['changetype'] eq 11" />
-												消费商提现
+												销费商提现
 											<elseif condition="$item['changetype'] eq 12" />
 												处理提现
 											<elseif condition="$item['changetype'] eq 13" />

@@ -282,7 +282,7 @@ def member_achievement_status(uid):
 
 	return flag
 
-# 通过父uid获取子推荐, 按昨天的激活时间子推荐
+# 通过父uid获取子推荐
 def gettuijiannumber_child(uid):
 	childs = []
 	sql = """
@@ -332,6 +332,7 @@ def getuservalue(parents):
 
 	return members
 
+# 获取管理奖比例
 def getmaxmanagercash(usertitle):
 	value = 0
 	sql = """
@@ -449,14 +450,14 @@ def managerbonus(uid, usertitle):
 	# 先获取会员管理比例的最大值
 	maxmanagercash = getmaxmanagercash(usertitle)
 
-	# 获取会员 的 左 中 右 消费商
+	# 获取会员 的 左 中 右 销费商
 	sql = """
 		select uid from zx_member where parentid = %s
 	""" % (uid)
 	members = conn.query(sql)
 	for member in members:
 		member_uid = member['uid']
-		# 获取消费商推荐的人
+		# 获取销费商推荐的人
 		childs = gettuijiannumber_child(member_uid)
 		for child in childs:
 			# 获取推荐人的级别金额
@@ -473,6 +474,4 @@ def managerbonus(uid, usertitle):
 						update_achievement_status(child)
 
 if __name__ == '__main__':
-	#lists = [[170, 2L, 5.0], [171L, 1L, 10.0], [173L, 1L, 15.0], [174L, 2L, 20.0]]
-	#jicha(174, 4, 1980, 20, lists)
 	main()

@@ -156,11 +156,11 @@
 		    $xlsCell  = array(
 			    array('title','类型'),
 			    array('jiangjinbi','奖金币'),
-			    array('baodanbi','报单币'),
+			    array('baodanbi','注册币'),
 			    array('jihuobi','激活币'),
 			    array('rongzidun','戎子盾'),
 			    array('lovemoney','爱心基金'),
-			    array('jianglijifen','奖励积分'),
+			    array('jianglijifen','福利积分'),
 			    array('platmoney','平台管理费'),
 			    array('taxmoney','税费'),
 			    array('total','总奖金'),
@@ -180,11 +180,11 @@
 				}elseif($value['moneytype'] == 5){
 					$xlsData[$key]['title'] = "市场补贴";
 				}elseif($value['moneytype'] == 6){
-					$xlsData[$key]['title'] = "消费补贴";
+					$xlsData[$key]['title'] = "销售补贴";
 				}elseif($value['moneytype'] == 7){
 					$xlsData[$key]['title'] = "服务补贴";
 				}elseif($value['moneytype'] == 8){
-					$xlsData[$key]['title'] = "消费提成";
+					$xlsData[$key]['title'] = "服务补贴";
 				}
 		    }
 		    $this->exportExcel($xlsName,$xlsCell,$xlsData);
