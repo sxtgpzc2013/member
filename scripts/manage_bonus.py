@@ -35,23 +35,6 @@ def rate():
 		)
 	return rates
 
-def compare(x, y, z):
-	values = []
-	values.append(x)
-	values.append(y)
-	values.append(z)
-
-	for i, v in enumerate(values):
-		if v == max(values):
-			del values[i]
-			break
-
-	if len(values) == 2:
-		value = values[0] + values[1]
-		return value
-	else:
-		return 0
-
 # 插入管理补贴明细,流水
 def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
 	# 比率配比

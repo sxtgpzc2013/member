@@ -14,6 +14,23 @@ now = datetime.datetime.now()
 now_second = datetime.datetime.now().strftime('%s')
 yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
 
+def compare(x, y, z):
+	values = []
+	values.append(x)
+	values.append(y)
+	values.append(z)
+
+	for i, v in enumerate(values):
+		if v == max(values):
+			del values[i]
+			break
+
+	if len(values) == 2:
+		value = values[0] + values[1]
+		return value
+	else:
+		return 0
+
 def update_member(usertitle, jianglijifen, usernumber):
 	sql = """
 		update zx_member set usertitle = %s, jianglijifen = jianglijifen + %s where usernumber = %s 
