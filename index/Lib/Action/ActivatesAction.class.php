@@ -469,6 +469,10 @@ class ActivatesAction extends CommonAction {
 			//更新拓展补贴
 			$this -> save_expand_subsidy($member, $deduct);
 
+			//调用Python脚本
+			//exec("python ./");
+			system("python ./scripts/manage_bonus.py", $ret)
+			
 			//更新消费套餐红酒订单 添加一份订单
 			$this -> save_red_order($member);
 
