@@ -39,7 +39,7 @@
    			system("python ./scripts/achievement.py", $ret2);
 
 			var_dump($ret);
-			var_dump($ret2)
+			var_dump($ret2);
 			// $program="/usr/bin/python ./astro.py"; #注意使用绝对路径
 			// exec ($program);
 		}
