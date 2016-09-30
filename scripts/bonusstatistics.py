@@ -30,28 +30,28 @@ def money_change(uid, usernumber):
 			moneytype = int(result['moneytype'])
 			if moneytype == 1:
 				fenhong_total = result['total']
-				fenhong_real_total = result['realtotal']
+				fenhong_real_total = result['real_total']
 			elif moneytype == 2:
 				manager_total = result['total']
-				manager_real_total = result['realtotal']
+				manager_real_total = result['real_total']
 			elif moneytype == 3:
 				leader_total = result['total']
-				leader_real_total = result['realtotal']
+				leader_real_total = result['real_total']
 			elif moneytype == 4:
 				expand_total = result['total']
-				expand_real_total = result['realtotal']
+				expand_real_total = result['real_total']
 			elif moneytype == 5:
 				market_total = result['total']
-				market_real_total = result['realtotal']
+				market_real_total = result['real_total']
 			elif moneytype == 6:
 				consume_total = result['total']
-				consume_real_total = result['realtotal']
+				consume_real_total = result['real_total']
 			elif moneytype == 7:
 				service_total = result['total']
-				service_real_total = result['realtotal']
+				service_real_total = result['real_total']
 			elif moneytype == 8:
 				twice_consume_total = result['total']
-				twice_consume_real_total = result['realtotal']
+				twice_consume_real_total = result['real_total']
 
 		total = fenhong_total + manager_total + leader_total + expand_total + market_total + consume_total + service_total + twice_consume_total
 		realtotal =  fenhong_real_total + manager_real_total + leader_real_total + expand_real_total + market_real_total + consume_real_total + service_real_total + twice_consume_real_total
