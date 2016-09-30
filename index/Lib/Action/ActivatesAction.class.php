@@ -352,7 +352,7 @@ class ActivatesAction extends CommonAction {
 		$contactuserpath_arr = array_reverse(explode(",", $member['contactuserpath']));
 
 		foreach ($contactuserpath_arr as $key => $value) {
-			
+
 			//查询该用户在左区中区还是右区
 			if($contactuserpath_arr[$key] && $contactuserpath_arr[$key+1] && $member['userrank'] != 1){
 
