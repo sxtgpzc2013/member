@@ -33,7 +33,7 @@ def rate():
 			{'category': 'platmoney', 'value': 2}, 
 			{'category': 'taxmoney', 'value': 17}
 		)
-	return rates
+	return ratesZQ
 
 # 插入管理补贴明细,流水
 def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
@@ -261,7 +261,7 @@ def main():
 def member_active_time(uid):
 	flag = False
 	sql = """
-		select active_time from zx_member where uid = %s and from_unixtime(active_time, '%%Y-%%m-%%d') = '%s'
+		select active_time from zx_member where uid = %s and achievementstatus = 0 and from_unixtime(active_time, '%%Y-%%m-%%d') = '%s'
 	""" % (uid, yes_time)
 	results = conn.query(sql)
 	if results:
@@ -401,7 +401,6 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				managercash = value * maxmanagercash / 100
 				result = getmemberinfo(member_uid)	
 				if result:
-					print "ok"
 					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 			else:
 				if member_title > int(usertitle):
@@ -423,6 +422,15 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 	return True
+
+#更新会员的业绩状态
+def update_achievement_status(uid):
+	sql = """
+		update zx_member set achievementstatus = 1 where uid = %s and achievementstatus != 1
+	""" % (usernumber)
+
+	status = conn.dml(sql, 'update')
+	return status
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
@@ -448,7 +456,11 @@ def managerbonus(uid, usertitle):
 					# 极差
 					# 赛选有星级的会员 uid, usertitle
 					memberlevels = getuservalue(parents[0:k+1])
-					jicha(uid, usertitle, value, maxmanagercash, memberlevels)
+					status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
+					if status:
+						update_achievement_status(child)
+
+
 
 if __name__ == '__main__':
 	#lists = [[170, 2L, 5.0], [171L, 1L, 10.0], [173L, 1L, 15.0], [174L, 2L, 20.0]]

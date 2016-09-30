@@ -239,6 +239,7 @@ CREATE TABLE `zx_member` (
   `right_zone` tinyint(1) DEFAULT '0' COMMENT '右区是否被占',
   `proxy_state` tinyint(2) DEFAULT '0' COMMENT '分红状态， 0 不分红，1 分红',
   `achievement` double(16,2) DEFAULT '0.00' COMMENT '总业绩',
+  `achievementstatus` tinyint(1) DEFAULT '0' COMMENT '业绩分红状态 0： 不计算头衔升级的消费商  1： 计算头衔升级推荐消费商',
   `num` int(10) DEFAULT '0' COMMENT '伞下人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
