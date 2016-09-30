@@ -33,6 +33,7 @@ def rate():
 def fenhong():
 	now = datetime.datetime.now()
 	now_second = datetime.datetime.now().strftime('%s')
+	yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
 	# 比率配比
 	rates = rate()
  	fenghong_scale_sql = "select value from zx_bonus_rule where category = 'UserCash'"
@@ -46,7 +47,7 @@ def fenhong():
 	member_sql = """
 					select m.uid, m.usernumber, m.realname, m.userrank, m.jiangjinbi, m.rongzidun, r.value from zx_member as m left join zx_bonus_rule as r
 					on m.userrank = r.key
-	 				where m.userrank != 1 and m.status = 1 and m.proxy_state = 1 and r.category = 'userrank'
+	 				where m.userrank != 1 and m.status = 1 and m.proxy_state = 1 and r.category = 'userrank' and m.usernumber != 1
 	"""
 	members = conn.query(member_sql)
 
@@ -99,7 +100,7 @@ def fenhong():
 				zx_bonus_detail_sql = """
 					insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
 					values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
-				""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, fenhong, real_total, now_second)
+				""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, fenhong, real_total, yes_second)
 				#  插入明细表
  				conn.dml(zx_bonus_detail_sql, 'insert')
 

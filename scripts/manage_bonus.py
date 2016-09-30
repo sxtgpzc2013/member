@@ -12,6 +12,7 @@ if sys.getdefaultencoding() != default_encoding:
 conn = mysql.db()
 now = datetime.datetime.now()
 now_second = datetime.datetime.now().strftime('%s')
+yes_second = (now + datetime.timedelta(days=-1)).strftime('%s')
 yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
 
@@ -59,11 +60,11 @@ def update_member(usertitle, jianglijifen, usernumber):
 	return conn.dml(sql, 'update')
 
 # 插入奖励积分明细
-def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen, now_second):
+def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen, yes_second):
 	sql = """
 		insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jianglijifen, createdate) 
 		values (%s, %s, '%s', %s, %s, %s)
-	""" % (uid, usernumber, realname, moneytype, jianglijifen, now_second)
+	""" % (uid, usernumber, realname, moneytype, jianglijifen, yes_second)
 
 	return conn.dml(sql, 'insert')
 
@@ -111,7 +112,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash, now_second):
 		zx_bonus_detail_sql = """
 			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
-		""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, now_second)
+		""" % (uid, usernumber, realname, 1, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, yes_second)
 		#  插入明细表
 		conn.dml(zx_bonus_detail_sql, 'insert')
 		jiangjinbi_change_sql = """
@@ -181,9 +182,10 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash, now_second):
 		zx_bonus_detail_sql = """
 			insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate) 
             values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
-		""" % (uid, usernumber, realname, 3, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, leadercash, real_total, now_second)
+		""" % (uid, usernumber, realname, 3, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, leadercash, real_total, yes_second)
 		#  插入明细表
 		conn.dml(zx_bonus_detail_sql, 'insert')
+
 		jiangjinbi_change_sql = """
 			insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
             values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
@@ -279,8 +281,8 @@ def leaderbonus(uid, managercash):
 
 			insert_bonus_detail_3(uid, usernumber, realname, leadercash, now_second)
 		
-# 管理补贴
-def member():
+# 管理补贴 和 互助补贴
+def main():
 	sql = """
 		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3
 	"""
@@ -303,7 +305,7 @@ def member():
 				if usertitle == 0:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
-						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, now_second)
+						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 			elif value > 300000 and value < 800000: 
 				title = 2				
@@ -311,7 +313,7 @@ def member():
 				if usertitle == 0 or usertitle == 1:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
-						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, now_second)
+						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 			elif value > 800000 and value < 2000000:
 				title = 3
@@ -319,7 +321,7 @@ def member():
 				if usertitle == 0 or usertitle == 1 or usertitle == 2:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
-						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, now_second)
+						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 			elif value > 2000000 and value < 5000000:
 				title = 4
@@ -327,7 +329,7 @@ def member():
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
-						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, now_second)
+						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 			elif value > 5000000 and value < 8000000:
 				title = 5
@@ -335,7 +337,7 @@ def member():
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
-						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, now_second)
+						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 			elif value > 8000000:
 				title = 6
@@ -343,7 +345,7 @@ def member():
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5:
 					status = update_member(title, jianglijifen, usernumber)
 					if status:
-						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, now_second)
+						insert_bonus_detail_jianglijifen(uid, usernumber, realname, 2, jianglijifen, yes_second)
 						insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen, now_second)
 
 	conn.close()
@@ -437,22 +439,75 @@ def getmembervalue(uid):
 # 极差算法
 def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 	maxmanagercash = maxmanagercash
-	i = 0
-	for member in memberlevels:
-		member_uid = member[0]
-		member_title = member[1]
-		member_value = member[2]
+	for index, val in enumerate(memberlevels):
+		if index > 0:
+			flag = False
+			member_uid = int(memberlevels[index][0])
+			member_title = int(memberlevels[index][1])
+			member_value = int(memberlevels[index][2])
+			i = 0	
+			for x in range(0, index):
+				if member_title > int(memberlevels[x][1]):		
+					flag = True
+				elif member_title == int(memberlevels[x][1]):
+					flag = False
+					break
+				elif member_title < int(memberlevels[x][1]):
+					flag = False
+					break
+				i = int(memberlevels[x][2])
 
-		if member_title > usertitle:
-			leadercash = value * maxmanagercash / 100
-		elif member_title == usertitle:
-			leadercash = value * maxmanagercash / 100
-		elif member_title < usertitle:
-			leadercash = value * member_value / 100
-			maxmanagercash -= member_value
-
-		print maxmanagercash
-		i = member_title
+			if flag:
+				if member_uid == int(uid):
+					managercash = value * maxmanagercash / 100
+					result = getmemberinfo(member_uid)
+					if result:
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)
+					break
+				else:
+					if member_title > int(usertitle):
+						managercash = value * maxmanagercash / 100
+						result = getmemberinfo(member_uid)
+						if result:
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+						break
+					elif member_title == int(usertitle): 
+						managercash = value * member_value / 100
+						if result:
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+						break
+					elif member_title < int(usertitle):
+						_member_value = member_value - i
+						managercash = value * _member_value / 100 
+						maxmanagercash -= _member_value
+						if result:
+							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+						
+		elif index == 0:
+			member_uid = int(memberlevels[index][0])
+			member_title = int(memberlevels[index][1])
+			member_value = int(memberlevels[index][2])
+			if member_uid == int(uid):
+				managercash = value * maxmanagercash / 100	
+				if result:
+					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+			else:
+				if member_title > int(usertitle):
+					managercash = value * maxmanagercash / 100
+					if result:
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+					break
+				elif member_title == int(usertitle):
+					managercash = value * member_value / 100
+					if result:
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+					break
+				elif member_title < int(usertitle):
+					managercash = value * member_value / 100
+					maxmanagercash -= member_value
+					if result:
+						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result['realname'], managercash, now_second)	
+	return True
 
 #根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
@@ -464,7 +519,6 @@ def managerbonus(uid, usertitle):
 		select uid from zx_member where parentid = %s
 	""" % (uid)
 	members = conn.query(sql)
-	print members
 	for member in members:
 		member_uid = member['uid']
 		# 获取消费商推荐的人
@@ -480,9 +534,8 @@ def managerbonus(uid, usertitle):
 					# 赛选有星级的会员 uid, usertitle
 					memberlevels = getuservalue(parents[0:k+1])
 					jicha(uid, usertitle, value, maxmanagercash, memberlevels)
-			break
-		break
-
 
 if __name__ == '__main__':
-	managerbonus(170, 2)
+	#lists = [[170, 2L, 5.0], [171L, 1L, 10.0], [173L, 1L, 15.0], [174L, 2L, 20.0]]
+	#jicha(174, 4, 1980, 20, lists)
+	main()
