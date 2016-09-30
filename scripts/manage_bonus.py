@@ -217,7 +217,7 @@ def leaderbonus(uid, managercash):
 			elif rate['key'] == 3:
 				rate3 = rate['value']
 
-	uids = gettuijiannumber_parent(uid)
+	_uids = gettuijiannumber_parent(uid)
 	
 	for i, v in enumerate(uids):
 		if int(v) == 1:
@@ -230,6 +230,8 @@ def leaderbonus(uid, managercash):
 			result = conn.query(filter_member_sql)
 			if result:
 				del uids[i]
+
+	uids = _uids[0:3]
 	i = 0
 	leadercash = 0
 	for uid in uids:
