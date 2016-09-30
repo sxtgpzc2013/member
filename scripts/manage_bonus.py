@@ -250,25 +250,6 @@ def leaderbonus(uid, managercash):
 
 			insert_bonus_detail_3(uid, usernumber, realname, leadercash)
 		
-# 管理补贴 和 互助补贴
-def main():
-	sql = """
-		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
-	"""
-	members = conn.query(sql)
-	if members:
-		for member in members:
-			usernumber = member['usernumber']
-			usertitle = member['usertitle']
-			uid = member['uid']
-			usernumber = member['usernumber']
-			realname = member['realname']
-			# 判断是星级的会员
-			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
-				managerbonus(uid, usertitle)
-
-	conn.close()
-
 def member_achievement_status(uid):
 	flag = False
 	sql = """
@@ -472,6 +453,26 @@ def managerbonus(uid, usertitle):
 					status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
 					if status:
 						update_achievement_status(child)
+
+# 管理补贴 和 互助补贴
+def main():
+	sql = """
+		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
+	"""
+	members = conn.query(sql)
+	if members:
+		for member in members:
+			usernumber = member['usernumber']
+			usertitle = member['usertitle']
+			uid = member['uid']
+			usernumber = member['usernumber']
+			realname = member['realname']
+			# 判断是星级的会员
+			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
+				managerbonus(uid, usertitle)
+
+	conn.close()
+	print "ok"
 
 if __name__ == '__main__':
 	main()

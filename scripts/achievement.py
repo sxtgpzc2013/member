@@ -152,6 +152,7 @@ def main():
 							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 
 	conn.close()
+	print "ok"
 
 if __name__ == '__main__':
 	main()
