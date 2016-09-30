@@ -429,8 +429,8 @@ def getmembervalue(uid):
 	value = 0
 	sql = """
 		select r.value from zx_member as m left join zx_bonus_rule as r on m.userrank = r.key
-		where r.category = 'userrank'
-	"""
+		where r.category = 'userrank' and m.uid = %s
+	""" % (uid)
 	results = conn.query(sql)
 	if results:
 		value = results[0]['value']
@@ -493,6 +493,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				managercash = value * maxmanagercash / 100
 				result = getmemberinfo(member_uid)	
 				if result:
+					print "ok"
 					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash, now_second)	
 			else:
 				if member_title > int(usertitle):
