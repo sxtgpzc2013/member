@@ -231,7 +231,12 @@ def leaderbonus(uid, managercash):
 			if result:
 				del uids[i]
 
-	uids = _uids[0:3]
+	lengh = len(uids)
+	if lengh > 3:
+		uids = _uids[0:3]
+	else:
+		uids =  _uids[0:lengh]
+
 	i = 0
 	leadercash = 0
 	for uid in uids:
@@ -426,7 +431,7 @@ def update_achievement_status(uid):
 	status = conn.dml(sql, 'update')
 	return status
 
-#根据激活时间 计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
+#计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
 	# 先获取会员管理比例的最大值
 	maxmanagercash = getmaxmanagercash(usertitle)
@@ -447,7 +452,6 @@ def managerbonus(uid, usertitle):
 			parents = gettuijiannumber_parent(child)
 			for k, v in enumerate(parents):
 				if int(v) == int(uid):
-					# 极差
 					# 赛选有星级的会员 uid, usertitle
 					memberlevels = getuservalue(parents[0:k+1])
 					status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
