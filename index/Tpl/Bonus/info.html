@@ -23,6 +23,7 @@
 						<table class="table table-hover no-margins">
 							<thead>
 								<tr>
+									<th></th>
 									<th>奖金币</th>
 									<th>注册币</th>
 									<th>激活币</th>
@@ -39,6 +40,7 @@
 								<foreach name="result['result']" item="item">
 									<if condition="$item['moneytype'] eq 1">
 										<tr>
+											<th>分红</th>
 											<td>￥{$item.jiangjinbi}</td>
 											<td>￥{$item.baodanbi}</td>
 											<td>￥{$item.jihuobi}</td>
