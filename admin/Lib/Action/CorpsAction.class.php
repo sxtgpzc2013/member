@@ -128,7 +128,7 @@
 
 	    	$recommendmember = $this -> model -> my_find($params);
 
-			//获取位置编号数据 parentid
+			//获取位置编号据 parentid
 			$params = array(
 
 				'table_name' => 'member',

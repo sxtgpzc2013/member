@@ -472,7 +472,7 @@ def main():
 				managerbonus(uid, usertitle)
 
 	conn.close()
-	print "ok"
+	print "ok" 
 
 if __name__ == '__main__':
 	main()

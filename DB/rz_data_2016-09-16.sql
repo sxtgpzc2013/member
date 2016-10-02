@@ -233,7 +233,7 @@ CREATE TABLE `zx_member` (
   `psd2` varchar(32) DEFAULT NULL COMMENT '二级密码',
   `recom_num` int(8) DEFAULT '0' COMMENT '推荐人数',
   `zone` int(4) DEFAULT '1' COMMENT 'A部（1），B部(2), C部（3）',
-  `znum` mediumint(10) DEFAULT '0' COMMENT '位置编号数',
+  `znum` mediumint(10) DEFAULT '0' COMMENT '位置编号',
   `left_zone` tinyint(1) DEFAULT '0' COMMENT 'A部是否被占',
   `middle_zone` tinyint(1) DEFAULT '0' COMMENT 'B部是否被占',
   `right_zone` tinyint(1) DEFAULT '0' COMMENT 'C部是否被占',
