@@ -15,7 +15,7 @@ yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
 def money_change(uid, usernumber):
 	total, realtotal = 0, 0
-	fenhong_total, fenhong_real_total, manager_total, manager_real_total, leader_total, leader_real_total, expand_total, expand_real_total, market_total, market_real_total, consume_total, consume_real_total, service_total, service_real_total, twice_consume_total, twice_consume_real_total = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	fenhong_total, fenhong_real_total, manager_total, manager_real_total, leader_total, leader_real_total, expand_total, expand_real_total, market_total, market_real_total, consume_total, consume_real_total, service_total, service_real_total, twice_consume_total, twice_consume_real_total, jifen_total, jifen_real_total = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 	sql = """
 		select moneytype, sum(total) as total, sum(real_total) as real_total from zx_bonus_detail 
@@ -55,7 +55,7 @@ def money_change(uid, usernumber):
 		realtotal =  fenhong_real_total + manager_real_total + leader_real_total + expand_real_total + market_real_total + consume_real_total + service_real_total + twice_consume_real_total
 
 	zx_bonus_count_sql = """
-		insert into zx_bonus_count (touserid, tousernumber, bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus7, bonus8, total, real_total, count_date) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+		insert into zx_bonus_count (touserid, tousernumber, bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus7, bonus8, bonus9, total, real_total, count_date) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
 	""" % (uid, usernumber, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, total, realtotal, yes_time)
 	conn.dml(zx_bonus_count_sql, 'insert')
 

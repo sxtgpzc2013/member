@@ -158,6 +158,22 @@
 											<td>￥{$item.real_total}</td>
 										</tr>
 									</if>
+									<if condition="$item['moneytype'] eq 9">
+										<tr>
+											<th>福利积分</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+										</tr>
+									</if>
+
 								</foreach>
 
 							</tbody>
