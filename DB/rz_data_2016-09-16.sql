@@ -309,6 +309,7 @@ CREATE TABLE `zx_withdrawal` (
   `moneytype` int(1) unsigned DEFAULT '0' COMMENT '提现类型 0 奖金币',
   `userid` int(10) DEFAULT '0' COMMENT '用户id',
   `usernumber` char(16) DEFAULT '' COMMENT '用户编号',
+  `realname` varchar(16) DEFAULT '' COMMENT '用户姓名',
   `bankholder` varchar(16) NOT NULL COMMENT '开户人',
   `bankname` varchar(16) DEFAULT NULL COMMENT '开户银行',
   `banknumber` varchar(20) DEFAULT NULL COMMENT '银行卡号',
