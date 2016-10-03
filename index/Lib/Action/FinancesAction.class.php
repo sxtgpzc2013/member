@@ -100,7 +100,7 @@
 
 	    		$data['fee'] = $data['money'] / 10;
 
-	    		$data['arrival_amount'] = $date['money'] - $data['free'];
+	    		$data['arrival_amount'] = $date['money'] - $data['fee'];
 
 	    		$data['createtime'] = time();
 
