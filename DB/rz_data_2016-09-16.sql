@@ -244,8 +244,7 @@ CREATE TABLE `zx_member` (
   `num` int(10) DEFAULT '0' COMMENT '伞下人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
-  `static_fenghong` double(10,2) DEFAULT '0.00' COMMENT '静态分红',
-  `dynamic_fenhong` double(10,2) DEFAULT '0.00' COMMENT '动态分红'
+  `max_bonus` double(16,2) DEFAULT '0.00' COMMENT '最大奖金',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `usernumber` (`usernumber`) USING BTREE,
   KEY `status` (`status`) USING BTREE,
