@@ -11,6 +11,7 @@ if sys.getdefaultencoding() != default_encoding:
 
 conn = mysql.db()
 now = datetime.datetime.now()
+yes_time_second = (now + datetime.timedelta(days=-1)).strftime('%s')
 yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
 def money_change(uid, usernumber):
@@ -56,7 +57,7 @@ def money_change(uid, usernumber):
 
 	zx_bonus_count_sql = """
 		insert into zx_bonus_count (touserid, tousernumber, bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus7, bonus8, total, real_total, count_date) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-	""" % (uid, usernumber, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, total, realtotal, yes_time)
+	""" % (uid, usernumber, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, total, realtotal, yes_time_second)
 	conn.dml(zx_bonus_count_sql, 'insert')
 
 def main():
