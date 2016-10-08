@@ -14,7 +14,7 @@ now = datetime.datetime.now()
 yes_time_second = (now + datetime.timedelta(days=-1)).strftime('%s')
 yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
-def money_change(uid, usernumber):
+def money_change(uid, usernumber, realname):
 	total, realtotal = 0, 0
 	fenhong_total, fenhong_real_total, manager_total, manager_real_total, leader_total, leader_real_total, expand_total, expand_real_total, market_total, market_real_total, consume_total, consume_real_total, service_total, service_real_total, twice_consume_total, twice_consume_real_total = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
@@ -56,14 +56,14 @@ def money_change(uid, usernumber):
 		realtotal =  fenhong_real_total + manager_real_total + leader_real_total + expand_real_total + market_real_total + consume_real_total + service_real_total + twice_consume_real_total
 
 	zx_bonus_count_sql = """
-		insert into zx_bonus_count (touserid, tousernumber, bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus7, bonus8, total, real_total, count_date) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-	""" % (uid, usernumber, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, total, realtotal, yes_time_second)
+		insert into zx_bonus_count (touserid, tousernumber, torealname, bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus7, bonus8, total, real_total, count_date) values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+	""" % (uid, usernumber, realname, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, total, realtotal, yes_time_second)
 	conn.dml(zx_bonus_count_sql, 'insert')
 
 def main():
 	# 查昨天所有的明细
 	member_sql = """
-		select uid, usernumber from zx_member where status = 1 and uid != 1
+		select uid, usernumber, realname from zx_member where status = 1 and uid != 1
 	"""
 	results = conn.query(member_sql)
 
@@ -71,7 +71,8 @@ def main():
 		for result in results:
 			uid = result['uid']
 			usernumber = result['usernumber']
-			money_change(uid, usernumber)
+			realname = result['realname']
+			money_change(uid, usernumber, realname)
 
 	conn.close()
 
