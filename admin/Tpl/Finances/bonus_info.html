@@ -54,8 +54,9 @@
 									<td>福利积分</td>
 									<td>平台管理费</td>
 									<td>税费</td>
-									<td>总奖金</td>
+									<td>应发奖金</td>
 									<td>实发奖金</td>
+									<th>时间</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -73,6 +74,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 2">
@@ -88,6 +90,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 3">
@@ -103,6 +106,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 4">
@@ -118,6 +122,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 5">
@@ -133,6 +138,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 6">
@@ -148,6 +154,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 7">
@@ -163,6 +170,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 									<if condition="$item['moneytype'] eq 8">
@@ -178,6 +186,7 @@
 											<td>￥{$item.taxmoney}</td>
 											<td>￥{$item.total}</td>
 											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
 								</foreach>

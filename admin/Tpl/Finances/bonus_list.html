@@ -42,7 +42,7 @@
 						<table class="table table-hover no-margins">
 							<thead>
 								<tr>
-									<th>日期</th>
+									<!-- <th>日期</th>
 									<th>销费商编号</th>
 									<th>销费商姓名</th>
 									<th>分红</th>
@@ -55,25 +55,35 @@
 									<th>服务补贴</th>
 									<th>应发金额累计</th>
 									<th>实发金额累计</th>
+									<th>操作</th> -->
+									<th>日期</th>
+									<th>分红</th>
+									<th>管理补贴</th>
+									<th>互助补贴</th>
+									<th>拓展补贴</th>
+									<th>市场补贴</th>
+									<th>消费补贴</th>
+									<th>服务补贴</th>
+									<th>二次消费补贴</th>
+									<th>应发金额累计</th>
+									<th>实发金额累计</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								<foreach name="result['result']" item="item">
+								<foreach name="result['result']" item="bonus">
 									<tr>
-										<td>{$item.count_date|date="Y-m-d H:i:s",###}</td>
-										<td>{$item.tousernumber}</td>
-										<td>{$item.torealname}</td>
-										<td>￥{$item.bonus1}</td>
-										<td>￥{$item.bonus2}</td>
-										<td>￥{$item.bonus3}</td>
-										<td>￥{$item.bonus4}</td>
-										<td>￥{$item.bonus5}</td>
-										<td>￥{$item.bonus6}</td>
-										<td>￥{$item.bonus7}</td>
-										<td>￥{$item.bonus8}</td>
-										<td>￥{$item.total}</td>
-										<td>￥{$item.real_total}</td>
+										<td>{$bonus['count_date']|date="Y-m-d",###}</td>
+										<td>{$bonus['bonus1']}</td>
+										<td>{$bonus['bonus2']}</td>
+										<td>{$bonus['bonus3']}</td>
+										<td>{$bonus['bonus4']}</td>
+										<td>{$bonus['bonus5']}</td>
+										<td>{$bonus['bonus6']}</td>
+										<td>{$bonus['bonus7']}</td>
+										<td>{$bonus['bonus8']}</td>
+										<td>{$bonus['total']}</td>
+										<td>{$bonus['real_total']}</td>
 										<td><a href="__APP__/Finances/bonus_info/id/{$item.id}">查看明细</a></td>
 									</tr>
 								</foreach>
