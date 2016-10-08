@@ -499,25 +499,37 @@
 	    			//获取上三代ID
 	    			$upids = explode(',', $member_find['recommenduserpath']);
 
-	    			$upid[1] = count($upids) >= 1 ? $upids[count($upids)-1] : 0;
+	    			//查询上三代信息
+	    			$params = array(
 
-	    			$upid[2] = count($upids) >= 2 ? $upids[count($upids)-2] : 0;
+	    				'table_name' => 'member',
 
-	    			$upid[3] = count($upids) >= 3 ? $upids[count($upids)-3] : 0;
+	    				'where' => "userrank > 1 AND uid IN ({$member_find['recommenduserpath']})",
+
+	    				'order' => "field(uid,{$member_find['recommenduserpath']})"
+	    			);
+
+	    			$members = $this -> model -> order_select($params, 'no');
+
+	    			$upmember[1] = count($members) >= 1 ? $members[count($members)-1] : 0;
+
+	    			$upmember[2] = count($members) >= 2 ? $members[count($members)-2] : 0;
+
+	    			$upmember[3] = count($members) >= 3 ? $members[count($members)-3] : 0;
 
 	    			//更新
-	    			foreach ($upid as $k => $v)
+	    			foreach ($upmember as $k => $v)
 	    			{
-		    			if ($v != 0 && $v != 1)
+		    			if ($v['uid'] != 0 && $v['uid'] != 1)
 		    			{
-		    				$params = array(
+		    				// $params = array(
 
-		    					'table_name' => 'member',
+		    				// 	'table_name' => 'member',
 
-		    					'where' => "uid = {$v}"
-		    				);
+		    				// 	'where' => "uid = {$v}"
+		    				// );
 
-		    				$up_find = $this -> model -> my_find($params);
+		    				// $up_find = $this -> model -> my_find($params);
 
 			    			$params = array(
 
@@ -527,7 +539,7 @@
 
 			    				'data' => array(
 
-			    					'jiangjinbi' => $up_find['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
+			    					'jiangjinbi' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
 
 			    					'update_time' => time()
 			    				)
@@ -546,9 +558,9 @@
 
 			    					'status' => $up_save,
 
-			    					'targetuserid' => $up_find['uid'],
+			    					'targetuserid' => $v['uid'],
 
-			    					'targetusernumber' => $up_find['usernumber'],
+			    					'targetusernumber' => $v['usernumber'],
 
 			    					'changetype' => 9,
 
@@ -556,13 +568,13 @@
 
 			    					'money' => $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8,
 
-			    					'hasmoney' => $up_find['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
+			    					'hasmoney' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
 
 			    					'createtime' => time(),
 
 			    					'realname' => '系统',
 
-			    					'targetrealname' => $up_find['realname']
+			    					'targetrealname' => $v['realname']
 			    				)
 			    			);
 
@@ -576,11 +588,11 @@
 
 			    				'data' => array(
 
-			    					'touserid' => $up_find['uid'],
+			    					'touserid' => $v['uid'],
 
-			    					'tousernumber' => $up_find['usernumber'],
+			    					'tousernumber' => $v['usernumber'],
 
-			    					'torealname' => $up_find['realname'],
+			    					'torealname' => $v['realname'],
 
 			    					'moneytype' => 7,
 
@@ -669,5 +681,45 @@
 	    	$this -> assign('result', $result);
 
 			$this -> display();
+	    }
+
+	    /**
+		 * 签收
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function sign()
+	    {
+	    	$id = isset($_GET['id']) ? intval($_GET['id']) : $this -> _back('缺少必要参数');
+
+	    	$params = array(
+
+	    		'table_name' => 'orders',
+
+	    		'where' => "user_id = {$_SESSION['Rongzi']['user']['uid']} AND id = {$id} AND is_del = 0 AND status = 2",
+
+	    		'data' => array(
+
+	    			'status' => 3,
+
+	    			'updated_at' => time()
+	    		)
+	    	);
+
+	    	$order_save = $this -> model -> my_save($params);
+
+	    	if ($order_save)
+	    	{
+	    		redirect(__APP__.'/Orders/index', 0);
+	    	}
+	    	else
+	    	{
+	    		$this -> _back('签收失败 请重试');
+	    	}
 	    }
 	}
