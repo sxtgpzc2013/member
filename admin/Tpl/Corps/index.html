@@ -24,8 +24,6 @@
 					<div class="col-sm-8 m-b-xs">
 						<p>
 							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Teams/register">新增</a>
-							<!-- <button type="button" class="btn btn-w-m btn-primary">启用</button>
-							<button type="button" class="btn btn-w-m btn-primary">冻结</button> -->
 							<button type="button" class="btn btn-w-m btn-primary">导出数据</button>
 						</p>
 					</div>
@@ -67,7 +65,7 @@
                                     <th>销费商编号</th>
                                     <th>销费商姓名</th>
                                     <th>销费商级别</th>
-									<th>销费商职务</th>
+									<th>销费商头衔</th>
 									<th>数字红酒资格</th>
 									<th>奖金币</th>
 									<th>注册币</th>
@@ -87,7 +85,7 @@
 	                                    <!-- <td>
 	                                        <input type="checkbox" class="i-checks" name="input[]">
 	                                    </td> -->
-	                                    <td>{$member['uid']}</span></td>
+	                                    <td>{$member['usernumber']}</span></td>
 										<td>{$member['realname']}</td>
 										<td>{$member['userrank']}
 											<if condition="$member['userrank'] eq 1">
@@ -103,13 +101,7 @@
 											</if>
 										</td>
 	                                    <td>{$member['usertitle']}级会员</td>
-										<td>
-											<if condition="$member['red_wine_number'] eq 1">
-												一瓶
-											<elseif condition="$member['red_wine_number'] eq 2"/>
-												三瓶
-											</if>
-										</td>
+										<td>{$member['red_wine_number']}</td>
 										<td>{$member['jiangjinbi']}</td>
 										<td>{$member['baodanbi']}</td>
 										<td>{$member['rongzidun']}</td>
