@@ -57,6 +57,8 @@
 									<th>实发金额累计</th>
 									<th>操作</th> -->
 									<th>日期</th>
+									<th>销费商编号</th>
+									<th>销费商姓名</th>
 									<th>分红</th>
 									<th>管理补贴</th>
 									<th>互助补贴</th>
@@ -74,6 +76,8 @@
 								<foreach name="result['result']" item="bonus">
 									<tr>
 										<td>{$bonus['count_date']|date="Y-m-d",###}</td>
+										<td>{$item.tousernumber}</td>
+										<td>{$item.torealname}</td>
 										<td>{$bonus['bonus1']}</td>
 										<td>{$bonus['bonus2']}</td>
 										<td>{$bonus['bonus3']}</td>
