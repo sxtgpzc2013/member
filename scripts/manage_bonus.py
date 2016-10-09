@@ -13,6 +13,18 @@ conn = mysql.db()
 now = datetime.datetime.now()
 now_second = datetime.datetime.now().strftime('%s')
 
+# 最大分红比例
+def maxcash(userrank):
+	value = 0
+	sql = """
+		select value from zx_bonus_rule where category = 'maxcash' and `key` = %s
+	""" % (userrank)
+	result = conn.query(sql)
+	if result:
+		value = result[0]['value']
+ 
+	return value
+
 def rate():
 	rate_sql = """
 		select category, value from zx_bonus_rule where category in ('rongzidun', 'jiangjinbi', 'lovemoney', 'platmoney', 'taxmoney')
