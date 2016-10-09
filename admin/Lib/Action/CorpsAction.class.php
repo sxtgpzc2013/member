@@ -411,4 +411,47 @@
 
 			die(json_encode(array("success" => true, "code" => 200, "msg" => "代理商编号获取成功", "data" => $userinfo)));
 		 }
+
+
+		 /**
+ 		 * 销费商注册
+ 		 *
+ 		 * 参数描述：
+ 		 *
+ 		 *
+ 		 *
+ 		 * 返回值：
+ 		 *
+ 		 */
+ 	    public function upgrade()
+ 	    {
+ 			$form_key = htmlspecialchars($_POST['form_key']);
+
+ 			if ($form_key == 'yes')
+ 			{
+
+				$data['userrank'] = $_POST['canlevel'];
+
+ 				//查询用户手机号是否注册 查询用户编号是否注册
+ 				$params = array(
+
+ 					'table_name' => 'member',
+
+ 					'where' => "uid = {$_POST['uid']} AND usernumber = '{$_POST['usernumber']}'",
+
+					'data' => $data
+
+ 				);
+
+ 				$my_save = $this -> model -> my_save($params);
+				if ($my_save == 1){
+					echo '<script language="JavaScript">;alert("消费商升级成功");</script>;';
+					$this -> redirect("/Corps/upgrade");
+				}else{
+					$this -> _back('销费商代理商编号设置失败失败');
+				}
+			}
+
+			$this -> display();
+		}
 	}

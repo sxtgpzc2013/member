@@ -25,8 +25,9 @@
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
+					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Corps/upgrade" method="post">
 						<input type="hidden" name="uid" value="" id="uid">
+						<input type="hidden" name="form_key" value="yes">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*销费商编号:</label>
                             <div class="col-sm-6">
@@ -55,7 +56,7 @@
 							<label class="col-sm-3 control-label">*升级方式:</label>
 							<div class="col-sm-6">
 								<!-- <label class="checkbox-inline"><input type="radio" name="type" value="1" id="inlineCheckbox1"> 扣币升级</label> -->
-								<label class="checkbox-inline"><input type="radio" name="type" value="2" id="inlineCheckbox2" checked> 空单升级(只对级别升级有效)</label>
+								<label class="checkbox-inline"><input type="radio" id="inlineCheckbox2" checked> 空单升级(只对级别升级有效)</label>
 							</div>
 						</div>
 
@@ -110,9 +111,6 @@
 				   required: true
 			   },
 			   number: {
-				   required: true,
-			   },
-			   type: {
 				   required: true,
 			   },
 			   canlevel: {
