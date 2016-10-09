@@ -711,7 +711,35 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 提现记录
+     * 提现记录
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function cash_list()
+    {
+        $params = array(
+
+            'table_name' => 'withdrawal',
+
+            'where' => "status = 0 OR status = 2",
+
+            'order' => 'createtime desc'
+        );
+
+        $result = $this -> model -> order_select($params);
+
+        $this -> assign('result', $result);
+
+        $this -> display();
+    }
+
+    /**
+	 * 业绩统计
 	 *
 	 * 参数描述：
 	 *
@@ -720,21 +748,21 @@ class FinancesAction extends CommonAction {
 	 * 返回值：
 	 *
 	 */
-    public function cash_list()
-    {
-    	$params = array(
+    // public function performance()
+    // {
+    // 	$params = array(
 
-    		'table_name' => 'withdrawal',
+    // 		'table_name' => 'withdrawal',
 
-    		'where' => "status = 0 OR status = 2",
+    // 		'where' => "status = 0 OR status = 2",
 
-    		'order' => 'createtime desc'
-    	);
+    // 		'order' => 'createtime desc'
+    // 	);
 
-    	$result = $this -> model -> order_select($params);
+    // 	$result = $this -> model -> order_select($params);
 
-    	$this -> assign('result', $result);
+    // 	$this -> assign('result', $result);
 
-    	$this -> display();
-    }
+    // 	$this -> display();
+    // }
 }
