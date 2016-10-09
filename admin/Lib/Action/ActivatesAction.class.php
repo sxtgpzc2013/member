@@ -676,7 +676,7 @@ class ActivatesAction extends CommonAction {
 			unset($expand[$admin_offset]);
 		}
 
-		$expand_slice = array_slice($expand, 0, 3);
+		$expand_slice = array_slice($expand, 0, 1);
 
 		//处理几级拓展补贴
 		foreach ($expand_slice as $key => $value) {
