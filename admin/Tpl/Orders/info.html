@@ -27,10 +27,9 @@
                         <h5>待发货订单 </h5>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-hover no-margins table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>详情</th>
                                     <th>名称</th>
                                     <th>戎子盾</th>
                                     <th>奖金币</th>
@@ -38,23 +37,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>112</td>
-									<td>2</td>
-									<td>12</td>
-
-                                </tr>
-								<tr>
-									<td>3123</td>
-									<td>2</td>
-									<td>112</td>
-									<td>2</td>
-									<td>12</td>
-
-								</tr>
-
+                            	<foreach name="result['items']" item="item">
+	                                <tr>
+										<td>{$item.name}</td>
+										<td>￥{$item.rprice}</td>
+	                                    <td>￥{$item.jprice}</td>
+										<td>{$item.count}</td>
+	                                </tr>
+                               	</foreach>
                             </tbody>
                         </table>
                     </div>
@@ -63,42 +53,42 @@
 					<div class="ibox-title">
                         <h5>订单详情 </h5>
                     </div>
-					<table class="table table-bordered">
+					<table class="table table-hover no-margins table-bordered table-striped">
 						<tbody>
 							<tr >
 								<td class="col-lg-2">订单时间</td>
-								<td>2</td>
+								<td>{$result.order.created_at|date="Y-m-d H:i:s",###}</td>
 							</tr>
 
 							<tr>
 								<td>订单号</td>
-								<td>2</td>
+								<td>{$result.order.order_code}</td>
 							</tr>
 
 							<tr>
 								<td>收货人姓名</td>
-								<td>2</td>
+								<td>{$result.order.sendName}</td>
 							</tr>
 
 
 							<tr>
 								<td>收货人地址</td>
-								<td>2</td>
+								<td>{$result.order.sendAddress}</td>
 							</tr>
 
 							<tr>
-								<td>会员编号</td>
-								<td>2</td>
+								<td>销费商编号</td>
+								<td>{$result.order.memberCode}</td>
 							</tr>
 
 							<tr>
 								<td>收货人电话</td>
-								<td>2</td>
+								<td>{$result.order.sendTel}</td>
 							</tr>
 
 							<tr>
 								<td>订单备注</td>
-								<td>2</td>
+								<td>{$result.order.notice}</td>
 							</tr>
 
 						</tbody>
@@ -108,26 +98,31 @@
 					<div class="ibox-title">
                         <h5>发货操作 </h5>
                     </div>
-					<table class="table table-bordered">
-						<tbody>
-							<tr>
-								<td class="col-lg-2">物流公司</td>
-								<td><input class="form-control" type="text" name="name" value="" placeholder="请输入物流公司地址"></td>
-							</tr>
+                    <form method="post" action="__ACTION__" onsubmit="return confirm('确认发货吗？');">
+						<table class="table table-hover no-margins table-bordered table-striped">
+							<tbody>
+								<tr>
+									<td class="col-lg-2">物流公司</td>
+									<td><input class="form-control" type="text" name="sendCommpany" placeholder="请输入物流公司" value="{$result.order.sendCommpany}"></td>
+									<input type="hidden" name="id" value="{$result.order.id}" />
+									<input type="hidden" name="form_key" value="yes" />
+								</tr>
 
-							<tr>
-								<td>物流编号</td>
-								<td><input class="form-control" type="text" name="name" value="" placeholder="请输入物流编号"></td>
-							</tr>
+								<tr>
+									<td>物流编号</td>
+									<td><input class="form-control" type="text" name="logistics_number" placeholder="请输入物流编号" value="{$result.order.logistics_number}"></td>
+								</tr>
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
 
-					<div class="text-center">
-						<a href="#" class="btn btn-primary">返回</a>
-
-						<a href="#" class="btn btn-info">确认发货</a>
-					</div>
+						<div class="text-center">
+							<a href="#" onclick="javascript:history.back(-1);"  class="btn btn-primary">返回</a>
+							<if condition="$result['order']['status'] eq 1">
+								<button class="btn btn-sm btn-info">确认发货</button>
+							</if>
+						</div>
+					</form>
                 </div>
             </div>
         </div>

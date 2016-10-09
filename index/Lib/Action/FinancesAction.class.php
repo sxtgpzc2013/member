@@ -134,7 +134,7 @@
 	    			$member_save = $this -> model -> my_save($params);
 
 	    			//存入流水
-	    			$money_change_data['moneytype'] = 6;
+	    			$money_change_data['moneytype'] = 1;
 
 					$money_change_data['status'] = $member_save ? 1 : 0;
 

@@ -78,11 +78,11 @@
 
 				$data['proxy_state'] = 1;
 
-				if($data['userrank'] == 1){
+				//if($data['userrank'] == 1){
 
-					$data['proxy_state'] = 0;
+				//	$data['proxy_state'] = 0;
 
-				}
+				//}
 
 				//处理密码操作
 				$data['psd1'] = md5(md5($data['psd1']));
