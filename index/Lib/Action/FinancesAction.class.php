@@ -38,7 +38,7 @@
 
 		}
 
-		
+
 
 	    /**
 		 * 首页
@@ -166,7 +166,7 @@
 
 					$money_change_add = $this -> model -> my_add($params);
 
-	    			redirect(__APP__.'/Finances/cash', 0);
+	    			redirect(__APP__.'/Finances/cash_list', 0);
 	    		}
 	    		else
 	    		{

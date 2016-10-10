@@ -1,10 +1,15 @@
 <include file="public:header" />
+<style media="screen">
+	.orgchart td.right{
+		width:800px !important;
+	}
+</style>
 <div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
 	<div class="col-lg-10"  style="padding:0px;">
 		<ol class="breadcrumb">
 			<a href="__URL__"><i class="fa fa-home"></i></a>
             <li>
-                <a href="__URL__">首页</a>
+                <a href="__APP__">首页</a>
             </li>
 			<li>
                 <a>市场管理</a>
@@ -32,13 +37,18 @@
                     <h5>推荐关系</h5>
                 </div>
                 <div class="ibox-content">
+
+                    <!-- <p class="m-b-lg">
+                        牛牛 当前共有20代会员
+                    </p> -->
                     <div class="dd" id="nestable2">
 						<foreach name="recommend_list" item="recommend">
 							<ol class="dd-list">
 	                            <li class="dd-item" data-id="{$recommend.uid}">
 	                                <div class="dd-handle">
-	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} [{$recommend.realname}][伞下人数:{$recommend.num}人][用户级别:{$recommend.userrank}级消费][用户头衔:{$recommend.usertitle}星销费商]
+	                                    <span class="label label-info"><i class="fa fa-users"></i></span> {$recommend.usernumber} [{$recommend.realname}][伞下人数:{$recommend.num}人][用户级别:{$recommend.userrank}][用户头衔:{$recommend.usertitle}]
 										[A部业绩:{$recommend.leftachievement}][B部业绩:{$recommend.middleachievement}][C部业绩:{$recommend.rightachievement}][总业绩:{$recommend.achievement}]
+										<!-- [福利积分:{$recommend.jianglijifen}][注册币:{$recommend.baodanbi}][奖金币:{$recommend.jiangjinbi}][戎子盾:{$recommend.rongzidun}][激活币:{$recommend.jihuobi}] -->
 	                                </div>
 
 									<if condition="$recommend['num'] neq 0">
@@ -166,7 +176,7 @@
 						  success: function (resdata) {
 							  if (resdata.success == true) {
 								  if(resdata.data == ""){
-									  alert("用户区伞下人数获取失败 请重试!");
+									  alert("没有推荐的销费商! 请推荐!");
 								  }else{
 
 									   var html = template('list', resdata);
@@ -174,7 +184,7 @@
 									   $(that).parent().children(".dd-list").append(html);
 								  }
 							  } else {
-								  alert("用户代理商编号获取错误 请重试");
+								  alert("用户推荐数据获取错误 请重试");
 							  }
 						 }
 					 });
@@ -237,8 +247,9 @@
 				   {{/if}}
 				   <div class="dd-handle">
 					   <span class="label label-info"><i class="fa fa-users"></i></span>
-					   {{value.usernumber}} [{{value.realname}}][伞下人数:{{value.num}}人][用户级别:{{value.userrank}}级消费][用户级别:{{value.usertitle}}星销费商]
-					  [A部业绩:{{value.leftachievement}}][B部业绩:{{value.middleachievement}}][C部业绩:{{value.rightachievement}}][总业绩:{{value.achievement}}]
+					   {{value.usernumber}} [{{value.realname}}][伞下人数:{{value.num}}人][用户级别:{{value.userrank}}][用户头衔:{{value.usertitle}}]
+					  [A部业绩:{{value.leftachievement}} ][B部业绩:{{value.middleachievement}}][C部业绩:{{value.rightachievement}}][总业绩:{{value.achievement}}]
+					  <!-- [福利积分:{{value.jianglijifen}}][注册币:{{value.baodanbi}}][奖金币:{{value.jiangjinbi}}][戎子盾:{{value.rongzidun}}] -->
 				   </div>
 
 				   {{if value.num > 0}}

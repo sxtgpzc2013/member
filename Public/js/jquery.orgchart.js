@@ -384,7 +384,7 @@
         }
 
       // construct the content of node
-      var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
+      var $nodeDiv = $('<div class="onclickhref" data-uid="'+nodeData[opts.nodeUid]+'">', {'id': nodeData[opts.nodeId]})
         .addClass('node')
         .append('<div class="title">' + nodeData[opts.nodeNumber]+ '['+ nodeData[opts.nodeTitle] + ']</div>')
         .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeContent + '</div>' : '')

@@ -383,11 +383,8 @@ ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币�
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
 
 
-<<<<<<< HEAD
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
-=======
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
->>>>>>> 2a1d93dbf9dc67aef4852ffe0a8d8ef84417ce5a
+
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
 
@@ -439,6 +436,21 @@ ALTER TABLE zx_order_items ADD unit_rprice float(9,2) NOT NULL DEFAULT 0 COMMENT
 # 2016-09-27
 ALTER TABLE zx_orders ADD total_jprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '奖金币总额' AFTER total_price;
 ALTER TABLE zx_orders ADD total_rprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '戎子盾总额' AFTER total_jprice;
+
+#2016-10-09 
+
+#upgrade_log
+DROP TABLE IF EXISTS `zx_upgrade_log`;
+
+CREATE TABLE `zx_upgrade_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `uid` int(10) NOT NULL DEFAULT 0 COMMENT '升级用户id',
+  `upgrade_uid` int(10) NOT NULL DEFAULT 0 COMMENT '操作升级管理员ID',
+  `level` int(10) NOT NULL DEFAULT '0' COMMENT '升级级别',
+  `levelago` int(10) NOT NULL DEFAULT '0' COMMENT '升级前级别',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='升级记录表';
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

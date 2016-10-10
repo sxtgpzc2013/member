@@ -40,6 +40,12 @@
 					</li>
 					<?php } ?>
 
+					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
+					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'log') {echo 'active';} ?>">
+						<a href="__APP__/Activates/log">激活销费商列表</a>
+					</li>
+					<?php } ?>
+
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'register') {echo 'active';} ?>">
 						<a href="__APP__/Teams/register">注册销费商</a>
 					</li>

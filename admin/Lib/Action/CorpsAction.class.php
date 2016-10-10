@@ -366,4 +366,92 @@
 				$this -> _back('删除销费商失败');
 			}
 	    }
+
+
+		/**
+		 * 获取消费商信息
+		 *
+		 * 参数描述：@usernumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		 public function get_userinfo()
+		 {
+
+			$usernumber = htmlspecialchars($_GET['usernumber']);
+
+			//查询用户资料数据
+ 			$params = array(
+
+ 				'table_name' => 'member',
+
+ 				'where' => "usernumber = '{$usernumber}' AND status = 1"
+
+ 			);
+
+ 			$member = $this -> model -> my_find($params);
+
+			$userinfo = array();
+
+ 			if($member){
+
+				$userinfo['realname'] = $member['realname'];
+
+				$userinfo['uid'] = $member['uid'];
+
+				$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+				$userinfo['userrankname'] = $userrank_content[$member['userrank']];
+
+				$userinfo['userrank'] = $member['userrank'];
+
+				$userinfo['canlevel'] = array();
+ 			}
+
+			die(json_encode(array("success" => true, "code" => 200, "msg" => "代理商编号获取成功", "data" => $userinfo)));
+		 }
+
+
+		 /**
+ 		 * 销费商注册
+ 		 *
+ 		 * 参数描述：
+ 		 *
+ 		 *
+ 		 *
+ 		 * 返回值：
+ 		 *
+ 		 */
+ 	    public function upgrade()
+ 	    {
+ 			$form_key = htmlspecialchars($_POST['form_key']);
+
+ 			if ($form_key == 'yes')
+ 			{
+
+				$data['userrank'] = $_POST['canlevel'];
+
+ 				//查询用户手机号是否注册 查询用户编号是否注册
+ 				$params = array(
+
+ 					'table_name' => 'member',
+
+ 					'where' => "uid = {$_POST['uid']} AND usernumber = '{$_POST['usernumber']}'",
+
+					'data' => $data
+
+ 				);
+
+ 				$my_save = $this -> model -> my_save($params);
+				if ($my_save == 1){
+					echo '<script language="JavaScript">;alert("消费商升级成功");</script>;';
+					$this -> redirect("/Corps/upgrade");
+				}else{
+					$this -> _back('销费商代理商编号设置失败失败');
+				}
+			}
+
+			$this -> display();
+		}
 	}

@@ -4,7 +4,7 @@
 		<ol class="breadcrumb">
 			<a href="__URL__"><i class="fa fa-home"></i></a>
             <li>
-                <a href="__URL__">首页</a>
+                <a href="__APP__">首页</a>
             </li>
             <li>
                 <a>信息管理</a>
@@ -33,7 +33,7 @@
 			                    <label class="col-sm-2 control-label">销费商编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}">
+			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}" minlength="8">
 									<span id="cname-error" class="help-block m-b-none usernumber_err" style="display:none;">必填</span>
 								</div>
 
@@ -74,27 +74,18 @@
 			                    <label class="col-sm-2 control-label">销费商身份证号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="IDcard">
+			                        <input type="text" class="form-control" name="IDcard" minlength="18">
 			                    </div>
 			                </div>
 
-
-							<div class="form-group">
-			                    <label class="col-sm-2 control-label">销费商身份证所在区域</label>
-
-			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="ID_address">
-			                    </div>
-			                </div>
-
-							<div class="form-group">
+							<!-- <div class="form-group">
 			                    <label class="col-sm-2 control-label">上传身份证附件</label>
 
 			                    <div class="col-sm-7">
 			                        正面:<input type="file" class="form-control" placeholder="身份证正面" name="ID_address_face"><br>
 									反面:<input type="file" class="form-control" placeholder="身份证反面" name="ID_address_back">
 			                    </div>
-			                </div>
+			                </div> -->
 
 							<div class="form-group">
 			                    <label class="col-sm-2 control-label">销费商手机号</label>
@@ -109,22 +100,9 @@
 
 			                    <div class="col-sm-7">
 									<select class="form-control" name="bankname">
-										<option value="1">中国工商银行</option>
-										<option value="2">中国农业银行</option>
-										<option value="3">中国银行</option>
-										<option value="4">中国建设银行</option>
-										<option value="5">国家开发银行</option>
-										<option value="6">中国进出口银行</option>
-										<option value="7">中国农业发展银行</option>
-										<option value="8">交通银行</option>
-										<option value="9">中信银行</option>
-										<option value="10">中国光大银行</option>
-										<option value="11">华夏银行</option>
-										<option value="12">中国民生银行</option>
-										<option value="13">广东发展银行</option>
-										<option value="14">深圳发展银行</option>
-										<option value="15">招商银行</option>
-										<option value="16">北京银行</option>
+										<option value="1">中国农业银行</option>
+										<option value="2">中国建设银行</option>
+
 									</select>
 			                    </div>
 			                </div>
@@ -203,11 +181,11 @@
 			                    <label class="col-sm-2 control-label">推荐人编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber" value="{$member['usernumber']}">
+			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber" value="{$_SESSION['Rongzi']['user']['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
-									<span>(如何修改推荐人请重新获取代理商编号)</span>
+									<span>(如修改推荐人请重新获取代理商编号)</span>
 								</div>
 			                </div>
 
@@ -216,7 +194,7 @@
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control billcenternumber" name="billcenternumber"
-									value="<if condition="$member['isbill'] eq 1">{$member['usernumber']}<else/>{$member['billcenternumber']}</if>">
+									value="<if condition="$_SESSION['Rongzi']['user']['isbill'] eq 1">{$_SESSION['Rongzi']['user']['usernumber']}<else/>{$_SESSION['Rongzi']['user']['billcenternumber']}</if>">
 
 			                    </div>
 
@@ -233,7 +211,7 @@
 			                    </div>
 
 								<div class="col-sm-3">
-									<span>(如何修改位置编号,公司将会按先左后右排位)</span>
+									<span></span>
 								</div>
 			                </div>
 
@@ -271,7 +249,7 @@
 			                    <label class="col-sm-2 control-label">一级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="psd1">
+			                        <input type="text" class="form-control" name="psd1" minlength="6">
 			                    </div>
 			                </div>
 
@@ -279,7 +257,7 @@
 			                    <label class="col-sm-2 control-label">确认一级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="confirm_psd1">
+			                        <input type="text" class="form-control" name="confirm_psd1" minlength="6">
 			                    </div>
 			                </div>
 
@@ -287,7 +265,7 @@
 			                    <label class="col-sm-2 control-label">二级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="psd2">
+			                        <input type="text" class="form-control" name="psd2" minlength="6">
 			                    </div>
 			                </div>
 
@@ -295,7 +273,7 @@
 			                    <label class="col-sm-2 control-label">确认二级密码</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control" name="confirm_psd2">
+			                        <input type="text" class="form-control" name="confirm_psd2" minlength="6">
 			                    </div>
 			                </div>
 
@@ -326,7 +304,7 @@
 														   <p>3.请您务必在注册之前认真阅读全部服务协议内容，如有任何疑问，可向戎子酒庄咨询。</p>
 														   <p>4.无论您事实上是否在注册之前认真阅读了本服务协议，只要您点击协议正本下方的"接受"按钮并按照戎子酒庄注册程序成功注册为用户，您的行为仍然表示您同意并签署了本服务协议。</p>
 														<p>二、用户资格</p>
-														<p>适用本协议注册的用户，应当具备的资格是：</p>
+														<p>适用本协议注册的用户，应当具备的资格是:</p>
 														 <p> 1.必须是具备《中华人民共和国民法通则》规定的完全民事行为能力的自然人、合法证照的组织单位。无民事行为能力人、限制民事行为能力人以及无合法证照的组织不得注册并使用戎子酒庄营销系统</p>
 														  <p>2.所有注册销费商为消费定量的1万、3万、5万的红酒才能成为销费商，其保值增值分红或其他奖励为附加权益。
 														<p>三、用户的权利义务</p>
@@ -345,7 +323,7 @@
 
 		                                        <div class="modal-footer">
 		                                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-		                                            <button type="button" class="btn btn-primary">保存</button>
+		                                            <!-- <button type="button" class="btn btn-primary">保存</button> -->
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -356,7 +334,7 @@
 							<div class="form-group">
 								<div class="col-sm-4 col-sm-offset-2">
 									<button class="btn btn-primary" type="submit">注册</button>
-									<button class="btn btn-white" type="submit">取消</button>
+									<!-- <button class="btn btn-white" type="reset">取消</button> -->
 								</div>
 							</div>
 			        </div>
@@ -416,12 +394,6 @@
 				banknumber: {
 					required: true
 				},
-				ID_address_face: {
-					required: true
-				},
-				ID_address_back: {
-					required: true
-				},
 				tuijiannumber: {
 					required: true
 				},
@@ -432,16 +404,20 @@
 					required: true
 				},
 				psd1: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				confirm_psd1: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				psd2: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				confirm_psd2: {
-					required: true
+					required: true,
+					minlength: 6
 				},
 				is_free: {
 					required: true
@@ -462,6 +438,27 @@
 					required: true
 				},
 				agree: "required"
+			},
+			messages: {
+				is_free: {
+					required: "如需注册请同意销费商注册协议",
+				},
+				psd1: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				confirm_psd1: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				psd2: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				confirm_psd2: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				}
 			}
 		});
 
@@ -611,7 +608,7 @@ var showArea = function(){
 
 }
 
-Gid('s_county').setAttribute('onchange','showArea()');
+//Gid('s_county').setAttribute('onchange','showArea()');
 
 </script>
 

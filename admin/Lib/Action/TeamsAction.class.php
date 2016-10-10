@@ -50,7 +50,7 @@
 
 					'table_name' => 'member',
 
-					'where' => "usernumber = '{$_POST['usernumber']}' OR mobile = '{$_POST['mobile']}'"
+					'where' => "usernumber = '{$_POST['usernumber']}'"
 
 				);
 
@@ -62,9 +62,27 @@
 
 				}
 
+				if($_POST['zone'] == "" || $_POST["zone"] == 0){
+					$this -> _back('推荐人区间为空,请重新选择推荐人！');return;
+				}
+
 				$data = $_POST;
 
+				// foreach ($data as $key => $value) {
+				// 	if(empty($value)){
+				// 		$this -> _back('请完善数据后再提交！');return;
+				// 	}
+				// }
+
 				unset($_data['form_key']);
+
+				$data['proxy_state'] = 1;
+
+				//if($data['userrank'] == 1){
+
+				//	$data['proxy_state'] = 0;
+
+				//}
 
 				//处理密码操作
 				$data['psd1'] = md5(md5($data['psd1']));
@@ -76,26 +94,26 @@
 				$data['reg_uid'] = $_SESSION['Rongzi']['user']['uid'];
 
 				//获取推荐人ID
-				$data['tuijianid'] = $this -> get_user_id($data['tuijiannumber']);
+				$data['tuijianid'] = $this -> get_recommend_user_id($data['tuijiannumber']);
 
 				//获取位置编号ID
-				$data['parentid'] = $this -> get_user_id($data['parentnumber']);
+				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber']);
 
 				//代理商编号人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
 
-				$pic = $this -> _upload_pic_all('member');
-
-				if ($pic['ID_address_face']['status'] == 1)
-				{
-					$data['ID_address_face'] = $pic['ID_address_face']['msg'];
-				}
-
-
-				if ($pic['ID_address_back']['status'] == 1)
-				{
-					$data['ID_address_back'] = $pic['ID_address_back']['msg'];
-				}
+				// $pic = $this -> _upload_pic_all('member');
+				//
+				// if ($pic['ID_address_face']['status'] == 1)
+				// {
+				// 	$data['ID_address_face'] = $pic['ID_address_face']['msg'];
+				// }
+				//
+				//
+				// if ($pic['ID_address_back']['status'] == 1)
+				// {
+				// 	$data['ID_address_back'] = $pic['ID_address_back']['msg'];
+				// }
 
 				if($data['billcenterid'] == 0){
 					$this -> _back("{$data['billcenternumber']}不是代理商编号,销费商注册失败,请重试。");return;
@@ -152,7 +170,6 @@
 				'where' => "uid = '{$uid}' AND status = 1"
 
 			);
-
 			$member = $this -> model -> my_find($params);
 
 			$this -> assign("usernumber", $this->get_user_number());
@@ -314,7 +331,7 @@
 		 * 返回值：
 		 *
 		 */
-		function get_user_id($usernumber){
+		function get_recommend_user_id($usernumber){
 
 			//查询用户资料数据
 			$params = array(
@@ -340,6 +357,43 @@
 
 		/**
 		 * 获取推荐人ID
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		function get_contact_user_id($usernumber){
+
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "usernumber = '{$usernumber}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			if($member){
+
+				if($member['left_zone'] == 1 && $member['middle_zone'] == 1 && $member['right_zone'] == 1 ){
+					$this -> _back('位置编号区间已满,请重新选择推荐人！');return;
+				}else{
+
+					return $member['uid'];
+				}
+
+			}else{
+
+				return 0;
+
+			}
+		}
+
+		/**
+		 * 获取代理商编号ID
 		 *
 		 * 参数描述：@tuijiannumber 推荐人编号
 		 *
@@ -497,7 +551,27 @@
 
 			if($member){
 
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "uid = {$uid}",
+				//
+				// 	'field' => 'znum',
+				//
+				// 	'data' => 1
+				// );
+				//
+				// $setInc = $this -> model -> my_setInc($params);
+				//
+				// if($setInc){
+				// 	return true;
+				// }else{
+				// 	return false;
+				// }
+
 				return true;
+
 
 			}else{
 
@@ -518,11 +592,13 @@
 		 */
 		public function contact_relation()
 		{
+			$uid = $_GET['uid'] ? $_GET['uid'] : $_SESSION['Rongzi']['user']['uid'];
+
 			$params = array(
 
 				'table_name' => 'member',
 
-				'where' => "status = 1 AND uid = {$_SESSION['Rongzi']['user']['uid']} AND usernumber = '{$_SESSION['Rongzi']['user']['usernumber']}'"
+				'where' => "status = 1 AND uid = {$uid}"
 			);
 
 			$contact = $this -> model -> my_find($params);
@@ -533,7 +609,7 @@
 
 				'order' => "uid desc",
 
-				'where' => "status = 1 AND parentid = {$contact['uid']} AND parentnumber = '{$contact['usernumber']}'"
+				'where' => "status = 1 AND parentid = {$contact['uid']} AND parentnumber = '{$contact['usernumber']}' AND uid != {$contact['uid']} "
 			);
 
 			$contact_children_list = $this -> model -> easy_select($params);
@@ -542,6 +618,10 @@
 			$exp_result['name'] = $contact['realname'];
 
 			$exp_result['title'] = $contact['userrank'];
+
+			$exp_result['usernumber'] = $contact['usernumber'];
+
+			$exp_result['uid'] = $contact['uid'];
 
 			$exp_result['achievement'] = array('left' => $contact['leftachievement'], 'middle' => $contact['middleachievement'], 'right' => $contact['rightachievement']);
 
@@ -633,7 +713,7 @@
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 1,
-							'parentid' => $value['uid']
+							'parentid' => $cvalue['uid']
 						);
 
 						$exp_four_children_children[1] = array(
@@ -641,7 +721,7 @@
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 2,
-							'parentid' => $value['uid']
+							'parentid' => $cvalue['uid']
 						);
 
 
@@ -650,7 +730,7 @@
 							'relationship' => array('children_num' => 1, 'parent_num' => 0),
 							'is_null' => 'true',
 							'zone' => 3,
-							'parentid' => $value['uid']
+							'parentid' => $cvalue['uid']
 						);
 
 						foreach ($four_children_list as $fkey => $fvalue) {
@@ -660,6 +740,8 @@
 									'relationship' => array('children_num' => 0, 'parent_num' => 0),
 									'name' => $fvalue['realname'],
 									'title' => $fvalue['userrank'],
+									'usernumber' => $fvalue['usernumber'],
+									'uid' => $fvalue['uid'],
 									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
 									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
 								);
@@ -671,6 +753,8 @@
 									'relationship' => array('children_num' => 0, 'parent_num' => 0),
 									'name' => $fvalue['realname'],
 									'title' => $fvalue['userrank'],
+									'usernumber' => $fvalue['usernumber'],
+									'uid' => $fvalue['uid'],
 									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
 									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
 								);
@@ -683,6 +767,8 @@
 									'relationship' => array('children_num' => 0, 'parent_num' => 0),
 									'name' => $fvalue['realname'],
 									'title' => $fvalue['userrank'],
+									'usernumber' => $fvalue['usernumber'],
+									'uid' => $fvalue['uid'],
 									'achievement' => array('left' => $fvalue['leftachievement'], 'middle' => $fvalue['middleachievement'], 'right' => $fvalue['rightachievement']),
 									'achievement_today' => $this->get_today_achievement($fvalue['uid'])
 								);
@@ -695,6 +781,8 @@
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
+								'usernumber' => $cvalue['usernumber'],
+								'uid' => $cvalue['uid'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -706,6 +794,8 @@
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
+								'usernumber' => $cvalue['usernumber'],
+								'uid' => $cvalue['uid'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -718,6 +808,8 @@
 								'relationship' => array('children_num' => 0, 'parent_num' => 0),
 								'name' => $cvalue['realname'],
 								'title' => $cvalue['userrank'],
+								'usernumber' => $cvalue['usernumber'],
+								'uid' => $cvalue['uid'],
 								'achievement' => array('left' => $cvalue['leftachievement'], 'middle' => $cvalue['middleachievement'], 'right' => $cvalue['rightachievement']),
 								'achievement_today' => $this->get_today_achievement($cvalue['uid'])
 							);
@@ -730,6 +822,8 @@
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
 							'title' => $value['userrank'],
+							'usernumber' => $value['usernumber'],
+							'uid' => $value['uid'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -741,6 +835,8 @@
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
 							'title' => $value['userrank'],
+							'usernumber' => $value['usernumber'],
+							'uid' => $value['uid'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -752,6 +848,8 @@
 							'relationship' => array('children_num' => $this -> model -> get_count($params), 'parent_num' => 0),
 							'name' => $value['realname'],
 							'title' => $value['userrank'],
+							'usernumber' => $value['usernumber'],
+							'uid' => $value['uid'],
 							'achievement' => array('left' => $value['leftachievement'], 'middle' => $value['middleachievement'], 'right' => $value['rightachievement']),
 							'achievement_today' => $this->get_today_achievement($value['uid'])
 						);
@@ -845,16 +943,16 @@
 
 			foreach ($recommend_list as $key => $value) {
 
-				$params = array(
-
-					'table_name' => 'member',
-
-					'where' => "status = 1 AND tuijianid = {$value['uid']} AND tuijiannumber = '{$value['usernumber']}'"
-				);
-
-				$recommend_count = $this -> model -> get_count($params);
-
-				$recommend_list[$key]["num"] = $recommend_count;
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "status = 1 AND tuijianid = {$value['uid']} AND tuijiannumber = '{$value['usernumber']}'"
+				// );
+				//
+				// $recommend_count = $this -> model -> get_count($params);
+				//
+				// $recommend_list[$key]["num"] = $recommend_count;
 
 				if($value['zone'] == 1){
 
@@ -869,6 +967,34 @@
 					$recommend_list[$key]["zone_name"] = "C部";
 
 				}
+
+				$recommend_list[$key]["leftachievement"] = intval($value['leftachievement']);
+
+				$recommend_list[$key]["middleachievement"] = intval($value['middleachievement']);
+
+				$recommend_list[$key]["rightachievement"] = intval($value['rightachievement']);
+
+				$recommend_list[$key]["achievement"] = intval($value['achievement']);
+
+				$recommend_list[$key]["jianglijifen"] = intval($value['jianglijifen']);
+
+				$recommend_list[$key]["baodanbi"] = intval($value['baodanbi']);
+
+				$recommend_list[$key]["jiangjinbi"] = intval($value['jiangjinbi']);
+
+				$recommend_list[$key]["rongzidun"] = intval($value['rongzidun']);
+
+				$recommend_list[$key]["jihuobi"] = intval($value['jihuobi']);
+
+				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
+
+				$recommend_list[$key]["usertitle"] = $userrank[$value['usertitle']];
+
+				$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+				$recommend_list[$key]["userrank"] = $userrank_content[$value['userrank']];
+
+
 			}
 
 			$this -> assign('recommend_list', $recommend_list);
@@ -905,16 +1031,16 @@
 
 			foreach ($recommend_list as $key => $value) {
 
-				$params = array(
-
-					'table_name' => 'member',
-
-					'where' => "status = 1 AND tuijianid = {$value['uid']}"
-				);
-
-				$recommend_count = $this -> model -> get_count($params);
-
-				$recommend_list_result[$key]["num"] = $recommend_count;
+				// $params = array(
+				//
+				// 	'table_name' => 'member',
+				//
+				// 	'where' => "status = 1 AND tuijianid = {$value['uid']}"
+				// );
+				//
+				// $recommend_count = $this -> model -> get_count($params);
+				//
+				// $recommend_list_result[$key]["num"] = $recommend_count;
 
 				$recommend_list_result[$key]["realname"] = $value['realname'];
 
@@ -922,31 +1048,33 @@
 
 				$recommend_list_result[$key]["uid"] = $value['uid'];
 
-				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+				$recommend_list_result[$key]["leftachievement"] = intval($value['leftachievement']);
 
-				$recommend_list_result[$key]["usertitle"] = $value['usertitle'];
+				$recommend_list_result[$key]["middleachievement"] = intval($value['middleachievement']);
 
-				$recommend_list_result[$key]["leftachievement"] = $value['leftachievement'];
+				$recommend_list_result[$key]["rightachievement"] = intval($value['rightachievement']);
 
-				$recommend_list_result[$key]["middleachievement"] = $value['middleachievement'];
+				$recommend_list_result[$key]["achievement"] = intval($value['achievement']);
 
-				$recommend_list_result[$key]["rightachievement"] = $value['rightachievement'];
+				$recommend_list_result[$key]["jianglijifen"] = intval($value['jianglijifen']);
 
-				$recommend_list_result[$key]["achievement"] = $value['achievement'];
+				$recommend_list_result[$key]["baodanbi"] = intval($value['baodanbi']);
 
-				$recommend_list_result[$key]["userrank"] = $value['userrank'];
+				$recommend_list_result[$key]["jiangjinbi"] = intval($value['jiangjinbi']);
 
-				$recommend_list_result[$key]["achievement"] = $value['achievement'];
+				$recommend_list_result[$key]["rongzidun"] = intval($value['rongzidun']);
 
-				$recommend_list_result[$key]["baodanbi"] = $value['baodanbi'];
+				$recommend_list_result[$key]["jihuobi"] = intval($value['jihuobi']);
 
-				$recommend_list_result[$key]["jianglijifen"] = $value['jianglijifen'];
+				$recommend_list_result[$key]["num"] = intval($value['num']);
 
-				$recommend_list_result[$key]["jiangjinbi"] = $value['jiangjinbi'];
+				$userrank = array("无头衔","一星会员","二星会员","三星会员","四星会员","五星会员","六星会员","七星会员");
 
-				$recommend_list_result[$key]["rongzidun"] = $value['rongzidun'];
+				$userrank_content = array("","普卡","银卡","金卡","钻卡");
 
-				$recommend_list_result[$key]["ringzidun"] = $value['ringzidun'];
+				$recommend_list_result[$key]["userrank"] = $userrank_content[$value['userrank']];
+
+				$recommend_list_result[$key]["usertitle"] = $userrank[$value['usertitle']];
 
 				if($value['zone'] == 1){
 
