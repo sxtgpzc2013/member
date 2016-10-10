@@ -549,7 +549,7 @@ class ActivatesAction extends CommonAction {
 		}
 	}
 
-	//更新代理商编号服务市场补贴
+	//更新代理商服务市场补贴
 	function save_market_subsidy($deduct){
 		//用户ID
 		$uid = intval($_SESSION['Rongzi']['user']['uid']);
@@ -565,142 +565,152 @@ class ActivatesAction extends CommonAction {
 
 			$member = $this -> model -> my_find($params);
 
-			//获取市场补贴比例
-			$marketratio = $this -> get_market_ratio();
+			if($member && $member['proxy_state'] == 1){
 
-			$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
+				//获取市场补贴比例
+				$marketratio = $this -> get_market_ratio();
 
-			$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
+				$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
 
-			//保存代理商编号金额
-			$params = array(
+				$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
 
-				'table_name' => 'member',
+				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
 
-				'where' => "uid = {$uid}",
+				//消费商最大奖金
+				$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
 
-				'data' => $data
-			);
+				if($max_bonus_money < $data['max_bonus']){
+					$data['proxy_state'] = 0;
+				}
 
-			$marke_save = $this -> model -> my_save($params);
-
-			//扣除公司金额
-			$this -> save_finance($deduct * $marketratio);
-
-			$bonusdata = array(
-
-				'touserid' => $member['uid'],
-
-				'tousernumber' => $member['usernumber'],
-
-				'torealname' => $member['realname'],
-
-				'jiangjinbi' => $deduct * $marketratio * 0.55,
-
-				'rongzidun' => $deduct * $marketratio * 0.25,
-
-				'platmoney' => $deduct * $marketratio * 0.02,
-
-				'taxmoney' => $deduct * $marketratio * 0.17,
-
-				'total' => $deduct * $marketratio,
-
-				'real_total' => $deduct * $marketratio * 0.8,
-
-				'createdate' => strtotime(date("Y-m-d", time())),
-
-				'lovemoney' => $deduct * $marketratio * 0.01,
-
-				'moneytype' => 5
-
-			);
-
-			//添加奖金明细记录
-			$params = array(
-
-				'table_name' => 'bonus_detail',
-
-				'data' => $bonusdata
-			);
-
-			$bonusdata_add = $this -> model -> my_add($params);
-
-			//添加到财务流水 money_change
-			$money_change_data['changetype'] = 7;
-
-			$money_change_data['realname'] = "戎子";
-
-			$money_change_data['status'] = 1;
-
-			$money_change_data['targetrealname'] = $member['realname'];
-
-			$money_change_data['targetuserid'] = $member['uid'];
-
-			$money_change_data['targetusernumber'] = $member['usernumber'];
-
-			$money_change_data['userid'] = 1;
-
-			$money_change_data['usernumber'] = 1;
-
-			$money_change_data['createtime'] = time();
-
-			//jiangjinbi rongzidun platmoney taxmoney lovemoney
-
-			$add_array = array(
-				"0" => array(
-					'name' => "jiangjinbi",
-					'moneytype' => 1,
-					'ratio' => "0.55",
-					'recordtype' => 1
-				),
-				"1" => array(
-					'name' => "rongzidun",
-					'moneytype' => 3,
-					'ratio' => "0.25",
-					'recordtype' => 1
-				),
-				"2" => array(
-					'name' => "platmoney",
-					'moneytype' => 7,
-					'ratio' => "0.02",
-					'recordtype' => 0
-				),
-				"3" => array(
-					'name' => "taxmoney",
-					'moneytype' => 8,
-					'ratio' => "0.17",
-					'recordtype' => 0
-				),
-				"4" => array(
-					'name' => "lovemoney",
-					'moneytype' => 6,
-					'ratio' => "0.01",
-					'recordtype' => 0
-				),
-			);
-
-			foreach ($add_array as $key => $value) {
-
-
-				$money_change_data['recordtype'] = $value['recordtype'];
-
-				$money_change_data['money'] = $deduct * $marketratio * $value['ratio'];
-
-				$money_change_data['moneytype'] = $value['moneytype'];
-
-				//添加财务明细记录
+				//保存代理商金额
 				$params = array(
 
-					'table_name' => 'money_change',
+					'table_name' => 'member',
 
-					'data' => $money_change_data
+					'where' => "uid = {$uid}",
+
+					'data' => $data
 				);
 
-				$money_change_add = $this -> model -> my_add($params);
+				$marke_save = $this -> model -> my_save($params);
 
+				//扣除公司金额
+				$this -> save_finance($deduct * $marketratio);
+
+				$bonusdata = array(
+
+					'touserid' => $member['uid'],
+
+					'tousernumber' => $member['usernumber'],
+
+					'torealname' => $member['realname'],
+
+					'jiangjinbi' => $deduct * $marketratio * 0.55,
+
+					'rongzidun' => $deduct * $marketratio * 0.25,
+
+					'platmoney' => $deduct * $marketratio * 0.02,
+
+					'taxmoney' => $deduct * $marketratio * 0.17,
+
+					'total' => $deduct * $marketratio,
+
+					'real_total' => $deduct * $marketratio * 0.8,
+
+					'createdate' => strtotime(date("Y-m-d", time())),
+
+					'lovemoney' => $deduct * $marketratio * 0.01,
+
+					'moneytype' => 5
+
+				);
+
+				//添加奖金明细记录
+				$params = array(
+
+					'table_name' => 'bonus_detail',
+
+					'data' => $bonusdata
+				);
+
+				$bonusdata_add = $this -> model -> my_add($params);
+
+				//添加到财务流水 money_change
+				$money_change_data['changetype'] = 7;
+
+				$money_change_data['realname'] = "戎子";
+
+				$money_change_data['status'] = 1;
+
+				$money_change_data['targetrealname'] = $member['realname'];
+
+				$money_change_data['targetuserid'] = $member['uid'];
+
+				$money_change_data['targetusernumber'] = $member['usernumber'];
+
+				$money_change_data['userid'] = 1;
+
+				$money_change_data['usernumber'] = 1;
+
+				$money_change_data['createtime'] = time();
+
+				//jiangjinbi rongzidun platmoney taxmoney lovemoney
+
+				$add_array = array(
+					"0" => array(
+						'name' => "jiangjinbi",
+						'moneytype' => 1,
+						'ratio' => "0.55",
+						'recordtype' => 1
+					),
+					"1" => array(
+						'name' => "rongzidun",
+						'moneytype' => 3,
+						'ratio' => "0.25",
+						'recordtype' => 1
+					),
+					"2" => array(
+						'name' => "platmoney",
+						'moneytype' => 7,
+						'ratio' => "0.02",
+						'recordtype' => 0
+					),
+					"3" => array(
+						'name' => "taxmoney",
+						'moneytype' => 8,
+						'ratio' => "0.17",
+						'recordtype' => 0
+					),
+					"4" => array(
+						'name' => "lovemoney",
+						'moneytype' => 6,
+						'ratio' => "0.01",
+						'recordtype' => 0
+					),
+				);
+
+				foreach ($add_array as $key => $value) {
+
+					$money_change_data['recordtype'] = $value['recordtype'];
+
+					$money_change_data['money'] = $deduct * $marketratio * $value['ratio'];
+
+					$money_change_data['moneytype'] = $value['moneytype'];
+
+					//添加财务明细记录
+					$params = array(
+
+						'table_name' => 'money_change',
+
+						'data' => $money_change_data
+					);
+
+					$money_change_add = $this -> model -> my_add($params);
+
+				}
 			}
 		}
-
 
 	}
 
@@ -778,139 +788,217 @@ class ActivatesAction extends CommonAction {
 
 				$member = $this -> model -> my_find($params);
 
-				$data['rongzidun'] = $member['rongzidun'] + ($deduct * $expand_ratio * 0.25);
+				//发放补贴
+				if($member && $member['proxy_state'] == 1){
+					//判断是否超出最大比例 userrank
+					//bonus_rule userrank key value 的值 奖金基数
+					//bonus_rule maxcash key value 的值 比例
+					//最大奖金额度 奖金基数 * 比例 < $member['max_bonus'] + ($deduct * $expand_ratio * 0.55) 更改proxy_state = 0
 
-				$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
+					$data['rongzidun'] = $member['rongzidun'] + ($deduct * $expand_ratio * 0.25);
 
-				//保存代理商编号金额
-				$params = array(
+					$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
 
-					'table_name' => 'member',
+					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
 
-					'where' => "uid = {$uid}",
+					//消费商最大奖金
+					$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
 
-					'data' => $data
-				);
+					if($max_bonus_money < $data['max_bonus']){
+						$data['proxy_state'] = 0;
+					}
 
-				$marke_save = $this -> model -> my_save($params);
-
-				//扣除公司金额
-				$this -> save_finance($deduct * $expand_ratio);
-
-				$bonusdata = array(
-
-					'touserid' => $member['uid'],
-
-					'tousernumber' => $member['usernumber'],
-
-					'torealname' => $member['realname'],
-
-					'jiangjinbi' => $deduct * $expand_ratio * 0.55,
-
-					'rongzidun' => $deduct * $expand_ratio * 0.25,
-
-					'platmoney' => $deduct * $expand_ratio * 0.02,
-
-					'taxmoney' => $deduct * $expand_ratio * 0.17,
-
-					'total' => $deduct * $expand_ratio,
-
-					'real_total' => $deduct * $expand_ratio * 0.8,
-
-					'createdate' => strtotime(date("Y-m-d", time())),
-
-					'lovemoney' => $deduct * $expand_ratio * 0.01,
-
-					'moneytype' => 4
-
-				);
-
-				//添加奖金明细记录
-				$params = array(
-
-					'table_name' => 'bonus_detail',
-
-					'data' => $bonusdata
-				);
-
-				$bonusdata_add = $this -> model -> my_add($params);
-
-				//添加到财务流水 money_change
-				$money_change_data['changetype'] = 6;
-
-				$money_change_data['realname'] = "戎子";
-
-				$money_change_data['status'] = 1;
-
-				$money_change_data['targetrealname'] = $member['realname'];
-
-				$money_change_data['targetuserid'] = $member['uid'];
-
-				$money_change_data['targetusernumber'] = $member['usernumber'];
-
-				$money_change_data['userid'] = 1;
-
-				$money_change_data['usernumber'] = 1;
-
-				$money_change_data['createtime'] = time();
-
-				//jiangjinbi rongzidun platmoney taxmoney lovemoney
-
-				$add_array = array(
-					"0" => array(
-						'name' => "jiangjinbi",
-						'moneytype' => 1,
-						'ratio' => "0.55",
-						'recordtype' => 1
-					),
-					"1" => array(
-						'name' => "rongzidun",
-						'moneytype' => 3,
-						'ratio' => "0.25",
-						'recordtype' => 1
-					),
-					"2" => array(
-						'name' => "platmoney",
-						'moneytype' => 7,
-						'ratio' => "0.02",
-						'recordtype' => 0
-					),
-					"3" => array(
-						'name' => "taxmoney",
-						'moneytype' => 8,
-						'ratio' => "0.17",
-						'recordtype' => 0
-					),
-					"4" => array(
-						'name' => "lovemoney",
-						'moneytype' => 6,
-						'ratio' => "0.01",
-						'recordtype' => 0
-					),
-				);
-
-				foreach ($add_array as $key => $value) {
-
-
-					$money_change_data['recordtype'] = $value['recordtype'];
-
-					$money_change_data['money'] = $deduct * $expand_ratio * $value['ratio'];
-
-					$money_change_data['moneytype'] = $value['moneytype'];
-
-					//添加财务明细记录
+					//保存代理商编号金额
 					$params = array(
 
-						'table_name' => 'money_change',
+						'table_name' => 'member',
 
-						'data' => $money_change_data
+						'where' => "uid = {$uid}",
+
+						'data' => $data
 					);
 
-					$money_change_add = $this -> model -> my_add($params);
+					$marke_save = $this -> model -> my_save($params);
 
+					//扣除公司金额
+					$this -> save_finance($deduct * $expand_ratio);
+
+					$bonusdata = array(
+
+						'touserid' => $member['uid'],
+
+						'tousernumber' => $member['usernumber'],
+
+						'torealname' => $member['realname'],
+
+						'jiangjinbi' => $deduct * $expand_ratio * 0.55,
+
+						'rongzidun' => $deduct * $expand_ratio * 0.25,
+
+						'platmoney' => $deduct * $expand_ratio * 0.02,
+
+						'taxmoney' => $deduct * $expand_ratio * 0.17,
+
+						'total' => $deduct * $expand_ratio,
+
+						'real_total' => $deduct * $expand_ratio * 0.8,
+
+						'createdate' => strtotime(date("Y-m-d", time())),
+
+						'lovemoney' => $deduct * $expand_ratio * 0.01,
+
+						'moneytype' => 4
+
+					);
+
+					//添加奖金明细记录
+					$params = array(
+
+						'table_name' => 'bonus_detail',
+
+						'data' => $bonusdata
+					);
+
+					$bonusdata_add = $this -> model -> my_add($params);
+
+					//添加到财务流水 money_change
+					$money_change_data['changetype'] = 6;
+
+					$money_change_data['realname'] = "戎子";
+
+					$money_change_data['status'] = 1;
+
+					$money_change_data['targetrealname'] = $member['realname'];
+
+					$money_change_data['targetuserid'] = $member['uid'];
+
+					$money_change_data['targetusernumber'] = $member['usernumber'];
+
+					$money_change_data['userid'] = 1;
+
+					$money_change_data['usernumber'] = 1;
+
+					$money_change_data['createtime'] = time();
+
+					//jiangjinbi rongzidun platmoney taxmoney lovemoney
+
+					$add_array = array(
+						"0" => array(
+							'name' => "jiangjinbi",
+							'moneytype' => 1,
+							'ratio' => "0.55",
+							'recordtype' => 1
+						),
+						"1" => array(
+							'name' => "rongzidun",
+							'moneytype' => 3,
+							'ratio' => "0.25",
+							'recordtype' => 1
+						),
+						"2" => array(
+							'name' => "platmoney",
+							'moneytype' => 7,
+							'ratio' => "0.02",
+							'recordtype' => 0
+						),
+						"3" => array(
+							'name' => "taxmoney",
+							'moneytype' => 8,
+							'ratio' => "0.17",
+							'recordtype' => 0
+						),
+						"4" => array(
+							'name' => "lovemoney",
+							'moneytype' => 6,
+							'ratio' => "0.01",
+							'recordtype' => 0
+						),
+					);
+
+					foreach ($add_array as $key => $value) {
+
+
+						$money_change_data['recordtype'] = $value['recordtype'];
+
+						$money_change_data['money'] = $deduct * $expand_ratio * $value['ratio'];
+
+						$money_change_data['moneytype'] = $value['moneytype'];
+
+						//添加财务明细记录
+						$params = array(
+
+							'table_name' => 'money_change',
+
+							'data' => $money_change_data
+						);
+
+						$money_change_add = $this -> model -> my_add($params);
+
+					}
 				}
 			}
 		}
+	}
+
+	//获取最大分配奖金额度
+	function get_max_bonus_money($userrank){
+		//获取消费商奖金基数
+		$bonus_rule_userrank = $this -> get_bonus_rule_userrank($userrank);
+
+		//获取消费商奖金比例
+		$bonus_rule_maxcash = $this -> get_bonus_rule_maxcash($userrank);
+
+		$max_bonus_money = $bonus_rule_userrank * $bonus_rule_maxcash;
+
+		return $max_bonus_money;
+	}
+
+	//获取消费商奖金基数
+	function get_bonus_rule_userrank($userrank){
+
+		$params = array(
+
+			'table_name' => 'bonus_rule',
+
+			'where' => "category = 'userrank' AND `key` = {$userrank}"
+		);
+
+		$my_find = $this -> model -> my_find($params);
+
+		if($my_find){
+			if($my_find['value'] && $my_find['value'] > 0){
+				return $my_find['value'];
+			}else{
+				return 0;
+			}
+		}else{
+			return 0;
+		}
+
+	}
+
+	//获取消费商最大奖金比例
+	function get_bonus_rule_maxcash($userrank){
+
+		$params = array(
+
+			'table_name' => 'bonus_rule',
+
+			'where' => "category = 'maxcash' AND `key` = {$userrank}"
+		);
+
+		$my_find = $this -> model -> my_find($params);
+
+		if($my_find){
+			if($my_find['value'] && $my_find['value'] > 0){
+				return $my_find['value'];
+			}else{
+				return 0;
+			}
+		}else{
+			return 0;
+		}
+
 	}
 
 	//更新伞下人数
@@ -1136,5 +1224,7 @@ class ActivatesAction extends CommonAction {
 			return "";
 		}
 	}
+
+
 
 }

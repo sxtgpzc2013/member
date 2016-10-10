@@ -408,4 +408,26 @@
 	   $relate_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $php_self.(isset($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : $path_info);
 	   return $sys_protocal.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$relate_url;
 	}
+
+	//获取市场补贴比例
+	function get_market_ratio(){
+		$params = array(
+
+			'table_name' => 'bonus_rule',
+
+			'where' => "category = 'marketcash' AND `key` = 0"
+		);
+
+		$my_find = $this -> model -> my_find($params);
+
+		if($my_find){
+			if($my_find['value'] && $my_find['value'] > 0){
+				return $my_find['value']/100;
+			}else{
+				return "0.00";
+			}
+		}else{
+			return "0.00";
+		}
+	}
 }
