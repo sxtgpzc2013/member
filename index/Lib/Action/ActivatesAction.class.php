@@ -89,6 +89,67 @@ class ActivatesAction extends CommonAction {
 		$this -> display();
     }
 
+
+	/**
+	 * 销费商激活列表
+	 *
+	 * 参数描述：
+	 *
+	 *
+	 *
+	 * 返回值：
+	 *
+	 */
+	public function log()
+    {
+		//代理商编号ID
+		$billcenterid = $_SESSION['Rongzi']['user']['uid'];
+		//代理商编号编号
+		$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
+
+		//查询用户资料数据
+		$params = array(
+
+			'table_name' => 'member',
+
+			'where' => "active_uid = {$billcenterid}"
+
+		);
+
+    	$data = $this -> model -> order_select($params);
+
+		foreach ($data['result'] as $key => $value) {
+			if($value['userrank'] == 1){
+				$data['result'][$key]['money'] = 1980;
+			}
+
+			if($value['userrank'] == 2){
+				$data['result'][$key]['money'] = 10000;
+			}
+
+
+			if($value['userrank'] == 3){
+				$data['result'][$key]['money'] = 30000;
+			}
+
+			if($value['userrank'] == 4){
+				$data['result'][$key]['money'] = 50000;
+			}
+
+			$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+			$data['result'][$key]["userrank"] = $userrank_content[$value['userrank']];
+		}
+
+    	$result['members'] = $data['result'];
+
+		$result['page'] = $data['page'];
+
+    	$this -> assign('result', $result);
+
+		$this -> display();
+    }
+
 	/**
 	* 删除
 	*
@@ -658,6 +719,7 @@ class ActivatesAction extends CommonAction {
 
 		$setInc = $this -> model -> my_setInc($params);
 	}
+
 	//更新拓展补贴
 	public function save_expand_subsidy($expand_member, $deduct){
 
@@ -676,7 +738,7 @@ class ActivatesAction extends CommonAction {
 			unset($expand[$admin_offset]);
 		}
 
-		$expand_slice = array_slice($expand, 0, 3);
+		$expand_slice = array_slice($expand, 0, 1);
 
 		//处理几级拓展补贴
 		foreach ($expand_slice as $key => $value) {

@@ -77,9 +77,6 @@
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'bonus_list') {echo 'active';} ?>">
 						<a href="__APP__/Finances/bonus_list">奖金统计</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'performance') {echo 'active';} ?>">
-						<a href="__APP__/Finances/performance">业绩统计</a>
-					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'finance_flow') {echo 'active';} ?>">
 						<a href="__APP__/Finances/finance_flow">财务流水</a>
 					</li>
@@ -91,9 +88,6 @@
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'company_deduct_money') {echo 'active';} ?>">
 						<a href="__APP__/Finances/company_deduct_money">公司扣币</a>
-					</li>
-					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'company_finance_list') {echo 'active';} ?>">
-						<a href="__APP__/Finances/company_finance_list">公司财务</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'cash') {echo 'active';} ?>">
 						<a href="__APP__/Finances/cash">提现申请</a>
@@ -110,7 +104,12 @@
 			<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'index') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-gear"></i> <span class="nav-label">系统设置</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'plan') {echo 'active';} ?>">
+
+					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'bonus') {echo 'active';} ?>">
+						<a href="__APP__/Set/bonus">奖金设置</a>
+					</li>
+
+					<!-- <li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'plan') {echo 'active';} ?>">
 						<a href="__APP__/Set/plan">计划任务</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'bonus') {echo 'active';} ?>">
@@ -118,7 +117,7 @@
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Set' && ACTION_NAME == 'set') {echo 'active';} ?>">
 						<a href="__APP__/Set/set">系统设置</a>
-					</li>
+					</li> -->
 				</ul>
 			</li>
 

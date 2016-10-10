@@ -27,7 +27,7 @@ class IndexAction extends CommonAction {
 
             'table_name' => 'member',
 
-            'where' => "1"
+            'where' => "1 AND uid != 1"
         );
 
         $result['member_count'] = $this -> model -> get_count($params);
@@ -38,7 +38,7 @@ class IndexAction extends CommonAction {
 
             'table_name' => 'member',
 
-            'where' => "reg_time >= ".strtotime(date("Y-m-d", time()))." AND reg_time <= ". (strtotime(date("Y-m-d", time())) + 24 * 60 * 60)
+            'where' => " uid != 1 AND reg_time >= ".strtotime(date("Y-m-d", time()))." AND reg_time <= ". (strtotime(date("Y-m-d", time())) + 24 * 60 * 60)
         );
 
         $result['today_member_count'] = $this -> model -> get_count($params);

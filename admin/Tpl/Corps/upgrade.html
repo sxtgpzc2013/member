@@ -25,24 +25,29 @@
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
+					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Corps/upgrade" method="post">
+						<input type="hidden" name="uid" value="" id="uid">
+						<input type="hidden" name="form_key" value="yes">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*销费商编号:</label>
                             <div class="col-sm-6">
                                 <input id="usernumber" name="usernumber" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
                             </div>
+							<a href="#" class="btn btn-info get_userinfo">获取消费商信息</a>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*销费商姓名:</label>
                             <div class="col-sm-6">
-                                <input id="number" name="number" class="form-control" type="text" value="1">
+                                <input id="realname" name="realname" class="form-control" type="text" value="">
                             </div>
                         </div>
 
 						<div class="form-group">
                             <label class="col-sm-3 control-label">*销费商当前级别:</label>
                             <div class="col-sm-6">
-                                <input id="number" name="number" class="form-control" type="text" value="1">
+                                <input id="level" name="level" class="form-control" type="text" value="" disabled="true">
+
+
                             </div>
                         </div>
 
@@ -50,15 +55,17 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">*升级方式:</label>
 							<div class="col-sm-6">
-								<label class="checkbox-inline"><input type="radio" name="type" value="1" id="inlineCheckbox1"> 扣币升级</label>
-								<label class="checkbox-inline"><input type="radio" name="type" value="2" id="inlineCheckbox2" checked> 空单升级(只对级别升级有效)</label>
+								<!-- <label class="checkbox-inline"><input type="radio" name="type" value="1" id="inlineCheckbox1"> 扣币升级</label> -->
+								<label class="checkbox-inline"><input type="radio" id="inlineCheckbox2" checked> 空单升级(只对级别升级有效)</label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">*可升级别:</label>
 							<div class="col-sm-6">
-								<input id="number" name="number" class="form-control" type="text" value="1">
+								<select class="canlevel form-control" name="canlevel" id="canlevel">
+									<option>请选择升级级别</option>
+								</select>
 							</div>
 						</div>
 
@@ -106,7 +113,7 @@
 			   number: {
 				   required: true,
 			   },
-			   type: {
+			   canlevel: {
 				   required: true,
 			   },
 			   agree: "required"
@@ -114,6 +121,70 @@
 		   messages: {
 
 		   }
+	   });
+
+
+	   $('.get_userinfo').click(function(){
+		   var usernumber = $('#usernumber').val();
+		   if(usernumber == ""){
+			   alert("请输入推荐人编号");return false;
+		   }
+		   $.ajax({
+			   url: "__APP__/Corps/get_userinfo",
+			   type: "get",
+			   data: {
+				   usernumber: usernumber
+			   },
+			   success: function (resdata) {
+				   resdata = JSON.parse(resdata);
+				   if (resdata.success == true) {
+					   if(resdata.data == 0){
+						   alert("用户信息获取失败,请重新输入用户编号");
+					   }else{
+						//    $('.billcenternumber').val(resdata.data);
+
+						$('#realname').val(resdata.data.realname);
+						$('#uid').val(resdata.data.uid);
+						$('#level').val(resdata.data.userrankname);
+
+						//userrank
+						if(resdata.data.userrank != "" && resdata.data.userrank != 0){
+
+							var obj=document.getElementById('canlevel');
+							obj.innerHTML = "";
+
+							var rank = parseInt(resdata.data.userrank) + 1;
+							for (var i = rank; i <= 4; i++) {
+
+								if(i == 1){
+									obj.options.add(new Option("普卡销费商 1980","1"));
+								}
+
+								if(i == 2){
+									obj.options.add(new Option("银卡销费商 1万","2"));
+								}
+
+
+								if(i == 3){
+									obj.options.add(new Option("金卡销费商 3万","3"));
+								}
+
+								if(i == 4){
+									obj.options.add(new Option("钻卡销费商 5万","4"));
+								}
+
+							}
+
+
+						}
+
+
+					   }
+				   } else {
+					   alert("用户信息获取失败 请重试");
+				   }
+			   }
+		   });
 	   });
    });
 </script>

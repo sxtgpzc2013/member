@@ -52,6 +52,7 @@
 	  'data' : datascource,
 	  'depth': 4,
 	  'nodeTitle': 'name',
+	  'nodeUid': 'uid',
 	  'nodeContent': 'title',
 	  'nodeNumber': 'usernumber',
 	  'nodeAchievement': 'achievement',
@@ -59,6 +60,10 @@
 	  'is_null' : 'is_null',
 	  'parentid' : 'parentid',
 	  'zone' : 'zone'
+	});
+
+	$('.onclickhref').click(function(){
+		location.href="./contact_relation?uid="+$(this).attr('data-uid')
 	});
 
   });
