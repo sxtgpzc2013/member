@@ -5,8 +5,8 @@
  * @version 1.0.0
  *
  * 功能简介：运营后台管理员控制器类
- * @author  
- * @copyright  
+ * @author
+ * @copyright
  * @time 2014-08-21
  * @version 1.0.0
  */
@@ -63,28 +63,13 @@
 
     				'table_name' => 'admins',
 
-    				'where' => "is_del = 0 AND type_str = 'admin'",
+    				'where' => "is_del = 0",
 
-    				'order' => 'type_str desc, substation_id asc, created_at asc'
+    				'order' => 'created_at asc'
     			);
 
-    			$result['admins'] = $this -> model -> order_select($params, 'no');
+    			$result['admins'] = $this -> model -> easy_select($params, 'no');
 
-    			//循环查询分站名称
-    			foreach ($result['admins'] as $k => $v)
-    			{
-    				//查询分站
-    				$params = array(
-
-    					'table_name' => 'substations',
-
-    					'where' => "id = {$v['substation_id']}"
-    				);
-
-    				$substation_find = $this -> model -> my_find($params);
-
-    				$result['admins'][$k]['substation_name'] = $substation_find['name'];
-    			}
     		}
     		else
     		{

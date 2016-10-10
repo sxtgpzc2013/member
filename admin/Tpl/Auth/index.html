@@ -32,34 +32,33 @@
                     <div class="table-responsive">
                         <table class="table table-hover no-margins table-bordered table-striped">
                             <thead>
+
                                 <tr>
-                                    <th>管理员名</th>
-                                    <th>登录次数</th>
-                                    <th>最后登录时间</th>
-                                    <th>最后登录IP</th>
+                                    <th>名称</th>
+                                    <th>描述</th>
+                                    <th>授权</th>
 									<th>状态</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-								<foreach name="result['admins']" item="item">
+								<foreach name="result['auth']" item="item">
 	                                <tr>
 	                                    <td>{$item['name']}</span>
-										<td>{$item['login_number']}</td>
+										<td>{$item['content']}</td>
 	                                    </td>
-										<td>{$item['last_login_time']}</td>
-										<td>{$item['last_login_ip']}</td>
+										<td>{$item['auth_action']}</td>
 	                                    <td>
 											<if condition="$item['status'] eq 0">
-												正常使用
+												正常
 											<else/>
 												已禁用
 											</if>
 										</td>
 
 										<td>
-											<a href="__APP__/Admins/edit?id={$item['id']}">编辑</a>
-											<a href="__APP__/Admins/delete?id={$item['id']}">删除</a>
+											<a href="__APP__/Auth/edit?id={$item['id']}">编辑</a>
+											<a href="__APP__/Auth/delete?id={$item['id']}">删除</a>
 	                                    </td>
 	                                </tr>
 								</foreach>

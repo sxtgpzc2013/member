@@ -386,100 +386,172 @@
 
 	    			$rongzidun_money_change_add = $this -> model -> my_add($params);
 
-	    			//获取销售补贴比例
+	    			//计算最大奖金数
 	    			$params = array(
 
 	    				'table_name' => 'bonus_rule',
 
-	    				'where' => "category = 'salecash' AND `key` = {$member_find['userrank']}"
+	    				'where' => "category = 'maxcash' AND `key` = {$member_find['userrank']}"
 	    			);
 
-	    			$bonus_rule_find = $this -> model -> my_find($params);
+	    			//最大比例
+	    			$maxcash_find = $this -> model -> my_find($params);
 
 	    			$params = array(
 
-	    				'table_name' => 'member',
+	    				'table_name' => 'bonus_rule',
 
-	    				'where' => "uid = {$member_find['uid']}",
-
-	    				'data' => array(
-
-	    					'jiangjinbi' => ($member_find['jiangjinbi'] - $result['total_jprice']) + ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8),
-
-	    					'update_time' => time()
-	    				)
+	    				'where' => "category = 'userrank' AND `key` = {$member_find['userrank']}"
 	    			);
 
-	    			$mem_save = $this -> model -> my_save($params);
+	    			//最大金额
+	    			$userrank_find = $this -> model -> my_find($params);
+	    			
+	    			//用户当前最大金额
+	    			$max_bonus = $member_find['max_bonus'];
 
-	    			$member_data['jiangjinbi'] = ($member_find['jiangjinbi'] - $result['total_jprice']) + ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8);
+	    			if ($member_find['proxy_state'] == 1)
+	    			{
+		    			//获取销售补贴比例
+		    			$params = array(
 
-	    			//写入bonus_detail
-	    			$member_jiangjinbi = $result['total_price'] * ($bonus_rule_find['value']/100);
-	    			$params = array(
+		    				'table_name' => 'bonus_rule',
 
-	    				'table_name' => 'bonus_detail',
+		    				'where' => "category = 'salecash' AND `key` = {$member_find['userrank']}"
+		    			);
 
-	    				'data' => array(
+		    			$bonus_rule_find = $this -> model -> my_find($params);
 
-	    					'touserid' => $member_find['uid'],
+		    			$params = array(
 
-	    					'tousernumber' => $member_find['usernumber'],
+		    				'table_name' => 'member',
 
-	    					'torealname' => $member_find['realname'],
+		    				'where' => "uid = {$member_find['uid']}",
 
-	    					'moneytype' => 6,
+		    				'data' => array(
 
-	    					'jiangjinbi' => $member_jiangjinbi * 0.8,
+		    					'jiangjinbi' => ($member_find['jiangjinbi'] - $result['total_jprice']) + ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8),
 
-	    					'lovemoney' => $member_jiangjinbi * 0.01,
+		    					'update_time' => time()
+		    				)
+		    			);
 
-	    					'platmoney' => $member_jiangjinbi * 0.02,
+		    			//判断是否超出最大奖金限制
+		    			$add_bonus_value = $result['total_price'] * ($bonus_rule_find['value']/100); //应发
 
-	    					'taxmoney' => $member_jiangjinbi * 0.17,
+		    			if (($add_bonus_value + $max_bonus) < ($maxcash_find['value'] * $userrank_find['value']))
+		    			{
+			    			$mem_save = $this -> model -> my_save($params);
 
-	    					'total' => $member_jiangjinbi,
+			    			$member_data['jiangjinbi'] = ($member_find['jiangjinbi'] - $result['total_jprice']) + ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8);
 
-	    					'real_total' => $member_jiangjinbi * 0.8,
+			    			//写入bonus_detail
+			    			$member_jiangjinbi = $result['total_price'] * ($bonus_rule_find['value']/100);
 
-	    					'createdate' => time()
-	    				)
-	    			);
+			    			//写入财务
+			    			$finance_save = $this -> _save_to_finance($add_bonus_value, 'expend');
 
-	    			$member_detail_add = $this -> model -> my_add($params);
+			    			$params = array(
 
-	    			//写入流水
-	    			$params = array(
+			    				'table_name' => 'bonus_detail',
 
-	    				'table_name' => 'money_change',
+			    				'data' => array(
 
-	    				'data' => array(
+			    					'touserid' => $member_find['uid'],
 
-	    					'moneytype' => 6,
+			    					'tousernumber' => $member_find['usernumber'],
 
-	    					'status' => 1,
+			    					'torealname' => $member_find['realname'],
 
-	    					'targetuserid' => $member_find['uid'],
+			    					'moneytype' => 6,
 
-	    					'targetusernumber' => $member_find['usernumber'],
+			    					'jiangjinbi' => $member_jiangjinbi * 0.8,
 
-	    					'changetype' => 8,
+			    					'lovemoney' => $member_jiangjinbi * 0.01,
 
-	    					'recordtype' => 1,
+			    					'platmoney' => $member_jiangjinbi * 0.02,
 
-	    					'money' => ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8),
+			    					'taxmoney' => $member_jiangjinbi * 0.17,
 
-	    					'hasmoney' => $member_data['jiangjinbi'],
+			    					'total' => $member_jiangjinbi,
 
-	    					'createtime' => time(),
+			    					'real_total' => $member_jiangjinbi * 0.8,
 
-	    					'realname' => '系统',
+			    					'createdate' => time()
+			    				)
+			    			);
 
-	    					'targetrealname' => $member_find['realname']
-	    				)
-	    			);
+			    			$member_detail_add = $this -> model -> my_add($params);
 
-	    			$jiangjinbi_8_add = $this -> model -> my_add($params);
+			    			//写入流水
+			    			$params = array(
+
+			    				'table_name' => 'money_change',
+
+			    				'data' => array(
+
+			    					'moneytype' => 6,
+
+			    					'status' => 1,
+
+			    					'targetuserid' => $member_find['uid'],
+
+			    					'targetusernumber' => $member_find['usernumber'],
+
+			    					'changetype' => 8,
+
+			    					'recordtype' => 1,
+
+			    					'money' => ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8),
+
+			    					'hasmoney' => $member_data['jiangjinbi'],
+
+			    					'createtime' => time(),
+
+			    					'realname' => '系统',
+
+			    					'targetrealname' => $member_find['realname']
+			    				)
+			    			);
+
+			    			$jiangjinbi_8_add = $this -> model -> my_add($params);
+
+			    			//增加用户max_bonus
+			    			$params = array(
+
+			    				'table_name' => 'member',
+
+			    				'where' => "id = {$member_find['id']}",
+
+			    				'data' => array(
+
+			    					'max_bonus' => $add_bonus_value + $max_bonus,
+
+			    					'update_time' => time()
+			    				)
+			    			);
+
+			    			$member_max_bonus_save = $this -> model -> my_save($params);
+			    		}
+			    		else //超出最大限制 修改状态为不分红
+			    		{
+			    			$params = array(
+
+			    				'table_name' => 'member',
+
+			    				'where' => "id = {$member_find['id']}",
+
+			    				'data' => array(
+
+			    					'proxy_state' => 0,
+
+			    					'update_time' => time()
+			    				)
+			    			);
+
+			    			$member_proxy_state_save = $this -> model -> my_save($params);
+			    		}
+		    		}
 
 	    			//获取服务补贴比例
 	    			$params = array(
@@ -531,6 +603,39 @@
 
 		    				// $up_find = $this -> model -> my_find($params);
 
+		    				//计算最大奖金数
+			    			$params = array(
+
+			    				'table_name' => 'bonus_rule',
+
+			    				'where' => "category = 'maxcash' AND `key` = {$v['userrank']}"
+			    			);
+
+			    			//最大比例
+			    			$up_maxcash_find = $this -> model -> my_find($params);
+
+			    			$params = array(
+
+			    				'table_name' => 'bonus_rule',
+
+			    				'where' => "category = 'userrank' AND `key` = {$v['userrank']}"
+			    			);
+
+			    			//最大金额
+			    			$up_userrank_find = $this -> model -> my_find($params);
+			    			
+			    			//用户当前最大金额
+			    			$up_max_bonus = $v['max_bonus'];
+
+			    			//要增加的奖金币应发
+			    			$up_add_jprice = $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k];
+
+			    			//实发后余额
+			    			$up_add_real_jprice = $v['jiangjinbi'] + ($up_add_jprice * 0.8);
+
+			    			//最大限额
+			    			$up_max_bonus_top = $up_maxcash_find['value'] * $up_userrank_find['value'];
+
 			    			$params = array(
 
 			    				'table_name' => 'member',
@@ -539,80 +644,92 @@
 
 			    				'data' => array(
 
-			    					'jiangjinbi' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
-
 			    					'update_time' => time()
 			    				)
 			    			);
 
-			    			$up_save = $this -> model -> my_save($params);
+			    			if (($up_max_bonus + $up_add_jprice) >= $up_max_bonus_top)
+			    			{
+			    				$params['data']['proxy_state'] = 0;
 
-			    			//计入流水
-			    			$params = array(
+			    				$up_save = $this -> model -> my_save($params);
+			    			}
+			    			else
+			    			{
+			    				$params['data']['jiangjinbi'] = $up_add_real_jprice;
 
-			    				'table_name' => 'money_change',
+			    				$up_save = $this -> model -> my_save($params);
 
-			    				'data' => array(
+			    				//写入财务
+			    				$finance_save = $this -> _save_to_finance($up_add_jprice, 'expend');
 
-			    					'moneytype' => 6,
+				    			//计入流水
+				    			$params = array(
 
-			    					'status' => $up_save,
+				    				'table_name' => 'money_change',
 
-			    					'targetuserid' => $v['uid'],
+				    				'data' => array(
 
-			    					'targetusernumber' => $v['usernumber'],
+				    					'moneytype' => 6,
 
-			    					'changetype' => 9,
+				    					'status' => $up_save,
 
-			    					'recordtype' => 1,
+				    					'targetuserid' => $v['uid'],
 
-			    					'money' => $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8,
+				    					'targetusernumber' => $v['usernumber'],
 
-			    					'hasmoney' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
+				    					'changetype' => 9,
 
-			    					'createtime' => time(),
+				    					'recordtype' => 1,
 
-			    					'realname' => '系统',
+				    					'money' => $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8,
 
-			    					'targetrealname' => $v['realname']
-			    				)
-			    			);
+				    					'hasmoney' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
 
-			    			$up_money_change_add = $this -> model -> my_add($params);
+				    					'createtime' => time(),
 
-			    			//写入bonus_detail
-			    			$up_jiangjinbi = $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k];
-			    			$params = array(
+				    					'realname' => '系统',
 
-			    				'table_name' => 'bonus_detail',
+				    					'targetrealname' => $v['realname']
+				    				)
+				    			);
 
-			    				'data' => array(
+				    			$up_money_change_add = $this -> model -> my_add($params);
 
-			    					'touserid' => $v['uid'],
+				    			//写入bonus_detail
+				    			$up_jiangjinbi = $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k];
+				    			$params = array(
 
-			    					'tousernumber' => $v['usernumber'],
+				    				'table_name' => 'bonus_detail',
 
-			    					'torealname' => $v['realname'],
+				    				'data' => array(
 
-			    					'moneytype' => 7,
+				    					'touserid' => $v['uid'],
 
-			    					'jiangjinbi' => $up_jiangjinbi * 0.8,
+				    					'tousernumber' => $v['usernumber'],
 
-			    					'lovemoney' => $up_jiangjinbi * 0.01,
+				    					'torealname' => $v['realname'],
 
-			    					'platmoney' => $up_jiangjinbi * 0.02,
+				    					'moneytype' => 7,
 
-			    					'taxmoney' => $up_jiangjinbi * 0.17,
+				    					'jiangjinbi' => $up_jiangjinbi * 0.8,
 
-			    					'total' => $up_jiangjinbi,
+				    					'lovemoney' => $up_jiangjinbi * 0.01,
 
-			    					'real_total' => $up_jiangjinbi * 0.8,
+				    					'platmoney' => $up_jiangjinbi * 0.02,
 
-			    					'createdate' => time()
-			    				)
-			    			);
+				    					'taxmoney' => $up_jiangjinbi * 0.17,
 
-			    			$up_detail_add = $this -> model -> my_add($params);
+				    					'total' => $up_jiangjinbi,
+
+				    					'real_total' => $up_jiangjinbi * 0.8,
+
+				    					'createdate' => time()
+				    				)
+				    			);
+
+				    			$up_detail_add = $this -> model -> my_add($params);
+			    			}
 			    		}
 			    	}
 
@@ -630,6 +747,39 @@
 	    	$this -> assign('result', $result);
 
 	    	$this -> display();
+	    }
+
+	    /**
+		 * 写入财务记录
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function _save_to_finance($money, $type)
+	    {
+	    	$params = array(
+
+	    		'table_name' => 'finance',
+
+	    		'where' => 'id = 1'
+	    	);
+
+	    	if ($type == 'income') //存入
+	    	{
+	    		$params['data']['income'] = "`income` + {$money}";
+	    	}
+	    	else //支出
+	    	{
+	    		$params['data']['expend'] = "`expend` + {$money}";
+	    	}
+
+	    	$finance_save = $this -> model -> my_save($params);
+
+	    	return $finance_save;
 	    }
 
 	    /**
