@@ -8,10 +8,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>管理员管理</a>
+                <a>权限管理</a>
             </li>
             <li>
-                <strong>添加管理员</strong>
+                <strong>权限添加</strong>
             </li>
         </ol>
 	</div>
@@ -21,40 +21,38 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5 class="text-center">新增管理员</h5>
+                    <h5 class="text-center">权限添加</h5>
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
+					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Auth/add" method="post">
+						<input type="hidden" name="form_key" value="yes">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*管理员名：</label>
+                            <label class="col-sm-3 control-label">*用户组:</label>
                             <div class="col-sm-6">
-                                <input id="username" name="username" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                                <input id="name" name="name" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*密码：</label>
+                            <label class="col-sm-3 control-label">*描述:</label>
                             <div class="col-sm-6">
-                                <input id="password" name="password" class="form-control" type="password">
+                                <input id="content" name="content" class="form-control" type="text">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*确认密码：</label>
+
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*授权相关入口:</label>
                             <div class="col-sm-6">
-                                <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+                                <textarea class="form-control" name="auth_action" rows="8" cols="40"></textarea>
                             </div>
-							<div class="col-sm-3">
-								<span class="help-block">(不能小于6位数,且不能为纯数字)</span>
-							</div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*E-mail：</label>
+
+
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*标识:</label>
                             <div class="col-sm-6">
-                                <input id="email" name="email" class="form-control" type="email">
+                                <input id="type_str" name="type_str" class="form-control" type="text">
                             </div>
-							<div class="col-sm-3">
-								<span class="help-block">(用于找回密码)</span>
-							</div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
@@ -96,43 +94,19 @@
 		   rules: {
 			   firstname: "required",
 			   lastname: "required",
-			   username: {
+			   name: {
 				   required: true
 			   },
-			   password: {
-				   required: true,
-				   minlength: 6
+			   content: {
+				   required: true
 			   },
-			   confirm_password: {
-				   required: true,
-				   minlength: 5,
-				   equalTo: "#password"
+			   auth_action: {
+				   required: true
 			   },
-			   email: {
-				   required: true,
-				   email: true
-			   },
-			   topic: {
-				   required: "#newsletter:checked",
-				   minlength: 2
+			   type_str: {
+				   required: true
 			   },
 			   agree: "required"
-		   },
-		   messages: {
-			   username: {
-				   required: "请输入管理员名"
-			   },
-			   password: {
-				   required: "请输入您的密码",
-				   minlength: "密码必须6个字符以上"
-			   },
-			   confirm_password: {
-				   required: "请再次输入密码",
-				   minlength: "密码必须5个字符以上",
-				   equalTo: "两次输入的密码不一致"
-			   },
-			   email: "请输入您的E-mail",
-			   agree: "请输入邮箱"
 		   }
 	   });
    });

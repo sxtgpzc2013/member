@@ -452,6 +452,29 @@ CREATE TABLE `zx_upgrade_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='升级记录表';
 
+
+ALTER TABLE zx_admins ADD login_number INT(9) NOT NULL DEFAULT 0 COMMENT '登录次数';
+ALTER TABLE zx_admins ADD last_login_time INT(11) NOT NULL DEFAULT 0 COMMENT '最后登录时间';
+ALTER TABLE zx_admins ADD last_login_ip VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '最后登录IP';
+ALTER TABLE zx_admins ADD status TINYINT(9) NOT NULL DEFAULT 0 COMMENT '是否禁用 状态 0 启用 1 禁用';
+
+# Dump of table zx_auth
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_auth`;
+
+CREATE TABLE `zx_auth` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(200) NOT NULL DEFAULT '' COMMENT '用户组名称',
+  `content` varchar(200) NOT NULL DEFAULT '' COMMENT '描述',
+  `auth_action` text NOT NULL COMMENT '授权相关入口',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '状态',
+  `type_str` varchar(15) NOT NULL DEFAULT '' COMMENT '标识',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `is_del` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-正常 1-删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='权限管理表';
+
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

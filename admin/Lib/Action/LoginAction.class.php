@@ -5,7 +5,7 @@
  * @version 1.0.0
  *
  * 功能简介：登陆管理控制器类
- * @author  
+ * @author
  * @copyright 经常去
  * @time 2014-6-16
  * @version 1.0.0
@@ -54,9 +54,9 @@
 
 					'table_name' => 'admins',
 
-					'where' => "mobile = '{$username}' AND password = '{$password}' AND is_del = 0"
+					'where' => "mobile = '{$username}' AND password = '{$password}' AND is_del = 0 AND status = 0"
 				);
-				
+
 				$admin_find = $this -> model -> my_find($params);
 
 
