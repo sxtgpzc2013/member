@@ -253,6 +253,7 @@ def getmemberinfo(uid):
 
 #插入互助补贴明细, 流水
 def leaderbonus(uid, managercash):
+	uids = []
 	sql = """
 		select `key`, value from zx_bonus_rule where category = 'leadercash'
 	"""
@@ -285,9 +286,9 @@ def leaderbonus(uid, managercash):
 
 	_uids = gettuijiannumber_parent(uid)
 
-	for i, v in enumerate(uids):
+	for i, v in enumerate(_uids):
 		if int(v) == 1:
-			del uids[i]
+			del _uids[i]
 		else:
 			# 过滤掉普卡
 			filter_member_sql = """
@@ -295,9 +296,9 @@ def leaderbonus(uid, managercash):
 			""" % (v)
 			result = conn.query(filter_member_sql)
 			if result:
-				del uids[i]
+				del _uids[i]
 
-	lengh = len(uids)
+	lengh = len(_uids)
 	if lengh > 3:
 		uids = _uids[0:3]
 	else:
