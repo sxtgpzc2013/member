@@ -306,8 +306,8 @@ def leaderbonus(uid, managercash):
 
 	i = 0
 	leadercash = 0
-	for uid in uids:
-		result = getmemberinfo(uid)
+	for _uid in uids:
+		result = getmemberinfo(_uid)
 		if result:
 			usernumber = result[0]['usernumber']
 			realname = result[0]['realname']
@@ -320,7 +320,7 @@ def leaderbonus(uid, managercash):
 			elif i == 3:
 				leadercash = managercash * rate3 / 100
 
-			insert_bonus_detail_3(uid, usernumber, realname, leadercash)
+			insert_bonus_detail_3(_uid, usernumber, realname, leadercash)
 
 def member_achievement_status(uid):
 	flag = False
@@ -508,10 +508,11 @@ def update_achievement_status(uid):
 
 #计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
+	flag = False
 	# 先获取会员管理比例的最大值
 	maxmanagercash = getmaxmanagercash(usertitle)
 
-	# 获取会员 的 左 中 右 销费商
+	# 获取会员 的 左 中 右 销费商 
 	sql = """
 		select uid from zx_member where parentid = %s
 	""" % (uid)
@@ -531,8 +532,10 @@ def managerbonus(uid, usertitle):
 						# 赛选有星级的会员 uid, usertitle
 						memberlevels = getuservalue(parents[0:k+1])
 						status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
+
 						if status:
-							update_achievement_status(child)
+							return child
+	return flag
 
 # 管理补贴 和 互助补贴
 def main():
@@ -541,7 +544,10 @@ def main():
 	"""
 	members = conn.query(sql)
 	if members:
+		i = 0
+		length = len(members)
 		for member in members:
+			i += 1
 			usernumber = member['usernumber']
 			usertitle = member['usertitle']
 			userrank = member['userrank']
@@ -551,7 +557,9 @@ def main():
 		
 			# 判断是星级的会员
 			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
-				managerbonus(uid, usertitle)
+				child = managerbonus(uid, usertitle)
+				if child and i == length:
+					update_achievement_status(child)
 
 	conn.close()
 	print "ok" 
