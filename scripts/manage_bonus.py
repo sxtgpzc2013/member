@@ -253,7 +253,6 @@ def getmemberinfo(uid):
 
 #插入互助补贴明细, 流水
 def leaderbonus(uid, managercash):
-	uids = []
 	sql = """
 		select `key`, value from zx_bonus_rule where category = 'leadercash'
 	"""
@@ -432,7 +431,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				i = int(memberlevels[x][2])
 
 			if flag:
-				if member_uid == int(uid):
+				if member_uid == uid:
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
@@ -528,7 +527,7 @@ def managerbonus(uid, usertitle):
 				# 获取推荐的人的父级
 				parents = gettuijiannumber_parent(child)
 				for k, v in enumerate(parents):
-					if int(v) == int(uid):
+					if v == uid:
 						# 赛选有星级的会员 uid, usertitle
 						memberlevels = getuservalue(parents[0:k+1])
 						status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
@@ -551,7 +550,7 @@ def main():
 			usernumber = member['usernumber']
 			usertitle = member['usertitle']
 			userrank = member['userrank']
-			uid = member['uid']
+			uid = int(member['uid'])
 			usernumber = member['usernumber']
 			realname = member['realname']
 		
