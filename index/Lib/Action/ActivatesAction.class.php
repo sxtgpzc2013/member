@@ -576,7 +576,7 @@ class ActivatesAction extends CommonAction {
 
 				$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
 
-				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
+				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 				//消费商最大奖金
 				$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
@@ -801,7 +801,7 @@ class ActivatesAction extends CommonAction {
 
 					$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
 
-					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
+					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 					//消费商最大奖金
 					$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);

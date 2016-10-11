@@ -281,7 +281,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = {$member['billcenterid']} AND isbill = 1"
+				'where' => "uid = 1 AND isbill = 1"
 
 			);
 
@@ -306,7 +306,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = {$member['billcenterid']}",
+				'where' => "uid = 1",
 
 				'data' => $billdata
 			);
@@ -552,7 +552,7 @@ class ActivatesAction extends CommonAction {
 	//更新代理商服务市场补贴
 	function save_market_subsidy($deduct){
 		//用户ID
-		$uid = intval($_SESSION['Rongzi']['user']['uid']);
+		$uid = 1;
 
 		if($uid != 1){
 			//获取代理商编号数据
@@ -574,7 +574,7 @@ class ActivatesAction extends CommonAction {
 
 				$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
 
-				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
+				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 				//消费商最大奖金
 				$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
@@ -799,7 +799,7 @@ class ActivatesAction extends CommonAction {
 
 					$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
 
-					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
+					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 					//消费商最大奖金
 					$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
