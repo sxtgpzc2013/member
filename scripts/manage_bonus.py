@@ -527,7 +527,7 @@ def managerbonus(uid, usertitle):
 				# 获取推荐的人的父级
 				parents = gettuijiannumber_parent(child)
 				for k, v in enumerate(parents):
-					if v == uid:
+					if int(v) == uid:
 						# 赛选有星级的会员 uid, usertitle
 						memberlevels = getuservalue(parents[0:k+1])
 						status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
