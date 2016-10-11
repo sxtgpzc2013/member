@@ -24,7 +24,7 @@
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm" method="post" action="__APP__/Products/edit/id/{$result.id}">
+					<form class="form-horizontal m-t" id="signupForm" method="post" action="__APP__/Products/edit/id/{$result.id}" enctype="multipart/form-data">
 						<input type="hidden" name="form_key" value="yes">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">*商品编号:</label>
@@ -42,7 +42,8 @@
 						<div class="form-group">
                             <label class="col-sm-2 control-label">*商品图片:</label>
                             <div class="col-sm-9">
-                                <input id="" name="" class="form-control" type="text">
+                                <img src="http://image.enjvip.com/images/products/m_{$result.logo}" />
+                                <input id="" name="logo" class="form-control" type="file">
                             </div>
                         </div>
 
