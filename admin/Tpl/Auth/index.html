@@ -23,7 +23,7 @@
 				<div class="row">
 					<div class="col-sm-12 m-b-xs">
 						<p>
-							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Admins/add">新增</a>
+							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Auth/add">新增</a>
 						</p>
 					</div>
 				</div>
@@ -37,7 +37,6 @@
                                     <th>名称</th>
                                     <th>描述</th>
                                     <th>授权</th>
-									<th>状态</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
@@ -47,14 +46,14 @@
 	                                    <td>{$item['name']}</span>
 										<td>{$item['content']}</td>
 	                                    </td>
-										<td>{$item['auth_action']}</td>
-	                                    <td>
+										<td><a class="" href="__APP__/Auth/edit?id={$item['id']}">访问授权</a></td>
+	                                    <!-- <td>
 											<if condition="$item['status'] eq 0">
 												正常
 											<else/>
 												已禁用
 											</if>
-										</td>
+										</td> -->
 
 										<td>
 											<a href="__APP__/Auth/edit?id={$item['id']}">编辑</a>

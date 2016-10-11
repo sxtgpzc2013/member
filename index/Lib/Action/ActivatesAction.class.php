@@ -112,7 +112,9 @@ class ActivatesAction extends CommonAction {
 
 			'table_name' => 'member',
 
-			'where' => "active_uid = {$billcenterid}"
+			'where' => "active_uid = {$billcenterid}",
+
+			'order' => "reg_time desc"
 
 		);
 
