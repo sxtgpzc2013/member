@@ -106,8 +106,8 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 					insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
 		            values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
 				""" % (uid, usernumber, realname, 2, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, managercash, real_total, now_second)
-				#  插入明细表
 				conn.dml(zx_bonus_detail_sql, 'insert')
+				# 奖金币流水
 				jiangjinbi_change_sql = """
 					insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 		            values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
@@ -204,9 +204,8 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 					insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
 		            values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s)
 				""" % (uid, usernumber, realname, 3, jiangjinbi_award, rongzidun_award, lovemoney_award, platmoney_award, taxmoney_award, leadercash, real_total, now_second)
-				#  插入明细表
 				conn.dml(zx_bonus_detail_sql, 'insert')
-
+				# 奖金币流水
 				jiangjinbi_change_sql = """
 					insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 		            values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
@@ -242,12 +241,15 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 			print "互助奖成功"
 
 def getmemberinfo(uid):
+	flag = False
 	sql = """
 		select usernumber, realname from zx_member where uid = %s
 	""" % (uid)
 	result = conn.query(sql)
 	if result:
 		return result
+
+	return flag
 
 #插入互助补贴明细, 流水
 def leaderbonus(uid, managercash):

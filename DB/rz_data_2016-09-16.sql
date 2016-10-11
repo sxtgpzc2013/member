@@ -380,10 +380,10 @@ CREATE TABLE `zx_bonus_detail` (
 # 2016-09-21 新增字段
 # --------------------------------------------------------------
 ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-注册币 3-戎子盾 4-激活币 5-福利积分 6-爱心基金 7 平台管理费 8税费';
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
 
 
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互动补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
 
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
@@ -451,6 +451,29 @@ CREATE TABLE `zx_upgrade_log` (
   `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='升级记录表';
+
+
+ALTER TABLE zx_admins ADD login_number INT(9) NOT NULL DEFAULT 0 COMMENT '登录次数';
+ALTER TABLE zx_admins ADD last_login_time INT(11) NOT NULL DEFAULT 0 COMMENT '最后登录时间';
+ALTER TABLE zx_admins ADD last_login_ip VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '最后登录IP';
+ALTER TABLE zx_admins ADD status TINYINT(9) NOT NULL DEFAULT 0 COMMENT '是否禁用 状态 0 启用 1 禁用';
+
+# Dump of table zx_auth
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_auth`;
+
+CREATE TABLE `zx_auth` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(200) NOT NULL DEFAULT '' COMMENT '用户组名称',
+  `content` varchar(200) NOT NULL DEFAULT '' COMMENT '描述',
+  `auth_action` text NOT NULL COMMENT '授权相关入口',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '状态',
+  `type_str` varchar(15) NOT NULL DEFAULT '' COMMENT '标识',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `is_del` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-正常 1-删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='权限管理表';
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
