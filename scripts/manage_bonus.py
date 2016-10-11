@@ -507,7 +507,6 @@ def update_achievement_status(uid):
 
 #计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
 def managerbonus(uid, usertitle):
-	flag = False
 	# 先获取会员管理比例的最大值
 	maxmanagercash = getmaxmanagercash(usertitle)
 
@@ -534,7 +533,8 @@ def managerbonus(uid, usertitle):
 
 						if status:
 							return child
-	return flag
+
+	return False
 
 # 管理补贴 和 互助补贴
 def main():
