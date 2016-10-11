@@ -64,12 +64,12 @@ def fenhong():
 
 	if members:
 		for member in members:
-			uid = member['uid']
-			usernumber = member['usernumber']
-			realname = member['realname']
-			userrank = member['userrank']
-			value = member['value']
-			max_bonus = float(member['max_bonus'])
+			uid = member[0]['uid']
+			usernumber = member[0]['usernumber']
+			realname = member[0]['realname']
+			userrank = member[0]['userrank']
+			value = member[0]['value']
+			max_bonus = float(member[0]['max_bonus'])
 
 			# 最大分红的奖金
 			max_cash = int(maxcash(userrank) * value)
