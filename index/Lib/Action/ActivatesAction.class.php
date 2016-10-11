@@ -568,6 +568,7 @@ class ActivatesAction extends CommonAction {
 			$member = $this -> model -> my_find($params);
 
 			if($member && $member['proxy_state'] == 1){
+				$data = array();
 
 				//获取市场补贴比例
 				$marketratio = $this -> get_market_ratio();
@@ -581,7 +582,9 @@ class ActivatesAction extends CommonAction {
 
 					$data['proxy_state'] = 0;
 
-					$deduct = $max_bonus_money - $data['max_bonus'];
+					$deduct = $max_bonus_money - $member['max_bonus'];
+
+					$data['max_bonus'] = $max_bonus_money;
 				}
 
 				$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
@@ -799,6 +802,7 @@ class ActivatesAction extends CommonAction {
 					//bonus_rule userrank key value 的值 奖金基数
 					//bonus_rule maxcash key value 的值 比例
 					//最大奖金额度 奖金基数 * 比例 < $member['max_bonus'] + ($deduct * $expand_ratio * 0.55) 更改proxy_state = 0
+					$data = array();
 
 					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
@@ -806,9 +810,12 @@ class ActivatesAction extends CommonAction {
 					$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
 
 					if($max_bonus_money < $data['max_bonus']){
+
 						$data['proxy_state'] = 0;
 
-						$deduct = $max_bonus_money - $data['max_bonus'];
+						$deduct = ($max_bonus_money - $member['max_bonus']);
+
+						$data['max_bonus'] = $max_bonus_money;
 					}
 
 					$data['rongzidun'] = $member['rongzidun'] + ($deduct * $expand_ratio * 0.25);

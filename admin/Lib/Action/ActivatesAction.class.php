@@ -579,7 +579,9 @@ class ActivatesAction extends CommonAction {
 
 					$data['proxy_state'] = 0;
 
-					$deduct = $max_bonus_money - $data['max_bonus'];
+					$deduct = $max_bonus_money - $member['max_bonus'];
+
+					$data['max_bonus'] = $max_bonus_money;
 
 				}
 
@@ -807,7 +809,9 @@ class ActivatesAction extends CommonAction {
 
 						$data['proxy_state'] = 0;
 
-						$deduct = $max_bonus_money - $data['max_bonus'];
+						$deduct = $max_bonus_money - $member['max_bonus'];
+
+						$data['max_bonus'] = $max_bonus_money;
 
 					}
 
