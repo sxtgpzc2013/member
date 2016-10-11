@@ -127,7 +127,7 @@
 
 	    		$data['password'] = md5(md5($data['password']));
 
-	    		$data['name'] = htmlspecialchars($_POST['name']);
+	    		$data['name'] = htmlspecialchars($_POST['username']);
 
 	    		$data['type_str'] = $_POST['type_str'] ? $_POST['type_str'] : $this -> _back('请添加管理员权限');
 
@@ -358,4 +358,5 @@
 	    		return true;
 	    	}
 	    }
+
 	}
