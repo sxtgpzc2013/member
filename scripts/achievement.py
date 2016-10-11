@@ -64,7 +64,7 @@ def update_achievement_status(uid):
 			update_uid_sql = """
 				update zx_member set achievementstatus = 1 where uid = %s
 			""" % (uid)
-			conn.dml(update_uid_sql)
+			conn.dml(update_uid_sql, 'update')
 
 			childs = gettuijiannumber_child(uid)
 			if childs:

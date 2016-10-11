@@ -185,7 +185,7 @@ def gettuijiannumber_parent(uid):
 		select recommenduserpath from zx_member where uid = %s
 	"""  % (uid)
 	result = conn.query(sql)
-	print result
+
 	if result:
 		parents = result[0]['recommenduserpath'].split(',')
 

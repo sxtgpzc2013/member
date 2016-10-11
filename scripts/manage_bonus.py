@@ -253,6 +253,7 @@ def getmemberinfo(uid):
 
 #插入互助补贴明细, 流水
 def leaderbonus(uid, managercash):
+	uids = []
 	sql = """
 		select `key`, value from zx_bonus_rule where category = 'leadercash'
 	"""
@@ -285,9 +286,9 @@ def leaderbonus(uid, managercash):
 
 	_uids = gettuijiannumber_parent(uid)
 
-	for i, v in enumerate(uids):
+	for i, v in enumerate(_uids):
 		if int(v) == 1:
-			del uids[i]
+			del _uids[i]
 		else:
 			# 过滤掉普卡
 			filter_member_sql = """
@@ -295,9 +296,9 @@ def leaderbonus(uid, managercash):
 			""" % (v)
 			result = conn.query(filter_member_sql)
 			if result:
-				del uids[i]
+				del _uids[i]
 
-	lengh = len(uids)
+	lengh = len(_uids)
 	if lengh > 3:
 		uids = _uids[0:3]
 	else:
@@ -436,6 +437,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+						leaderbonus(member_uid, managercash)
 					break
 				else:
 					if member_title > int(usertitle):
@@ -443,12 +445,14 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						result = getmemberinfo(member_uid)
 						if result:
 							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+							leaderbonus(member_uid, managercash)
 						break
 					elif member_title == int(usertitle):
 						managercash = value * member_value / 100
 						result = getmemberinfo(member_uid)
 						if result:
 							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+							leaderbonus(member_uid, managercash)
 						break
 					elif member_title < int(usertitle):
 						_member_value = member_value - i
@@ -457,6 +461,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						result = getmemberinfo(member_uid)
 						if result:
 							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+							leaderbonus(member_uid, managercash)
 
 		elif index == 0:
 			member_uid = int(memberlevels[index][0])
@@ -467,18 +472,21 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				result = getmemberinfo(member_uid)
 				if result:
 					insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+					leaderbonus(member_uid, managercash)
 			else:
 				if member_title > int(usertitle):
 					managercash = value * maxmanagercash / 100
 					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+						leaderbonus(member_uid, managercash)
 					break
 				elif member_title == int(usertitle):
 					managercash = value * member_value / 100
 					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+						leaderbonus(member_uid, managercash)
 					break
 				elif member_title < int(usertitle):
 					managercash = value * member_value / 100
@@ -486,6 +494,7 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 					result = getmemberinfo(member_uid)
 					if result:
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+						leaderbonus(member_uid, managercash)
 	return True
 
 #更新会员的业绩状态
