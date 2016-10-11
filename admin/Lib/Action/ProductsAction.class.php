@@ -190,6 +190,13 @@ class ProductsAction extends CommonAction {
 		{
 			$data['name'] = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : $this -> _back('商品名称不能为空');
 
+			$logo = $this -> _upload_pic('products');
+
+			if ($logo['status'] == 1)
+			{
+				$data['logo'] = $logo['msg'];
+			}
+
 			//这里缺少logo
 			$data['content'] = isset($_POST['content']) ? $_POST['content'] : $this -> _back('商品详情不能为空');
 
