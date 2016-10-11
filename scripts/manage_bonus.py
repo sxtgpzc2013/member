@@ -54,9 +54,9 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 	""" % (uid)
 	member = conn.query(member_sql)
 	if member:
-		userrank = member['userrank']
-		value = member['value']
-		max_bonus = int(member['max_bonus'])
+		userrank = member[0]['userrank']
+		value = member[0]['value']
+		max_bonus = int(member[0]['max_bonus'])
 		# 最大分红的奖金
 		max_cash = int(maxcash(userrank) * value)
 
@@ -152,9 +152,9 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 	""" % (uid)
 	member = conn.query(member_sql)
 	if member:
-		userrank = member['userrank']
-		value = member['value']
-		max_bonus = int(member['max_bonus'])
+		userrank = member[0]['userrank']
+		value = member[0]['value']
+		max_bonus = int(member[0]['max_bonus'])
 		# 最大分红的奖金
 		max_cash = int(maxcash(userrank) * value)
 
@@ -511,18 +511,19 @@ def managerbonus(uid, usertitle):
 		member_uid = member['uid']
 		# 获取销费商推荐的人
 		childs = gettuijiannumber_child(member_uid)
-		for child in childs:
-			# 获取推荐人的级别金额
-			value = getmembervalue(child)
-			# 获取推荐的人的父级
-			parents = gettuijiannumber_parent(child)
-			for k, v in enumerate(parents):
-				if int(v) == int(uid):
-					# 赛选有星级的会员 uid, usertitle
-					memberlevels = getuservalue(parents[0:k+1])
-					status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
-					if status:
-						update_achievement_status(child)
+		if childs:
+			for child in childs:
+				# 获取推荐人的级别金额
+				value = getmembervalue(child)
+				# 获取推荐的人的父级
+				parents = gettuijiannumber_parent(child)
+				for k, v in enumerate(parents):
+					if int(v) == int(uid):
+						# 赛选有星级的会员 uid, usertitle
+						memberlevels = getuservalue(parents[0:k+1])
+						status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
+						if status:
+							update_achievement_status(child)
 
 # 管理补贴 和 互助补贴
 def main():

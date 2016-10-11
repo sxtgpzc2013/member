@@ -30,9 +30,43 @@ def compare(x, y, z):
 	else:
 		return 0
 
+def member_achievement_status(uid):
+	flag = False
+	sql = """
+		select active_time from zx_member where uid = %s and achievementstatus = 0
+	""" % (uid)
+	result = conn.query(sql)
+	if result:
+		return True
+	else:
+		flag = False
+
+	return flag
+
+# 通过父uid获取子推荐
+def gettuijiannumber_child(uid):
+	childs = []
+	sql = """
+		select recommenduserpath from zx_member where find_in_set(%s, recommenduserpath) and uid != %s
+	"""  % (uid, uid)
+	results = conn.query(sql)
+	if results:
+		for result in results:
+			_childs = result['recommenduserpath'].split(',')[::-1]
+			for _child in _childs:
+				if int(_child) == int(uid):
+					break
+
+				status = member_achievement_status(_child)
+				if status:
+					if _child not in childs:
+						childs.append(_child)
+
+	return childs
+
 #更新会员的业绩状态
 def update_achievement_status(uid):
-	status = True
+	flag = False
 	sql = """
 		select uid from zx_member where parentid = %s
 	""" % (uid)
@@ -42,12 +76,22 @@ def update_achievement_status(uid):
 	if result:
 		for result in result:
 			uid = result['uid']
-			update_sql = """
+			update_uid_sql = """
 				update zx_member set achievementstatus = 1 where uid = %s
 			""" % (uid)
-			status = conn.dml(update_sql, 'update')
+			conn.dml(update_uid_sql)
 
-	return status
+			childs = gettuijiannumber_child(uid)
+			if childs:
+				for child in childs:
+					update_child_sql = """
+						update zx_member set achievementstatus = 1 where uid = %s
+					""" % (child)
+					conn.dml(update_child_sql, 'update')
+
+		flag = True
+
+	return flag
 
 def update_member(usertitle, jianglijifen, usernumber):
 	sql = """

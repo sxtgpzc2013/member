@@ -34,9 +34,9 @@ def insert_bonus_detail_8(uid, usernumber, realname, repeatcash):
 	""" % (uid)
 	member = conn.query(member_sql)
 	if member:
-		userrank = member['userrank']
-		value = member['value']
-		max_bonus = int(member['max_bonus'])
+		userrank = member[0]['userrank']
+		value = member[0]['value']
+		max_bonus = int(member[0]['max_bonus'])
 		# 最大分红的奖金
 		max_cash = int(maxcash(userrank) * value)
 
