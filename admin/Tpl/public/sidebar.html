@@ -28,18 +28,18 @@
 				</ul>
 			</li>
 
-			<li class="<?php if (MODULE_NAME == 'Admins') {echo 'active';} ?>">
+			<li class="<?php if (MODULE_NAME == 'Admins' || MODULE_NAME == 'Auth') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-list"></i> <span class="nav-label">管理员列表</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'auth') {echo 'active bcolor';} ?>">
-						<a href="__APP__">权限管理</a>
+					<li class="<?php if (MODULE_NAME == 'Auth' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
+						<a href="__APP__/Auth/index">权限管理</a>
 					</li>
 					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'add') {echo 'active bcolor';} ?>">
 						<a href="__APP__/Admins/add">新增管理员</a>
 					</li>
-					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'edit') {echo 'active bcolor';} ?>">
+					<!-- <li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'edit') {echo 'active bcolor';} ?>">
 						<a href="__APP__/Admins/edit">管理员修改</a>
-					</li>
+					</li> -->
 					<li class="<?php if (MODULE_NAME == 'Admins' && ACTION_NAME == 'index') {echo 'active bcolor';} ?>">
 						<a href="__APP__/Admins/index">管理员列表</a>
 					</li>

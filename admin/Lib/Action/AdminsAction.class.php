@@ -99,21 +99,21 @@
 	    		$this -> _back('权限不足');
 	    	}
 
-	    	//查询分站信息
+	    	//查询相关权限信息
 	    	$params = array(
 
-	    		'table_name' => 'substations',
+	    		'table_name' => 'auth',
 
 	    		'where' => "is_del = 0"
 	    	);
 
-	    	$result['substations'] = $this -> model -> easy_select($params);
+	    	$result['auth'] = $this -> model -> easy_select($params);
 
 	    	$form_key = htmlspecialchars($_POST['form_key']);
 
 	    	if ($form_key == 'yes')
 	    	{
-	    		$data['substation_id'] = intval($_POST['substation_id']) ? intval($_POST['substation_id']) : $this -> _back('请选择分站');
+	    		$data['password'] = $_POST['password'] ? $_POST['password'] : $this -> _back('请添加');
 
 	    		$data['mobile'] = is_tel(htmlspecialchars($_POST['mobile'])) ? htmlspecialchars($_POST['mobile']) : $this -> _back('请输入正确的手机号');
 
@@ -122,14 +122,14 @@
 
 	    		if (!$check_result)
 	    		{
-	    			$this -> _back('手机号已存在');
+	    			$this -> _back('账号已存在');
 	    		}
 
-	    		$data['password'] = md5(md5($data['mobile']));
+	    		$data['password'] = md5(md5($data['password']));
 
 	    		$data['name'] = htmlspecialchars($_POST['name']);
 
-	    		$data['type_str'] = 'admin';
+	    		$data['type_str'] = $_POST['type_str'] ? $_POST['type_str'] : $this -> _back('请添加管理员权限');
 
 	    		$data['created_at'] = time();
 

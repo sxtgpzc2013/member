@@ -30,19 +30,6 @@ def compare(x, y, z):
 	else:
 		return 0
 
-def member_achievement_status(uid):
-	flag = False
-	sql = """
-		select active_time from zx_member where uid = %s and achievementstatus = 0
-	""" % (uid)
-	result = conn.query(sql)
-	if result:
-		return True
-	else:
-		flag = False
-
-	return flag
-
 # 通过父uid获取子推荐
 def gettuijiannumber_child(uid):
 	childs = []
@@ -57,10 +44,8 @@ def gettuijiannumber_child(uid):
 				if int(_child) == int(uid):
 					break
 
-				status = member_achievement_status(_child)
-				if status:
-					if _child not in childs:
-						childs.append(_child)
+				if _child not in childs:
+					childs.append(_child)
 
 	return childs
 
@@ -79,7 +64,7 @@ def update_achievement_status(uid):
 			update_uid_sql = """
 				update zx_member set achievementstatus = 1 where uid = %s
 			""" % (uid)
-			conn.dml(update_uid_sql)
+			conn.dml(update_uid_sql, 'update')
 
 			childs = gettuijiannumber_child(uid)
 			if childs:
