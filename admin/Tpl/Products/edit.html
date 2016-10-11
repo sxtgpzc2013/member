@@ -42,7 +42,9 @@
 						<div class="form-group">
                             <label class="col-sm-2 control-label">*商品图片:</label>
                             <div class="col-sm-9">
-                                <img src="http://image.enjvip.com/images/products/m_{$result.logo}" />
+                                <if condition="$result['logo'] neq ''">
+                                  <img src="http://image.enjvip.com/images/products/m_{$result.logo}" />
+                                </if>
                                 <input id="" name="logo" class="form-control" type="file">
                             </div>
                         </div>

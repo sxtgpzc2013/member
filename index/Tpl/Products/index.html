@@ -41,7 +41,11 @@
 									<foreach name="result['result']" item="item">
 										<tr>
 											<td>{$item.products_code}</td>
-											<td><img src="http://image.enjvip.com/images/products/s_{$item.logo}" /></td>
+											<td>
+												<if condition="$item['logo'] neq ''">
+													<img src="http://image.enjvip.com/images/products/s_{$item.logo}" />
+												</if>
+											</td>
 											<td>{$item.name}</td>
 											<!-- <td>234234</td> -->
 											<td>{$item.surplus}件</td>
