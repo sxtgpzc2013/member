@@ -48,27 +48,14 @@ def rate():
 def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 	# 会员
 	member_sql = """
-					select m.userrank, m.max_bonus, r.value from zx_member as m left join zx_bonus_rule as r
+					select m.userrank, r.value from zx_member as m left join zx_bonus_rule as r
 					on m.userrank = r.key
-	 				where m.status = 1 and m.proxy_state = 1 and r.category = 'userrank' and m.uid = %s
+	 				where m.status = 1 and r.category = 'userrank' and m.uid = %s
 	""" % (uid)
 	member = conn.query(member_sql)
 	if member:
 		userrank = member[0]['userrank']
 		value = member[0]['value']
-		max_bonus = float(member[0]['max_bonus'])
-		# 最大分红的奖金
-		max_cash = int(maxcash(userrank) * value)
-
-		if managercash + max_bonus > max_cash:
-			managercash = max_cash - max_bonus
-			sql = """
-				update zx_member set proxy_state = 0 where uid = %s 
-			""" % (uid)
-
-			conn.dml(sql, 'update')
-		else:
-			managercash = managercash
 
 		# 比率配比
 		rates = rate()
@@ -149,27 +136,14 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 	# 会员
 	member_sql = """
-					select m.userrank, m.max_bonus, r.value from zx_member as m left join zx_bonus_rule as r
+					select m.userrank, r.value from zx_member as m left join zx_bonus_rule as r
 					on m.userrank = r.key
-	 				where m.status = 1 and m.proxy_state = 1 and r.category = 'userrank' and m.uid = %s
+	 				where m.status = 1 and r.category = 'userrank' and m.uid = %s
 	""" % (uid)
 	member = conn.query(member_sql)
 	if member:
 		userrank = member[0]['userrank']
 		value = member[0]['value']
-		max_bonus = int(member[0]['max_bonus'])
-		# 最大分红的奖金
-		max_cash = int(maxcash(userrank) * value)
-
-		if leadercash + max_bonus > max_cash:
-			leadercash = max_cash - max_bonus
-			sql = """
-				update zx_member set proxy_state = 0 where uid = %s 
-			""" % (uid)
-
-			conn.dml(sql, 'update')
-		else:
-			leadercash = leadercash
 
 		# 比率配比
 		rates = rate()
