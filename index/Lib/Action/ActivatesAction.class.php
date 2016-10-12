@@ -567,7 +567,7 @@ class ActivatesAction extends CommonAction {
 
 			$member = $this -> model -> my_find($params);
 
-			if($member && $member['proxy_state'] == 1){
+			if($member){
 				$data = array();
 
 				//获取市场补贴比例
@@ -576,16 +576,16 @@ class ActivatesAction extends CommonAction {
 				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 				//消费商最大奖金
-				$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
-
-				if($max_bonus_money < $data['max_bonus']){
-
-					$data['proxy_state'] = 0;
-
-					$deduct = $max_bonus_money - $member['max_bonus'];
-
-					$data['max_bonus'] = $max_bonus_money;
-				}
+				// $max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
+				//
+				// if($max_bonus_money < $data['max_bonus']){
+				//
+				// 	$data['proxy_state'] = 0;
+				//
+				// 	$deduct = $max_bonus_money - $member['max_bonus'];
+				//
+				// 	$data['max_bonus'] = $max_bonus_money;
+				// }
 
 				$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
 
@@ -797,7 +797,7 @@ class ActivatesAction extends CommonAction {
 				$member = $this -> model -> my_find($params);
 
 				//发放补贴
-				if($member && $member['proxy_state'] == 1){
+				if($member){
 					//判断是否超出最大比例 userrank
 					//bonus_rule userrank key value 的值 奖金基数
 					//bonus_rule maxcash key value 的值 比例
@@ -807,16 +807,16 @@ class ActivatesAction extends CommonAction {
 					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 					//消费商最大奖金
-					$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
-
-					if($max_bonus_money < $data['max_bonus']){
-
-						$data['proxy_state'] = 0;
-
-						$deduct = ($max_bonus_money - $member['max_bonus']);
-
-						$data['max_bonus'] = $max_bonus_money;
-					}
+					// $max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
+					//
+					// if($max_bonus_money < $data['max_bonus']){
+					//
+					// 	$data['proxy_state'] = 0;
+					//
+					// 	$deduct = ($max_bonus_money - $member['max_bonus']);
+					//
+					// 	$data['max_bonus'] = $max_bonus_money;
+					// }
 
 					$data['rongzidun'] = $member['rongzidun'] + ($deduct * $expand_ratio * 0.25);
 
