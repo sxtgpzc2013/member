@@ -387,31 +387,31 @@
 	    			$rongzidun_money_change_add = $this -> model -> my_add($params);
 
 	    			//计算最大奖金数
-	    			$params = array(
+	    			// $params = array(
 
-	    				'table_name' => 'bonus_rule',
+	    			// 	'table_name' => 'bonus_rule',
 
-	    				'where' => "category = 'maxcash' AND `key` = {$member_find['userrank']}"
-	    			);
+	    			// 	'where' => "category = 'maxcash' AND `key` = {$member_find['userrank']}"
+	    			// );
 
 	    			//最大比例
-	    			$maxcash_find = $this -> model -> my_find($params);
+	    			// $maxcash_find = $this -> model -> my_find($params);
 
-	    			$params = array(
+	    			// $params = array(
 
-	    				'table_name' => 'bonus_rule',
+	    			// 	'table_name' => 'bonus_rule',
 
-	    				'where' => "category = 'userrank' AND `key` = {$member_find['userrank']}"
-	    			);
+	    			// 	'where' => "category = 'userrank' AND `key` = {$member_find['userrank']}"
+	    			// );
 
 	    			//最大金额
-	    			$userrank_find = $this -> model -> my_find($params);
+	    			// $userrank_find = $this -> model -> my_find($params);
 	    			
 	    			//用户当前最大金额
 	    			$max_bonus = $member_find['max_bonus'];
 
-	    			if ($member_find['proxy_state'] == 1)
-	    			{
+	    			// if ($member_find['proxy_state'] == 1)
+	    			// {
 		    			//获取销售补贴比例
 		    			$params = array(
 
@@ -439,8 +439,8 @@
 		    			//判断是否超出最大奖金限制
 		    			$add_bonus_value = $result['total_price'] * ($bonus_rule_find['value']/100); //应发
 
-		    			if (($add_bonus_value + $max_bonus) < ($maxcash_find['value'] * $userrank_find['value']))
-		    			{
+		    			// if (($add_bonus_value + $max_bonus) < ($maxcash_find['value'] * $userrank_find['value']))
+		    			// {
 			    			$mem_save = $this -> model -> my_save($params);
 
 			    			$member_data['jiangjinbi'] = ($member_find['jiangjinbi'] - $result['total_jprice']) + ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8);
@@ -532,26 +532,26 @@
 			    			);
 
 			    			$member_max_bonus_save = $this -> model -> my_save($params);
-			    		}
-			    		else //超出最大限制 修改状态为不分红
-			    		{
-			    			$params = array(
+			    		// }
+			    		// else //超出最大限制 修改状态为不分红
+			    		// {
+			    		// 	$params = array(
 
-			    				'table_name' => 'member',
+			    		// 		'table_name' => 'member',
 
-			    				'where' => "id = {$member_find['id']}",
+			    		// 		'where' => "id = {$member_find['id']}",
 
-			    				'data' => array(
+			    		// 		'data' => array(
 
-			    					'proxy_state' => 0,
+			    		// 			'proxy_state' => 0,
 
-			    					'update_time' => time()
-			    				)
-			    			);
+			    		// 			'update_time' => time()
+			    		// 		)
+			    		// 	);
 
-			    			$member_proxy_state_save = $this -> model -> my_save($params);
-			    		}
-		    		}
+			    		// 	$member_proxy_state_save = $this -> model -> my_save($params);
+			    		// }
+		    		// }
 
 	    			//获取服务补贴比例
 	    			$params = array(
@@ -576,7 +576,7 @@
 
 	    				'table_name' => 'member',
 
-	    				'where' => "userrank > 1 AND uid IN ({$member_find['recommenduserpath']})",
+	    				'where' => "status = 1 AND uid IN ({$member_find['recommenduserpath']})",
 
 	    				'order' => "field(uid,{$member_find['recommenduserpath']})"
 	    			);
@@ -604,25 +604,25 @@
 		    				// $up_find = $this -> model -> my_find($params);
 
 		    				//计算最大奖金数
-			    			$params = array(
+			    			// $params = array(
 
-			    				'table_name' => 'bonus_rule',
+			    			// 	'table_name' => 'bonus_rule',
 
-			    				'where' => "category = 'maxcash' AND `key` = {$v['userrank']}"
-			    			);
+			    			// 	'where' => "category = 'maxcash' AND `key` = {$v['userrank']}"
+			    			// );
 
 			    			//最大比例
-			    			$up_maxcash_find = $this -> model -> my_find($params);
+			    			// $up_maxcash_find = $this -> model -> my_find($params);
 
-			    			$params = array(
+			    			// $params = array(
 
-			    				'table_name' => 'bonus_rule',
+			    			// 	'table_name' => 'bonus_rule',
 
-			    				'where' => "category = 'userrank' AND `key` = {$v['userrank']}"
-			    			);
+			    			// 	'where' => "category = 'userrank' AND `key` = {$v['userrank']}"
+			    			// );
 
 			    			//最大金额
-			    			$up_userrank_find = $this -> model -> my_find($params);
+			    			// $up_userrank_find = $this -> model -> my_find($params);
 			    			
 			    			//用户当前最大金额
 			    			$up_max_bonus = $v['max_bonus'];
@@ -648,14 +648,14 @@
 			    				)
 			    			);
 
-			    			if (($up_max_bonus + $up_add_jprice) >= $up_max_bonus_top)
-			    			{
-			    				$params['data']['proxy_state'] = 0;
+			    			// if (($up_max_bonus + $up_add_jprice) >= $up_max_bonus_top)
+			    			// {
+			    			// 	$params['data']['proxy_state'] = 0;
 
-			    				$up_save = $this -> model -> my_save($params);
-			    			}
-			    			else
-			    			{
+			    			// 	$up_save = $this -> model -> my_save($params);
+			    			// }
+			    			// else
+			    			// {
 			    				$params['data']['jiangjinbi'] = $up_add_real_jprice;
 
 			    				$up_save = $this -> model -> my_save($params);
@@ -729,7 +729,7 @@
 				    			);
 
 				    			$up_detail_add = $this -> model -> my_add($params);
-			    			}
+			    			// }
 			    		}
 			    	}
 
