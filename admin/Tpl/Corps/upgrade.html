@@ -31,9 +31,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*销费商编号:</label>
                             <div class="col-sm-6">
-                                <input id="usernumber" name="usernumber" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                                <input id="usernumber" name="usernumber" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error" value="{$_GET['usernumber']}">
                             </div>
-							<a href="#" class="btn btn-info get_userinfo">获取消费商信息</a>
+							<a href="#" class="btn btn-info get_userinfo" id="subbtn">获取消费商信息</a>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*销费商姓名:</label>
@@ -186,5 +186,8 @@
 			   }
 		   });
 	   });
+
+	   var sub = document.getElementById("subbtn");
+	   sub.click()
    });
 </script>

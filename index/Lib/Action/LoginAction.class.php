@@ -41,6 +41,7 @@
 		 */
 	    public function login()
 	    {
+			echo phpinfo();exit;
 			$form_key = htmlspecialchars($_POST['form_key']);
 
 			if ($form_key == 'yes')
