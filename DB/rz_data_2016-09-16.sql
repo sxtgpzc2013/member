@@ -437,7 +437,7 @@ ALTER TABLE zx_order_items ADD unit_rprice float(9,2) NOT NULL DEFAULT 0 COMMENT
 ALTER TABLE zx_orders ADD total_jprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '奖金币总额' AFTER total_price;
 ALTER TABLE zx_orders ADD total_rprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '戎子盾总额' AFTER total_jprice;
 
-#2016-10-09 
+#2016-10-09
 
 #upgrade_log
 DROP TABLE IF EXISTS `zx_upgrade_log`;
@@ -482,6 +482,10 @@ CREATE TABLE `zx_auth` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+
+ALTER TABLE zx_member ADD max_bonus double(16,2) NOT NULL DEFAULT '0.00' COMMENT '最大奖金';
+
+
 #jenkins http://121.42.26.223:8080/   admin  zxtc999.
 -- 121.42.26.223
 -- abiding  14:53:37
@@ -492,7 +496,7 @@ CREATE TABLE `zx_auth` (
 -- 账号：zxtc999
 -- 密码：zhongxiang999qwer
 -- abiding  18:45:55
--- 数据库   
+-- 数据库
 -- rm-m5e372r857ot6cl37.mysql.rds.aliyuncs.com    3306
 -- member
--- zhqjqzhnn15! 
+-- zhqjqzhnn15!

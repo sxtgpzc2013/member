@@ -36,6 +36,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>商品名称</th>
+                                    <th>LOGO</th>
                                     <th>戎子盾</th>
                                     <th>奖金币</th>
                                     <th>余量</th>
@@ -50,6 +51,11 @@
 	                                <tr>
 	                                    <td>{$item.id}</td>
 										<td>{$item.name}</td>
+										<td>
+											<if condition="$item['logo'] neq ''">
+												<img src="http://image.enjvip.com/images/products/s_{$item.logo}" />
+											</if>
+										</td>
 										<td>￥{$item.rprice}</td>
 										<td>￥{$item.jprice}</td>
 										<td>{$item.surplus}件</td>

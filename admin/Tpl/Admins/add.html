@@ -25,7 +25,7 @@
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Auth/add" method="post">
+					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Admins/add" method="post">
 						<input type="hidden" name="form_key" value="yes">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">*管理员名:</label>
@@ -60,8 +60,10 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">*权限:</label>
 							<div class="col-sm-6">
-								<select class="form-control" name=type_str"">
-
+								<select class="form-control" name="type_str">
+									<foreach name="result['auth']" item="item">
+										<option value="{$item.type_str}">{$item.name}</option>
+									</foreach>
 								</select>
 							</div>
 						</div>
@@ -115,7 +117,7 @@
 			   },
 			   confirm_password: {
 				   required: true,
-				   minlength: 5,
+				   minlength: 6,
 				   equalTo: "#password"
 			   },
 			   mobile: {

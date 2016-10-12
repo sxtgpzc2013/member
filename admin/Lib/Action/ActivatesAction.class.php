@@ -281,7 +281,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = {$member['billcenterid']} AND isbill = 1"
+				'where' => "uid = 1 AND isbill = 1"
 
 			);
 
@@ -306,7 +306,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = {$member['billcenterid']}",
+				'where' => "uid = 1",
 
 				'data' => $billdata
 			);
@@ -552,7 +552,7 @@ class ActivatesAction extends CommonAction {
 	//更新代理商服务市场补贴
 	function save_market_subsidy($deduct){
 		//用户ID
-		$uid = intval($_SESSION['Rongzi']['user']['uid']);
+		$uid = 1;
 
 		if($uid != 1){
 			//获取代理商编号数据
@@ -570,18 +570,24 @@ class ActivatesAction extends CommonAction {
 				//获取市场补贴比例
 				$marketratio = $this -> get_market_ratio();
 
-				$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
-
-				$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
-
-				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
+				$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 				//消费商最大奖金
 				$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
 
 				if($max_bonus_money < $data['max_bonus']){
+
 					$data['proxy_state'] = 0;
+
+					$deduct = $max_bonus_money - $member['max_bonus'];
+
+					$data['max_bonus'] = $max_bonus_money;
+
 				}
+
+				$data['rongzidun'] = $member['rongzidun'] + $deduct * $marketratio * 0.25;
+
+				$data['jiangjinbi'] = $member['jiangjinbi'] + $deduct * $marketratio * 0.55;
 
 				//保存代理商金额
 				$params = array(
@@ -794,19 +800,24 @@ class ActivatesAction extends CommonAction {
 					//bonus_rule userrank key value 的值 奖金基数
 					//bonus_rule maxcash key value 的值 比例
 					//最大奖金额度 奖金基数 * 比例 < $member['max_bonus'] + ($deduct * $expand_ratio * 0.55) 更改proxy_state = 0
-
-					$data['rongzidun'] = $member['rongzidun'] + ($deduct * $expand_ratio * 0.25);
-
-					$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
-
-					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio * 0.55);
+					$data['max_bonus'] = $member['max_bonus'] + ($deduct * $expand_ratio);
 
 					//消费商最大奖金
 					$max_bonus_money = $this -> get_max_bonus_money($member['userrank']);
 
 					if($max_bonus_money < $data['max_bonus']){
+
 						$data['proxy_state'] = 0;
+
+						$deduct = $max_bonus_money - $member['max_bonus'];
+
+						$data['max_bonus'] = $max_bonus_money;
+
 					}
+
+					$data['rongzidun'] = $member['rongzidun'] + ($deduct * $expand_ratio * 0.25);
+
+					$data['jiangjinbi'] = $member['jiangjinbi'] + ($deduct * $expand_ratio * 0.55);
 
 					//保存代理商编号金额
 					$params = array(

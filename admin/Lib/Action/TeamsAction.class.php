@@ -936,7 +936,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "status = 1 AND uid = {$_SESSION['Rongzi']['user']['uid']} AND usernumber = '{$_SESSION['Rongzi']['user']['usernumber']}'"
+				'where' => "status = 1 AND uid = 1"
 			);
 
 			$recommend_list = $this -> model -> easy_select($params);
@@ -1022,7 +1022,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "status = 1 AND tuijianid = {$tuijianid} AND uid != {$tuijianid}"
+				'where' => "status = 1 AND tuijianid = 1 AND uid != {$tuijianid}"
 			);
 
 			$recommend_list = $this -> model -> easy_select($params);
