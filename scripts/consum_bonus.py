@@ -70,6 +70,7 @@ def insert_bonus_detail_8(uid, usernumber, realname, repeatcash):
 			zx_finance_sql = """
 				update zx_finance set expend = expend + %s, createtime = %s
 			""" % (repeatcash, now_second)
+			conn.dml(zx_finance_sql, 'update')
 			# 明细
 			zx_bonus_detail_sql = """
 				insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)

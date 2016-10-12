@@ -91,6 +91,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 			zx_finance_sql = """
 				update zx_finance set expend = expend + %s, createtime = %s
 			""" % (managercash, now_second)
+			conn.dml(zx_finance_sql, 'update')
 			# 明细
 			zx_bonus_detail_sql = """
 				insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
@@ -127,8 +128,6 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 	            values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
 			""" % (8, 8, uid, usernumber, realname, 1, 1, '戎子', 4, 0, taxmoney_award, now_second)
 			conn.dml(taxmoney_change_sql, 'insert')
-
-		print "管理奖成功"
 
 	return True
 
@@ -179,6 +178,7 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 			zx_finance_sql = """
 				update zx_finance set expend = expend + %s, createtime = %s
 			""" % (leadercash, now_second)
+			conn.dml(zx_finance_sql, 'update')
 			# 明细
 			zx_bonus_detail_sql = """
 				insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
@@ -215,8 +215,6 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 	            values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
 			""" % (8, 8, uid, usernumber, realname, 1, 1, '戎子', 5, 0, taxmoney_award, now_second)
 			conn.dml(taxmoney_change_sql, 'insert')
-
-		print "互助奖成功"
 
 	return True
 
