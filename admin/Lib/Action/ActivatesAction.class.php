@@ -565,7 +565,7 @@ class ActivatesAction extends CommonAction {
 
 			$member = $this -> model -> my_find($params);
 
-			if($member{
+			if($member){
 
 				//获取市场补贴比例
 				$marketratio = $this -> get_market_ratio();
