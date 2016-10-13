@@ -13,10 +13,10 @@ if sys.getdefaultencoding() != default_encoding:
 
 
 def main():
-	cmd1 = "python manage_bonus.py"
+	cmd1 = "python /var/www/member/scripts/manage_bonus.py"
 	info1 = subprocess.Popen(cmd1, stdout = subprocess.PIPE, shell = True).communicate()[0].strip()
 	if info1 == "ok":
-		cmd2 = "python achievement.py"
+		cmd2 = "python /var/www/member/scripts/achievement.py"
 		info2 = subprocess.Popen(cmd1, stdout = subprocess.PIPE, shell = True).communicate()[0].strip()
 		print info2
 
