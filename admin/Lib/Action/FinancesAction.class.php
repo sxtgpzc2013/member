@@ -150,8 +150,6 @@ class FinancesAction extends CommonAction {
     	$this -> display();
     }
 
-<<<<<<< HEAD
-
     /**
      * 财务流水
      *
@@ -288,15 +286,13 @@ class FinancesAction extends CommonAction {
             // } else {
             //     $xlsData[$key]['status'] = "未知";
             // }
-            
+
 
         }
 
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
-=======
->>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
     /**
 	 * 转账明细
 	 *
@@ -442,29 +438,29 @@ class FinancesAction extends CommonAction {
     		$member_save = $this -> model -> my_save($params);
 
     		$money_change_data['moneytype'] = $moneytype;
-    			
+
 			$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['userid'] = $user_find['uid'];
-			
+
 			$money_change_data['usernumber'] = $user_find['usernumber'];
-			
+
 			$money_change_data['realname'] = $user_find['realname'];
-			
+
 			$money_change_data['changetype'] = 1;
-			
+
 			$money_change_data['recordtype'] = 1;
-			
+
 			$money_change_data['money'] = $money;
-			
+
 			$money_change_data['hasmoney'] = $balance;
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
@@ -607,29 +603,29 @@ class FinancesAction extends CommonAction {
     		$member_save = $this -> model -> my_save($params);
 
     		$money_change_data['moneytype'] = $moneytype;
-    			
+
 			$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['userid'] = $user_find['uid'];
-			
+
 			$money_change_data['usernumber'] = $user_find['usernumber'];
-			
+
 			$money_change_data['realname'] = $user_find['realname'];
-			
+
 			$money_change_data['changetype'] = 2;
-			
+
 			$money_change_data['recordtype'] = 0;
-			
+
 			$money_change_data['money'] = $money;
-			
+
 			$money_change_data['hasmoney'] = $balance;
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
@@ -807,7 +803,7 @@ class FinancesAction extends CommonAction {
 	    		$member_save = $this -> model -> my_save($params);
 
 	    		$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 				$money_change_data['recordtype'] = 1;
 
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 && $member_save ? $member_find['jiangjinbi'] + $cash_find['money'] : $member_find['jiangjinbi'];
@@ -815,26 +811,26 @@ class FinancesAction extends CommonAction {
     		elseif ($type == 'agreen')
     		{
 				$money_change_data['status'] = 1;
-			
+
 				$money_change_data['recordtype'] = 0;
-			
+
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 ? $member_find['jiangjinbi'] : 0;
     		}
 
     		$money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 6 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['realname'] = '系统';
-			
+
 			$money_change_data['changetype'] = 12;
-			
+
 			$money_change_data['money'] = $cash_find['money'];
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
