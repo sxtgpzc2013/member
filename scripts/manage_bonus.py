@@ -516,6 +516,10 @@ def main():
 		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
 	"""
 	members = conn.query(sql)
+<<<<<<< HEAD
+=======
+	childs = []
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 	if members:
 		i = 0
 		length = len(members)
@@ -531,8 +535,17 @@ def main():
 			# 判断是星级的会员
 			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
 				child = managerbonus(uid, usertitle)
+<<<<<<< HEAD
 				if child and i == length:
 					update_achievement_status(child)
+=======
+				if child not in childs:
+					childs.append(child)
+				if i == length:
+					if childs:
+						for uid in childs:
+							update_achievement_status(uid)
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 
 	conn.close()
 	print "ok" 

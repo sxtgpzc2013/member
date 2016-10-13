@@ -150,6 +150,7 @@ class FinancesAction extends CommonAction {
     	$this -> display();
     }
 
+<<<<<<< HEAD
 
     /**
      * 财务流水
@@ -294,6 +295,8 @@ class FinancesAction extends CommonAction {
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
+=======
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
     /**
 	 * 转账明细
 	 *
