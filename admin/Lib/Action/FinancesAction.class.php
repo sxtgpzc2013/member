@@ -150,6 +150,153 @@ class FinancesAction extends CommonAction {
     	$this -> display();
     }
 
+<<<<<<< HEAD
+
+    /**
+     * 财务流水
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function finance_flow_download()
+    {
+
+        //默认导出今天数据
+        <td>{$item.realname}</td>
+                                        <td>{$item.targetrealname}</td>
+                                        <td>￥{$item.money}</td>
+                                        <td>
+                                            <if condition="$item['moneytype'] eq 1">
+                                                奖金币
+                                            <elseif condition="$item['moneytype'] eq 2" />
+                                                注册币
+                                            <elseif condition="$item['moneytype'] eq 3" />
+                                                戎子盾
+                                            <elseif condition="$item['moneytype'] eq 4" />
+                                                激活币
+                                            <elseif condition="$item['moneytype'] eq 5" />
+                                                福利积分
+                                            <elseif condition="$item['moneytype'] eq 6" />
+                                                爱心基金
+                                            <elseif condition="$item['moneytype'] eq 7" />
+                                                平台管理费
+                                            <elseif condition="$item['moneytype'] eq 8" />
+                                                税费
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <if condition="$item['changetype'] eq 0">
+                                                未知
+                                            <elseif condition="$item['changetype'] eq 1" />
+                                                公司充值
+                                            <elseif condition="$item['changetype'] eq 2" />
+                                                公司扣币
+                                            <elseif condition="$item['changetype'] eq 3" />
+                                                分红
+                                            <elseif condition="$item['changetype'] eq 4" />
+                                                管理补贴
+                                            <elseif condition="$item['changetype'] eq 5" />
+                                                互助补贴
+                                            <elseif condition="$item['changetype'] eq 6" />
+                                                拓展补贴
+                                            <elseif condition="$item['changetype'] eq 7" />
+                                                市场补贴
+                                            <elseif condition="$item['changetype'] eq 8" />
+                                                销售补贴
+                                            <elseif condition="$item['changetype'] eq 9" />
+                                                服务补贴
+                                            <elseif condition="$item['changetype'] eq 10" />
+                                                服务补贴
+                                            <elseif condition="$item['changetype'] eq 11" />
+                                                销费商提现
+                                            <elseif condition="$item['changetype'] eq 12" />
+                                                处理提现
+                                            <elseif condition="$item['changetype'] eq 13" />
+                                                消费
+                                            <elseif condition="$item['changetype'] eq 14" />
+                                                系统内部转账
+                                            <elseif condition="$item['changetype'] eq 15" />
+                                                币种转换
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <if condition="$item['recordtype'] eq 0">
+                                                减少
+                                            <elseif condition="$item['recordtype'] eq 1" />
+                                                增加
+                                            </if>
+                                        </td>
+        //导出筛选数据
+        $params = array(
+
+            'table_name' => 'money_change',
+
+            'where' => "1",
+
+            'order' => 'createtime desc'
+        );
+
+        //相关销费商   目标销费商   变更金额    变更币种    类型  变更状态    时间
+        $xlsData = $this -> model -> easy_select($params);
+
+        $xlsName  = "Corps";
+
+        $xlsCell  = array(
+            array('realname','相关销费商'),
+            array('targetrealname','目标销费商'),
+            array('money','变更金额'),
+            array('moneytype','变更币种'),
+            array('changetype','类型'),
+            array('recordtype','变更状态'),
+            array('createtime','时间')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($item['moneytype'] == 1){
+                $xlsData[$key]['moneytype'] = "奖金币";
+            } elseif ($value['moneytype'] == 2){
+                $xlsData[$key]['moneytype'] = "注册币";
+            } elseif ($value['moneytype'] == 3){
+                $xlsData[$key]['moneytype'] = "戎子盾";
+            } elseif ($value['moneytype'] == 4){
+                $xlsData[$key]['moneytype'] = "激活币";
+            } elseif ($value['moneytype'] == 5){
+                $xlsData[$key]['moneytype'] = "福利积分";
+            } elseif ($value['moneytype'] == 6){
+                $xlsData[$key]['moneytype'] = "爱心基金";
+            } elseif ($value['moneytype'] == 7){
+                $xlsData[$key]['moneytype'] = "平台管理费";
+            } elseif ($value['moneytype'] == 8){
+                $xlsData[$key]['moneytype'] = "税费";
+            }
+
+            // $xlsData[$key]['title'] = $xlsData[$key]['title']."级销费商";
+
+            // if ($value['status'] == 0) {
+            //     $xlsData[$key]['status'] = "未激活";
+            // } elseif ($value['status'] == 1) {
+            //     $xlsData[$key]['status'] = "已激活";
+            // } elseif ($value['status'] == -1) {
+            //     $xlsData[$key]['status'] = "已删除";
+            // } elseif ($value['status'] == -2) {
+            //     $xlsData[$key]['status'] = "已冻结";
+            // } else {
+            //     $xlsData[$key]['status'] = "未知";
+            // }
+            
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+    }
+
+=======
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
     /**
 	 * 转账明细
 	 *

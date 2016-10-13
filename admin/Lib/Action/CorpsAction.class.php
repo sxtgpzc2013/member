@@ -32,7 +32,7 @@
 		}
 
 	    /**
-		 * 展示型首页
+		 * 首页
 		 *
 		 * 参数描述：
 		 *
@@ -70,6 +70,93 @@
 	    }
 
 
+<<<<<<< HEAD
+	    /**
+		 * 展示型首页
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function download()
+	    {
+			$where = "";
+
+			if($_GET['usernumber']){
+				$where = "usernumber = ". htmlspecialchars($_GET['usernumber']);
+			}
+
+			//获取所有用户数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => $where,
+
+				'order' => "uid desc"
+
+			);
+
+	    	$xlsData = $this -> model -> easy_select($params);
+
+			$xlsName  = "Corps";
+
+		    $xlsCell  = array(
+			    array('usernumber','用户编号'),
+			    array('realname','姓名'),
+			    array('userrank','级别'),
+			    array('usertitle','头衔'),
+			    array('red_wine_number','数字红酒'),
+			    array('jiangjinbi','奖金币'),
+			    array('baodanbi','报单币'),
+			    array('rongzidun','戎子盾'),
+			    array('jianglijifen','奖励积分'),
+			    array('tuijianid','推荐人'),
+			    array('parentid','上级人'),
+			    array('billcenterid','代理商编号'),
+			   	array('reg_time','注册时间'),
+			    array('status','状态')
+		    );
+
+		    foreach ($xlsData as $key => $value) {
+		    	
+		    	# 处理标题数据
+				if ($value['userrank'] == 1) {
+					$xlsData[$key]['title'] = "普卡销费商";
+				} elseif ($value['userrank'] == 2) {
+					$xlsData[$key]['title'] = "银卡销费商";
+				} elseif ($value['userrank'] == 3) {
+					$xlsData[$key]['title'] = "金卡销费商";
+				} elseif ($value['userrank'] == 4) {
+					$xlsData[$key]['title'] = "钻卡销费商";
+				} else {
+					$xlsData[$key]['title'] = "无";
+				}
+
+				$xlsData[$key]['title'] = $xlsData[$key]['title']."级销费商";
+
+				if ($value['status'] == 0) {
+					$xlsData[$key]['status'] = "未激活";
+				} elseif ($value['status'] == 1) {
+					$xlsData[$key]['status'] = "已激活";
+				} elseif ($value['status'] == -1) {
+					$xlsData[$key]['status'] = "已删除";
+				} elseif ($value['status'] == -2) {
+					$xlsData[$key]['status'] = "已冻结";
+				} else {
+					$xlsData[$key]['status'] = "未知";
+				}
+				
+
+		    }
+		    $this->exportExcel($xlsName,$xlsCell,$xlsData);
+	    }
+
+=======
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 		/**
 		 * 销费商修改相关页面
 		 *
@@ -104,6 +191,7 @@
 			$zone = array("1" => "左", "2" => "中", "3" => "右");
 
 			$member["zone"] = $zone[$member['zone']];
+<<<<<<< HEAD
 
 
 			//获取代理商编号数据
@@ -120,6 +208,24 @@
 			//获取推荐人数据
 			$params = array(
 
+=======
+
+
+			//获取代理商编号数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$member['billcenterid']} AND status = 1"
+
+			);
+
+	    	$billmember = $this -> model -> my_find($params);
+
+			//获取推荐人数据
+			$params = array(
+
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 				'table_name' => 'member',
 
 				'where' => "uid = {$member['tuijianid']} AND status = 1"
@@ -318,10 +424,17 @@
 				'table_name' => 'member',
 
 				'where' => "uid = {$uid}",
+<<<<<<< HEAD
 
 				'data' => $data
 			);
 
+=======
+
+				'data' => $data
+			);
+
+>>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 			$my_save = $this -> model -> my_save($params);
 
 			if ($my_save == 1){
