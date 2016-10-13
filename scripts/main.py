@@ -17,7 +17,7 @@ def main():
 	info1 = subprocess.Popen(cmd1, stdout = subprocess.PIPE, shell = True).communicate()[0].strip()
 	if info1 == "ok":
 		cmd2 = "python /var/www/member/scripts/achievement.py"
-		info2 = subprocess.Popen(cmd1, stdout = subprocess.PIPE, shell = True).communicate()[0].strip()
+		info2 = subprocess.Popen(cmd2, stdout = subprocess.PIPE, shell = True).communicate()[0].strip()
 		print info2
 
 if __name__ == '__main__':
