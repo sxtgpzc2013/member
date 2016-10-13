@@ -31,6 +31,7 @@
                             <thead>
                                 <tr>
                                     <th>名称</th>
+                                    <th>LOGO</th>
                                     <th>戎子盾</th>
                                     <th>奖金币</th>
 									<th>数量</th>
@@ -40,6 +41,11 @@
                             	<foreach name="result['items']" item="item">
 	                                <tr>
 										<td>{$item.name}</td>
+										<td>
+											<if condition="$item['logo'] neq ''">
+												<img src="http://image.enjvip.com/images/products/s_{$item.logo}" style="height:100px; width:100px;" />
+											</if>
+										</td>
 										<td>￥{$item.rprice}</td>
 	                                    <td>￥{$item.jprice}</td>
 										<td>{$item.count}</td>
