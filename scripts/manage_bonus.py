@@ -531,8 +531,9 @@ def main():
 			# 判断是星级的会员
 			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
 				child = managerbonus(uid, usertitle)
-				if child and i == length:
-					update_achievement_status(child)
+				if i == length:
+					if child:
+						update_achievement_status(child)
 
 	conn.close()
 	print "ok" 
