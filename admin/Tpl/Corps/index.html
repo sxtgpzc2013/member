@@ -8,10 +8,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>消费商管理</a>
+                <a>信息管理</a>
             </li>
             <li>
-                <strong>消费商列表</strong>
+                <strong>销费商列表</strong>
             </li>
         </ol>
 	</div>
@@ -21,127 +21,130 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
 				<div class="row">
-					<div class="col-sm-9 m-b-xs">
+					<div class="col-sm-8 m-b-xs">
 						<p>
-							<button type="button" class="btn btn-w-m btn-danger">新增</button>
-							<button type="button" class="btn btn-w-m btn-primary">启用</button>
-							<button type="button" class="btn btn-w-m btn-primary">冻结</button>
-							<button type="button" class="btn btn-w-m btn-primary">导出数据</button>
+							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Teams/register">新增</a>
+							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/download">导出数据</a>
 						</p>
 					</div>
-					<div class="col-sm-3">
-						<div class="input-group">
-							<input type="text" placeholder="请输入消费商编码" class="input-sm form-control"> <span class="input-group-btn">
-						<button type="button" class="btn btn-sm btn-primary"> 查询</button> </span>
-						</div>
+
+					<div class="col-sm-4">
+							<form  action="./" method="get">
+							<div class="form-group">
+	                            <div class="col-sm-12">
+	                                <div class="input-group">
+
+	                                    <input type="text" class="form-control" name="usernumber" value="{$_GET['usernumber']}"> <span class="input-group-btn"> <button type="submit" class="btn btn-primary btn-submit">搜索
+	                            		</button> </span>
+
+	                                </div>
+	                            </div>
+	                        </div>
+							</form>
+						<!-- <div class="input-group">
+							<form role="form" class="form-inline" action="./" method="get">
+								<input type="text" placeholder="请输入销费商编码" class="input-sm form-control"> <span class="input-group-btn">
+								<button type="button" class="btn btn-sm btn-primary"> 查询</button> </span>
+							</form>
+
+						</div> -->
 					</div>
+
 				</div>
 
 				<!-- <div class="ibox-title">
-					<h5 class="ibox-title text-center">消费商</h5>
+					<h5 class="ibox-title text-center">销费商</h5>
 				</div> -->
                 <div class="ibox-content">
-					<!-- <h5 class="text-center">消费商列表</h5> -->
+					<!-- <h5 class="text-center">销费商列表</h5> -->
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-hover no-margins table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>消费商编号</th>
-                                    <th>消费商姓名</th>
-                                    <th>报单中心</th>
-                                    <th>消费商级别</th>
-									<th>消费商职务</th>
+                                    <!-- <th>#</th> -->
+                                    <th>销费商编号</th>
+                                    <th>姓名</th>
+                                    <th>级别</th>
+									<th>头衔</th>
+									<th>数字红酒</th>
 									<th>奖金币</th>
-									<th>报单币</th>
+									<th>注册币</th>
 									<th>戎子盾</th>
-									<th>爱心基金</th>
-									<th>奖励积分</th>
+									<th>福利积分</th>
 									<th>推荐人</th>
-									<th>接点人</th>
-									<th>所属报单中心</th>
+									<th>位置编号</th>
+									<th>代理商编号</th>
 									<th>注册时间</th>
-									<th>消费商状态</th>
+									<th>状态</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="i-checks" name="input[]">
-                                    </td>
-                                    <td>1</span>
-									<td>MiMO Show</td>
-                                    </td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-                                    <td>
-										<a class="btn btn-info btn-sm">冻结</a>
-										<div class="btn-group">
-	                                        <button data-toggle="dropdown" class="btn btn-default btn-sm dropdown-toggle">操作 <span class="caret"></span>
-	                                        </button>
-	                                        <ul class="dropdown-menu">
-	                                            <li><a>编辑</a>
-	                                            </li>
-	                                            <li><a class="font-bold">禁用</a>
-	                                            </li>
-	                                            <li class="divider"></li>
-	                                            <li><a>删除</a>
-	                                            </li>
-	                                        </ul>
-	                                    </div>
-                                    </td>
-                                </tr>
+								<foreach name="members" item="member">
+	                                <tr>
+	                                    <!-- <td>
+	                                        <input type="checkbox" class="i-checks" name="input[]">
+	                                    </td> -->
+	                                    <td>{$member['usernumber']}</span></td>
+										<td>{$member['realname']}</td>
+										<td>{$member['userrank']}
+											<if condition="$member['userrank'] eq 1">
+												普卡销费商
+											<elseif condition="$member['userrank'] eq 2"/>
+												银卡销费商
+											<elseif condition="$member['userrank'] eq 3"/>
+												金卡销费商
+											<elseif condition="$member['userrank'] eq 4"/>
+												钻卡销费商
+											<else/>
+												无
+											</if>
+										</td>
+	                                    <td>{$member['usertitle']}级销费商</td>
+										<td>{$member['red_wine_number']}</td>
+										<td>{$member['jiangjinbi']}</td>
+										<td>{$member['baodanbi']}</td>
+										<td>{$member['rongzidun']}</td>
+										<td>{$member['jianglijifen']}</td>
+										<td>{$member['tuijianid']}</td>
+										<td>{$member['parentid']}</td>
+										<td>{$member['billcenterid']}</td>
+										<td>{$member['reg_time']|date="Y-m-d H:i:s",###}</td>
+										<td>
+											<if condition="$member['status'] eq 0">
+												未激活
+											<elseif condition="$member['status'] eq 1"/>
+												已激活
+											<elseif condition="$member['status'] eq -1"/>
+												已删除
+											<elseif condition="$member['status'] eq -2"/>
+												已冻结
+											<else/>
+												未知
+											</if>
+										</td>
+	                                    <td>
+
+											<if condition="$member['status'] eq 1">
+												<a class="btn btn-info btn-sm" href="__APP__/Corps/edit?uid={$member['uid']}">编辑</a>
+											</if>
+											<if condition="$member['status'] eq -2">
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/nofreeze?uid={$member['uid']}">取消冻结</a>
+											<else/>
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/freeze?uid={$member['uid']}">冻结</a>
+											</if>
+
+											<if condition="$member['status'] eq -1">
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/nodelete?uid={$member['uid']}">恢复</a>
+											<else/>
+												<a class="btn btn-danger btn-sm" href="__APP__/Corps/delete?uid={$member['uid']}">删除</a>
+											</if>
 
 
-								<tr>
-                                    <td>
-                                        <input type="checkbox" class="i-checks" name="input[]">
-                                    </td>
-                                    <td>1</span>
-									<td>MiMO Show</td>
-                                    </td>
-									<td>3123</td>
-									<td>2</td>
-                                    <td>总裁助理</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-									<td>2</td>
-                                    <td>
-										<a class="btn btn-info btn-sm">冻结</a>
-										<div class="btn-group">
-	                                        <button data-toggle="dropdown" class="btn btn-default btn-sm dropdown-toggle">操作 <span class="caret"></span>
-	                                        </button>
-	                                        <ul class="dropdown-menu">
-	                                            <li><a>编辑</a>
-	                                            </li>
-	                                            <li><a class="font-bold">禁用</a>
-	                                            </li>
-	                                            <li class="divider"></li>
-	                                            <li><a>删除</a>
-	                                            </li>
-	                                        </ul>
-	                                    </div>
-                                    </td>
-                                </tr>
+	                                    </td>
+	                                </tr>
+
+								</foreach>
 
 
                             </tbody>
@@ -155,29 +158,13 @@
     </div>
 
 	<div class="row">
-	    <div class="col-sm-12 text-right">
-	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-	            <ul class="pagination">
-	                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-	                    <a href="#">上一页</a></li>
-	                <li class="paginate_button active" aria-controls="editable" tabindex="0">
-	                    <a href="#">1</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">2</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">3</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">4</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">5</a></li>
-	                <li class="paginate_button " aria-controls="editable" tabindex="0">
-	                    <a href="#">6</a></li>
-	                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-	                    <a href="#">下一页</a></li>
-	            </ul>
-				<div class="dataTables_info">显示 1 到 10 项，共 57 项</div>
-	        </div>
-	    </div>
+		<div class="col-sm-12 text-right">
+			<div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+				<ul class="pagination">
+					{$page}
+				</ul>
+			</div>
+		</div>
 	</div>
 
 </div>

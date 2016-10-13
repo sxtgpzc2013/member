@@ -5,8 +5,8 @@
  * @version 1.0.0
  *
  * 功能简介：运营后台管理员控制器类
- * @author 张睿
- * @copyright 社区送
+ * @author
+ * @copyright
  * @time 2014-08-21
  * @version 1.0.0
  */
@@ -47,13 +47,13 @@
 
 	    		'table_name' => 'admins',
 
-	    		'where' => "id = {$_SESSION['OftenGo']['admin']['id']}"
+	    		'where' => "id = {$_SESSION['Rongzi']['admin']['id']}"
     		);
 
     		$admin_find = $this -> model -> my_find($params);
 
     		//更新SESSION
-    		$_SESSION['OftenGo']['admin'] = $admin_find;
+    		$_SESSION['Rongzi']['admin'] = $admin_find;
 
     		//判断权限
     		if ($admin_find['type_str'] == 'super')
@@ -63,28 +63,13 @@
 
     				'table_name' => 'admins',
 
-    				'where' => "is_del = 0 AND type_str = 'admin'",
+    				'where' => "is_del = 0",
 
-    				'order' => 'type_str desc, substation_id asc, created_at asc'
+    				'order' => 'created_at asc'
     			);
 
-    			$result['admins'] = $this -> model -> order_select($params, 'no');
+    			$result['admins'] = $this -> model -> easy_select($params, 'no');
 
-    			//循环查询分站名称
-    			foreach ($result['admins'] as $k => $v)
-    			{
-    				//查询分站
-    				$params = array(
-
-    					'table_name' => 'substations',
-
-    					'where' => "id = {$v['substation_id']}"
-    				);
-
-    				$substation_find = $this -> model -> my_find($params);
-
-    				$result['admins'][$k]['substation_name'] = $substation_find['name'];
-    			}
     		}
     		else
     		{
@@ -109,42 +94,42 @@
 	    public function add()
 	    {
 	    	//判断权限
-	    	if ($_SESSION['OftenGo']['admin']['type_str'] != 'super')
+	    	if ($_SESSION['Rongzi']['admin']['type_str'] != 'super')
 	    	{
 	    		$this -> _back('权限不足');
 	    	}
 
-	    	//查询分站信息
+	    	//查询相关权限信息
 	    	$params = array(
 
-	    		'table_name' => 'substations',
+	    		'table_name' => 'auth',
 
 	    		'where' => "is_del = 0"
 	    	);
 
-	    	$result['substations'] = $this -> model -> easy_select($params);
+	    	$result['auth'] = $this -> model -> easy_select($params);
 
 	    	$form_key = htmlspecialchars($_POST['form_key']);
 
 	    	if ($form_key == 'yes')
 	    	{
-	    		$data['substation_id'] = intval($_POST['substation_id']) ? intval($_POST['substation_id']) : $this -> _back('请选择分站');
+	    		$data['password'] = $_POST['password'] ? $_POST['password'] : $this -> _back('请添加');
 
-	    		$data['mobile'] = is_tel(htmlspecialchars($_POST['mobile'])) ? htmlspecialchars($_POST['mobile']) : $this -> _back('请输入正确的手机号');
+	    		$data['mobile'] = htmlspecialchars($_POST['mobile']) ? htmlspecialchars($_POST['mobile']) : $this -> _back('请输入正确的手机号');
 
 	    		//验证手机号是否存在
 	    		$check_result = $this -> _check_mobile($data['mobile']);
 
 	    		if (!$check_result)
 	    		{
-	    			$this -> _back('手机号已存在');
+	    			$this -> _back('账号已存在');
 	    		}
 
-	    		$data['password'] = md5(md5($data['mobile']));
+	    		$data['password'] = md5(md5($data['password']));
 
-	    		$data['name'] = htmlspecialchars($_POST['name']);
+	    		$data['name'] = htmlspecialchars($_POST['username']);
 
-	    		$data['type_str'] = 'admin';
+	    		$data['type_str'] = $_POST['type_str'] ? $_POST['type_str'] : $this -> _back('请添加管理员权限');
 
 	    		$data['created_at'] = time();
 
@@ -189,13 +174,40 @@
 		 */
 	    public function edit()
 	    {
+			//判断权限
+	    	if ($_SESSION['Rongzi']['admin']['type_str'] != 'super')
+	    	{
+	    		$this -> _back('权限不足');
+	    	}
+
+	    	//查询相关权限信息
+	    	$params = array(
+
+	    		'table_name' => 'auth',
+
+	    		'where' => "is_del = 0"
+	    	);
+
+	    	$result['auth'] = $this -> model -> easy_select($params);
+
+			$id = $_GET['id'] ? $_GET['id'] : $_POST['id'];
+			//查看管理数据
+
 	    	$form_key = htmlspecialchars($_POST['form_key']);
 
 	    	if ($form_key == 'yes')
 	    	{
-	    		$data['substation_id'] = intval($_POST['substation_id']) ? intval($_POST['substation_id']) : $this -> _back('请选择分站');
+	    		//$data['password'] = $_POST['password'] ? $_POST['password'] : $this -> _back('请添加密码');
 
-	    		$data['name'] = htmlspecialchars($_POST['name']);
+	    		$data['mobile'] = htmlspecialchars($_POST['mobile']) ? htmlspecialchars($_POST['mobile']) : $this -> _back('请输入正确的手机号');
+
+				if($_POST['password']){
+		    		$data['password'] = md5(md5($_POST['password']));
+				}
+
+	    		$data['name'] = htmlspecialchars($_POST['username']);
+
+	    		$data['type_str'] = $_POST['type_str'] ? $_POST['type_str'] : $this -> _back('请添加管理员权限');
 
 	    		$data['updated_at'] = time();
 
@@ -204,14 +216,14 @@
 
 	    			'table_name' => 'admins',
 
-	    			'where' => "id = {$id}",
+					'where' => 'id = '. $id,
 
 	    			'data' => $data
 	    		);
 
 	    		$admin_save = $this -> model -> my_save($params);
 
-	    		if ($admin_save == 1)
+	    		if ($admin_save)
 	    		{
 	    			redirect(__APP__.'/Admins/index', 0);
 	    		}
@@ -220,6 +232,16 @@
 	    			$this -> _back('保存失败，请重试。');
 	    		}
 	    	}
+
+			//写入数据库
+			$params = array(
+
+				'table_name' => 'admins',
+
+				'where' => 'id = '. $id
+			);
+
+			$result['admin'] = $this -> model -> my_find($params);
 
 	    	$this -> assign('result', $result);
 
@@ -242,7 +264,7 @@
 
 	    	if ($form_key == 'yes')
 	    	{
-	    		$id = intval($_SESSION['OftenGo']['admin']['id']);
+	    		$id = intval($_SESSION['Rongzi']['admin']['id']);
 
 	    		if (!$id) { $this -> _back('非法操作'); }
 
@@ -311,7 +333,7 @@
 	    public function delete()
 	    {
 	    	//判断权限
-	    	if ($_SESSION['OftenGo']['admin']['type_str'] != 'super') { $this -> _back('权限不够'); }
+	    	if ($_SESSION['Rongzi']['admin']['type_str'] != 'super') { $this -> _back('权限不够'); }
 
 	    	$id = intval($_GET['id']);
 
@@ -373,4 +395,5 @@
 	    		return true;
 	    	}
 	    }
+
 	}

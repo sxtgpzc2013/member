@@ -364,25 +364,38 @@
 
   // create node
   function createNode(nodeData, opts) {
-    console.log(nodeData[opts.nodeTitle])
-    if(nodeData[opts.is_null] == true){
+    console.log(nodeData[opts.is_null])
+    if(nodeData[opts.is_null] == "true"){
       var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
         .addClass('node')
-        .append('<a href="http://www.baidu.com">注册会员</a>')
+        .append('<a href="./register?uid='+nodeData[opts.parentid]+'&zone='+nodeData[opts.zone]+'" style="padding:2px;background:#f3c500;color:#fff;width:100%;min-width:60px;display:block;">注册会员</a>')
     }else{
+
+
+        var nodeContent = ""
+        if(nodeData[opts.nodeContent] == "1"){
+            nodeContent = "普卡"
+        }else if(nodeData[opts.nodeContent] == "2"){
+            nodeContent = "银卡"
+        }else if(nodeData[opts.nodeContent] == "3"){
+            nodeContent = "金卡"
+        }else if(nodeData[opts.nodeContent] == "4"){
+            nodeContent = "钻卡"
+        }
+
       // construct the content of node
-      var $nodeDiv = $('<div>', {'id': nodeData[opts.nodeId]})
+      var $nodeDiv = $('<div class="onclickhref" data-uid="'+nodeData[opts.nodeUid]+'">', {'id': nodeData[opts.nodeId]})
         .addClass('node')
-        .append('<div class="title">' + nodeData[opts.nodeTitle] + '</div>')
-        .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeData[opts.nodeContent] + '</div>' : '')
-        .append(typeof opts.nodeAchievement !== 'undefined' ? '<div class="content">总:' + nodeData[opts.nodeAchievement] + '&nbsp;&nbsp;余:' + nodeData[opts.nodeAchievement] +'</div>' : '')
-        .append(typeof opts.nodeSurplus !== 'undefined' ? '<div class="content">' + nodeData[opts.nodeSurplus] + '|余单</div>' : '');
-      
+        .append('<div class="title">' + nodeData[opts.nodeNumber]+ '['+ nodeData[opts.nodeTitle] + ']</div>')
+        .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + nodeContent + '</div>' : '')
+        .append(typeof opts.nodeAchievement !== 'undefined' ? '<div class="content">总:' + parseInt(nodeData[opts.nodeAchievement]['left'])/10000 +"  "+ parseInt(nodeData[opts.nodeAchievement]['middle'])/10000 +"  "+ parseInt(nodeData[opts.nodeAchievement]['right'])/10000 +'</div>' : '')
+        .append(typeof opts.nodeSurplus !== 'undefined' ? '<div class="content">新:' + parseInt(nodeData[opts.nodeSurplus]['left'])/10000 + "  " + parseInt(nodeData[opts.nodeSurplus]['middle'])/10000 + "  " + parseInt(nodeData[opts.nodeSurplus]['right'])/10000 + '</div>' : '');
+
     }
-    
+
     // append 4 directions arrows
     if (nodeData.relationship.parent_num > 0) {
-      $nodeDiv.append('<i class="edge topEdge fa"></i>');
+      //$nodeDiv.append('<i class="edge topEdge fa"></i>');
     }
     if(nodeData.relationship.sibling_num > 0) {
       $nodeDiv.append('<i class="edge rightEdge fa"></i>' +
@@ -390,7 +403,7 @@
     }
     if(nodeData.relationship.children_num > 0) {
       $nodeDiv.find('.title').prepend('<i class="fa fa-users symbol"></i>')
-      $nodeDiv.append('<i class="edge bottomEdge fa"></i>');
+      //$nodeDiv.append('<i class="edge bottomEdge fa"></i>');
     }
 
     // define hover event handler
@@ -686,7 +699,7 @@
       }
     );
 
-    // allow user to append dom modification after finishing node create of orgchart 
+    // allow user to append dom modification after finishing node create of orgchart
     if (opts.createNode) {
       opts.createNode($nodeDiv, nodeData);
     }

@@ -1,7 +1,7 @@
 jQuery(function() {
     var $ = jQuery,    // just in case. Make sure it's not an other libaray.
 
-        $wrap = $('#uploader'),
+        $wrap = $(this),
 
         // 图片容器
         $queue = $('<ul class="filelist"></ul>')
@@ -62,9 +62,10 @@ jQuery(function() {
 
     // 实例化
     uploader = WebUploader.create({
+        auto: true,
         pick: {
             id: '#filePicker',
-            label: '点击选择图片'
+            label: '上传身份证正面'
         },
         dnd: '#uploader .queueList',
         paste: document.body,
@@ -82,20 +83,49 @@ jQuery(function() {
 
         chunked: true,
         // server: 'http://webuploader.duapp.com/server/fileupload.php',
-        server: 'http://2betop.net/fileupload.php',
-        fileNumLimit: 300,
+        server: '../Uploads/upload?upload_dir=member',
+        fileNumLimit: 1,
         fileSizeLimit: 5 * 1024 * 1024,    // 200 M
         fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
     });
 
+    // 实例化
+    // uploader = WebUploader.create({
+    //     pick: {
+    //         id: '#filePicker3',
+    //         label: '点击选择图片'
+    //     },
+    //     dnd: '#uploader .queueList',
+    //     paste: document.body,
+    //
+    //     accept: {
+    //         title: 'Images',
+    //         extensions: 'gif,jpg,jpeg,bmp,png',
+    //         mimeTypes: 'image/*'
+    //     },
+    //
+    //     // swf文件路径
+    //     swf: BASE_URL + '/Uploader.swf',
+    //
+    //     disableGlobalDnd: true,
+    //
+    //     chunked: true,
+    //     // server: 'http://webuploader.duapp.com/server/fileupload.php',
+    //     server: '../Uploads/upload?upload_dir=member',
+    //     fileNumLimit: 1,
+    //     fileSizeLimit: 5 * 1024 * 1024,    // 200 M
+    //     fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
+    // });
+
     // 添加“添加文件”的按钮，
-    uploader.addButton({
-        id: '#filePicker2',
-        label: '继续添加'
-    });
+    // uploader.addButton({
+    //     id: '#filePicker2',
+    //     label: '继续添加'
+    // });
 
     // 当有文件添加进来时执行，负责view的创建
     function addFile( file ) {
+
         var $li = $( '<li id="' + file.id + '">' +
                 '<p class="title">' + file.name + '</p>' +
                 '<p class="imgWrap"></p>'+
@@ -148,6 +178,7 @@ jQuery(function() {
         }
 
         file.on('statuschange', function( cur, prev ) {
+
             if ( prev === 'progress' ) {
                 $prgress.hide().width(0);
             } else if ( prev === 'queued' ) {
@@ -376,6 +407,18 @@ jQuery(function() {
         updateTotalProgress();
     };
 
+    uploader.on( 'uploadSuccess', function( file,response) {
+       var imgurl=response.imagename;    //上传图片路径
+    //   $('#images').val(imgurl);
+      $( '#'+file.id ).find(".input").text("已上传");
+    });
+
+    uploader.on( 'uploadBeforeSend',function(object,data,header){
+        data.upload_dir = "user";
+    });
+
+
+  //uploadBeforeSend
     uploader.onFileDequeued = function( file ) {
         fileCount--;
         fileSize -= file.size;

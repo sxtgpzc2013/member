@@ -8,10 +8,10 @@
                 <a href="__URL__">首页</a>
             </li>
             <li>
-                <a>新闻公告</a>
+                <a>管理员管理</a>
             </li>
             <li>
-                <strong>公司新闻</strong>
+                <strong>添加管理员</strong>
             </li>
         </ol>
 	</div>
@@ -25,21 +25,30 @@
 
                 </div>
                 <div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
+					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Admins/add" method="post">
+						<input type="hidden" name="form_key" value="yes">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*管理员名：</label>
+                            <label class="col-sm-3 control-label">*管理员名:</label>
                             <div class="col-sm-6">
                                 <input id="username" name="username" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
                             </div>
                         </div>
+
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*账号:</label>
+                            <div class="col-sm-6">
+                                <input id="mobile" name="mobile" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*密码：</label>
+                            <label class="col-sm-3 control-label">*密码:</label>
                             <div class="col-sm-6">
                                 <input id="password" name="password" class="form-control" type="password">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*确认密码：</label>
+                            <label class="col-sm-3 control-label">*确认密码:</label>
                             <div class="col-sm-6">
                                 <input id="confirm_password" name="confirm_password" class="form-control" type="password">
                             </div>
@@ -47,15 +56,18 @@
 								<span class="help-block">(不能小于6位数,且不能为纯数字)</span>
 							</div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">*E-mail：</label>
-                            <div class="col-sm-6">
-                                <input id="email" name="email" class="form-control" type="email">
-                            </div>
-							<div class="col-sm-3">
-								<span class="help-block">(用于找回密码)</span>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*权限:</label>
+							<div class="col-sm-6">
+								<select class="form-control" name="type_str">
+									<foreach name="result['auth']" item="item">
+										<option value="{$item.type_str}">{$item.name}</option>
+									</foreach>
+								</select>
 							</div>
-                        </div>
+						</div>
+
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <button class="btn btn-primary" type="submit">提交</button>
@@ -105,12 +117,12 @@
 			   },
 			   confirm_password: {
 				   required: true,
-				   minlength: 5,
+				   minlength: 6,
 				   equalTo: "#password"
 			   },
-			   email: {
+			   mobile: {
 				   required: true,
-				   email: true
+				   mobile: true
 			   },
 			   topic: {
 				   required: "#newsletter:checked",
@@ -128,7 +140,7 @@
 			   },
 			   confirm_password: {
 				   required: "请再次输入密码",
-				   minlength: "密码必须5个字符以上",
+				   minlength: "密码必须6个字符以上",
 				   equalTo: "两次输入的密码不一致"
 			   },
 			   email: "请输入您的E-mail",

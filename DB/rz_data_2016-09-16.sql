@@ -146,9 +146,10 @@ CREATE TABLE `zx_bonus_count` (
   `bonus3` decimal(10,2) DEFAULT '0.00' COMMENT '互助补贴',
   `bonus4` decimal(10,2) DEFAULT '0.00' COMMENT '拓展补贴',
   `bonus5` decimal(10,2) DEFAULT '0.00' COMMENT '市场补贴',
-  `bonus6` decimal(10,2) DEFAULT '0.00' COMMENT '消费补贴',
+  `bonus6` decimal(10,2) DEFAULT '0.00' COMMENT '销售补贴',
   `bonus7` decimal(10,2) DEFAULT '0.00' COMMENT '服务补贴',
-  `bonus8` decimal(10,2) DEFAULT '0.00' COMMENT '消费提成',
+  `bonus8` decimal(10,2) DEFAULT '0.00' COMMENT '二次消费补贴',
+  `bonus9` decimal(10,2) DEFAULT '0.00' COMMENT '福利积分',
   `total` decimal(10,2) DEFAULT '0.00' COMMENT '总奖金',
   `real_total` decimal(10,2) DEFAULT '0.00' COMMENT '实发奖金',
   `count_date` int(8) DEFAULT NULL COMMENT '统计日期',
@@ -161,13 +162,15 @@ CREATE TABLE `zx_bonus_count` (
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `zx_bonus_rule`;
-
 CREATE TABLE `zx_bonus_rule` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT '' COMMENT '规则名称',
-  `money` double(10,2) DEFAULT '0.00' COMMENT '报单金额(单级别)',
+  `category` varchar(255) DEFAULT '' COMMENT '类别',
+  `key` int(4) DEFAULT '0' COMMENT '级别',
+  `value` double(10,2) DEFAULT '0' COMMENT '数值',
+  `createtime` varchar(255) DEFAULT '' COMMENT '时间',
+  `remark` varchar(255) DEFAULT '' COMMENT '注释',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='奖金规则表';
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='奖金规则表';
 
 
 
@@ -199,20 +202,20 @@ CREATE TABLE `zx_member` (
   `usertitle` int(255) DEFAULT '0' COMMENT '用户头衔',
   `tuijianid` int(10) NOT NULL DEFAULT '0' COMMENT '推荐人ID',
   `tuijiannumber` char(16) NOT NULL DEFAULT '0' COMMENT '推荐人帐号',
-  `parentid` int(10) NOT NULL DEFAULT '0' COMMENT '接点人ID',
-  `parentnumber` char(16) NOT NULL DEFAULT '0' COMMENT '接点人帐号',
+  `parentid` int(10) NOT NULL DEFAULT '0' COMMENT '位置编号ID',
+  `parentnumber` char(16) NOT NULL DEFAULT '0' COMMENT '位置编号帐号',
   `reg_uid` mediumint(8) DEFAULT '0' COMMENT '注册人id',
   `active_uid` mediumint(8) DEFAULT '0' COMMENT '激活人id',
-  `billcenterid` mediumint(8) DEFAULT '1' COMMENT '报单中心ID',
-  `billcenternumber` mediumint(8) DEFAULT '1' COMMENT '报单中心账号',
-  `isbill` tinyint(3) DEFAULT '0' COMMENT '是否是报单中心:0不是，1报单中心',
-  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '报单币',
+  `billcenterid` mediumint(8) DEFAULT '1' COMMENT '代理商编号ID',
+  `billcenternumber` mediumint(8) DEFAULT '1' COMMENT '代理商编号账号',
+  `isbill` tinyint(3) DEFAULT '0' COMMENT '是否是代理商编号:0不是，1代理商编号',
+  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
   `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
   `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
   `jihuobi` double(10,2) DEFAULT '0.00' COMMENT '激活币',
-  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '奖励积分',
+  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '福利积分',
   `isfull` tinyint(2) DEFAULT '0' COMMENT '分红是否封顶',
-  `status` int(8) DEFAULT '0' COMMENT '用户状态：-2 删除 ，-1 死了，0 未激活 1 已经激活 ',
+  `status` int(8) DEFAULT '0' COMMENT '用户状态：-2 删除 ，-1 死了，0 未激活 1 已经激活 -3 账号冻结 -4 账号禁用',
   `bankname` varchar(1000) DEFAULT '' COMMENT '银行名称',
   `bankholder` varchar(50) DEFAULT '' COMMENT '开户人姓名',
   `banknumber` varchar(20) DEFAULT NULL COMMENT '银行卡号',
@@ -230,16 +233,18 @@ CREATE TABLE `zx_member` (
   `psd1` varchar(32) DEFAULT NULL COMMENT '一级密码',
   `psd2` varchar(32) DEFAULT NULL COMMENT '二级密码',
   `recom_num` int(8) DEFAULT '0' COMMENT '推荐人数',
-  `zone` int(4) DEFAULT '1' COMMENT '左区（1），中区(2), 右区（3）',
-  `znum` mediumint(10) DEFAULT '0' COMMENT '接点人数',
-  `left_zone` tinyint(1) DEFAULT '0' COMMENT '左区是否被占',
-  `middle_zone` tinyint(1) DEFAULT '0' COMMENT '中区是否被占',
-  `right_zone` tinyint(1) DEFAULT '0' COMMENT '右区是否被占',
+  `zone` int(4) DEFAULT '1' COMMENT 'A部（1），B部(2), C部（3）',
+  `znum` mediumint(10) DEFAULT '0' COMMENT '位置编号',
+  `left_zone` tinyint(1) DEFAULT '0' COMMENT 'A部是否被占',
+  `middle_zone` tinyint(1) DEFAULT '0' COMMENT 'B部是否被占',
+  `right_zone` tinyint(1) DEFAULT '0' COMMENT 'C部是否被占',
   `proxy_state` tinyint(2) DEFAULT '0' COMMENT '分红状态， 0 不分红，1 分红',
   `achievement` double(16,2) DEFAULT '0.00' COMMENT '总业绩',
+  `achievementstatus` tinyint(1) DEFAULT '0' COMMENT '业绩分红状态 0： 不计算头衔升级的销费商  1： 计算头衔升级推荐销费商',
   `num` int(10) DEFAULT '0' COMMENT '伞下人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
+  `max_bonus` double(16,2) DEFAULT '0.00' COMMENT '最大奖金',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `usernumber` (`usernumber`) USING BTREE,
   KEY `status` (`status`) USING BTREE,
@@ -265,7 +270,6 @@ CREATE TABLE `zx_money_change` (
   `changetype` int(6) unsigned NOT NULL DEFAULT '0' COMMENT '变更类型 ：',
   `recordtype` int(2) DEFAULT NULL COMMENT '记录类型：减少（0），增加（1）',
   `money` double(10,2) DEFAULT '0.00' COMMENT '变更金额',
-  `hasmoney` double(10,2) DEFAULT '0.00' COMMENT '账户余额',
   `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `status` (`status`) USING BTREE
@@ -284,7 +288,7 @@ CREATE TABLE `zx_transfer` (
   `usernumber` char(16) DEFAULT '' COMMENT '用户编号',
   `targetuserid` int(10) DEFAULT '0' COMMENT '目标用户id',
   `targetusernumber` char(16) DEFAULT '' COMMENT '目标用户编号',
-  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '转账类型 0 报单币',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '转账类型 0 注册币',
   `money` double(10,2) DEFAULT '0.00' COMMENT '转币金额',
   `status` int(4) DEFAULT '0' COMMENT '转账提现状态 0 转账成功 ，1 转账失败',
   `createtime` int(10) DEFAULT NULL COMMENT '更新时间',
@@ -304,6 +308,7 @@ CREATE TABLE `zx_withdrawal` (
   `moneytype` int(1) unsigned DEFAULT '0' COMMENT '提现类型 0 奖金币',
   `userid` int(10) DEFAULT '0' COMMENT '用户id',
   `usernumber` char(16) DEFAULT '' COMMENT '用户编号',
+  `realname` varchar(16) DEFAULT '' COMMENT '用户姓名',
   `bankholder` varchar(16) NOT NULL COMMENT '开户人',
   `bankname` varchar(16) DEFAULT NULL COMMENT '开户银行',
   `banknumber` varchar(20) DEFAULT NULL COMMENT '银行卡号',
@@ -317,8 +322,158 @@ CREATE TABLE `zx_withdrawal` (
   KEY `status` (`status`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='提现申请表';
 
+# 2016-09-17 新增字段
+# --------------------------------------------------------------
+ALTER TABLE zx_member ADD ID_address VARCHAR(200) NOT NULL DEFAULT "" COMMENT "身份证所在地址";
+ALTER TABLE zx_withdrawal ADD bank_address VARCHAR(255) DEFAULT NULL COMMENT '开户行地址';
+ALTER TABLE zx_withdrawal ADD realname VARCHAR(255) DEFAULT NULL COMMENT '提现账户姓名';
+ALTER TABLE zx_withdrawal ADD arrival_amount DOUBLE(10,2) DEFAULT '0.00' COMMENT '到账金额';
+
+ALTER TABLE zx_transfer ADD username VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
+ALTER TABLE zx_transfer ADD targetusername VARCHAR(200) NOT NULL DEFAULT "" COMMENT "转出账户姓名";
+
+# Dump of table zx_news
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_news`;
+
+CREATE TABLE `zx_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '类型',
+  `level` tinyint(2) NOT NULL DEFAULT '0' COMMENT '优先级',
+  `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '新闻内容',
+  `viewnum` int(10) DEFAULT NULL COMMENT '浏览次数',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0 启用 1 禁用',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `is_del` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-正常 1-删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='新闻公告表';
 
 
+
+-- 奖金明细表
+-- -----------------------------
+-- Table structure for `zx_bonus_detail`
+-- -----------------------------
+DROP TABLE IF EXISTS `zx_bonus_detail`;
+CREATE TABLE `zx_bonus_detail` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `touserid` int(10) DEFAULT NULL,
+  `tousernumber` varchar(16) DEFAULT NULL,
+  `torealname` varchar(255) DEFAULT NULL COMMENT '会员真实姓名',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 销售补贴 7 服务补贴 8 二次销售补贴 9 福利积分',
+  `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
+  `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
+  `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
+  `jihuobi` double(10,2) DEFAULT '0.00' COMMENT '激活币',
+  `jianglijifen` double(10,2) DEFAULT '0.00' COMMENT '福利积分',
+  `lovemoney` double(10,2) DEFAULT '0.00' COMMENT '爱心基金',
+  `platmoney` double(10,2) DEFAULT '0.00' COMMENT '平台管理费',
+  `taxmoney` double(10,2) DEFAULT '0.00' COMMENT '税费',
+  `total` decimal(10,2) DEFAULT '0.00' COMMENT '总奖金',
+  `real_total` decimal(10,2) DEFAULT '0.00' COMMENT '实发奖金',
+  `createdate` int(11) DEFAULT NULL COMMENT '明细日期',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=493 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='奖金明细表';
+# 2016-09-21 新增字段
+# --------------------------------------------------------------
+ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币种 1-现金币 2-注册币 3-戎子盾 4-激活币 5-福利积分 6-爱心基金 7 平台管理费 8税费';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互助补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
+
+
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互助补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
+
+ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
+ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
+
+
+ALTER TABLE zx_member ADD leftachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '左业绩';
+
+ALTER TABLE zx_member ADD middleachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '中业绩';
+
+ALTER TABLE zx_member ADD rightachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '右业绩';
+
+ALTER TABLE zx_member ADD contactuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户接点路径';
+ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户推荐路径';
+ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
+
+# 2016-09-22 新增相关
+# Dump of table achievement_log
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_achievement_log`;
+
+CREATE TABLE `zx_achievement_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `zone` tinyint(2) NOT NULL DEFAULT 0 COMMENT '业绩区间',
+  `deduct` DOUBLE(16,2) NOT NULL DEFAULT '0.00' COMMENT '业绩金额',
+  `fromuid` int(10) NOT NULL DEFAULT '0' COMMENT '业绩来源用户',
+  `uid` int(10) NOT NULL DEFAULT '0' COMMENT '业绩用户',
+  `produceuid` int(10) NOT NULL DEFAULT '0' COMMENT '业绩产生用户',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='业绩产生记录表';
+
+
+ALTER TABLE zx_bonus_count ADD torealname VARCHAR(100) NOT NULL DEFAULT '' COMMENT '真实姓名' AFTER tousernumber;
+ALTER TABLE zx_products ADD sell_count INT(11) NOT NULL DEFAULT 0 COMMENT '卖出数量' AFTER surplus;
+ALTER TABLE zx_products ADD is_free TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否为消费套餐红酒产品' AFTER created_at;
+ALTER TABLE zx_member CHANGE status status int(8) DEFAULT '0' COMMENT '用户状态：-2 账号冻结 ，-1 删除，0 未激活 1 已经激活';
+
+
+# 2016-09-25
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互助补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-服务补贴 11-销费商提现 12-处理提现 13-消费';
+
+# 2016-09-26
+ALTER TABLE zx_order_items ADD name VARCHAR(255) NOT NULL DEFAULT '' COMMENT '名称' AFTER pro_id;
+ALTER TABLE zx_order_items ADD logo VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'LOGO' AFTER name;
+ALTER TABLE zx_order_items ADD content TEXT NOT NULL DEFAULT '' COMMENT '详情' AFTER logo;
+ALTER TABLE zx_order_items ADD unit_jprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-奖金币' AFTER content;
+ALTER TABLE zx_order_items ADD unit_rprice float(9,2) NOT NULL DEFAULT 0 COMMENT '单价-戎子盾' AFTER unit_jprice;
+
+# 2016-09-27
+ALTER TABLE zx_orders ADD total_jprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '奖金币总额' AFTER total_price;
+ALTER TABLE zx_orders ADD total_rprice FLOAT(9,2) NOT NULL DEFAULT 0 COMMENT '戎子盾总额' AFTER total_jprice;
+
+#2016-10-09
+
+#upgrade_log
+DROP TABLE IF EXISTS `zx_upgrade_log`;
+
+CREATE TABLE `zx_upgrade_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `uid` int(10) NOT NULL DEFAULT 0 COMMENT '升级用户id',
+  `upgrade_uid` int(10) NOT NULL DEFAULT 0 COMMENT '操作升级管理员ID',
+  `level` int(10) NOT NULL DEFAULT '0' COMMENT '升级级别',
+  `levelago` int(10) NOT NULL DEFAULT '0' COMMENT '升级前级别',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='升级记录表';
+
+
+ALTER TABLE zx_admins ADD login_number INT(9) NOT NULL DEFAULT 0 COMMENT '登录次数';
+ALTER TABLE zx_admins ADD last_login_time INT(11) NOT NULL DEFAULT 0 COMMENT '最后登录时间';
+ALTER TABLE zx_admins ADD last_login_ip VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '最后登录IP';
+ALTER TABLE zx_admins ADD status TINYINT(9) NOT NULL DEFAULT 0 COMMENT '是否禁用 状态 0 启用 1 禁用';
+
+# Dump of table zx_auth
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zx_auth`;
+
+CREATE TABLE `zx_auth` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(200) NOT NULL DEFAULT '' COMMENT '用户组名称',
+  `content` varchar(200) NOT NULL DEFAULT '' COMMENT '描述',
+  `auth_action` text NOT NULL COMMENT '授权相关入口',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '状态',
+  `type_str` varchar(15) NOT NULL DEFAULT '' COMMENT '标识',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `is_del` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-正常 1-删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='权限管理表';
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -326,3 +481,22 @@ CREATE TABLE `zx_withdrawal` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+ALTER TABLE zx_member ADD max_bonus double(16,2) NOT NULL DEFAULT '0.00' COMMENT '最大奖金';
+
+
+#jenkins http://121.42.26.223:8080/   admin  zxtc999.
+-- 121.42.26.223
+-- abiding  14:53:37
+-- Zhxtch999！@#￥
+
+
+-- 阿里云账号
+-- 账号：zxtc999
+-- 密码：zhongxiang999qwer
+-- abiding  18:45:55
+-- 数据库
+-- rm-m5e372r857ot6cl37.mysql.rds.aliyuncs.com    3306
+-- member
+-- zhqjqzhnn15!
