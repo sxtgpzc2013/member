@@ -70,7 +70,6 @@
 	    }
 
 
-<<<<<<< HEAD
 	    /**
 		 * 展示型首页
 		 *
@@ -122,7 +121,7 @@
 		    );
 
 		    foreach ($xlsData as $key => $value) {
-		    	
+
 		    	# 处理标题数据
 				if ($value['userrank'] == 1) {
 					$xlsData[$key]['title'] = "普卡销费商";
@@ -149,14 +148,12 @@
 				} else {
 					$xlsData[$key]['status'] = "未知";
 				}
-				
+
 
 		    }
 		    $this->exportExcel($xlsName,$xlsCell,$xlsData);
 	    }
 
-=======
->>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 		/**
 		 * 销费商修改相关页面
 		 *
@@ -191,8 +188,6 @@
 			$zone = array("1" => "左", "2" => "中", "3" => "右");
 
 			$member["zone"] = $zone[$member['zone']];
-<<<<<<< HEAD
-
 
 			//获取代理商编号数据
 			$params = array(
@@ -207,25 +202,6 @@
 
 			//获取推荐人数据
 			$params = array(
-
-=======
-
-
-			//获取代理商编号数据
-			$params = array(
-
-				'table_name' => 'member',
-
-				'where' => "uid = {$member['billcenterid']} AND status = 1"
-
-			);
-
-	    	$billmember = $this -> model -> my_find($params);
-
-			//获取推荐人数据
-			$params = array(
-
->>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 				'table_name' => 'member',
 
 				'where' => "uid = {$member['tuijianid']} AND status = 1"
@@ -424,17 +400,10 @@
 				'table_name' => 'member',
 
 				'where' => "uid = {$uid}",
-<<<<<<< HEAD
 
 				'data' => $data
 			);
 
-=======
-
-				'data' => $data
-			);
-
->>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 			$my_save = $this -> model -> my_save($params);
 
 			if ($my_save == 1){
