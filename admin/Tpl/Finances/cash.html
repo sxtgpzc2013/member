@@ -26,6 +26,7 @@
                         <table class="table table-hover no-margins table-bordered table-striped">
                             <thead>
                                 <tr>
+									<th>#</th>
                                     <th>提现账户编号</th>
                                     <th>提现账户姓名</th>
                                     <th>银行账号</th>
@@ -41,6 +42,9 @@
                             <tbody>
                             	<foreach name="result['result']" item="item">
 	                                <tr>
+										<td>
+	                                        <input type="checkbox" class="i-checks" name="input[]">
+	                                    </td>
 										<td>{$item.usernumber}</td>
 										<td>{$item.realname}</td>
 										<td>{$item.banknumber}</td>
@@ -54,7 +58,10 @@
 	                                </tr>
 	                            </foreach>
                             </tbody>
+
+
                         </table>
+						<a class="btn btn-info chkall" id="check_revsern">全选</a> <a class="btn btn-info">批量同意</a>
                     </div>
 
                 </div>
@@ -83,5 +90,41 @@
 		   checkboxClass: 'icheckbox_square-green',
 		   radioClass: 'iradio_square-green',
 	   });
+
+
+
+	//    $('.select_all').click(function(){
+	//
+	//    });
+
+	$('.get_billcenternumber').click(function(){
+		var tuijiannumber = $('.tuijiannumber').val();
+		
+		$.ajax({
+			url: "__APP__/Teams/get_billcenternumber",
+			type: "get",
+			data: {
+				usernumber: tuijiannumber
+			},
+			success: function (resdata) {
+				resdata = JSON.parse(resdata);
+				if (resdata.success == true) {
+					if(resdata.data == 0){
+						alert("用户代理商编号获取失败,请重新输入用户编号");
+					}else{
+						$('.billcenternumber').val(resdata.data);
+					}
+				} else {
+					alert("用户代理商编号获取错误 请重试");
+				}
+			}
+		});
+	});
+
+
+	$("#check_revsern").click(function(){
+		$('.i-checks').iCheck('check');
+	});
+
    });
 </script>

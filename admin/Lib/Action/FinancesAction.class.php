@@ -150,8 +150,6 @@ class FinancesAction extends CommonAction {
     	$this -> display();
     }
 
-<<<<<<< HEAD
-
     /**
      * 财务流水
      *
@@ -166,70 +164,7 @@ class FinancesAction extends CommonAction {
     {
 
         //默认导出今天数据
-        <td>{$item.realname}</td>
-                                        <td>{$item.targetrealname}</td>
-                                        <td>￥{$item.money}</td>
-                                        <td>
-                                            <if condition="$item['moneytype'] eq 1">
-                                                奖金币
-                                            <elseif condition="$item['moneytype'] eq 2" />
-                                                注册币
-                                            <elseif condition="$item['moneytype'] eq 3" />
-                                                戎子盾
-                                            <elseif condition="$item['moneytype'] eq 4" />
-                                                激活币
-                                            <elseif condition="$item['moneytype'] eq 5" />
-                                                福利积分
-                                            <elseif condition="$item['moneytype'] eq 6" />
-                                                爱心基金
-                                            <elseif condition="$item['moneytype'] eq 7" />
-                                                平台管理费
-                                            <elseif condition="$item['moneytype'] eq 8" />
-                                                税费
-                                            </if>
-                                        </td>
-                                        <td>
-                                            <if condition="$item['changetype'] eq 0">
-                                                未知
-                                            <elseif condition="$item['changetype'] eq 1" />
-                                                公司充值
-                                            <elseif condition="$item['changetype'] eq 2" />
-                                                公司扣币
-                                            <elseif condition="$item['changetype'] eq 3" />
-                                                分红
-                                            <elseif condition="$item['changetype'] eq 4" />
-                                                管理补贴
-                                            <elseif condition="$item['changetype'] eq 5" />
-                                                互助补贴
-                                            <elseif condition="$item['changetype'] eq 6" />
-                                                拓展补贴
-                                            <elseif condition="$item['changetype'] eq 7" />
-                                                市场补贴
-                                            <elseif condition="$item['changetype'] eq 8" />
-                                                销售补贴
-                                            <elseif condition="$item['changetype'] eq 9" />
-                                                服务补贴
-                                            <elseif condition="$item['changetype'] eq 10" />
-                                                服务补贴
-                                            <elseif condition="$item['changetype'] eq 11" />
-                                                销费商提现
-                                            <elseif condition="$item['changetype'] eq 12" />
-                                                处理提现
-                                            <elseif condition="$item['changetype'] eq 13" />
-                                                消费
-                                            <elseif condition="$item['changetype'] eq 14" />
-                                                系统内部转账
-                                            <elseif condition="$item['changetype'] eq 15" />
-                                                币种转换
-                                            </if>
-                                        </td>
-                                        <td>
-                                            <if condition="$item['recordtype'] eq 0">
-                                                减少
-                                            <elseif condition="$item['recordtype'] eq 1" />
-                                                增加
-                                            </if>
-                                        </td>
+    
         //导出筛选数据
         $params = array(
 
@@ -288,15 +223,13 @@ class FinancesAction extends CommonAction {
             // } else {
             //     $xlsData[$key]['status'] = "未知";
             // }
-            
+
 
         }
 
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
-=======
->>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
     /**
 	 * 转账明细
 	 *
@@ -442,29 +375,29 @@ class FinancesAction extends CommonAction {
     		$member_save = $this -> model -> my_save($params);
 
     		$money_change_data['moneytype'] = $moneytype;
-    			
+
 			$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['userid'] = $user_find['uid'];
-			
+
 			$money_change_data['usernumber'] = $user_find['usernumber'];
-			
+
 			$money_change_data['realname'] = $user_find['realname'];
-			
+
 			$money_change_data['changetype'] = 1;
-			
+
 			$money_change_data['recordtype'] = 1;
-			
+
 			$money_change_data['money'] = $money;
-			
+
 			$money_change_data['hasmoney'] = $balance;
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
@@ -607,29 +540,29 @@ class FinancesAction extends CommonAction {
     		$member_save = $this -> model -> my_save($params);
 
     		$money_change_data['moneytype'] = $moneytype;
-    			
+
 			$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['userid'] = $user_find['uid'];
-			
+
 			$money_change_data['usernumber'] = $user_find['usernumber'];
-			
+
 			$money_change_data['realname'] = $user_find['realname'];
-			
+
 			$money_change_data['changetype'] = 2;
-			
+
 			$money_change_data['recordtype'] = 0;
-			
+
 			$money_change_data['money'] = $money;
-			
+
 			$money_change_data['hasmoney'] = $balance;
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
@@ -807,7 +740,7 @@ class FinancesAction extends CommonAction {
 	    		$member_save = $this -> model -> my_save($params);
 
 	    		$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 				$money_change_data['recordtype'] = 1;
 
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 && $member_save ? $member_find['jiangjinbi'] + $cash_find['money'] : $member_find['jiangjinbi'];
@@ -815,26 +748,26 @@ class FinancesAction extends CommonAction {
     		elseif ($type == 'agreen')
     		{
 				$money_change_data['status'] = 1;
-			
+
 				$money_change_data['recordtype'] = 0;
-			
+
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 ? $member_find['jiangjinbi'] : 0;
     		}
 
     		$money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 6 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['realname'] = '系统';
-			
+
 			$money_change_data['changetype'] = 12;
-			
+
 			$money_change_data['money'] = $cash_find['money'];
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
