@@ -1,0 +1,73 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>商城</a>
+            </li>
+            <li>
+                <strong>已发货订单</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content" style="border:0">
+					<h3 class="text-center">已发货订单</h3>
+                    <div class="table-responsive">
+                        <table class="table table-hover no-margins table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>戎子盾</th>
+                                    <th>奖金币</th>
+                                    <th>下单时间</th>
+									<th>状态</th>
+									<th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<foreach name="result['result']" item="item">
+	                                <tr>
+										<td>{$item.order_code}</td>
+										<td>￥{$item.total_rprice}</td>
+	                                    <td>￥{$item.total_jprice}</td>
+										<td>{$item.created_at|date="Y-m-d H:i:s",###}</td>
+										<td>已发货</td>
+	                                    <td>
+											<a class="btn btn-info btn-sm" href="__APP__/Orders/info/id/{$item.id}">订单详情</a>
+	                                    </td>
+	                                </tr>
+	                            </foreach>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+	<div class="row">
+	    <div class="col-sm-12 text-right">
+	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+	            <ul class="pagination">
+	                {$result.page}
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+</div>
+<include file="public:footer" />

@@ -1,0 +1,174 @@
+<include file="public:header" />
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>商城</a>
+            </li>
+            <li>
+                <strong>新增商品</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h3 class="text-center">新增商品</h3>
+
+                </div>
+                <div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm" method="post" action="__APP__/Products/add" enctype = "multipart/form-data">
+						<input type="hidden" name="form_key" value="yes">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">*商品编号:</label>
+                            <div class="col-sm-9">
+                                <input id="" name="products_code" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">*商品名称:</label>
+                            <div class="col-sm-9">
+                                <input id="" name="name" class="form-control" type="text">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label">*商品图片:</label>
+                            <div class="col-sm-9">
+                                <input id="" name="logo" class="form-control" type="file">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label">*商品详情:</label>
+                            <div class="col-sm-9">
+								<div class="ibox-content gray-bg">
+
+		                            <div class="summernote"  style="height: auto;min-height: 300px;" name="content">
+
+		                            </div>
+
+		                        </div>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label">*戎子盾:</label>
+                            <div class="col-sm-9">
+                                <input id="" name="rprice" class="form-control" type="text">
+                            </div>
+                        </div>
+
+
+						<div class="form-group">
+                            <label class="col-sm-2 control-label">*奖金币:</label>
+                            <div class="col-sm-9">
+                                <input id="" name="jprice" class="form-control" type="text">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">*余量:</label>
+							<div class="col-sm-9">
+								<input id="" name="surplus" class="form-control" type="text">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">*出售状态:</label>
+							<div class="col-sm-9">
+								<select class="form-control" name="status">
+									<option value="0">启用<option>
+									<option value="1">禁用<option>
+								</select>
+							</div>
+						</div>
+						<textarea name="content" rows="8" cols="40" class="content_code" style="display:none">
+
+						</textarea>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button class="btn btn-primary" onclick="save()">确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<include file="public:footer" />
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<!-- SUMMERNOTE -->
+<script src="__PUBLIC__/js/plugins/summernote/summernote.min.js"></script>
+<script src="__PUBLIC__/js/plugins/summernote/summernote-zh-CN.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('.summernote').summernote({
+            lang: 'zh-CN'
+        });
+    });
+    // var edit = function () {
+    //     $("#eg").addClass("no-padding");
+    //     $('.click2edit').summernote({
+    //         lang: 'zh-CN',
+    //         focus: true
+    //     });
+    // };
+    var save = function () {
+        var aHTML = $('.summernote').code(); //save HTML If you need(aHTML: array).
+		$('.content_code').val(aHTML)
+	};
+
+</script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+   // $().ready(function () {
+   //  // validate signup form on keyup and submit
+   //  $("#signupForm").validate({
+   //   rules: {
+   //    usernumber: {
+   // 	   required: true
+   //    },
+   //    number: {
+   // 	   required: true,
+   //    },
+   //    type: {
+   // 	   required: true,
+   //    },
+   //    agree: "required"
+   //   },
+   //   messages: {
+   //
+   //   }
+   //  });
+   // });
+</script>

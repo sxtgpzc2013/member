@@ -1,0 +1,114 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>权限管理</a>
+            </li>
+            <li>
+                <strong>权限编辑</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="text-center">权限编辑</h5>
+
+                </div>
+                <div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm" action="__APP__/Auth/edit" method="post">
+						<input type="hidden" name="form_key" value="yes">
+						<input type="hidden" name="id" value="{$auth['id']}">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*用户组:</label>
+                            <div class="col-sm-6">
+                                <input id="name" name="name" class="form-control" type="text" value="{$auth['name']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*描述:</label>
+                            <div class="col-sm-6">
+                                <input id="content" name="content" class="form-control" type="text" value="{$auth['content']}">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*授权相关入口:</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" name="auth_action" rows="8" cols="40">{$auth['auth_action']}</textarea>
+                            </div>
+                        </div>
+
+
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">*标识:</label>
+                            <div class="col-sm-6">
+                                <input id="type_str" name="type_str" class="form-control" type="text" value="{$auth['type_str']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<include file="public:footer" />
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+   $().ready(function () {
+	   // validate signup form on keyup and submit
+	   $("#signupForm").validate({
+		   rules: {
+			   firstname: "required",
+			   lastname: "required",
+			   name: {
+				   required: true
+			   },
+			   content: {
+				   required: true
+			   },
+			   auth_action: {
+				   required: true
+			   },
+			   type_str: {
+				   required: true
+			   },
+			   agree: "required"
+		   }
+	   });
+   });
+</script>

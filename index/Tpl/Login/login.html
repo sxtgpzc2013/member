@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>登录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="black-bg" style="background: url(__PUBLIC__/images/index_bg.jpg)  center top no-repeat";>
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name"><img src="__PUBLIC__/images/index_logo.jpg" alt="" /></h1>
+
+            </div>
+            <!-- <h3>欢迎使用 销费商系统</h3> -->
+
+            <form class="m-t" role="form" action="__APP__/Login/login" method="post" >
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" required="" name="usernumber">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" required="" name="password">
+                </div>
+                <input class="login-txt" id="" name="form_key" size="30" type="hidden" value="yes">
+                <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="lsdV0Sjl8QbKoPLltIOOwEisIzUxNRUNo2liv+O9xIA=">
+                <button type="submit" class="btn btn-primary block full-width m-b btn-sm">登 录</button>
+
+
+                <!-- <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a>
+                </p> -->
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

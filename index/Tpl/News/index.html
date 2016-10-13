@@ -1,0 +1,48 @@
+<include file="public:header" />
+<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
+	<div class="col-lg-10"  style="padding:0px;">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__APP__">首页</a>
+            </li>
+			<li>
+                <a>新闻公告</a>
+            </li>
+            <li>
+                <strong>新闻资讯</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5 style="float: none !important;">新闻资讯</h5>
+						</div>
+						<div class="ibox-content">
+							<div class="feed-activity-list">
+								<foreach name="result['result']" item="new">
+									<div class="feed-element">
+										<div>
+											<small class="pull-right text-navy">{$new.created_at|date="Y-m-d H:i:s",###}</small>
+											<i class="fa fa-volume-up"></i>&nbsp;<strong>{$new.title}</strong>
+											<div>{$new.content}</div>
+									</div>
+								</foreach>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<include file="public:footer" />

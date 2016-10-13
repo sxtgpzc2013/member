@@ -1,0 +1,616 @@
+<include file="public:header" />
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__APP__">首页</a>
+            </li>
+            <li>
+                <a>信息管理</a>
+            </li>
+            <li>
+                <strong>销费商注册</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+
+
+                <form class="form-horizontal m-t" id="signupForm" action="__APP__/Teams/register" method="post" enctype = "multipart/form-data">
+					<input type="hidden" name="form_key" value="yes">
+					<input type="hidden" name="red_wine_number" value="0" class="red_wine_number">
+			        <div class="ibox-content" style="border:0">
+						<div class="ibox-title" >
+							<h5>基本信息</h5>
+						</div>
+			                <div class="form-group">
+			                    <label class="col-sm-2 control-label">销费商编号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}" minlength="8">
+									<span id="cname-error" class="help-block m-b-none usernumber_err" style="display:none;">必填</span>
+								</div>
+
+								<div class="col-sm-3">
+			                        <a class="btn btn-white get_usernumber">验证编号</a>
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">销费商姓名</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="realname">
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">销费商级别</label>
+
+			                    <div class="col-sm-7">
+			                        <select class="form-control userrank" name="userrank">
+										<option value="1">普卡销费商 1980</option>
+										<option value="2">银卡销费商 1万</option>
+										<option value="3">金卡销费商 3万</option>
+										<option value="4">钻卡销费商 5万</option>
+			                        </select>
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">数字红酒</label>
+
+			                    <label class="col-sm-6 control-label" style="text-align:left;"><span class="red_wine_number_span">0</span>个数字红酒资格</label>
+								<input type="hidden" name="red_wine_number" value="0" class="red_wine_number">
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">销费商身份证号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="IDcard" minlength="18">
+			                    </div>
+			                </div>
+
+							<!-- <div class="form-group">
+			                    <label class="col-sm-2 control-label">上传身份证附件</label>
+
+			                    <div class="col-sm-7">
+			                        正面:<input type="file" class="form-control" placeholder="身份证正面" name="ID_address_face"><br>
+									反面:<input type="file" class="form-control" placeholder="身份证反面" name="ID_address_back">
+			                    </div>
+			                </div> -->
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">销费商手机号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="mobile">
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">开户银行</label>
+
+			                    <div class="col-sm-7">
+									<select class="form-control" name="bankname">
+										<option value="1">中国农业银行</option>
+										<option value="2">中国建设银行</option>
+
+									</select>
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">开户行地址</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="bank_adress">
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">银行卡号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="banknumber">
+			                    </div>
+
+								<div class="col-sm-3">
+			                        <span>(开户人必须是销费商姓名)</span>
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">消费套餐</label>
+
+								<label class="col-sm-8 control-label" style="text-align:left;">戎子经典<span class="red_wine_number_give">2瓶</span></label>
+
+
+							</div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">默认送货地址</label>
+
+
+								<div class="col-sm-7">
+									<!-- <input type="text" class="form-control" name="send_address"> -->
+									<select id="s_province" class="form-control col-sm-2" style="width:100px;" name="s_province"></select>
+
+									<select id="s_city" class="form-control col-sm-2" style="width:100px;" name="s_city" ></select>
+
+									<select id="s_county" class="form-control col-sm-2" style="width:100px;" name="s_county"></select><br>
+
+									<input type="text" class="form-control col-sm-6" style="width:0 auto;" name="s_address" placeholder="详细地址">
+								</div>
+
+								<div class="col-sm-3">
+			                        <span>(为订单默认收货地址)</span>
+			                    </div>
+			                </div>
+
+
+							<!-- <div class="ibox-title">
+								<h3>数字红酒资格</h3>
+							</div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">数字红酒资格</label>
+
+			                    <div class="col-sm-7">
+									<label class="checkbox-inline">
+			                            <input type="radio" value="1" id="inlineCheckbox1" name="red_wine_number"> 小戎子1箱
+									</label>
+									<label class="checkbox-inline">
+			                            <input type="radio" value="3" id="inlineCheckbox2" name="red_wine_number"> 大戎子1箱
+									</label>
+			                    </div>
+			                </div> -->
+
+							<div class="ibox-title">
+								<h3>运营信息</h3>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">推荐人编号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber" value="{$_SESSION['Rongzi']['user']['usernumber']}">
+			                    </div>
+
+								<div class="col-sm-3">
+									<span>(如修改推荐人请重新获取代理商编号)</span>
+								</div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">代理商编号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control billcenternumber" name="billcenternumber"
+									value="<if condition="$_SESSION['Rongzi']['user']['isbill'] eq 1">{$_SESSION['Rongzi']['user']['usernumber']}<else/>{$_SESSION['Rongzi']['user']['billcenternumber']}</if>">
+
+			                    </div>
+
+								<div class="col-sm-3">
+			                        <a class="btn btn-white get_billcenternumber">获取代理商编号</a>
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">位置编号</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control parentnumber" name="parentnumber" value="{$member['usernumber']}">
+			                    </div>
+
+								<div class="col-sm-3">
+									<span></span>
+								</div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">位置部门</label>
+
+			                    <div class="col-sm-7">
+									<select class="form-control zone" id="zone" name="zone">
+										<?php if($_GET['zone']== 1 && $member['left_zone'] == 0){ ?>
+											<option value="1">A部</option>
+										<?php }elseif($_GET['zone']== 2 && $member['middle_zone'] == 0){ ?>
+											<option value="2">B部</option>
+										<?php }elseif($_GET['zone']== 3 && $member['right_zone'] == 0){ ?>
+											<option value="3">C部</option>
+										<?php } ?>
+										<!-- <if condition="$_GET['zone'] eq 1">
+												{$_GET['zone']}
+											<option value="1">A部</option>
+										<elseif condition="$_GET['zone'] == 2">
+												123
+											<option value="2">B部</option>
+										<elseif condition="$_GET['zone'] eq 3">
+											<option value="3">C部</option>
+										</if> -->
+									</select>
+			                    </div>
+			                </div>
+
+
+							<div class="ibox-title">
+								<h3>安全信息</h3>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">一级密码</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="psd1" minlength="6">
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">确认一级密码</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="confirm_psd1" minlength="6">
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">二级密码</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="psd2" minlength="6">
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label">确认二级密码</label>
+
+			                    <div class="col-sm-7">
+			                        <input type="text" class="form-control" name="confirm_psd2" minlength="6">
+			                    </div>
+			                </div>
+
+
+							<div class="form-group">
+			                    <label class="col-sm-2 control-label"></label>
+
+			                    <div class="col-sm-7">
+									<label class="checkbox-inline">
+			                            <input type="checkbox" value="option1" id="inlineCheckbox1" name="is_free"> 我已阅读并同意本协议 <a  data-toggle="modal" data-target="#myModal">查看协议</a>
+									</label>
+									<!-- <div class="text-center">
+	                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	                                        打开示例窗口
+	                                    </button>
+	                                </div> -->
+									<div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+		                                <div class="modal-dialog modal-lg">
+		                                    <div class="modal-content">
+		                                        <div class="modal-header">
+		                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		                                            <h4 class="modal-title">戎子酒庄销费商注册协议</h4>
+		                                        </div>
+		                                        <div class="modal-body">
+		                                            <p>一、一般规定</p>
+														   <p>1. 本服务协议双方为戎子酒庄与戎子酒庄用户(以下简称“用户”)。本服务协议用于规 范双方之间全部的法律关系及权利义务，具有合同效力。</p>
+														   <p>2.您在使用戎子酒庄营销系统提供的各项服务的同时，承诺接受并遵守各项相关规则的规定。戎子酒庄有权根据需要不时的制定、修改各类规则，此类规则会在发布后或经您确认后生效，亦成为本协议一部分。</p>
+														   <p>3.请您务必在注册之前认真阅读全部服务协议内容，如有任何疑问，可向戎子酒庄咨询。</p>
+														   <p>4.无论您事实上是否在注册之前认真阅读了本服务协议，只要您点击协议正本下方的"接受"按钮并按照戎子酒庄注册程序成功注册为用户，您的行为仍然表示您同意并签署了本服务协议。</p>
+														<p>二、用户资格</p>
+														<p>适用本协议注册的用户，应当具备的资格是:</p>
+														 <p> 1.必须是具备《中华人民共和国民法通则》规定的完全民事行为能力的自然人、合法证照的组织单位。无民事行为能力人、限制民事行为能力人以及无合法证照的组织不得注册并使用戎子酒庄营销系统</p>
+														  <p>2.所有注册销费商为消费定量的1万、3万、5万的红酒才能成为销费商，其保值增值分红或其他奖励为附加权益。
+														<p>三、用户的权利义务</p>
+														  <p>1.用户有权根据《戎子酒庄用户服务协议书》使用戎子酒庄营销系统服务功能，享受戎子酒庄有关活动以及有权优先享受戎子酒庄营销系统提供的其他的信息服务。</p>
+														 <p> 2.用户使用戎子酒庄营销系统时如遇到问题，可以向戎子酒庄相关部门进行咨询要求解答。</p>
+														 <p> 3.销费商有参会加公司业务学习、技能培训的权利，销费商有依法、依规，制定地方营销政策的权利，销费商有依法、依规，组织各网点学习交流的权利，销费商要积极开拓公司产品的销售市场，扩大产品的市场份</p>
+															额，协助公司在当地开展市场推广工作。</p>
+														 <p> 4.用户应根据本协议的规定，及时向戎子酒庄支付服务费用, 并按照国家的税收规定向</p>
+														<p>四、争议解决</p>
+														<p>  因本协议产生的争议或与本协议相关争议，戎子酒庄与用户可以协商解决。如协商不成或不愿意协商，任何任何一方均可向戎子酒庄营销系统总部办公场所所在地的人民法院提起诉讼。</p>
+														<p>五、其他协议内容</p>
+														<p>  1.除非本协议有特殊规定外，就本协议相关事项进行联系，双方应当使用电子邮件方式。用户的电子邮箱以注册时填写的电子邮箱为准。戎子酒庄各相关部门的电子邮箱以戎子酒庄营销系统上的注明为准。</p>
+														<p>   2.点击接受本协议并正确提交注册程序所需要的资料后，本协议在戎子酒庄与您之间成立并立即生效。</p>
+
+		                                        </div>
+
+		                                        <div class="modal-footer">
+		                                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+		                                            <!-- <button type="button" class="btn btn-primary">保存</button> -->
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+			                    </div>
+			                </div>
+
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-2">
+									<button class="btn btn-primary" type="submit">注册</button>
+									<!-- <button class="btn btn-white" type="reset">取消</button> -->
+								</div>
+							</div>
+			        </div>
+
+				</form>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<include file="public:footer" />
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script class="resources library" src="__PUBLIC__/js/area.js" type="text/javascript"></script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+	$().ready(function () {
+		// validate signup form on keyup and submit
+		$("#signupForm").validate({
+			rules: {
+				usernumber: {
+					required: true
+				},
+				realname: {
+					required: true
+				},
+				IDcard: {
+					required: true
+				},
+				mobile: {
+					required: true
+				},
+				bankname: {
+					required: true
+				},
+				bank_adress: {
+					required: true
+				},
+				banknumber: {
+					required: true
+				},
+				tuijiannumber: {
+					required: true
+				},
+				billcenternumber: {
+					required: true
+				},
+				parentnumber: {
+					required: true
+				},
+				psd1: {
+					required: true,
+					minlength: 6
+				},
+				confirm_psd1: {
+					required: true,
+					minlength: 6
+				},
+				psd2: {
+					required: true,
+					minlength: 6
+				},
+				confirm_psd2: {
+					required: true,
+					minlength: 6
+				},
+				is_free: {
+					required: true
+				},
+				zone: {
+					required: true
+				},
+				s_province: {
+					required: true
+				},
+				s_city: {
+					required: true
+				},
+				s_county: {
+					required: true
+				},
+				s_address: {
+					required: true
+				},
+				agree: "required"
+			},
+			messages: {
+				is_free: {
+					required: "如需注册请同意销费商注册协议",
+				},
+				psd1: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				confirm_psd1: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				psd2: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				},
+				confirm_psd2: {
+					required: "请输入您的密码",
+					minlength: "密码必须6位数以上"
+				}
+			}
+		});
+
+		$('.get_usernumber').click(function(){
+			var usernumber = $('.usernumber').val();
+			if(usernumber == null){
+				alert("请输入用户编号");return false;
+			}
+			$.ajax({
+	            url: "__APP__/Teams/get_usernumber",
+	            type: "get",
+	            data: {
+	                usernumber: usernumber
+	            },
+	            success: function (resdata) {
+					resdata = JSON.parse(resdata);
+
+						$(".usernumber_err").show();
+	                if (resdata.success == true) {
+						if(resdata.data == 0){
+							$(".usernumber_err").html("用户编号验证成功,可以注册");
+						}else{
+
+							$(".usernumber_err").html("用户编号已存在,请重新输入用户编号");
+						}
+	                } else {
+						$(".usernumber_err").html("编号验证出现错误 请重试");
+	                }
+	            }
+	        });
+		});
+
+		$('.get_billcenternumber').click(function(){
+			var tuijiannumber = $('.tuijiannumber').val();
+			if(tuijiannumber == ""){
+				alert("请输入推荐人编号");return false;
+			}
+			$.ajax({
+	            url: "__APP__/Teams/get_billcenternumber",
+	            type: "get",
+	            data: {
+	                usernumber: tuijiannumber
+	            },
+	            success: function (resdata) {
+					resdata = JSON.parse(resdata);
+	                if (resdata.success == true) {
+						if(resdata.data == 0){
+							alert("用户代理商编号获取失败,请重新输入用户编号");
+						}else{
+							$('.billcenternumber').val(resdata.data);
+						}
+	                } else {
+	                    alert("用户代理商编号获取错误 请重试");
+	                }
+	            }
+	        });
+		});
+
+		$(".userrank").change(function(){
+			//1瓶 1箱 3箱 5箱
+			//red_wine_number_span red_wine_number_give
+			//red_wine_number
+			if($(this).val() == 1){
+				$('.red_wine_number_give').html("1瓶")
+				$('.red_wine_number_span').html(0)
+				$('.red_wine_number').val(0)
+			}else if($(this).val() == 2){
+				$('.red_wine_number_give').html("1箱")
+				$('.red_wine_number_span').html(0)
+				$('.red_wine_number').val(0)
+			}else if($(this).val() == 3){
+				$('.red_wine_number_give').html("3箱")
+				$('.red_wine_number_span').html(1)
+				$('.red_wine_number').val(1)
+
+			}else if($(this).val() == 4){
+				$('.red_wine_number_give').html("5箱")
+				$('.red_wine_number_span').html(3)
+				$('.red_wine_number').val(3)
+			}
+
+		});
+
+		$('.parentnumber').blur(function(){
+
+			var parentnumber = $('.parentnumber').val();
+			if(parentnumber == ""){
+				alert("请输入推荐人编号");return false;
+			}
+			$.ajax({
+	            url: "__APP__/Teams/get_parentnumber_zone",
+	            type: "get",
+				dataType: "JSON",
+	            data: {
+	                usernumber: parentnumber
+	            },
+	            success: function (resdata) {
+	                if (resdata.success == true) {
+						if(resdata.data == ""){
+							alert("用户区间获取失败,请重新输入推荐人用户编号");
+						}else{
+							var zone_list = resdata.data
+							// var zone_list = JSON.stringify(resdata.data);
+							var obj=document.getElementById('zone');
+							obj.innerHTML = "";
+							for(var key in zone_list){
+							   //key是属性,object[key]是值
+							   if(zone_list[key] == 0){
+								   if(key == "left_zone"){
+									   obj.options.add(new Option("A部","1"));
+								   }else if(key == "middle_zone"){
+									   obj.options.add(new Option("B部","2"));
+								   }else if(key == "right_zone"){
+									   obj.options.add(new Option("C部","3"));
+								   }
+							   }
+							}
+
+
+						}
+	                } else {
+	                    alert("用户代理商编号获取错误 请重试");
+	                }
+	            }
+	        });
+		});
+
+
+
+	});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var Gid  = document.getElementById ;
+
+var showArea = function(){
+
+	Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+
+	Gid('s_city').value + " - 县/区" +
+
+	Gid('s_county').value + "</h3>"
+
+}
+
+//Gid('s_county').setAttribute('onchange','showArea()');
+
+</script>
+
+
+<script type="text/javascript">_init_area();</script>

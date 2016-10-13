@@ -1,0 +1,150 @@
+<include file="public:header" />
+<div class="row wrapper wrapper-content border-bottom white-bg page-heading" style="border-bottom:3px solid #f1c703 !important">
+	<div class="col-lg-10"  style="padding:0px;">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__APP__">首页</a>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content">
+
+	<div class="row">
+		<div class="col-lg-2 col-md-offset-3">
+			<div class="widget  p-lg text-center">
+                <a href="__APP__/Teams/register"><div class="m-b-md">
+					<img src="__PUBLIC__/img/tianjiaren.png" alt="" style="width:60px;height:60px"/>
+                    <h1 class="m-xs"></h1>
+                    <h3 class="no-margins" >
+                    注册销费商
+                </h3>
+                </div></a>
+            </div>
+		</div>
+		<div class="col-lg-2">
+			<div class="widget  p-lg text-center">
+                <a href="__APP__/Finances/cash"><div class="m-b-md">
+                    <img src="__PUBLIC__/img/qianbao.png" alt="" style="width:60px;height:60px"/>
+                    <h1 class="m-xs"></h1>
+                    <h3 class="no-margins">
+                    申请提现
+                </h3>
+				</div></a>
+            </div>
+		</div>
+		<div class="col-lg-2">
+			<div class="widget  p-lg text-center">
+                <a href="__APP__/Finances/transfer"><div class="m-b-md">
+                    <img src="__PUBLIC__/img/money.png" alt="" style="width:60px;height:60px"/>
+                    <h1 class="m-xs"></h1>
+                    <h3 class="no-margins">
+                    系统内部转账
+                </h3>
+                </div></a>
+            </div>
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5 style="float: none !important;">销费商信息</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-hover no-margins table-bordered table-striped">
+								<tbody>
+									<tr>
+										<td>销费商编号:{$member['usernumber']}</td>
+										<td>销费商姓名:{$member['realname']}</td>
+										<td>销费商级别:{$member['userrank']}</td>
+										<td>销费商头衔:<if condition="$member['usertitle'] neq ''">{$member['usertitle']}星销费商<else/>无头衔</if>
+
+										</td>
+									</tr>
+									<tr>
+										<td>注册币余额:{$member['baodanbi']}</td>
+										<td>奖金币余额:{$member['jiangjinbi']}</td>
+										<td>戎子盾:{$member['rongzidun']}</td>
+										<td>福利积分:{$member['jianglijifen']}</td>
+									</tr>
+									<tr>
+										<td>推荐人数:{$recommend_count}</td>
+										<td>A部业绩:{$member['leftachievement']}</td>
+										<td>B部业绩:{$member['middleachievement']}</td>
+										<td>C部业绩:{$member['rightachievement']}</td>
+									</tr>
+
+									<tr>
+										<td>数字红酒资格:{$member['red_wine_number']}</td>
+										<td>激活币:{$member['jihuobi']}</td>
+										<if condition="$member['isbill'] == 1">
+											<td>代理商</td>
+										</if>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5 style="float: none !important;">奖金统计</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-hover no-margins table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>日期</th>
+										<th>分红</th>
+										<th>管理补贴</th>
+										<th>互助补贴</th>
+										<th>拓展补贴</th>
+										<th>市场补贴</th>
+										<th>销售补贴</th>
+										<th>服务补贴</th>
+										<th>二次消费补贴</th>
+										<th>应发金额累计</th>
+										<th>实发金额累计</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<foreach name="bonus_count" item="bonus">
+										<tr>
+
+											<td>{$bonus['count_date']|date="Y-m-d",###}</td>
+											<td>{$bonus['bonus1']}</td>
+											<td>{$bonus['bonus2']}</td>
+											<td>{$bonus['bonus3']}</td>
+											<td>{$bonus['bonus4']}</td>
+											<td>{$bonus['bonus5']}</td>
+											<td>{$bonus['bonus6']}</td>
+											<td>{$bonus['bonus7']}</td>
+											<td>{$bonus['bonus8']}</td>
+											<td>{$bonus['total']}</td>
+											<td>{$bonus['real_total']}</td>
+											<td><a href="__APP__/Bonus/info?id={$bonus['id']}">查看明细</a></td>
+										</tr>
+									</foreach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</div>
+</div>
+<include file="public:footer" />

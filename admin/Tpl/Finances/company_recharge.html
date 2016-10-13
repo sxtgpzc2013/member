@@ -1,0 +1,109 @@
+<include file="public:header" />
+<link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<ol class="breadcrumb">
+			<a href="__URL__"><i class="fa fa-home"></i></a>
+            <li>
+                <a href="__URL__">首页</a>
+            </li>
+            <li>
+                <a>财务管理</a>
+            </li>
+            <li>
+                <strong>公司充值</strong>
+            </li>
+        </ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content animated">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="text-center">公司充值</h5>
+
+                </div>
+                <div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm" method="post" action="__ACTION__">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*销费商编号:</label>
+                            <div class="col-sm-6">
+                                <input id="usernumber" name="usernumber" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                                <input type="hidden" name="form_key" value="yes" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*充币金额:</label>
+                            <div class="col-sm-6">
+                                <input id="number" name="money" class="form-control" type="text" value="1">
+                            </div>
+                        </div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">*币种类型:</label>
+							<div class="col-sm-6">
+								<label class="checkbox-inline"><input type="radio" name="type" value="1" id="inlineCheckbox1"> 奖金币</label>
+								<label class="checkbox-inline"><input type="radio" name="type" value="2" id="inlineCheckbox2" checked> 注册币</label>
+								<label class="checkbox-inline"><input type="radio" name="type" value="3" id="inlineCheckbox3"> 激活币</label>
+								<label class="checkbox-inline"><input type="radio" name="type" value="4" id="inlineCheckbox4"> 戎子盾</label>
+								<label class="checkbox-inline"><input type="radio" name="type" value="5" id="inlineCheckbox6"> 福利积分</label>
+							</div>
+						</div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<include file="public:footer" />
+<!-- jQuery Validation plugin javascript-->
+<script src="__PUBLIC__/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__PUBLIC__/js/plugins/validate/messages_zh.min.js"></script>
+<script>
+   //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+   $.validator.setDefaults({
+	   highlight: function (element) {
+		   $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	   },
+	   success: function (element) {
+		   element.closest('.form-group').removeClass('has-error').addClass('has-success');
+	   },
+	   errorElement: "span",
+	   errorClass: "help-block m-b-none",
+	   validClass: "help-block m-b-none"
+
+
+   });
+
+	//以下为官方示例
+   $().ready(function () {
+	   // validate signup form on keyup and submit
+	   $("#signupForm").validate({
+		   rules: {
+			   usernumber: {
+				   required: true
+			   },
+			   number: {
+				   required: true,
+			   },
+			   type: {
+				   required: true,
+			   },
+			   agree: "required"
+		   },
+		   messages: {
+
+		   }
+	   });
+   });
+</script>
