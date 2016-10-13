@@ -108,11 +108,7 @@ def insert_bonus_detail_8(uid, usernumber, realname, repeatcash):
 			""" % (8, 8, uid, usernumber, realname, 1, 1, '戎子', 10, 0, taxmoney_award, now_second)
 			conn.dml(taxmoney_change_sql, 'insert')
 
-<<<<<<< HEAD
-		print "二次消费补贴成功"
 
-=======
->>>>>>> a86f3fd366dd857e360a4f935716171cc865090d
 # 极差算法, value 是销售的金额
 def jicha(value, memberlevels):
 	for index, val in enumerate(memberlevels):
