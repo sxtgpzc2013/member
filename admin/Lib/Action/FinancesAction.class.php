@@ -164,70 +164,7 @@ class FinancesAction extends CommonAction {
     {
 
         //默认导出今天数据
-        <td>{$item.realname}</td>
-                                        <td>{$item.targetrealname}</td>
-                                        <td>￥{$item.money}</td>
-                                        <td>
-                                            <if condition="$item['moneytype'] eq 1">
-                                                奖金币
-                                            <elseif condition="$item['moneytype'] eq 2" />
-                                                注册币
-                                            <elseif condition="$item['moneytype'] eq 3" />
-                                                戎子盾
-                                            <elseif condition="$item['moneytype'] eq 4" />
-                                                激活币
-                                            <elseif condition="$item['moneytype'] eq 5" />
-                                                福利积分
-                                            <elseif condition="$item['moneytype'] eq 6" />
-                                                爱心基金
-                                            <elseif condition="$item['moneytype'] eq 7" />
-                                                平台管理费
-                                            <elseif condition="$item['moneytype'] eq 8" />
-                                                税费
-                                            </if>
-                                        </td>
-                                        <td>
-                                            <if condition="$item['changetype'] eq 0">
-                                                未知
-                                            <elseif condition="$item['changetype'] eq 1" />
-                                                公司充值
-                                            <elseif condition="$item['changetype'] eq 2" />
-                                                公司扣币
-                                            <elseif condition="$item['changetype'] eq 3" />
-                                                分红
-                                            <elseif condition="$item['changetype'] eq 4" />
-                                                管理补贴
-                                            <elseif condition="$item['changetype'] eq 5" />
-                                                互助补贴
-                                            <elseif condition="$item['changetype'] eq 6" />
-                                                拓展补贴
-                                            <elseif condition="$item['changetype'] eq 7" />
-                                                市场补贴
-                                            <elseif condition="$item['changetype'] eq 8" />
-                                                销售补贴
-                                            <elseif condition="$item['changetype'] eq 9" />
-                                                服务补贴
-                                            <elseif condition="$item['changetype'] eq 10" />
-                                                服务补贴
-                                            <elseif condition="$item['changetype'] eq 11" />
-                                                销费商提现
-                                            <elseif condition="$item['changetype'] eq 12" />
-                                                处理提现
-                                            <elseif condition="$item['changetype'] eq 13" />
-                                                消费
-                                            <elseif condition="$item['changetype'] eq 14" />
-                                                系统内部转账
-                                            <elseif condition="$item['changetype'] eq 15" />
-                                                币种转换
-                                            </if>
-                                        </td>
-                                        <td>
-                                            <if condition="$item['recordtype'] eq 0">
-                                                减少
-                                            <elseif condition="$item['recordtype'] eq 1" />
-                                                增加
-                                            </if>
-                                        </td>
+    
         //导出筛选数据
         $params = array(
 
