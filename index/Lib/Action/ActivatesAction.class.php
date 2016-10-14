@@ -54,7 +54,7 @@ class ActivatesAction extends CommonAction {
 			'where' => "billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0"
 
 		);
-
+		
     	$data = $this -> model -> order_select($params);
 
 		foreach ($data['result'] as $key => $value) {
