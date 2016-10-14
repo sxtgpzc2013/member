@@ -495,41 +495,53 @@
 			    			$member_detail_add = $this -> model -> my_add($params);
 
 			    			//写入流水
-			    			$params = array(
+			    			$sell_money_change = $this -> _send_money_change(array(
 
-			    				'table_name' => 'money_change',
+			    				'member' => $member_find,
 
-			    				'data' => array(
+		    					'money' => $member_jiangjinbi,
 
-			    					'moneytype' => 1,
+		    					'hasmoney' => $member_data['jiangjinbi'],
 
-			    					'status' => 1,
+		    					'changetype' => 8
+			    			));
 
-			    					'targetuserid' => $member_find['uid'],
+			    			//写入流水
+			    			// $params = array(
 
-			    					'targetusernumber' => $member_find['usernumber'],
+			    			// 	'table_name' => 'money_change',
 
-			    					'userid' => 1,
+			    			// 	'data' => array(
 
-			    					'usernumber' => 1,
+			    			// 		'moneytype' => 1,
 
-			    					'changetype' => 8,
+			    			// 		'status' => 1,
 
-			    					'recordtype' => 1,
+			    			// 		'targetuserid' => $member_find['uid'],
 
-			    					'money' => ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8),
+			    			// 		'targetusernumber' => $member_find['usernumber'],
 
-			    					'hasmoney' => $member_data['jiangjinbi'],
+			    			// 		'userid' => 1,
 
-			    					'createtime' => time(),
+			    			// 		'usernumber' => 1,
 
-			    					'realname' => '戎子',
+			    			// 		'changetype' => 8,
 
-			    					'targetrealname' => $member_find['realname']
-			    				)
-			    			);
+			    			// 		'recordtype' => 1,
 
-			    			$jiangjinbi_8_add = $this -> model -> my_add($params);
+			    			// 		'money' => ($result['total_price'] * ($bonus_rule_find['value']/100) * 0.8),
+
+			    			// 		'hasmoney' => $member_data['jiangjinbi'],
+
+			    			// 		'createtime' => time(),
+
+			    			// 		'realname' => '戎子',
+
+			    			// 		'targetrealname' => $member_find['realname']
+			    			// 	)
+			    			// );
+
+			    			// $jiangjinbi_8_add = $this -> model -> my_add($params);
 
 			    			//增加用户max_bonus
 			    			$params = array(
@@ -678,46 +690,58 @@
 			    				//写入财务
 			    				$finance_save = $this -> _save_to_finance($up_add_jprice, 'expend');
 
+			    				//写入流水
+				    			$fuwu_money_change = $this -> _send_money_change(array(
+
+				    				'member' => $v,
+
+			    					'money' => $up_add_jprice,
+
+			    					'hasmoney' => $up_add_real_jpricev,
+
+			    					'changetype' => 9
+				    			));
+
 				    			//计入流水
-				    			$params = array(
+				    			// $params = array(
 
-				    				'table_name' => 'money_change',
+				    			// 	'table_name' => 'money_change',
 
-				    				'data' => array(
+				    			// 	'data' => array(
 
-				    					'moneytype' => 1,
+				    			// 		'moneytype' => 1,
 
-				    					'status' => $up_save,
+				    			// 		'status' => $up_save,
 
-				    					'targetuserid' => $v['uid'],
+				    			// 		'targetuserid' => $v['uid'],
 
-				    					'targetusernumber' => $v['usernumber'],
+				    			// 		'targetusernumber' => $v['usernumber'],
 
-				    					'userid' => 1,
+				    			// 		'userid' => 1,
 
-				    					'usernumber' => 1,
+				    			// 		'usernumber' => 1,
 
-				    					'userid' => 1,
+				    			// 		'userid' => 1,
 
-				    					'usernumber' => 1,
+				    			// 		'usernumber' => 1,
 
-				    					'changetype' => 9,
+				    			// 		'changetype' => 9,
 
-				    					'recordtype' => 1,
+				    			// 		'recordtype' => 1,
 
-				    					'money' => $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8,
+				    			// 		'money' => $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8,
 
-				    					'hasmoney' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
+				    			// 		'hasmoney' => $v['jiangjinbi'] + ($result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k] * 0.8),
 
-				    					'createtime' => time(),
+				    			// 		'createtime' => time(),
 
-				    					'realname' => '戎子',
+				    			// 		'realname' => '戎子',
 
-				    					'targetrealname' => $v['realname']
-				    				)
-				    			);
+				    			// 		'targetrealname' => $v['realname']
+				    			// 	)
+				    			// );
 
-				    			$up_money_change_add = $this -> model -> my_add($params);
+				    			// $up_money_change_add = $this -> model -> my_add($params);
 
 				    			//写入bonus_detail
 				    			$up_jiangjinbi = $result['total_price'] * ($bonus_rule_find['value']/100) * $bonus_rules_re[$k];
@@ -894,5 +918,203 @@
 	    	{
 	    		$this -> _back('签收失败 请重试');
 	    	}
+	    }
+
+	    /**
+		 * 写入补贴流水记录
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function _send_money_change($dt)
+	    {
+	    	//写入奖金币增加流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 1,
+
+					'status' => 1,
+
+					'targetuserid' => $dt['member']['uid'],
+
+					'targetusernumber' => $dt['member']['usernumber'],
+
+					'userid' => 1,
+
+					'usernumber' => 1,
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 1,
+
+					'money' => $dt['money'] * 0.8,
+
+					'hasmoney' => $dt['hasmoney'],
+
+					'createtime' => time(),
+
+					'realname' => '戎子',
+
+					'targetrealname' => $dt['member']['realname']
+				)
+			);
+
+			$jiangjinbi_add = $this -> model -> my_add($params);
+
+			//写入奖金币出账流水
+			// $params = array(
+
+			// 	'table_name' => 'money_change',
+
+			// 	'data' => array(
+
+			// 		'moneytype' => 1,
+
+			// 		'status' => 1,
+
+			// 		'targetuserid' => $dt['member']['uid'],
+
+			// 		'targetusernumber' => $dt['member']['usernumber'],
+
+			// 		'userid' => 1,
+
+			// 		'usernumber' => 1,
+
+			// 		'changetype' => $dt['changetype'],
+
+			// 		'recordtype' => 1,
+
+			// 		'money' => $dt['money'] * 0.8,
+
+			// 		'hasmoney' => $dt['hasmoney'],
+
+			// 		'createtime' => time(),
+
+			// 		'realname' => '戎子',
+
+			// 		'targetrealname' => $dt['member']['realname']
+			// 	)
+			// );
+
+			// $jiangjinbi_add = $this -> model -> my_add($params);
+
+	    	//写入爱心基金增加流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 6,
+
+					'status' => 1,
+
+					'targetuserid' => $dt['member']['uid'],
+
+					'targetusernumber' => $dt['member']['usernumber'],
+
+					'userid' => 1,
+
+					'usernumber' => 1,
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 0,
+
+					'money' => $dt['money'] * 0.01,
+
+					'hasmoney' => $dt['money'] * 0.01,
+
+					'createtime' => time(),
+
+					'realname' => '戎子',
+
+					'targetrealname' => $dt['member']['realname']
+				)
+			);
+
+			$lovemoney_add = $this -> model -> my_add($params);
+
+	    	//写入平台管理费增加流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 7,
+
+					'status' => 1,
+
+					'targetuserid' => $dt['member']['uid'],
+
+					'targetusernumber' => $dt['member']['usernumber'],
+
+					'userid' => 1,
+
+					'usernumber' => 1,
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 0,
+
+					'money' => $dt['money'] * 0.02,
+
+					'hasmoney' => $dt['money'] * 0.02,
+
+					'createtime' => time(),
+
+					'realname' => '戎子',
+
+					'targetrealname' => $dt['member']['realname']
+				)
+			);
+
+			$platmoney_add = $this -> model -> my_add($params);
+
+	    	//写入税费增加流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 8,
+
+					'status' => 1,
+
+					'targetuserid' => $dt['member']['uid'],
+
+					'targetusernumber' => $dt['member']['usernumber'],
+
+					'userid' => 1,
+
+					'usernumber' => 1,
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 0,
+
+					'money' => $dt['money'] * 0.17,
+
+					'hasmoney' => $dt['money'] * 0.17,
+
+					'createtime' => time(),
+
+					'realname' => '戎子',
+
+					'targetrealname' => $dt['member']['realname']
+				)
+			);
+
+			$taxmoney_add = $this -> model -> my_add($params);
 	    }
 	}
