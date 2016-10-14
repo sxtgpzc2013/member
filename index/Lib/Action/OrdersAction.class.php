@@ -287,6 +287,9 @@
 	    					//扣除库存
 	    					$product_data['surplus'] = ($product_find['surplus'] - $v['count']) >= 0 ? intval($product_find['surplus'] - $v['count']) : 0;
 
+	    					//增加已售卖数量
+	    					$product_data['sell_count'] = $product_find['sell_count'] + $v['count'];
+
 	    					$product_data['updated_at'] = time();
 
 	    					$params = array(
@@ -328,9 +331,13 @@
 
 	    				'data' => array(
 
-	    					'moneytype' => 6,
+	    					'moneytype' => 1,
 
 	    					'status' => 1,
+
+	    					'targetuserid' => 1,
+
+	    					'targetusernumber' => 1,
 
 	    					'userid' => $member_find['uid'],
 
@@ -346,7 +353,7 @@
 
 	    					'createtime' => time(),
 
-	    					'targetrealname' => '系统',
+	    					'targetrealname' => '戎子',
 
 	    					'realname' => $member_find['realname']
 	    				)
@@ -364,6 +371,10 @@
 
 	    					'status' => 1,
 
+	    					'targetuserid' => 1,
+
+	    					'targetusernumber' => 1,
+
 	    					'userid' => $member_find['uid'],
 
 	    					'usernumber' => $member_find['usernumber'],
@@ -378,7 +389,7 @@
 
 	    					'createtime' => time(),
 
-	    					'targetrealname' => '系统',
+	    					'targetrealname' => '戎子',
 
 	    					'realname' => $member_find['realname']
 	    				)
@@ -490,13 +501,17 @@
 
 			    				'data' => array(
 
-			    					'moneytype' => 6,
+			    					'moneytype' => 1,
 
 			    					'status' => 1,
 
 			    					'targetuserid' => $member_find['uid'],
 
 			    					'targetusernumber' => $member_find['usernumber'],
+
+			    					'userid' => 1,
+
+			    					'usernumber' => 1,
 
 			    					'changetype' => 8,
 
@@ -508,7 +523,7 @@
 
 			    					'createtime' => time(),
 
-			    					'realname' => '系统',
+			    					'realname' => '戎子',
 
 			    					'targetrealname' => $member_find['realname']
 			    				)
@@ -583,11 +598,11 @@
 
 	    			$members = $this -> model -> order_select($params, 'no');
 
-	    			$upmember[1] = count($members) >= 1 ? $members[count($members)-1] : 0;
+	    			$upmember[1] = count($members) >= 2 ? $members[count($members)-2] : 0;
 
-	    			$upmember[2] = count($members) >= 2 ? $members[count($members)-2] : 0;
+	    			$upmember[2] = count($members) >= 3 ? $members[count($members)-3] : 0;
 
-	    			$upmember[3] = count($members) >= 3 ? $members[count($members)-3] : 0;
+	    			$upmember[3] = count($members) >= 4 ? $members[count($members)-4] : 0;
 
 	    			//更新
 	    			foreach ($upmember as $k => $v)
@@ -670,13 +685,21 @@
 
 				    				'data' => array(
 
-				    					'moneytype' => 6,
+				    					'moneytype' => 1,
 
 				    					'status' => $up_save,
 
 				    					'targetuserid' => $v['uid'],
 
 				    					'targetusernumber' => $v['usernumber'],
+
+				    					'userid' => 1,
+
+				    					'usernumber' => 1,
+
+				    					'userid' => 1,
+
+				    					'usernumber' => 1,
 
 				    					'changetype' => 9,
 
@@ -688,7 +711,7 @@
 
 				    					'createtime' => time(),
 
-				    					'realname' => '系统',
+				    					'realname' => '戎子',
 
 				    					'targetrealname' => $v['realname']
 				    				)

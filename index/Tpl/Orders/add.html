@@ -62,7 +62,9 @@
 	                                        	<foreach name="result['products']" item="product">
 			                                        <tr>
 														<td>
-			                                                <img src="__PUBLIC__/img/a8.jpg" alt="" style="width:100px;height:100px;"/>
+			                                                <if condition="$product['logo'] neq ''">
+																<img src="http://image.enjvip.com/images/products/s_{$product.logo}" style="height:100px; width:100px;" />
+															</if>
 			                                            </td>
 			                                            <td>
 			                                                <div><strong>{$product.name}</strong>
