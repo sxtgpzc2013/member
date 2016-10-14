@@ -586,11 +586,11 @@
 
 	    			$members = $this -> model -> order_select($params, 'no');
 
-	    			$upmember[1] = count($members) >= 1 ? $members[count($members)-1] : 0;
+	    			$upmember[1] = count($members) >= 2 ? $members[count($members)-2] : 0;
 
-	    			$upmember[2] = count($members) >= 2 ? $members[count($members)-2] : 0;
+	    			$upmember[2] = count($members) >= 3 ? $members[count($members)-3] : 0;
 
-	    			$upmember[3] = count($members) >= 3 ? $members[count($members)-3] : 0;
+	    			$upmember[3] = count($members) >= 4 ? $members[count($members)-4] : 0;
 
 	    			//更新
 	    			foreach ($upmember as $k => $v)
