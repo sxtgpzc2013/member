@@ -70,6 +70,7 @@ def insert_bonus_detail_8(uid, usernumber, realname, repeatcash):
 			zx_finance_sql = """
 				update zx_finance set expend = expend + %s, createtime = %s
 			""" % (repeatcash, now_second)
+			conn.dml(zx_finance_sql, 'update')
 			# 明细
 			zx_bonus_detail_sql = """
 				insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jiangjinbi, rongzidun, lovemoney, platmoney, taxmoney, total, real_total, createdate)
@@ -107,7 +108,6 @@ def insert_bonus_detail_8(uid, usernumber, realname, repeatcash):
 			""" % (8, 8, uid, usernumber, realname, 1, 1, '戎子', 10, 0, taxmoney_award, now_second)
 			conn.dml(taxmoney_change_sql, 'insert')
 
-		print "二次消费补贴成功"
 
 # 极差算法, value 是销售的金额
 def jicha(value, memberlevels):

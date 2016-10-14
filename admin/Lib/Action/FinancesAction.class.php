@@ -151,6 +151,86 @@ class FinancesAction extends CommonAction {
     }
 
     /**
+     * 财务流水
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function finance_flow_download()
+    {
+
+        //默认导出今天数据
+    
+        //导出筛选数据
+        $params = array(
+
+            'table_name' => 'money_change',
+
+            'where' => "1",
+
+            'order' => 'createtime desc'
+        );
+
+        //相关销费商   目标销费商   变更金额    变更币种    类型  变更状态    时间
+        $xlsData = $this -> model -> easy_select($params);
+
+        $xlsName  = "Corps";
+
+        $xlsCell  = array(
+            array('realname','相关销费商'),
+            array('targetrealname','目标销费商'),
+            array('money','变更金额'),
+            array('moneytype','变更币种'),
+            array('changetype','类型'),
+            array('recordtype','变更状态'),
+            array('createtime','时间')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($item['moneytype'] == 1){
+                $xlsData[$key]['moneytype'] = "奖金币";
+            } elseif ($value['moneytype'] == 2){
+                $xlsData[$key]['moneytype'] = "注册币";
+            } elseif ($value['moneytype'] == 3){
+                $xlsData[$key]['moneytype'] = "戎子盾";
+            } elseif ($value['moneytype'] == 4){
+                $xlsData[$key]['moneytype'] = "激活币";
+            } elseif ($value['moneytype'] == 5){
+                $xlsData[$key]['moneytype'] = "福利积分";
+            } elseif ($value['moneytype'] == 6){
+                $xlsData[$key]['moneytype'] = "爱心基金";
+            } elseif ($value['moneytype'] == 7){
+                $xlsData[$key]['moneytype'] = "平台管理费";
+            } elseif ($value['moneytype'] == 8){
+                $xlsData[$key]['moneytype'] = "税费";
+            }
+
+            // $xlsData[$key]['title'] = $xlsData[$key]['title']."级销费商";
+
+            // if ($value['status'] == 0) {
+            //     $xlsData[$key]['status'] = "未激活";
+            // } elseif ($value['status'] == 1) {
+            //     $xlsData[$key]['status'] = "已激活";
+            // } elseif ($value['status'] == -1) {
+            //     $xlsData[$key]['status'] = "已删除";
+            // } elseif ($value['status'] == -2) {
+            //     $xlsData[$key]['status'] = "已冻结";
+            // } else {
+            //     $xlsData[$key]['status'] = "未知";
+            // }
+
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+    }
+
+    /**
 	 * 转账明细
 	 *
 	 * 参数描述：
@@ -295,29 +375,29 @@ class FinancesAction extends CommonAction {
     		$member_save = $this -> model -> my_save($params);
 
     		$money_change_data['moneytype'] = $moneytype;
-    			
+
 			$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['userid'] = $user_find['uid'];
-			
+
 			$money_change_data['usernumber'] = $user_find['usernumber'];
-			
+
 			$money_change_data['realname'] = $user_find['realname'];
-			
+
 			$money_change_data['changetype'] = 1;
-			
+
 			$money_change_data['recordtype'] = 1;
-			
+
 			$money_change_data['money'] = $money;
-			
+
 			$money_change_data['hasmoney'] = $balance;
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
@@ -460,29 +540,29 @@ class FinancesAction extends CommonAction {
     		$member_save = $this -> model -> my_save($params);
 
     		$money_change_data['moneytype'] = $moneytype;
-    			
+
 			$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['userid'] = $user_find['uid'];
-			
+
 			$money_change_data['usernumber'] = $user_find['usernumber'];
-			
+
 			$money_change_data['realname'] = $user_find['realname'];
-			
+
 			$money_change_data['changetype'] = 2;
-			
+
 			$money_change_data['recordtype'] = 0;
-			
+
 			$money_change_data['money'] = $money;
-			
+
 			$money_change_data['hasmoney'] = $balance;
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水
@@ -660,7 +740,7 @@ class FinancesAction extends CommonAction {
 	    		$member_save = $this -> model -> my_save($params);
 
 	    		$money_change_data['status'] = $member_save ? 1 : 0;
-			
+
 				$money_change_data['recordtype'] = 1;
 
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 && $member_save ? $member_find['jiangjinbi'] + $cash_find['money'] : $member_find['jiangjinbi'];
@@ -668,26 +748,26 @@ class FinancesAction extends CommonAction {
     		elseif ($type == 'agreen')
     		{
 				$money_change_data['status'] = 1;
-			
+
 				$money_change_data['recordtype'] = 0;
-			
+
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 ? $member_find['jiangjinbi'] : 0;
     		}
 
     		$money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 6 : 0;
-			
+
 			$money_change_data['targetuserid'] = $member_find['uid'];
-			
+
 			$money_change_data['targetusernumber'] = $member_find['usernumber'];
-			
+
 			$money_change_data['targetrealname'] = $member_find['realname'];
-			
+
 			$money_change_data['realname'] = '系统';
-			
+
 			$money_change_data['changetype'] = 12;
-			
+
 			$money_change_data['money'] = $cash_find['money'];
-			
+
 			$money_change_data['createtime'] = time();
 
 			//存入流水

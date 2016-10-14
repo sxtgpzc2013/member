@@ -186,8 +186,10 @@
 			   }
 		   });
 	   });
-
-	   var sub = document.getElementById("subbtn");
-	   sub.click()
+	   
+		<?php if($_GET['usernumber']){ ?>
+	   	var sub = document.getElementById("subbtn");
+	   	sub.click();
+	   	<?php }?>
    });
 </script>

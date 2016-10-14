@@ -538,8 +538,8 @@ class ActivatesAction extends CommonAction {
 
 			//调用Python脚本
 			//exec("python ./");
-			system("python ./scripts/manage_bonus.py", $ret);
-   			system("python ./scripts/achievement.py", $ret2);
+			system("python ./scripts/main.py", $ret);
+   // 			system("python ./scripts/achievement.py", $ret2);
 			//更新消费套餐红酒订单 添加一份订单
 			$this -> save_red_order($member);
 
