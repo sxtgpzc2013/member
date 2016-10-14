@@ -128,7 +128,7 @@ def main():
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
+							#insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 300000 and value < 800000: 
 				title = 2				
 				jianglijifen = 9000
@@ -138,7 +138,7 @@ def main():
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
+							#insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 800000 and value < 2000000:
 				title = 3
 				jianglijifen = 24000
@@ -148,7 +148,7 @@ def main():
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
+							#insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 2000000 and value < 5000000:
 				title = 4
 				jianglijifen = 60000     
@@ -158,7 +158,7 @@ def main():
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
+							#insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 5000000 and value < 8000000:
 				title = 5
 				jianglijifen = 150000
@@ -168,7 +168,7 @@ def main():
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
+							#insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 			elif value >= 8000000:
 				title = 6
 				jianglijifen = 240000
@@ -178,7 +178,7 @@ def main():
 						status = update_member(title, jianglijifen, usernumber)
 						if status:
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
-							insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
+							#insert_money_change_jianglijifen(5, uid, usernumber, realname, 4, 1, jianglijifen)
 
 	conn.close()
 	print "ok"
