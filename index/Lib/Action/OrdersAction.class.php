@@ -287,6 +287,9 @@
 	    					//扣除库存
 	    					$product_data['surplus'] = ($product_find['surplus'] - $v['count']) >= 0 ? intval($product_find['surplus'] - $v['count']) : 0;
 
+	    					//增加已售卖数量
+	    					$product_data['sell_count'] = $product_find['sell_count'] + $v['count'];
+
 	    					$product_data['updated_at'] = time();
 
 	    					$params = array(
