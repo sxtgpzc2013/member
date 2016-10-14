@@ -331,7 +331,7 @@
 
 	    				'data' => array(
 
-	    					'moneytype' => 6,
+	    					'moneytype' => 1,
 
 	    					'status' => 1,
 
@@ -501,7 +501,7 @@
 
 			    				'data' => array(
 
-			    					'moneytype' => 6,
+			    					'moneytype' => 1,
 
 			    					'status' => 1,
 
@@ -685,7 +685,7 @@
 
 				    				'data' => array(
 
-				    					'moneytype' => 6,
+				    					'moneytype' => 1,
 
 				    					'status' => $up_save,
 
