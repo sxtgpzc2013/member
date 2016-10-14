@@ -335,6 +335,10 @@
 
 	    					'status' => 1,
 
+	    					'targetuserid' => 1,
+
+	    					'targetusernumber' => 1,
+
 	    					'userid' => $member_find['uid'],
 
 	    					'usernumber' => $member_find['usernumber'],
@@ -349,7 +353,7 @@
 
 	    					'createtime' => time(),
 
-	    					'targetrealname' => '系统',
+	    					'targetrealname' => '戎子',
 
 	    					'realname' => $member_find['realname']
 	    				)
@@ -367,6 +371,10 @@
 
 	    					'status' => 1,
 
+	    					'targetuserid' => 1,
+
+	    					'targetusernumber' => 1,
+
 	    					'userid' => $member_find['uid'],
 
 	    					'usernumber' => $member_find['usernumber'],
@@ -381,7 +389,7 @@
 
 	    					'createtime' => time(),
 
-	    					'targetrealname' => '系统',
+	    					'targetrealname' => '戎子',
 
 	    					'realname' => $member_find['realname']
 	    				)
@@ -501,6 +509,10 @@
 
 			    					'targetusernumber' => $member_find['usernumber'],
 
+			    					'userid' => 1,
+
+			    					'usernumber' => 1,
+
 			    					'changetype' => 8,
 
 			    					'recordtype' => 1,
@@ -511,7 +523,7 @@
 
 			    					'createtime' => time(),
 
-			    					'realname' => '系统',
+			    					'realname' => '戎子',
 
 			    					'targetrealname' => $member_find['realname']
 			    				)
@@ -681,6 +693,14 @@
 
 				    					'targetusernumber' => $v['usernumber'],
 
+				    					'userid' => 1,
+
+				    					'usernumber' => 1,
+
+				    					'userid' => 1,
+
+				    					'usernumber' => 1,
+
 				    					'changetype' => 9,
 
 				    					'recordtype' => 1,
@@ -691,7 +711,7 @@
 
 				    					'createtime' => time(),
 
-				    					'realname' => '系统',
+				    					'realname' => '戎子',
 
 				    					'targetrealname' => $v['realname']
 				    				)
