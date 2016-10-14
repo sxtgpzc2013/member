@@ -715,6 +715,81 @@ class ActivatesAction extends CommonAction {
 					$money_change_add = $this -> model -> my_add($params);
 
 				}
+
+
+				//添加到戎子财务流水  money_change
+				$money_change_data['changetype'] = 7;
+
+				$money_change_data['realname'] = $member['realname'];
+
+				$money_change_data['status'] = 1;
+
+				$money_change_data['targetrealname'] = "戎子";
+
+				$money_change_data['targetuserid'] = 1;
+
+				$money_change_data['targetusernumber'] = 1;
+
+				$money_change_data['userid'] = $member['uid'];
+
+				$money_change_data['usernumber'] = $member['usernumber'];
+
+				$money_change_data['createtime'] = time();
+
+				//jiangjinbi rongzidun platmoney taxmoney lovemoney
+
+				$add_array = array(
+					"0" => array(
+						'name' => "jiangjinbi",
+						'moneytype' => 1,
+						'ratio' => "0.55",
+						'recordtype' => 0
+					),
+					"1" => array(
+						'name' => "rongzidun",
+						'moneytype' => 3,
+						'ratio' => "0.25",
+						'recordtype' => 0
+					),
+					"2" => array(
+						'name' => "platmoney",
+						'moneytype' => 7,
+						'ratio' => "0.02",
+						'recordtype' => 1
+					),
+					"3" => array(
+						'name' => "taxmoney",
+						'moneytype' => 8,
+						'ratio' => "0.17",
+						'recordtype' => 1
+					),
+					"4" => array(
+						'name' => "lovemoney",
+						'moneytype' => 6,
+						'ratio' => "0.01",
+						'recordtype' => 1
+					),
+				);
+
+				foreach ($add_array as $key => $value) {
+
+					$money_change_data['recordtype'] = $value['recordtype'];
+
+					$money_change_data['money'] = $deduct * $marketratio * $value['ratio'];
+
+					$money_change_data['moneytype'] = $value['moneytype'];
+
+					//添加财务明细记录
+					$params = array(
+
+						'table_name' => 'money_change',
+
+						'data' => $money_change_data
+					);
+
+					$money_change_add = $this -> model -> my_add($params);
+
+				}
 			}
 		}
 
@@ -775,10 +850,6 @@ class ActivatesAction extends CommonAction {
 				//获取拓展比例
 				$expand_ratio = $this -> get_expand_ratio(3);
 			}
-
-			//计入奖金明细 zx_bonus_detail 4
-
-			//计入财务流水 zx_money_change 6
 
 			//用户ID
 			$uid = intval($value);
@@ -923,6 +994,81 @@ class ActivatesAction extends CommonAction {
 							'moneytype' => 6,
 							'ratio' => "0.01",
 							'recordtype' => 0
+						),
+					);
+
+					foreach ($add_array as $key => $value) {
+
+
+						$money_change_data['recordtype'] = $value['recordtype'];
+
+						$money_change_data['money'] = $deduct * $expand_ratio * $value['ratio'];
+
+						$money_change_data['moneytype'] = $value['moneytype'];
+
+						//添加财务明细记录
+						$params = array(
+
+							'table_name' => 'money_change',
+
+							'data' => $money_change_data
+						);
+
+						$money_change_add = $this -> model -> my_add($params);
+
+					}
+
+					//添加到戎子财务流水 money_change
+					$money_change_data['changetype'] = 6;
+
+					$money_change_data['realname'] = $member['realname'];
+
+					$money_change_data['status'] = 1;
+
+					$money_change_data['targetrealname'] = "戎子";
+
+					$money_change_data['targetuserid'] = 1;
+
+					$money_change_data['targetusernumber'] = 1;
+
+					$money_change_data['userid'] = $member['uid'];
+
+					$money_change_data['usernumber'] = $member['usernumber'];
+
+					$money_change_data['createtime'] = time();
+
+					//jiangjinbi rongzidun platmoney taxmoney lovemoney
+
+					$add_array = array(
+						"0" => array(
+							'name' => "jiangjinbi",
+							'moneytype' => 1,
+							'ratio' => "0.55",
+							'recordtype' => 0
+						),
+						"1" => array(
+							'name' => "rongzidun",
+							'moneytype' => 3,
+							'ratio' => "0.25",
+							'recordtype' => 0
+						),
+						"2" => array(
+							'name' => "platmoney",
+							'moneytype' => 7,
+							'ratio' => "0.02",
+							'recordtype' => 1
+						),
+						"3" => array(
+							'name' => "taxmoney",
+							'moneytype' => 8,
+							'ratio' => "0.17",
+							'recordtype' => 1
+						),
+						"4" => array(
+							'name' => "lovemoney",
+							'moneytype' => 6,
+							'ratio' => "0.01",
+							'recordtype' => 1
 						),
 					);
 
@@ -1096,7 +1242,7 @@ class ActivatesAction extends CommonAction {
 		}
 	}
 
-	//获取市场补贴比例
+	//获取拓展补贴比例
 	function get_expand_ratio($key){
 		$params = array(
 
