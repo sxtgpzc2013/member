@@ -970,41 +970,41 @@
 			$jiangjinbi_add = $this -> model -> my_add($params);
 
 			//写入奖金币出账流水
-			// $params = array(
+			$params = array(
 
-			// 	'table_name' => 'money_change',
+				'table_name' => 'money_change',
 
-			// 	'data' => array(
+				'data' => array(
 
-			// 		'moneytype' => 1,
+					'moneytype' => 1,
 
-			// 		'status' => 1,
+					'status' => 1,
 
-			// 		'targetuserid' => $dt['member']['uid'],
+					'targetuserid' => $dt['member']['uid'],
 
-			// 		'targetusernumber' => $dt['member']['usernumber'],
+					'targetusernumber' => $dt['member']['usernumber'],
 
-			// 		'userid' => 1,
+					'userid' => 1,
 
-			// 		'usernumber' => 1,
+					'usernumber' => 1,
 
-			// 		'changetype' => $dt['changetype'],
+					'changetype' => $dt['changetype'],
 
-			// 		'recordtype' => 1,
+					'recordtype' => 0,
 
-			// 		'money' => $dt['money'] * 0.8,
+					'money' => $dt['money'] * 0.8,
 
-			// 		'hasmoney' => $dt['hasmoney'],
+					'hasmoney' => $dt['hasmoney'],
 
-			// 		'createtime' => time(),
+					'createtime' => time(),
 
-			// 		'realname' => '戎子',
+					'realname' => $dt['member']['realname'],
 
-			// 		'targetrealname' => $dt['member']['realname']
-			// 	)
-			// );
+					'targetrealname' => '戎子'
+				)
+			);
 
-			// $jiangjinbi_add = $this -> model -> my_add($params);
+			$jiangjinbi_rongzi_add = $this -> model -> my_add($params);
 
 	    	//写入爱心基金增加流水
 			$params = array(
@@ -1043,6 +1043,43 @@
 
 			$lovemoney_add = $this -> model -> my_add($params);
 
+			//写入爱心基金出账流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 6,
+
+					'status' => 1,
+
+					'targetuserid' => 1,
+
+					'targetusernumber' => 1,
+
+					'userid' => $dt['member']['uid'],
+
+					'usernumber' => $dt['member']['usernumber'],
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 1,
+
+					'money' => $dt['money'] * 0.01,
+
+					'hasmoney' => $dt['money'] * 0.01,
+
+					'createtime' => time(),
+
+					'realname' => $dt['member']['realname'],
+
+					'targetrealname' => '戎子'
+				)
+			);
+
+			$lovemoney_rongzi_add = $this -> model -> my_add($params);
+
 	    	//写入平台管理费增加流水
 			$params = array(
 
@@ -1080,6 +1117,43 @@
 
 			$platmoney_add = $this -> model -> my_add($params);
 
+	    	//写入平台管理费出账流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 7,
+
+					'status' => 1,
+
+					'targetuserid' => 1,
+
+					'targetusernumber' => 1,
+
+					'userid' => $dt['member']['uid'],
+
+					'usernumber' => $dt['member']['usernumber'],
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 1,
+
+					'money' => $dt['money'] * 0.02,
+
+					'hasmoney' => $dt['money'] * 0.02,
+
+					'createtime' => time(),
+
+					'realname' => $dt['member']['realname'],
+
+					'targetrealname' => '戎子'
+				)
+			);
+
+			$platmoney_rongzi_add = $this -> model -> my_add($params);
+
 	    	//写入税费增加流水
 			$params = array(
 
@@ -1116,5 +1190,42 @@
 			);
 
 			$taxmoney_add = $this -> model -> my_add($params);
+
+	    	//写入税费出账流水
+			$params = array(
+
+				'table_name' => 'money_change',
+
+				'data' => array(
+
+					'moneytype' => 8,
+
+					'status' => 1,
+
+					'targetuserid' => 1,
+
+					'targetusernumber' => 1,
+
+					'userid' => $dt['member']['uid'],
+
+					'usernumber' => $dt['member']['usernumber'],
+
+					'changetype' => $dt['changetype'],
+
+					'recordtype' => 1,
+
+					'money' => $dt['money'] * 0.17,
+
+					'hasmoney' => $dt['money'] * 0.17,
+
+					'createtime' => time(),
+
+					'realname' => $dt['member']['realname'],
+
+					'targetrealname' => '戎子'
+				)
+			);
+
+			$taxmoney_rongzi_add = $this -> model -> my_add($params);
 	    }
 	}
