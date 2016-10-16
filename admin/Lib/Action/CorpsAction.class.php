@@ -580,7 +580,7 @@
 
 			$Activates=A("Activates");
 
-			//查询该用户是否符合激活条件
+			//查询该用户是否符合升级条件
 			$params = array(
 
 				'table_name' => 'member',
@@ -597,142 +597,9 @@
 
 				$add_finance = $Activates -> add_finance($deduct);
 
-				//获取代理商编号数据
-				// $params = array(
-
-				// 	'table_name' => 'member',
-
-				// 	'where' => "uid = 1 AND isbill = 1"
-
-				// );
-
-				// $billmember = $this -> model -> my_find($params);
-
-				// if(intval($billmember['baodanbi']) < $deduct/2){
-				// 	$this -> _back("账户激活币不足{$billmember['baodanbi']}");return;
-				// }
-
-				// if(intval($billmember['jihuobi']) < $deduct/2){
-				// 	$this -> _back("账户激活币不足{$billmember['jihuobi']}");return;
-				// }
-
-				// //注册币余额计算
-				// $billdata['baodanbi'] = intval($billmember['baodanbi']) - $deduct/2;
-
-				// //激活币余额计算
-				// $billdata['jihuobi'] = intval($billmember['jihuobi']) - $deduct/2;
-
-				// //更新代理商编号相应数据
-				// $billparams = array(
-
-				// 	'table_name' => 'member',
-
-				// 	'where' => "uid = 1",
-
-				// 	'data' => $billdata
-				// );
-
-				// $bill_member_save = $this -> model -> my_save($billparams);
-				//$bill_member_save = 1;
-				//if ($bill_member_save == 1){
-
-					//更新用户上级位置部门
-					//$Activates -> update_znum($member['parentid']);
-
-					//更新公司总收入
-					//$Activates -> add_finance($deduct);
-
-					//记录代理商编号消费流水 奖金币 注册币的流水
-					//增加财务流水
-					// $flow_data['money'] = $deduct/2;
-
-					// $flow_data['moneytype'] = 1;
-
-					// $flow_data['changetype'] = 2;
-
-					// $flow_data['realname'] = "{$billmember['realname']}";
-
-					// $flow_data['targetrealname'] = "戎子";
-
-					// $flow_data['status'] = 1;
-
-					// $flow_data['targetuserid'] = 1;
-
-					// $flow_data['targetusernumber'] = 1;
-
-					// $flow_data['userid'] = $billmember['uid'];
-
-					// $flow_data['usernumber'] = $billmember['usernumber'];
-
-					// $flow_data['recordtype'] = 0;
-
-					// $flow_data['createtime'] = time();
-
-					// $params = array(
-
-					// 	'table_name' => 'money_change',
-
-					// 	'data' => $flow_data
-					// );
-
-					// $transfer_flow = $this -> model -> my_add($params);
-
-					// $to_data['money'] = $deduct/2;
-
-					// $to_data['moneytype'] = 2;
-
-					// $to_data['changetype'] = 2;
-
-					// $to_data['realname'] = "{$billmember['realname']}";
-
-					// $to_data['targetrealname'] = "戎子";
-
-					// $to_data['status'] = 1;
-
-					// $to_data['targetuserid'] = 1;
-
-					// $to_data['targetusernumber'] = 1;
-
-					// $to_data['userid'] = $billmember['uid'];
-
-					// $to_data['usernumber'] = $billmember['usernumber'];
-
-					// $to_data['recordtype'] = 0;
-
-					// $to_data['createtime'] = time();
-
-					// $params = array(
-
-					// 	'table_name' => 'money_change',
-
-					// 	'data' => $to_data
-					// );
-
-					// $to_transfer_flow = $this -> model -> my_add($params);
-
-
-				//}else{
-				//	$this -> _back('代理商编号激活数据保存失败，请重试。');
-				//}
-
 			}else{
 				$this -> _back('升级账号获取失败，请重试。');
 			}
-
-			//代理商编号ID
-			//$billcenterid = $_SESSION['Rongzi']['user']['uid'];
-
-			//代理商编号编号
-			//$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
-
-			//数据包
-			// $data['status'] = 1;
-
-			// $data['active_time'] = time();
-
-			// $data['active_uid'] = $_SESSION['Rongzi']['user']['uid'];
-
-			$data['update_time'] = time();
 
 			//修改相关所有人业绩
 			$contactuserpath_arr = array_reverse(explode(",", $member['contactuserpath']));
@@ -831,6 +698,16 @@
 					$achievementadd = $this -> model -> my_add($params);
 				}
 			}
+
+
+			$data['update_time'] = time();
+
+			if($member['userrank'] == 3){
+				$data['red_wine_number'] = 1;
+			}elseif($member['userrank'] == 4){
+				$data['red_wine_number'] = 3;
+			}
+			
 
 			//写入数据库
 			$params = array(
