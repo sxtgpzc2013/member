@@ -46,7 +46,7 @@
                             <label class="col-sm-3 control-label">*销费商当前级别:</label>
                             <div class="col-sm-6">
                                 <input id="level" name="level" class="form-control" type="text" value="" disabled="true">
-
+								<input id="oldrank" name="oldrank" class="form-control" type="hidden" value="">
 
                             </div>
                         </div>
@@ -146,10 +146,21 @@
 						$('#realname').val(resdata.data.realname);
 						$('#uid').val(resdata.data.uid);
 						$('#level').val(resdata.data.userrankname);
+						$('#oldrank').val(resdata.data.userrank);
+						
 
 						//userrank
 						if(resdata.data.userrank != "" && resdata.data.userrank != 0){
 
+							if(resdata.data.userrank == 1){
+								alert("普卡用户禁止升级");
+								return;
+							}
+
+							if(resdata.data.upgrade_status == 1){
+								alert("已升级过的用户禁止升级");
+								return;
+							}
 							var obj=document.getElementById('canlevel');
 							obj.innerHTML = "";
 
