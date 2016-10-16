@@ -350,7 +350,7 @@ class DownloadAction extends CommonAction {
             array('status','状态'),
             array('createtime','转账时间')
         );
-        
+
         foreach ($xlsData as $key => $value) {
 
             if ($value['status'] == 0){
@@ -709,20 +709,78 @@ class DownloadAction extends CommonAction {
 	 */
     public function recharge_list()
     {
-    	$params = array(
+        //默认导出今天数据
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d',time()));
 
-    		'table_name' => 'money_change',
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
 
-    		'where' => "changetype = 1",
+        $where = "1";
 
-    		'order' => 'createtime desc'
-    	);
+        if($start && $stop){
 
-    	$result = $this -> model -> order_select($params);
+            $where = "createtime >= {$start} AND createtime <= {$stop}";
 
-    	$this -> assign('result', $result);
+        }
 
-    	$this -> display();
+        if($_GET['usernumber']){
+
+            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+
+        }
+
+        $params = array(
+
+            'table_name' => 'money_change',
+
+            'where' => $where." AND changetype = 1",
+
+            'order' => 'createtime desc'
+        );
+
+    	$xlsData = $this -> model -> easy_select($params);
+
+        $xlsName  = "充值记录";
+
+        //销费商编号 销费商姓名   充值者编号   充值者姓名   充值币种    充值金额    状态  充值时间
+        $xlsCell  = array(
+            array('targetusernumber','销费商编号'),
+            array('targetrealname','销费商姓名'),
+            array('usernumber','充值者编号'),
+            array('realname','充值者姓名'),
+            array('moneytype','充值币种'),
+            array('money','充值金额'),
+            array('status','状态'),
+            array('createtime','充值时间')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($value['moneytype'] == 1){
+                $xlsData[$key]['moneytype'] = "现金币";
+            }elseif ($value['moneytype'] == 2){
+                $xlsData[$key]['moneytype'] = "报单币";
+            }elseif ($value['moneytype'] == 3){
+                $xlsData[$key]['moneytype'] = "戎子盾";
+            }elseif ($value['moneytype'] == 4){
+                $xlsData[$key]['moneytype'] = "激活币";
+            }elseif ($value['moneytype'] == 5){
+                $xlsData[$key]['moneytype'] = "福利积分";
+            }elseif ($value['moneytype'] == 6){
+                $xlsData[$key]['moneytype'] = "奖金币";
+            }
+
+            if ($value['status'] == 0){
+                $xlsData[$key]['status'] = "失败";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "成功";
+            }
+
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+        
     }
 
     /**
@@ -911,20 +969,70 @@ class DownloadAction extends CommonAction {
      */
     public function cash_list()
     {
+
+        //默认导出今天数据
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d',time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "createtime >= {$start} AND createtime <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+
+        }
+
         $params = array(
 
             'table_name' => 'withdrawal',
 
-            'where' => "status = 0 OR status = 2",
+            'where' => $where." AND (status = 0 OR status = 2)",
 
             'order' => 'createtime desc'
         );
 
-        $result = $this -> model -> order_select($params);
+        $xlsData = $this -> model -> easy_select($params);
 
-        $this -> assign('result', $result);
+        $xlsName  = "提现记录";
 
-        $this -> display();
+        //提现账户编号  提现账户姓名  银行账号    开户银行    开户姓名    提取金额    手续费 到账金额    提现时间    提现状态
+        $xlsCell  = array(
+            array('usernumber','提现账户编号'),
+            array('realname','提现账户姓名'),
+            array('banknumber','银行账号'),
+            array('bankname','开户银行'),
+            array('realname','开户姓名'),
+            array('money','提取金额'),
+            array('fee','手续费'),
+            array('fee_money','到账金额'),
+            array('createtime','提现时间'),
+            array('status','提现状态')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($value['status'] == 0){
+                $xlsData[$key]['status'] = "提现成功";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "申请提现";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "提现失败";
+            }
+
+            $xlsData[$key]['fee_money'] = $value['money'] - $value['fee'];
+
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
     /**

@@ -282,7 +282,7 @@ class FinancesAction extends CommonAction {
         //相关销费商   目标销费商   变更金额    变更币种    类型  变更状态    时间
         $xlsData = $this -> model -> easy_select($params);
 
-        $xlsName  = "Corps";
+        $xlsName  = "财务流水";
 
         $xlsCell  = array(
             array('realname','相关销费商'),
@@ -723,11 +723,30 @@ class FinancesAction extends CommonAction {
 	 */
     public function recharge_list()
     {
+        //默认导出今天数据
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d',time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "createtime >= {$start} AND createtime <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+
+        }
+
     	$params = array(
 
     		'table_name' => 'money_change',
 
-    		'where' => "changetype = 1",
+    		'where' => $where." AND changetype = 1",
 
     		'order' => 'createtime desc'
     	);
@@ -925,11 +944,30 @@ class FinancesAction extends CommonAction {
      */
     public function cash_list()
     {
+        //默认导出今天数据
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d',time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "createtime >= {$start} AND createtime <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+
+        }
+
         $params = array(
 
             'table_name' => 'withdrawal',
 
-            'where' => "status = 0 OR status = 2",
+            'where' => $where." AND (status = 0 OR status = 2)",
 
             'order' => 'createtime desc'
         );

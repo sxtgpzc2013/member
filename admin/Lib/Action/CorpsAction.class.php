@@ -113,8 +113,8 @@
 			    array('baodanbi','报单币'),
 			    array('rongzidun','戎子盾'),
 			    array('jianglijifen','奖励积分'),
-			    array('tuijianid','推荐人'),
-			    array('parentid','上级人'),
+			    array('tuijiannumber','推荐人'),
+			    array('parentnumber','上级人'),
 			    array('billcenterid','代理商编号'),
 			   	array('reg_time','注册时间'),
 			    array('status','状态')
@@ -124,18 +124,18 @@
 
 		    	# 处理标题数据
 				if ($value['userrank'] == 1) {
-					$xlsData[$key]['title'] = "普卡销费商";
+					$xlsData[$key]['userrank'] = "普卡销费商";
 				} elseif ($value['userrank'] == 2) {
-					$xlsData[$key]['title'] = "银卡销费商";
+					$xlsData[$key]['userrank'] = "银卡销费商";
 				} elseif ($value['userrank'] == 3) {
-					$xlsData[$key]['title'] = "金卡销费商";
+					$xlsData[$key]['userrank'] = "金卡销费商";
 				} elseif ($value['userrank'] == 4) {
-					$xlsData[$key]['title'] = "钻卡销费商";
+					$xlsData[$key]['userrank'] = "钻卡销费商";
 				} else {
-					$xlsData[$key]['title'] = "无";
+					$xlsData[$key]['userrank'] = "无";
 				}
 
-				$xlsData[$key]['title'] = $xlsData[$key]['title']."级销费商";
+				$xlsData[$key]['usertitle'] = $xlsData[$key]['usertitle']."级销费商";
 
 				if ($value['status'] == 0) {
 					$xlsData[$key]['status'] = "未激活";
@@ -149,6 +149,7 @@
 					$xlsData[$key]['status'] = "未知";
 				}
 
+				$xlsData[$key]['reg_time'] = date("Y-m-d", $value['reg_time']);
 
 		    }
 		    $this->exportExcel($xlsName,$xlsCell,$xlsData);
