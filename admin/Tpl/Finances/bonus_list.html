@@ -1,4 +1,5 @@
 <include file="public:header" />
+
 <link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
@@ -23,7 +24,7 @@
 				<div class="row">
 					<div class="col-sm-4 m-b-xs">
 						<p>
-							<button type="button" class="btn btn-w-m btn-danger">导出数据</button>
+							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Download/bonus_list?start={$_GET['start']}&stop={$_GET['stop']}&usernumber={$_GET['usernumber']}">导出数据</a>
 						</p>
 					</div>
 					<div class="col-sm-8 text-right">
@@ -39,7 +40,7 @@
 	                            </div>
 
 								<div class="form-group">
-	                                <input type="text" placeholder="请输入销费商编码" class="form-control">
+	                                <input type="text" placeholder="请输入销费商编码" class="form-control" name="usernumber" value="{$_GET['usernumber']}">
 	                            </div>
 
 
