@@ -268,7 +268,7 @@ class FinancesAction extends CommonAction {
     {
 
         //默认导出今天数据
-    
+
         //导出筛选数据
         $params = array(
 
