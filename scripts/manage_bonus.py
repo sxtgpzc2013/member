@@ -542,68 +542,43 @@ def update_achievement_status(uid):
 	status = conn.dml(sql, 'update')
 	return status
 
-#计算管理奖， 管理奖必须有推荐关系，滑落的点不计算管理奖， 管理奖是极差制度
-def managerbonus(uid, usertitle):
-	# 先获取会员管理比例的最大值
-	maxmanagercash = getmaxmanagercash(usertitle)
+# 推荐的人
+def managerbonus(uid, userrank):
+	flag = False
+	# 获取推荐人的级别金额
+	value = getmembervalue(uid)
+	# 获取推荐的人的父级
+	parents = gettuijiannumber_parent(uid)
 
-	# 获取会员 的 左 中 右 销费商 
-	sql = """
-		select uid from zx_member where parentid = %s
-	""" % (uid)
-	members = conn.query(sql)
-	for member in members:
-		member_uid = member['uid']
-		# 获取销费商推荐的人
-		childs = gettuijiannumber_child(member_uid)
-		if childs:
-			for child in childs:
-				# 获取推荐人的级别金额
-				value = getmembervalue(child)
-				# 获取推荐的人的父级
-				parents = gettuijiannumber_parent(child)
-				for k, v in enumerate(parents):
-					if int(v) == uid:
-						# 赛选有星级的会员 uid, usertitle
-						memberlevels = getuservalue(parents[0:k+1])
-						status = jicha(uid, usertitle, value, maxmanagercash, memberlevels)
+	if parents:
+		# 赛选有星级的会员
+		memberlevels = getuservalue(parents)
+		top_uid = memberlevels[-1][0]
+		top_usertitle = memberlevels[-1][1]
 
-						if status:
-							return child
+		# 先获取会员管理比例的最大值
+		maxmanagercash = getmaxmanagercash(top_usertitle)
 
-	return False
+		status = jicha(top_uid, top_usertitle, value, maxmanagercash, memberlevels)
+		return status
 
-# 管理补贴 和 互助补贴
+	return flag
+
+# 管理补贴和互助补贴
 def main():
 	sql = """
-		select uid, usernumber, realname, userrank, usertitle, leftachievement, middleachievement, rightachievement from zx_member where znum = 3 and usernumber != 1
+		select uid, userrank, usertitle from zx_member where achievementstatus = 0
 	"""
 	members = conn.query(sql)
-	childs = []
 
 	if members:
-		i = 0
-		length = len(members)
 		for member in members:
-			i += 1
-			usernumber = member['usernumber']
-			usertitle = member['usertitle']
-			userrank = member['userrank']
 			uid = int(member['uid'])
-			usernumber = member['usernumber']
-			realname = member['realname']
-		
-			# 判断是星级的会员
-			if usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5 or usertitle == 6:
-				child = managerbonus(uid, usertitle)
-				if child and i == length:
-					update_achievement_status(child)
-				if child not in childs:
-					childs.append(child)
-				if i == length:
-					if childs:
-						for uid in childs:
-							update_achievement_status(uid)
+			userrank = member['userrank']
+			
+			status = managerbonus(uid, userrank)	
+			if status:
+				update_achievement_status(uid)
 
 	conn.close()
 	print "ok" 
