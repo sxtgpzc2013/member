@@ -592,7 +592,7 @@
 		 */
 		public function contact_relation()
 		{
-			$uid = $_GET['uid'] ? $_GET['uid'] : $_SESSION['Rongzi']['user']['uid'];
+			$uid = $_GET['uid'] ? $_GET['uid'] : 1;
 
 			$params = array(
 

@@ -12,7 +12,7 @@
  * @version 1.0.0
  */
 
-class FinancesAction extends CommonAction {
+class DownloadAction extends CommonAction {
 
 	/**
 	 * 构造方法-实例化MODEL
@@ -49,53 +49,6 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 奖金统计
-	 *
-	 * 参数描述：
-	 *
-	 *
-	 *
-	 * 返回值：
-	 *
-	 */
-    public function bonus_list()
-    {
-
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
-
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
-
-        $where = "1";
-
-        if($start && $stop){
-
-            $where = "count_date >= {$start} AND count_date <= {$stop}";
-
-        }
-
-        if($_GET['usernumber']){
-
-            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
-
-        }
-
-    	$params = array(
-
-    		'table_name' => 'bonus_count',
-
-    		'where' => $where,
-
-    		'order' => 'count_date desc'
-    	);
-
-    	$result = $this -> model -> order_select($params);
-
-    	$this -> assign('result', $result);
-
-    	$this -> display();
-    }
-
-    /**
      * 奖金统计
      *
      * 参数描述：
@@ -105,7 +58,7 @@ class FinancesAction extends CommonAction {
      * 返回值：
      *
      */
-    public function bonus_list_download()
+    public function bonus_list()
     {
 
         $start = $_GET['start'] ? strtotime($_GET['start']) : time();
@@ -137,7 +90,7 @@ class FinancesAction extends CommonAction {
 
         $xlsData = $this -> model -> easy_select($params);
 
-            $xlsName  = "奖金统计";
+            $xlsName  = "Corps";
 
             $xlsCell  = array(
                 array('count_date','日期'),
@@ -208,17 +161,18 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 财务流水
-	 *
-	 * 参数描述：
-	 *
-	 *
-	 *
-	 * 返回值：
-	 *
-	 */
+     * 财务流水
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
     public function finance_flow()
     {
+
         //默认导出今天数据
         $start = $_GET['start'] ? strtotime($_GET['start']) : time();
 
@@ -237,44 +191,13 @@ class FinancesAction extends CommonAction {
             $where = $where ." AND tousernumber = {$_GET['usernumber']}";
 
         }
-
-    	$params = array(
-
-    		'table_name' => 'money_change',
-
-    		'where' => $where,
-
-    		'order' => 'createtime desc'
-    	);
-
-    	$result = $this -> model -> order_select($params);
-
-    	$this -> assign('result', $result);
-
-    	$this -> display();
-    }
-
-    /**
-     * 财务流水
-     *
-     * 参数描述：
-     *
-     *
-     *
-     * 返回值：
-     *
-     */
-    public function finance_flow_download()
-    {
-
-        //默认导出今天数据
-
+    
         //导出筛选数据
         $params = array(
 
             'table_name' => 'money_change',
 
-            'where' => "1",
+            'where' => $where,
 
             'order' => 'createtime desc'
         );
@@ -282,7 +205,7 @@ class FinancesAction extends CommonAction {
         //相关销费商   目标销费商   变更金额    变更币种    类型  变更状态    时间
         $xlsData = $this -> model -> easy_select($params);
 
-        $xlsName  = "财务流水";
+        $xlsName  = "Corps";
 
         $xlsCell  = array(
             array('realname','相关销费商'),
@@ -296,7 +219,7 @@ class FinancesAction extends CommonAction {
 
         foreach ($xlsData as $key => $value) {
 
-            if ($item['moneytype'] == 1){
+            if ($value['moneytype'] == 1){
                 $xlsData[$key]['moneytype'] = "奖金币";
             } elseif ($value['moneytype'] == 2){
                 $xlsData[$key]['moneytype'] = "注册币";
@@ -314,6 +237,45 @@ class FinancesAction extends CommonAction {
                 $xlsData[$key]['moneytype'] = "税费";
             }
 
+            if ($value['recordtype'] == 0){
+                $xlsData[$key]['recordtype'] = "减少";
+            }elseif ($value['recordtype'] == 1){
+                $xlsData[$key]['recordtype'] = "增加";
+            }
+            
+            if($value['changetype'] == 0){
+                $xlsData[$key]['changetype'] = '未知';
+            }elseif ($value['changetype'] == 1){
+                $xlsData[$key]['changetype'] = '公司充值';
+            }elseif ($value['changetype'] == 2){
+                $xlsData[$key]['changetype'] = '公司扣币';
+            }elseif ($value['changetype'] == 3){
+                $xlsData[$key]['changetype'] = '分红';
+            }elseif ($value['changetype'] == 4){
+                $xlsData[$key]['changetype'] = '管理补贴';
+            }elseif ($value['changetype'] == 5){
+                $xlsData[$key]['changetype'] = '互助补贴';
+            }elseif ($value['changetype'] == 6){
+                $xlsData[$key]['changetype'] = '拓展补贴';
+            }elseif ($value['changetype'] == 7){
+                $xlsData[$key]['changetype'] = '市场补贴';
+            }elseif ($value['changetype'] == 8){
+                $xlsData[$key]['changetype'] = '销售补贴';
+            }elseif ($value['changetype'] == 9){
+                $xlsData[$key]['changetype'] = '服务补贴';
+            }elseif ($value['changetype'] == 10){
+                $xlsData[$key]['changetype'] = '服务补贴';
+            }elseif ($value['changetype'] == 11){
+                $xlsData[$key]['changetype'] = '销费商提现';
+            }elseif ($value['changetype'] == 12){
+                $xlsData[$key]['changetype'] = '处理提现';
+            }elseif ($value['changetype'] == 13){
+                $xlsData[$key]['changetype'] = '消费';
+            }elseif ($value['changetype'] == 14){
+                $xlsData[$key]['changetype'] = '系统内部转账';
+            }elseif($value['changetype'] == 15){
+                $xlsData[$key]['changetype'] = '币种转换';
+            }
             // $xlsData[$key]['title'] = $xlsData[$key]['title']."级销费商";
 
             // if ($value['status'] == 0) {
@@ -327,7 +289,7 @@ class FinancesAction extends CommonAction {
             // } else {
             //     $xlsData[$key]['status'] = "未知";
             // }
-
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
 
         }
 
@@ -340,13 +302,13 @@ class FinancesAction extends CommonAction {
 	 * 参数描述：
 	 *
 	 *
-	 *
+	 * 转出账户编号  转出账户姓名  转入账户编号  转入账户姓名  币种  转账金额    状态  转账时间
 	 * 返回值：
 	 *
 	 */
     public function transfer_list()
     {
-        //默认导出今天数据
+    	//默认导出今天数据
         $start = $_GET['start'] ? strtotime($_GET['start']) : time();
 
         $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
@@ -365,20 +327,44 @@ class FinancesAction extends CommonAction {
 
         }
 
-    	$params = array(
+        $params = array(
 
-    		'table_name' => 'transfer',
+            'table_name' => 'transfer',
 
-    		'where' => $where,
+            'where' => $where,
 
-    		'order' => 'createtime desc'
-    	);
+            'order' => 'createtime desc'
+        );
 
-    	$result = $this -> model -> order_select($params);
+        $xlsData = $this -> model -> easy_select($params);
 
-    	$this -> assign('result', $result);
+        $xlsName  = "转账明细";
 
-    	$this -> display();
+        $xlsCell  = array(
+            array('usernumber','转出账户编号'),
+            array('username','转出账户姓名'),
+            array('targetusernumber','转入账户编号'),
+            array('targetusername','转入账户姓名'),
+            array('moneytype','币种'),
+            array('money','转账金额'),
+            array('status','状态'),
+            array('createtime','转账时间')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($value['status'] == 0){
+                $xlsData[$key]['status'] = "转账成功";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "转账失败";
+            }
+
+            $xlsData[$key]['moneytype'] = "报单币";
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
     /**
@@ -742,20 +728,59 @@ class FinancesAction extends CommonAction {
 
         }
 
-    	$params = array(
+        $params = array(
 
-    		'table_name' => 'money_change',
+            'table_name' => 'money_change',
 
-    		'where' => $where." AND changetype = 1",
+            'where' => $where." AND changetype = 1",
 
-    		'order' => 'createtime desc'
-    	);
+            'order' => 'createtime desc'
+        );
 
-    	$result = $this -> model -> order_select($params);
+    	$xlsData = $this -> model -> easy_select($params);
 
-    	$this -> assign('result', $result);
+        $xlsName  = "充值记录";
 
-    	$this -> display();
+        //销费商编号 销费商姓名   充值者编号   充值者姓名   充值币种    充值金额    状态  充值时间
+        $xlsCell  = array(
+            array('targetusernumber','销费商编号'),
+            array('targetrealname','销费商姓名'),
+            array('usernumber','充值者编号'),
+            array('realname','充值者姓名'),
+            array('moneytype','充值币种'),
+            array('money','充值金额'),
+            array('status','状态'),
+            array('createtime','充值时间')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($value['moneytype'] == 1){
+                $xlsData[$key]['moneytype'] = "现金币";
+            }elseif ($value['moneytype'] == 2){
+                $xlsData[$key]['moneytype'] = "报单币";
+            }elseif ($value['moneytype'] == 3){
+                $xlsData[$key]['moneytype'] = "戎子盾";
+            }elseif ($value['moneytype'] == 4){
+                $xlsData[$key]['moneytype'] = "激活币";
+            }elseif ($value['moneytype'] == 5){
+                $xlsData[$key]['moneytype'] = "福利积分";
+            }elseif ($value['moneytype'] == 6){
+                $xlsData[$key]['moneytype'] = "奖金币";
+            }
+
+            if ($value['status'] == 0){
+                $xlsData[$key]['status'] = "失败";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "成功";
+            }
+
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+        
     }
 
     /**
@@ -944,6 +969,7 @@ class FinancesAction extends CommonAction {
      */
     public function cash_list()
     {
+
         //默认导出今天数据
         $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d',time()));
 
@@ -972,11 +998,41 @@ class FinancesAction extends CommonAction {
             'order' => 'createtime desc'
         );
 
-        $result = $this -> model -> order_select($params);
+        $xlsData = $this -> model -> easy_select($params);
 
-        $this -> assign('result', $result);
+        $xlsName  = "提现记录";
 
-        $this -> display();
+        //提现账户编号  提现账户姓名  银行账号    开户银行    开户姓名    提取金额    手续费 到账金额    提现时间    提现状态
+        $xlsCell  = array(
+            array('usernumber','提现账户编号'),
+            array('realname','提现账户姓名'),
+            array('banknumber','银行账号'),
+            array('bankname','开户银行'),
+            array('realname','开户姓名'),
+            array('money','提取金额'),
+            array('fee','手续费'),
+            array('fee_money','到账金额'),
+            array('createtime','提现时间'),
+            array('status','提现状态')
+        );
+
+        foreach ($xlsData as $key => $value) {
+
+            if ($value['status'] == 0){
+                $xlsData[$key]['status'] = "提现成功";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "申请提现";
+            }elseif ($value['status'] == 1){
+                $xlsData[$key]['status'] = "提现失败";
+            }
+
+            $xlsData[$key]['fee_money'] = $value['money'] - $value['fee'];
+
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
     /**

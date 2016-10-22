@@ -1202,11 +1202,13 @@ class ActivatesAction extends CommonAction {
 		);
 
 		$finance = $this -> model -> my_setInc($params);
+
+		return $finance;
 	}
 
 	//增加公司总收入
 	function add_finance($data){
-
+		
 		$params = array(
 			'table_name' => 'finance',
 
@@ -1218,6 +1220,8 @@ class ActivatesAction extends CommonAction {
 		);
 
 		$finance = $this -> model -> my_setInc($params);
+
+		return $finance;
 	}
 
 	//获取市场补贴比例
@@ -1263,7 +1267,7 @@ class ActivatesAction extends CommonAction {
 		}
 	}
 
-	//更新代理商编号服务市场补贴
+	//添加红酒赠送
 	function save_red_order($member){
 
 		$order['order_code'] = $this -> get_order_number();
@@ -1307,16 +1311,28 @@ class ActivatesAction extends CommonAction {
 					$pro_id = 1;
 					break;
 				case '2':
-					# 红酒2瓶
+					# 红酒1箱
 					$pro_id = 2;
 					break;
 				case '3':
-					# 红酒2瓶
+					# 红酒3箱
 					$pro_id = 3;
 					break;
 				case '4':
-					# 红酒2瓶
+					# 红酒5箱
 					$pro_id = 4;
+					break;
+
+			}
+
+			switch ($member['upgrade_level']) {
+				case '2':
+					# 红酒2箱
+					$pro_id = 5;
+					break;
+				case '4':
+					# 红酒4箱子
+					$pro_id = 6;
 					break;
 
 			}

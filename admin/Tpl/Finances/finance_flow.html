@@ -23,7 +23,7 @@
 				<div class="row">
 					<div class="col-sm-4 m-b-xs">
 						<p>
-							<button type="button" class="btn btn-w-m btn-danger">导出数据</button>
+							<a type="button" class="btn btn-w-m btn-danger" href="__APP__/Download/finance_flow?start={$_GET['start']}&stop={$_GET['stop']}&usernumber={$_GET['usernumber']}">导出数据</a>
 						</p>
 					</div>
 					<div class="col-sm-8 text-right">
@@ -35,7 +35,7 @@
                                     <input type="stop" name="stop" placeholder="结束时间" class="form_datetime form-control" data-date="" data-date-format="yyyy-mm-dd" value="{$_GET['stop']}">
                                 </div>
                                 <div class="form-group">
-                                    <input name="usernumber" placeholder="请输入消费商编号" class=" form-control" data-date=""  value="{$_GET['usernumber']}">
+                                    <input name="usernumber" placeholder="请输入消费商编号" class=" form-control" data-date="" name="usernumber" value="{$_GET['usernumber']}">
                                 </div>
                                 <button class="btn btn-white" type="submit" style="margin-top:5px;">搜索</button>
                             </form>

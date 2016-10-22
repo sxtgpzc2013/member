@@ -485,6 +485,11 @@ CREATE TABLE `zx_auth` (
 
 ALTER TABLE zx_member ADD max_bonus double(16,2) NOT NULL DEFAULT '0.00' COMMENT '最大奖金';
 
+ALTER TABLE zx_member ADD upgrade_level INT(1) NOT NULL DEFAULT '0' COMMENT '升级差';
+
+ALTER TABLE zx_member ADD upgrade_status INT(1) NOT NULL DEFAULT '0' COMMENT '升级状态';
+
+ALTER TABLE zx_member ADD upgrade_time INT(10) NOT NULL DEFAULT '0' COMMENT '升级时间';
 
 #jenkins http://121.42.26.223:8080/   admin  zxtc999.
 -- 121.42.26.223
