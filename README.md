@@ -4,3 +4,4 @@
 2.用户编号 usernumber 10000 + uid 
 3.代理商编号ID billcenterid 代理商编号表 id
 4.代理商编号账号 billcenternumber 代理商编号 centernumber
+表结构
