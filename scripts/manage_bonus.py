@@ -376,25 +376,25 @@ def member_achievement_status(uid):
 	return flag
 
 # 通过父uid获取子推荐
-def gettuijiannumber_child(uid):
-	childs = []
-	sql = """
-		select recommenduserpath from zx_member where find_in_set(%s, recommenduserpath) and uid != %s
-	"""  % (uid, uid)
-	results = conn.query(sql)
-	if results:
-		for result in results:
-			_childs = result['recommenduserpath'].split(',')[::-1]
-			for _child in _childs:
-				if int(_child) == int(uid):
-					break
+# def gettuijiannumber_child(uid):
+# 	childs = []
+# 	sql = """
+# 		select recommenduserpath from zx_member where find_in_set(%s, recommenduserpath) and uid != %s
+# 	"""  % (uid, uid)
+# 	results = conn.query(sql)
+# 	if results:
+# 		for result in results:
+# 			_childs = result['recommenduserpath'].split(',')[::-1]
+# 			for _child in _childs:
+# 				if int(_child) == int(uid):
+# 					break
 
-				status = member_achievement_status(_child)
-				if status:
-					if _child not in childs:
-						childs.append(_child)
+# 				status = member_achievement_status(_child)
+# 				if status:
+# 					if _child not in childs:
+# 						childs.append(_child)
 
-	return childs
+# 	return childs
 
 # 通过子uid获取父推荐
 def gettuijiannumber_parent(uid):
@@ -542,8 +542,8 @@ def update_achievement_status(uid):
 	status = conn.dml(sql, 'update')
 	return status
 
-# 推荐的人
-def managerbonus(uid, userrank):
+# 通过推荐的人计算管理奖
+def managerbonus(uid):
 	flag = False
 	# 获取推荐人的级别金额
 	value = getmembervalue(uid)
@@ -553,6 +553,7 @@ def managerbonus(uid, userrank):
 	if parents:
 		# 赛选有星级的会员
 		memberlevels = getuservalue(parents)
+		# 获取最上层的会员
 		top_uid = memberlevels[-1][0]
 		top_usertitle = memberlevels[-1][1]
 
@@ -566,19 +567,11 @@ def managerbonus(uid, userrank):
 
 # 管理补贴和互助补贴
 def main():
-	sql = """
-		select uid, userrank, usertitle from zx_member where achievementstatus = 0
-	"""
-	members = conn.query(sql)
-
-	if members:
-		for member in members:
-			uid = int(member['uid'])
-			userrank = member['userrank']
-			
-			status = managerbonus(uid, userrank)	
-			if status:
-				update_achievement_status(uid)
+	if len(sys.argv) >= 2:
+		uid = sys.argv[1]
+		status = managerbonus(uid)	
+		if status:
+			update_achievement_status(uid)
 
 	conn.close()
 	print "ok" 
