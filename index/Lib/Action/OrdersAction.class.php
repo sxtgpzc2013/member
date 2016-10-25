@@ -783,6 +783,9 @@
 	    			//清空购物车
 	    			$_SESSION['Rongzi']['cart'] = array();
 
+	    			//调用李桐的程序
+	    			system("python /var/www/member/scripts/consum_bonus.py {$member_find['uid']} {$result['total_price']}");
+
 	    			redirect(__APP__.'/Orders/index', 0);
 	    		}
 	    		else
