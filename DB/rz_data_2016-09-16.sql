@@ -399,6 +399,11 @@ ALTER TABLE zx_member ADD contactuserpath VARCHAR(255) NOT NULL DEFAULT '' COMME
 ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户推荐路径';
 ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
 
+ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
+
+ALTER TABLE zx_member ADD packages int DEFAULT '1' COMMENT '1：普通套餐 2：金卡、钻卡套餐';
+
+
 # 2016-09-22 新增相关
 # Dump of table achievement_log
 # ------------------------------------------------------------

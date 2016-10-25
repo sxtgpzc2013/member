@@ -70,7 +70,7 @@ def fenhong():
 
 	# 会员
 	member_sql = """
-					select m.uid, m.usernumber, m.realname, m.userrank, m.jiangjinbi, m.rongzidun, m.max_bonus, m.upgrade_level, m.upgrade_status, r.value from zx_member as m left join zx_bonus_rule as r
+					select m.uid, m.usernumber, m.realname, m.userrank, m.jiangjinbi, m.rongzidun, m.max_bonus, m.upgrade_level, m.upgrade_status, m.packages, r.value from zx_member as m left join zx_bonus_rule as r
 					on m.userrank = r.key
 	 				where m.userrank != 1 and m.status = 1 and m.proxy_state = 1 and r.category = 'userrank' and m.usernumber != 1
 	"""
@@ -81,31 +81,35 @@ def fenhong():
 			uid = member['uid']
 			usernumber = member['usernumber']
 			realname = member['realname']
-			userrank = member['userrank']
-			value = member['value']
+			userrank = int(member['userrank'])
+			value = int(member['value'])
 			max_bonus = float(member['max_bonus'])
 			upgrade_status = int(member['upgrade_status'])
 			upgrade_level = int(member['upgrade_level'])
+			packages = int(member['packages'])
 
-			fenhong, max_cash = 0, 0
+			max_cash = 0
+			fenhong = fenghong_scale * value
 
-			# 不允许升级的分红模式
-			if upgrade_status == 1:
-				# 查看升级之前的最大分红奖金
-				userrank_ago_level = userrank - upgrade_level
-				current_cash = cash(userrank)
-				ago_cash = cash(userrank_ago_level)
+			# 普通套餐
+			if packages == 1:
+				# 升级的分红模式
+				if upgrade_status == 1:
+					# 查看升级之前的最大分红奖金
+					userrank_ago_level = userrank - upgrade_level
+					current_cash = cash(userrank)
+					ago_cash = cash(userrank_ago_level)
+					# 升级差值的最大分红奖金
+					max_cash = maxcash(userrank) * (current_cash - ago_cash)) + maxchash(userrank_ago_level) * ago_cash
+
+				elif upgrade_status == 0:
+					# 最大分红的奖金
+					max_cash = maxcash(userrank) * value
+
+			# 金卡、钻卡等额价值套餐
+			elif packages == 2:
+				max_cash = maxcash(userrank) * value) - value
 				
-				# 升级差值的最大分红奖金
-				max_cash = int(maxcash(userrank) * (current_cash - ago_cash)) + int(maxchash(userrank_ago_level) * ago_cash)
-
-				fenhong = fenghong_scale * value
-
-			elif upgrade_status == 0:
-				# 最大分红的奖金
-				max_cash = int(maxcash(userrank) * value)
-				fenhong = fenghong_scale * value
-
 			if max_bonus < max_cash:
 				if fenhong + max_bonus > max_cash:
 					fenhong = max_cash - max_bonus
