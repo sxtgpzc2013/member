@@ -208,7 +208,7 @@ CREATE TABLE `zx_member` (
   `active_uid` mediumint(8) DEFAULT '0' COMMENT '激活人id',
   `billcenterid` mediumint(8) DEFAULT '1' COMMENT '代理商编号ID',
   `billcenternumber` mediumint(8) DEFAULT '1' COMMENT '代理商编号账号',
-  `isbill` tinyint(3) DEFAULT '0' COMMENT '是否是代理商编号:0不是，1代理商编号',
+  `isbill` tinyint(3) DEFAULT '0' COMMENT '是否是代理商编号:0不是，1代理商, 2县级代理商，3市级代理商',
   `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
   `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
   `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
@@ -398,6 +398,11 @@ ALTER TABLE zx_member ADD rightachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '
 ALTER TABLE zx_member ADD contactuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户接点路径';
 ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户推荐路径';
 ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
+
+ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
+
+ALTER TABLE zx_member ADD packages int DEFAULT '1' COMMENT '1：普通套餐 2：金卡、钻卡套餐';
+
 
 # 2016-09-22 新增相关
 # Dump of table achievement_log

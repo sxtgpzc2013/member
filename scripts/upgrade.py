@@ -10,20 +10,6 @@ if sys.getdefaultencoding() != default_encoding:
     sys.setdefaultencoding(default_encoding)
 
 conn = mysql.db()
-now = datetime.datetime.now()
-now_second = datetime.datetime.now().strftime('%s')
-
-# 最大分红比例
-def maxcash(userrank):
-	value = 0
-	sql = """
-		select value from zx_bonus_rule where category = 'maxcash' and `key` = %s
-	""" % (userrank)
-	result = conn.query(sql)
-	if result:
-		value = result[0]['value']
- 
-	return value
 
 def rate():
 	rate_sql = """
@@ -281,17 +267,6 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 
 	return True
 
-def getmemberinfo(uid):
-	flag = False
-	sql = """
-		select usernumber, realname from zx_member where uid = %s
-	""" % (uid)
-	result = conn.query(sql)
-	if result:
-		return result
-
-	return flag
-
 #插入互助补贴明细, 流水
 def leaderbonus(uid, managercash):
 	sql = """
@@ -361,73 +336,6 @@ def leaderbonus(uid, managercash):
 				leadercash = managercash * rate3 / 100
 
 			insert_bonus_detail_3(_uid, usernumber, realname, leadercash)
-
-def member_achievement_status(uid):
-	flag = False
-	sql = """
-		select active_time from zx_member where uid = %s and achievementstatus = 0
-	""" % (uid)
-	result = conn.query(sql)
-	if result:
-		return True
-	else:
-		flag = False
-
-	return flag
-
-# 通过子uid获取父推荐
-def gettuijiannumber_parent(uid):
-	parents = []
-	sql = """
-		select recommenduserpath from zx_member where uid = %s
-	"""  % (uid)
-	result = conn.query(sql)
-	if result:
-		parents = result[0]['recommenduserpath'].split(',')
-
-	return parents[-2::-1]
-
-def getuservalue(parents):
-	members = []
-	for uid in parents:
-		val = []
-		sql = """
-			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
-			where m.uid = %s and category = 'managercash' and m.userrank != 1
-		""" % (uid)
-		result = conn.query(sql)
-		if result and result[0]['usertitle'] != 0:
-			val.append(result[0]['uid'])
-			val.append(result[0]['usertitle'])
-			val.append(result[0]['value'])
-			members.append(val)
-
-	return members
-
-# 获取管理奖比例
-def getmaxmanagercash(usertitle):
-	value = 0
-	sql = """
-		select value from zx_bonus_rule where `key` = %s and category = 'managercash'
-	""" % (usertitle)
-	result = conn.query(sql)
-	if result:
-		value = result[0]['value']
-
-	return value
-
-# 获取会员的级别对应的金额
-def getmembervalue(uid):
-	value = 0
-	sql = """
-		select r.value from zx_member as m left join zx_bonus_rule as r on m.userrank = r.key
-		where r.category = 'userrank' and m.uid = %s
-	""" % (uid)
-	result = conn.query(sql)
-	if result:
-		value = result[0]['value']
-
-	return value
 
 # 极差算法
 def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
@@ -512,20 +420,75 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 	return True
 
-#更新会员的业绩状态
-def update_achievement_status(uid):
+# 通过级别查看对应的金额
+def cash(userrank):
+	# 会员
 	sql = """
-		update zx_member set achievementstatus = 1 where uid = %s
-	""" % (uid)
+		select value from zx_bonus_rule where category = 'userrank' and `key` = %s
+	""" % (userrank)
+	result = conn.query(sql)
+	if result:
+		value = result[0]['value']
+		return value
 
-	status = conn.dml(sql, 'update')
-	return status
+	return result
+
+# 最大分红
+def maxcash(userrank):
+	value = 0
+	sql = """
+		select value from zx_bonus_rule where category = 'maxcash' and `key` = %s
+	""" % (userrank)
+	result = conn.query(sql)
+	if result:
+		value = result[0]['value']
+
+	return value
+
+# 通过子uid获取父推荐
+def gettuijiannumber_parent(uid):
+	parents = []
+	sql = """
+		select recommenduserpath from zx_member where uid = %s
+	"""  % (uid)
+	result = conn.query(sql)
+	if result:
+		parents = result[0]['recommenduserpath'].split(',')
+
+	return parents[-2::-1]
+
+def getuservalue(parents):
+	members = []
+	for uid in parents:
+		val = []
+		sql = """
+			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
+			where m.uid = %s and category = 'managercash' and m.userrank != 1
+		""" % (uid)
+		result = conn.query(sql)
+		if result and result[0]['usertitle'] != 0:
+			val.append(result[0]['uid'])
+			val.append(result[0]['usertitle'])
+			val.append(result[0]['value'])
+			members.append(val)
+
+	return members
+
+# 获取管理奖比例
+def getmaxmanagercash(usertitle):
+	value = 0
+	sql = """
+		select value from zx_bonus_rule where `key` = %s and category = 'managercash'
+	""" % (usertitle)
+	result = conn.query(sql)
+	if result:
+		value = result[0]['value']
+
+	return value
 
 # 通过推荐的人计算管理奖
-def managerbonus(uid):
+def managerbonus(uid, value):
 	flag = False
-	# 获取推荐人的级别金额
-	value = getmembervalue(uid)
 	# 获取推荐的人的父级
 	parents = gettuijiannumber_parent(uid)
 
@@ -542,16 +505,35 @@ def managerbonus(uid):
 
 	return flag
 
-# 管理补贴和互助补贴
-def main():
-	if len(sys.argv) >= 2:
-		uid = sys.argv[1]
-		status = managerbonus(uid)	
-		if status:
-			update_achievement_status(uid)
+# 升级补差 管理补贴和互助补贴
+def main(uid):
+	# 会员
+	sql = """
+		select m.uid, m.usernumber, m.realname, m.userrank, m.max_bonus, m.upgrade_level, r.value from zx_member as m left join zx_bonus_rule as r
+		on m.userrank = r.key where m.status = 1 and m.uid = %s and m.upgrade_status = 1 and r.category = 'userrank'
+	""" % (uid)
+	result = conn.query(sql)
+	if result:
+		uid = result['uid']
+		usernumber = result['usernumber']
+		realname = result['realname']
+		userrank = int(result['userrank'])
+		value = int(member['value'])
+		max_bonus = float(member['max_bonus'])
+		upgrade_level = int(member['upgrade_level'])
+
+		userrank_ago_level = userrank - upgrade_level
+		current_cash = cash(userrank)
+		ago_cash = cash(userrank_ago_level)
+		# 升级的差值金额
+		upgrade_cash = current_cash - ago_cash
+
+		# 计算升级的管理奖和互助奖
+		managerbonus(uid, value)
 
 	conn.close()
-	print "ok" 
 
 if __name__ == '__main__':
-	main()
+	if len(sys.argv) >= 2:
+		uid = sys.argv[1]
+		main(uid)

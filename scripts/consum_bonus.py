@@ -216,7 +216,8 @@ def main():
 		parents = gettuijiannumber_parent(uid)
 		if parents:
 			memberlevels = getuservalue(parents)
-			jicha(value, memberlevels)
+			if memberlevels:
+				jicha(value, memberlevels)
 
 	conn.close()
 	print "ok"
