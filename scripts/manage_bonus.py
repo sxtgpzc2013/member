@@ -346,21 +346,22 @@ def leaderbonus(uid, managercash):
 
 	i = 0
 	leadercash = 0
-	for _uid in uids:
-		result = getmemberinfo(_uid)
-		if result:
-			usernumber = result[0]['usernumber']
-			realname = result[0]['realname']
+	if uids:
+		for _uid in uids:
+			result = getmemberinfo(_uid)
+			if result:
+				usernumber = result[0]['usernumber']
+				realname = result[0]['realname']
 
-			i += 1
-			if i == 1:
-				leadercash = managercash * rate1 / 100
-			elif i == 2:
-				leadercash = managercash * rate2 / 100
-			elif i == 3:
-				leadercash = managercash * rate3 / 100
+				i += 1
+				if i == 1:
+					leadercash = managercash * rate1 / 100
+				elif i == 2:
+					leadercash = managercash * rate2 / 100
+				elif i == 3:
+					leadercash = managercash * rate3 / 100
 
-			insert_bonus_detail_3(_uid, usernumber, realname, leadercash)
+				insert_bonus_detail_3(_uid, usernumber, realname, leadercash)
 
 def member_achievement_status(uid):
 	flag = False
