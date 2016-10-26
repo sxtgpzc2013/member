@@ -100,7 +100,7 @@ def fenhong():
 					current_cash = cash(userrank)
 					ago_cash = cash(userrank_ago_level)
 					# 升级差值的最大分红奖金
-					max_cash = maxcash(userrank) * (current_cash - ago_cash)) + maxchash(userrank_ago_level) * ago_cash
+					max_cash = maxcash(userrank) * (current_cash - ago_cash) + maxchash(userrank_ago_level) * ago_cash
 
 				elif upgrade_status == 0:
 					# 最大分红的奖金
@@ -108,7 +108,7 @@ def fenhong():
 
 			# 金卡、钻卡等额价值套餐
 			elif packages == 2:
-				max_cash = maxcash(userrank) * value) - value
+				max_cash = maxcash(userrank) * value - value
 				
 			if max_bonus < max_cash:
 				if fenhong + max_bonus > max_cash:
@@ -233,10 +233,11 @@ def fenhong():
 					taxmoney_change_sql_1 = """
 						insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 						values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-					""" % (8, 8, 1, 1, '戎子', 3, uid, usernumber, realname, 1, taxmoney_award, now_second)
+					""" % (8, 8, 1, 1, '戎子', uid, usernumber, realname, 3, 1, taxmoney_award, now_second)
 					conn.dml(taxmoney_change_sql_1, 'insert')
 
 	conn.close()
+	print "ok"
 
 if __name__ == '__main__':
 	fenhong()
