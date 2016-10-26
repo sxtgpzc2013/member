@@ -430,8 +430,7 @@ def getmembervalue(uid):
 	return value
 
 # 极差算法
-def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
-	maxmanagercash = maxmanagercash
+def jicha(value, memberlevels):
 	for index, val in enumerate(memberlevels):
 		if index > 0:
 			flag = False
@@ -451,65 +450,24 @@ def jicha(uid, usertitle, value, maxmanagercash, memberlevels):
 				i = int(memberlevels[x][2])
 
 			if flag:
-				if member_uid == uid:
-					managercash = value * maxmanagercash / 100
-					result = getmemberinfo(member_uid)
-					if result:
-						status = insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
-						if status:
-							leaderbonus(uid, managercash)
-					break
-				else:
-					if member_title > int(usertitle):
-						managercash = value * maxmanagercash / 100
-						result = getmemberinfo(member_uid)
-						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
-						break
-					elif member_title == int(usertitle):
-						managercash = value * member_value / 100
-						result = getmemberinfo(member_uid)
-						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
-						break
-					elif member_title < int(usertitle):
-						_member_value = member_value - i
-						managercash = value * _member_value / 100
-						maxmanagercash -= _member_value
-						result = getmemberinfo(member_uid)
-						if result:
-							insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
-
-		elif index == 0:
-			member_uid = int(memberlevels[index][0])
-			member_title = int(memberlevels[index][1])
-			member_value = int(memberlevels[index][2])
-			if member_uid == int(uid):
-				managercash = value * maxmanagercash / 100
+				_member_value = member_value - i
+				managercash = value * _member_value / 100
 				result = getmemberinfo(member_uid)
 				if result:
 					status = insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 					if status:
 						leaderbonus(uid, managercash)
-			else:
-				if member_title > int(usertitle):
-					managercash = value * maxmanagercash / 100
-					result = getmemberinfo(member_uid)
-					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
-					break
-				elif member_title == int(usertitle):
-					managercash = value * member_value / 100
-					result = getmemberinfo(member_uid)
-					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
-					break
-				elif member_title < int(usertitle):
-					managercash = value * member_value / 100
-					maxmanagercash -= member_value
-					result = getmemberinfo(member_uid)
-					if result:
-						insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+		elif index == 0:
+			member_uid = int(memberlevels[index][0])
+			member_title = int(memberlevels[index][1])
+			member_value = int(memberlevels[index][2])
+			managercash = value * member_value / 100
+			result = getmemberinfo(member_uid)
+			if result:
+				status = insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
+				if status:
+					leaderbonus(uid, managercash)
+
 	return True
 
 #更新会员的业绩状态
@@ -532,13 +490,9 @@ def managerbonus(uid):
 	if parents:
 		# 赛选有星级的会员
 		memberlevels = getuservalue(parents)
-		# 获取最上层的会员
-		top_uid = memberlevels[-1][0]
-		top_usertitle = memberlevels[-1][1]
-		# 先获取会员管理比例的最大值
-		maxmanagercash = getmaxmanagercash(top_usertitle)
-		status = jicha(top_uid, top_usertitle, value, maxmanagercash, memberlevels)
-		return status
+		if memberlevels:
+			status = jicha(value, memberlevels)
+			return status
 
 	return flag
 

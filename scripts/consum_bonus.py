@@ -165,7 +165,7 @@ def jicha(value, memberlevels):
 				result = getmemberinfo(member_uid)
 				if result:
 					insert_bonus_detail_8(member_uid, result[0]['usernumber'], result[0]['realname'], repeatcash)
-
+					
 		elif index == 0:
 			member_uid = int(memberlevels[index][0])
 			member_title = int(memberlevels[index][1])
@@ -176,7 +176,6 @@ def jicha(value, memberlevels):
 				insert_bonus_detail_8(member_uid, result[0]['usernumber'], result[0]['realname'], repeatcash)
 			
 	return True
-
 
 def getuservalue(parents):
 	members = []
