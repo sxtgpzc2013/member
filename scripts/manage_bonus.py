@@ -456,7 +456,7 @@ def jicha(value, memberlevels):
 				if result:
 					status = insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 					if status:
-						leaderbonus(uid, managercash)
+						leaderbonus(member_uid, managercash)
 		elif index == 0:
 			member_uid = int(memberlevels[index][0])
 			member_title = int(memberlevels[index][1])
@@ -466,7 +466,7 @@ def jicha(value, memberlevels):
 			if result:
 				status = insert_bonus_detail_2(member_uid, result[0]['usernumber'], result[0]['realname'], managercash)
 				if status:
-					leaderbonus(uid, managercash)
+					leaderbonus(member_uid, managercash)
 
 	return True
 
