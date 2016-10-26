@@ -82,8 +82,9 @@ def update_member(usertitle, jianglijifen, usernumber):
 	sql = """
 		update zx_member set usertitle = %s, jianglijifen = jianglijifen + %s where usernumber = %s 
 	""" % (usertitle, jianglijifen, usernumber)
+	status = conn.dml(sql, 'update')
 
-	return conn.dml(sql, 'update')
+	return status
 
 # 插入福利积分明细
 def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen):
