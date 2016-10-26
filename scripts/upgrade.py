@@ -506,7 +506,7 @@ def managerbonus(uid, value):
 	return flag
 
 # 升级补差 管理补贴和互助补贴
-def main(uid):
+def upgrade(uid):
 	# 会员
 	sql = """
 		select m.uid, m.usernumber, m.realname, m.userrank, m.max_bonus, m.upgrade_level, r.value from zx_member as m left join zx_bonus_rule as r
@@ -531,9 +531,13 @@ def main(uid):
 		# 计算升级的管理奖和互助奖
 		managerbonus(uid, value)
 
+def main(uid):
+	if len(sys.argv) >= 2:
+		uid = sys.argv[1]
+		upgrade(uid)
+
 	conn.close()
 
 if __name__ == '__main__':
-	if len(sys.argv) >= 2:
-		uid = sys.argv[1]
-		main(uid)
+	main()
+	
