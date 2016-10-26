@@ -120,7 +120,7 @@ def insert_bonus_detail_2(uid, usernumber, realname, managercash):
 			rongzidun_change_sql_1 = """
 				insert into zx_money_change (moneytype, status, targetuserid, targetusernumber, targetrealname, userid, usernumber, realname, changetype, recordtype, money, createtime)
 	            values (%s, %s, %s, %s, '%s', %s, %s, '%s', %s, %s, %s, %s)
-			""" % (3, 3, 1, 1, '戎子', 4, uid, usernumber, realname, 0, rongzidun_award, now_second)
+			""" % (3, 3, 1, 1, '戎子', uid, usernumber, realname, 4, 0, rongzidun_award, now_second)
 			conn.dml(rongzidun_change_sql_1, 'insert')
 
 			# 爱心基金流水
