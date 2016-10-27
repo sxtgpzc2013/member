@@ -13,6 +13,25 @@ conn = mysql.db()
 now = datetime.datetime.now()
 now_second = datetime.datetime.now().strftime('%s')
 
+def rate():
+	rate_sql = """
+		select category, value from zx_bonus_rule where category in ('rongzidun', 'jiangjinbi', 'lovemoney', 'platmoney', 'taxmoney')
+	"""
+	rates = conn.query(rate_sql)
+	conn.close()
+
+	if rates:
+		rates = rates
+	else:
+		rates = (
+			{'category': 'rongzidun', 'value': 25},
+			{'category': 'jiangjinbi', 'value': 55},
+			{'category': 'lovemoney', 'value': 1},
+			{'category': 'platmoney', 'value': 2},
+			{'category': 'taxmoney', 'value': 17}
+		)
+	return rates
+
 def getmemberinfo(uid):
 	flag = False
 	sql = """
@@ -210,8 +229,8 @@ def gettuijiannumber_parent(uid):
 def main():
 	# 获取销售商的uid和销售产品的金额
 	if len(sys.argv) >= 3:
-		uid = sys.argv[1]
-		value = sys.argv[2]
+		uid = int(sys.argv[1])
+		value = int(sys.argv[2])
 		parents = gettuijiannumber_parent(uid)
 		if parents:
 			memberlevels = getuservalue(parents)
