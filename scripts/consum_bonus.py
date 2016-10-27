@@ -182,7 +182,7 @@ def getuservalue(parents):
 	for uid in parents:
 		val = []
 		sql = """
-			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
+			select m.uid, m.usertitle, m.isbill, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
 			where m.uid = %s and category = 'repeatcash' and m.userrank != 1
 		""" % (uid)
 		result = conn.query(sql)
