@@ -363,7 +363,7 @@ CREATE TABLE `zx_bonus_detail` (
   `touserid` int(10) DEFAULT NULL,
   `tousernumber` varchar(16) DEFAULT NULL,
   `torealname` varchar(255) DEFAULT NULL COMMENT '会员真实姓名',
-  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 销售补贴 7 服务补贴 8 二次销售补贴 9 福利积分',
+  `moneytype` int(1) unsigned DEFAULT '0' COMMENT '奖金类型 1 分红 2 管理补贴 3 互助补贴 4 拓展补贴 5 市场补贴 6 销售补贴 7 服务补贴 8 二次销售补贴 9 福利积分 10 县代理服务补贴 11 市代理管理补贴',
   `baodanbi` double(10,2) DEFAULT '0.00' COMMENT '注册币',
   `jiangjinbi` double(10,2) DEFAULT '0.00' COMMENT '奖金币',
   `rongzidun` double(10,2) DEFAULT '0.00' COMMENT '戎子盾',
@@ -383,7 +383,7 @@ ALTER TABLE zx_money_change CHANGE moneytype moneytype TINYINT(4) COMMENT '币�
 ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互助补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现， 13-消费 14-币种转换';
 
 
-ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互助补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换';
+ALTER TABLE zx_money_change CHANGE changetype changetype INT(6) NOT NULL DEFAULT 0 COMMENT '0-未知 1-公司充值 2-公司扣币 3-分红 4-管理补贴 5-互助补贴 6-拓展补贴 7-市场补贴 8-销售补贴 9-服务补贴 10-二次消费补贴 11-销费商提现 12-处理提现 13-消费 14-系统内部转账 15-币种转换 16 县代理服务补贴 17 市代理管理补贴';
 
 ALTER TABLE zx_money_change ADD realname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'realname';
 ALTER TABLE zx_money_change ADD targetrealname VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'targetrealname';
