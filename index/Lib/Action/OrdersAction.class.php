@@ -983,13 +983,13 @@
 
 					'status' => 1,
 
-					'targetuserid' => $dt['member']['uid'],
+					'targetuserid' => 1,
 
-					'targetusernumber' => $dt['member']['usernumber'],
+					'targetusernumber' => 1,
 
-					'userid' => 1,
+					'userid' => $dt['member']['uid'],
 
-					'usernumber' => 1,
+					'usernumber' => $dt['member']['usernumber'],
 
 					'changetype' => $dt['changetype'],
 
