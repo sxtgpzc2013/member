@@ -497,7 +497,7 @@ def upgrade(uid):
 		upgrade_cash = current_cash - ago_cash
 
 		# 计算升级的管理奖和互助奖
-		managerbonus(uid, value)
+		managerbonus(uid, upgrade_cash)
 
 def main():
 	if len(sys.argv) >= 2:
