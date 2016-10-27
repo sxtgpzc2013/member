@@ -95,12 +95,10 @@ def fenhong():
 			if packages == 1:
 				# 升级的分红模式
 				if upgrade_status == 1:
-					# 查看升级之前的最大分红奖金
-					userrank_ago_level = userrank - upgrade_level
 					current_cash = cash(userrank)
-					ago_cash = cash(userrank_ago_level)
+					ago_cash = cash(upgrade_level)
 					# 升级差值的最大分红奖金
-					max_cash = maxcash(userrank) * (current_cash - ago_cash) + maxchash(userrank_ago_level) * ago_cash
+					max_cash = maxcash(userrank) * (current_cash - ago_cash) + maxchash(upgrade_level) * ago_cash
 
 				elif upgrade_status == 0:
 					# 最大分红的奖金
