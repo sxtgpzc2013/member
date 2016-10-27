@@ -267,6 +267,17 @@ def insert_bonus_detail_3(uid, usernumber, realname, leadercash):
 
 	return True
 
+def getmemberinfo(uid):
+	flag = False
+	sql = """
+		select usernumber, realname from zx_member where uid = %s
+	""" % (uid)
+	result = conn.query(sql)
+	if result:
+		return result
+
+	return flag
+
 #插入互助补贴明细, 流水
 def leaderbonus(uid, managercash):
 	sql = """
