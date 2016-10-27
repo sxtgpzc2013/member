@@ -541,7 +541,7 @@
 				// 		$data['upgrade_level'] = 0;
 				// 		break;
 				// }
-				
+
 				$data['upgrade_level'] = ($_POST['canlevel'] - $_POST['oldrank']) * 2;
 
 				$data['upgrade_status'] = 1;
@@ -561,7 +561,7 @@
 
  				$my_save = $this -> model -> my_save($params);
 				if ($my_save == 1){
-					
+
 					//更新相关信息业绩和激活信息
 					$this -> update_upgrade_info($_POST['uid']);
 
@@ -593,7 +593,7 @@
 			$member = $this -> model -> my_find($params);
 
 			if($member){
-				
+
 				$deduct = $member['upgrade_level'] * 10000;
 
 				$add_finance = $Activates -> add_finance($deduct);
@@ -708,7 +708,7 @@
 			}elseif($member['userrank'] == 4){
 				$data['red_wine_number'] = 3;
 			}
-			
+
 
 			//写入数据库
 			$params = array(
@@ -735,7 +735,7 @@
 
 				//调用Python脚本
 				//exec("python ./");
-				system("python ./scripts/main.py", $ret);
+				system("python ./scripts/upgrade.py {$uid}", $ret);
 	   			//system("python ./scripts/achievement.py", $ret2);
 				//更新消费套餐红酒订单 添加一份订单
 				$Activates -> save_red_order($member);

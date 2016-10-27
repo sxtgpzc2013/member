@@ -496,17 +496,3 @@ ALTER TABLE zx_member ADD upgrade_status INT(1) NOT NULL DEFAULT '0' COMMENT '�
 
 ALTER TABLE zx_member ADD upgrade_time INT(10) NOT NULL DEFAULT '0' COMMENT '升级时间';
 
-#jenkins http://121.42.26.223:8080/   admin  zxtc999.
--- 121.42.26.223
--- abiding  14:53:37
--- Zhxtch999！@#￥
-
-
--- 阿里云账号
--- 账号：zxtc999
--- 密码：zhongxiang999qwer
--- abiding  18:45:55
--- 数据库
--- rm-m5e372r857ot6cl37.mysql.rds.aliyuncs.com    3306
--- member
--- zhqjqzhnn15!
