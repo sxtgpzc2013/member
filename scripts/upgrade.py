@@ -486,7 +486,7 @@ def upgrade(uid):
 		# 计算升级的管理奖和互助奖
 		managerbonus(uid, value)
 
-def main(uid):
+def main():
 	if len(sys.argv) >= 2:
 		uid = sys.argv[1]
 		upgrade(uid)
