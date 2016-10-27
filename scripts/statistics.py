@@ -63,7 +63,7 @@ def money_change(uid, usernumber, realname):
 
 	zx_bonus_count_sql = """
 		insert into zx_bonus_count (touserid, tousernumber, torealname, bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus7, bonus8, bonus10, bonus11, total, real_total, count_date) values (%s, %s, '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-	""" % (uid, usernumber, realname, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, total, realtotal, yes_time_second)
+	""" % (uid, usernumber, realname, fenhong_total, manager_total, leader_total, expand_total, market_total, consume_total, service_total, twice_consume_total, service_agent_total, total, manager_agent_total, realtotal, yes_time_second)
 	conn.dml(zx_bonus_count_sql, 'insert')
 
 def main():
