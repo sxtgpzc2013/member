@@ -469,13 +469,13 @@ def upgrade(uid):
 	""" % (uid)
 	result = conn.query(sql)
 	if result:
-		uid = result['uid']
-		usernumber = result['usernumber']
-		realname = result['realname']
-		userrank = int(result['userrank'])
-		value = int(member['value'])
-		max_bonus = float(member['max_bonus'])
-		upgrade_level = int(member['upgrade_level'])
+		uid = result[0]['uid']
+		usernumber = result[0]['usernumber']
+		realname = result[0]['realname']
+		userrank = int(result[0]['userrank'])
+		value = int(result[0]['value'])
+		max_bonus = float(result[0]['max_bonus'])
+		upgrade_level = int(result[0]['upgrade_level'])
 
 		userrank_ago_level = userrank - upgrade_level
 		current_cash = cash(userrank)
