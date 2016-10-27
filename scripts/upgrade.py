@@ -414,7 +414,7 @@ def getuservalue(parents):
 		val = []
 		sql = """
 			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
-			where m.uid = %s and category = 'managercash' and m.userrank != 1
+			where m.uid = %s and category = 'managercash' and m.userrank != 1 and m.usernumber != 1
 		""" % (uid)
 		result = conn.query(sql)
 		if result and result[0]['usertitle'] != 0:
