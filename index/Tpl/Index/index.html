@@ -86,11 +86,9 @@
 										<td>激活币:{$member['jihuobi']}</td>
 										<if condition="$member['isbill'] == 1">
 											<td>代理商</td>
-										</if>
-										<if condition="$member['isbill'] == 2">
+										<elseif condition="$member['isbill'] == 2" />
 											<td>县级代理商</td>
-										</if>
-										<if condition="$member['isbill'] == 3">
+										<elseif condition="$member['isbill'] == 3" />
 											<td>市级代理商</td>
 										</if>
 									</tr>

@@ -82,8 +82,9 @@ def update_member(usertitle, jianglijifen, usernumber):
 	sql = """
 		update zx_member set usertitle = %s, jianglijifen = jianglijifen + %s where usernumber = %s 
 	""" % (usertitle, jianglijifen, usernumber)
+	status = conn.dml(sql, 'update')
 
-	return conn.dml(sql, 'update')
+	return status
 
 # 插入福利积分明细
 def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen):
@@ -121,7 +122,7 @@ def main():
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
 			elif value >= 300000 and value < 800000: 
 				title = 2				
-				jianglijifen = 9000
+				jianglijifen = 6000
 				if usertitle == 0 or usertitle == 1:
 					achievement_status = update_achievement_status(uid)
 					if achievement_status:
@@ -130,7 +131,7 @@ def main():
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
 			elif value >= 800000 and value < 2000000:
 				title = 3
-				jianglijifen = 24000
+				jianglijifen = 15000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2:
 					achievement_status = update_achievement_status(uid)
 					if achievement_status:
@@ -139,7 +140,7 @@ def main():
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
 			elif value >= 2000000 and value < 5000000:
 				title = 4
-				jianglijifen = 60000     
+				jianglijifen = 36000     
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3:
 					achievement_status = update_achievement_status(uid)
 					if achievement_status:
@@ -148,7 +149,7 @@ def main():
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
 			elif value >= 5000000 and value < 8000000:
 				title = 5
-				jianglijifen = 150000
+				jianglijifen = 90000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4:
 					achievement_status = update_achievement_status(uid)
 					if achievement_status:
@@ -157,7 +158,7 @@ def main():
 							insert_bonus_detail_jianglijifen(uid, usernumber, realname, 9, jianglijifen)
 			elif value >= 8000000:
 				title = 6
-				jianglijifen = 240000
+				jianglijifen = 90000
 				if usertitle == 0 or usertitle == 1 or usertitle == 2 or usertitle == 3 or usertitle == 4 or usertitle == 5:
 					achievement_status = update_achievement_status(uid)
 					if achievement_status:

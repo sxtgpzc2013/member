@@ -176,6 +176,54 @@
 											<td>{$item.createdate|date="Y-m-d",###}</td>
 										</tr>
 									</if>
+									<if condition="$item['moneytype'] eq 9">
+										<tr>
+											<th>福利积分</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 10">
+										<tr>
+											<th>县代理服务补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
+										</tr>
+									</if>
+									<if condition="$item['moneytype'] eq 11">
+										<tr>
+											<th>福市代理管理补贴</th>
+											<td>￥{$item.jiangjinbi}</td>
+											<td>￥{$item.baodanbi}</td>
+											<td>￥{$item.jihuobi}</td>
+											<td>￥{$item.rongzidun}</td>
+											<td>￥{$item.lovemoney}</td>
+											<td>￥{$item.jianglijifen}</td>
+											<td>￥{$item.platmoney}</td>
+											<td>￥{$item.taxmoney}</td>
+											<td>￥{$item.total}</td>
+											<td>￥{$item.real_total}</td>
+											<td>{$item.createdate|date="Y-m-d",###}</td>
+										</tr>
+									</if>
 								</foreach>
 
 							</tbody>
