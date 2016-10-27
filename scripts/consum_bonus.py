@@ -437,13 +437,15 @@ def isbill_jicha(value, memberisbills):
 def getuservalue(parents):
 	members = []
 	for uid in parents:
+		if int(uid) == 1:
+			break
 		val = []
 		sql = """
 			select m.uid, m.usertitle, r.value from zx_member as m left join zx_bonus_rule as r on m.usertitle = r.key
-			where m.uid = %s and category = 'repeatcash' and m.userrank != 1
+			where m.uid = %s and category = 'repeatcash' and m.userrank != 1 and m.usertitle != 0
 		""" % (uid)
 		result = conn.query(sql)
-		if result and result[0]['usertitle'] != 0:
+		if result:
 			val.append(result[0]['uid'])
 			val.append(result[0]['usertitle'])
 			val.append(result[0]['value'])
@@ -457,7 +459,7 @@ def getisbill(parents):
 		val = []
 		sql = """
 			select m.uid, m.usertitle, m.isbill, r.value from zx_member as m left join zx_bonus_rule as r on m.isbill = r.key
-			where m.uid = %s and category = 'agent' and m.isbill in (2, 3)
+			where m.uid = %s and category = 'agent' and m.isbill in (2, 3) and m.usernumber != 1
 		""" % (uid)
 		result = conn.query(sql)
 		if result:
