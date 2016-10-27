@@ -250,7 +250,7 @@
 
 			$data['update_time'] = time();
 
-			$data['isbill'] = 1;
+			$data['isbill'] = intval($_GET['isbill']) ? $_GET['isbill'] : 1;
 
 			$params = array(
 

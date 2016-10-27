@@ -61,9 +61,9 @@ class FinancesAction extends CommonAction {
     public function bonus_list()
     {
 
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : "";
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : "" ;
 
         $where = "1";
 
