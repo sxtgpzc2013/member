@@ -16,7 +16,7 @@ yes_time = (now + datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 
 def money_change(uid, usernumber, realname):
 	total, realtotal = 0, 0
-	fenhong_total, fenhong_real_total, manager_total, manager_real_total, leader_total, leader_real_total, expand_total, expand_real_total, market_total, market_real_total, consume_total, consume_real_total, service_total, service_real_total, twice_consume_total, twice_consume_real_total, service_agent_total, service_agent_real_total, manager_agent_total, manager_agent_real_total = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	fenhong_total, fenhong_real_total, manager_total, manager_real_total, leader_total, leader_real_total, expand_total, expand_real_total, market_total, market_real_total, consume_total, consume_real_total, service_total, service_real_total, twice_consume_total, twice_consume_real_total, service_agent_total, service_agent_real_total, manager_agent_total, manager_agent_real_total = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 	sql = """
 		select moneytype, sum(total) as total, sum(real_total) as real_total from zx_bonus_detail 
