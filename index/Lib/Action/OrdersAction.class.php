@@ -893,14 +893,18 @@
 
 	    	if ($type == 'income') //存入
 	    	{
-	    		$params['data']['income'] = "`income` + {$money}";
+	    		$params['field'] = 'income';
+
+	    		$params['data'] = $money;
 	    	}
 	    	else //支出
 	    	{
-	    		$params['data']['expend'] = "`expend` + {$money}";
+	    		$params['field'] = 'expend';
+
+	    		$params['data'] = $money;
 	    	}
 
-	    	$finance_save = $this -> model -> my_save($params);
+	    	$finance_save = $this -> model -> my_setInc($params);
 
 	    	return $finance_save;
 	    }
