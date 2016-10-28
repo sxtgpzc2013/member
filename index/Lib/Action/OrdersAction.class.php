@@ -372,11 +372,11 @@
 
 	    					'status' => 1,
 
-	    					'targetuserid' => $member_find['uid'],,
+	    					'targetuserid' => $member_find['uid'],
 
 	    					'targetusernumber' => $member_find['usernumber'],
 
-	    					'userid' => 1
+	    					'userid' => 1,
 
 	    					'usernumber' => 1,
 
