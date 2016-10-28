@@ -34,13 +34,13 @@
 			<li class="<?php if (MODULE_NAME == 'Teams' || MODULE_NAME == 'Activates') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-group"></i> <span class="nav-label">市场管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
+					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1 || intval($_SESSION['Rongzi']['user']['isbill']) === 2 || intval($_SESSION['Rongzi']['user']['isbill']) === 3) { ?>
 					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'index') {echo 'active';} ?>">
 						<a href="__APP__/Activates/index">激活销费商</a>
 					</li>
 					<?php } ?>
 
-					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1) { ?>
+					<?php if (intval($_SESSION['Rongzi']['user']['isbill']) === 1 || intval($_SESSION['Rongzi']['user']['isbill']) === 2 || intval($_SESSION['Rongzi']['user']['isbill']) === 3) { ?>
 					<li class="<?php if (MODULE_NAME == 'Activates' && ACTION_NAME == 'log') {echo 'active';} ?>">
 						<a href="__APP__/Activates/log">激活销费商列表</a>
 					</li>

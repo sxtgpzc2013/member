@@ -61,9 +61,9 @@ class FinancesAction extends CommonAction {
     public function bonus_list()
     {
 
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : "";
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : "" ;
 
         $where = "1";
 
@@ -770,11 +770,29 @@ class FinancesAction extends CommonAction {
 	 */
     public function cash()
     {
+        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
     	$params = array(
 
     		'table_name' => 'withdrawal',
 
-    		'where' => "status = 1",
+    		'where' => $where ." AND status = 1",
 
     		'order' => 'createtime desc'
     	);

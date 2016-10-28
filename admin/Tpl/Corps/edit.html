@@ -27,10 +27,24 @@
 							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_password?uid={$_GET['uid']}">重置密码</a>
 							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改资料</a>
 							<if condition="$member['isbill'] eq 1">
-								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}">取消代理商编号</a>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}&isbill=1">取消代理商编号</a>
 							<else/>
-								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}">设为代理商编号</a>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}&isbill=1">设为代理商编号</a>
 							</if>
+
+							<if condition="$member['isbill'] eq 2">
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}&isbill=2">取消县级代理商编号</a>
+							<else/>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}&isbill=2">设为县级代理商编号</a>
+							</if>
+
+							<if condition="$member['isbill'] eq 3">
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/no_set_bill_center?uid={$_GET['uid']}&isbill=3">取消市级代理商编号</a>
+							<else/>
+								<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/set_bill_center?uid={$_GET['uid']}&isbill=3">设为市级代理商编号</a>
+							</if>
+
+
 							<a type="button" class="btn btn-w-m btn-primary" href="__APP__/Corps/upgrade?usernumber={$member['usernumber']}">修改销费商级别</a>
 							<!-- <a type="button" class="btn btn-w-m btn-primary" href="__APP__/Consumers/edit_info?uid={$_GET['uid']}">修改销费商职务</a> -->
 						</p>
