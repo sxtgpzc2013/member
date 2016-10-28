@@ -180,7 +180,7 @@
 
 	    	$member = $this -> model -> my_find($params);
 
-			$usertitle = array("","一","二","三","四","五","六");
+			$usertitle = array("零","一","二","三","四","五","六");
 
 			$member["usertitle"] = $usertitle[$member['usertitle']];
 
@@ -467,7 +467,7 @@
 
  				'table_name' => 'member',
 
- 				'where' => "usernumber = '{$usernumber}' AND status = 1 AND packages ! = 2"
+ 				'where' => "usernumber = '{$usernumber}' AND status = 1"
 
  			);
 
