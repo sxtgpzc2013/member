@@ -1,5 +1,6 @@
 #encoding:utf-8
 
+import mysql
 import datetime
 import sys
 import subprocess
