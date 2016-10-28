@@ -180,11 +180,9 @@
 
 	    	$member = $this -> model -> my_find($params);
 
-			$userrank = array("","一","二","三","四","五","六","七");
+			$usertitle = array("零","一","二","三","四","五","六");
 
-			$member["userrank"] = $userrank[$member['userrank']];
-
-			$member["usertitle"] = $userrank[$member['usertitle']];
+			$member["usertitle"] = $usertitle[$member['usertitle']];
 
 			$zone = array("1" => "左", "2" => "中", "3" => "右");
 
@@ -469,7 +467,7 @@
 
  				'table_name' => 'member',
 
- 				'where' => "usernumber = '{$usernumber}' AND status = 1 AND packages ! = 2"
+ 				'where' => "usernumber = '{$usernumber}' AND status = 1"
 
  			);
 
