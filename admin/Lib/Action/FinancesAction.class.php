@@ -222,7 +222,7 @@ class FinancesAction extends CommonAction {
         //默认导出今天数据
         $start = $_GET['start'] ? strtotime($_GET['start']) : time();
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
 
         $where = "1";
 
