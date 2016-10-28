@@ -1328,6 +1328,14 @@ class ActivatesAction extends CommonAction {
 
 			}
 
+			if($member['packages'] == 2 && $member['userrank'] == 3){
+				$pro_id = 5;
+			}
+
+			if($member['packages'] == 2 && $member['userrank'] == 4){
+				$pro_id = 6;
+			}
+
 			$order_items['pro_id'] = $pro_id;
 
 			$product = $this -> get_product($pro_id);

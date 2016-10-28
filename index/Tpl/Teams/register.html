@@ -68,6 +68,8 @@
 
 			                    <label class="col-sm-6 control-label" style="text-align:left;"><span class="red_wine_number_span">0</span>个数字红酒资格</label>
 								<input type="hidden" name="red_wine_number" value="0" class="red_wine_number">
+								<!-- <input type="hidden" name="packages" value="1" class="packages"> -->
+								
 			                </div>
 
 							<div class="form-group">
@@ -130,7 +132,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">消费套餐</label>
 
-								<label class="col-sm-8 control-label" style="text-align:left;">戎子经典<span class="red_wine_number_give">2瓶</span></label>
+								<label class="col-sm-8 control-label red_wine_number_give" style="text-align:left;"></label>
 
 
 							</div>
@@ -522,22 +524,41 @@
 			//red_wine_number_span red_wine_number_give
 			//red_wine_number
 			if($(this).val() == 1){
-				$('.red_wine_number_give').html("1瓶")
+				var html = '<select class="form-control col-sm-2" style="width:100px;" name="packages">'
+					+ '<option value="1">戎子经典1瓶</option>'
+					+'</select>'
+				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(0)
 				$('.red_wine_number').val(0)
+				
+				
 			}else if($(this).val() == 2){
-				$('.red_wine_number_give').html("1箱")
+				var html = '<select class="form-control col-sm-2" style="width:100px;" name="packages">'
+					+ '<option value="1">戎子经典1箱</option>'
+					+'</select>'
+				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(0)
 				$('.red_wine_number').val(0)
+				
 			}else if($(this).val() == 3){
-				$('.red_wine_number_give').html("3箱")
+				var html = '<select class="form-control col-sm-2" style="width:100px;" name="packages">'
+					+ '<option value="1">戎子经典3箱</option>'
+					+ '<option value="2">戎子三万消费套餐</option>'
+					+'</select>'
+				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(1)
 				$('.red_wine_number').val(1)
-
+				//red_wine_number_give
+				
 			}else if($(this).val() == 4){
-				$('.red_wine_number_give').html("5箱")
+				var html = '<select class="form-control col-sm-2" style="width:100px;" name="packages">'
+					+ '<option value="1">戎子经典5箱</option>'
+					+ '<option value="2">戎子五万消费套餐</option>'
+					+'</select>'
+				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(3)
 				$('.red_wine_number').val(3)
+				
 			}
 
 		});
