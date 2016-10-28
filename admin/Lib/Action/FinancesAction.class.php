@@ -234,7 +234,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+            $where = $where ." AND targetusernumber = '{$_GET['usernumber']}'";
 
         }
 
