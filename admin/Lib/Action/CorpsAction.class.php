@@ -467,7 +467,7 @@
 
  				'table_name' => 'member',
 
- 				'where' => "usernumber = '{$usernumber}' AND status = 1"
+ 				'where' => "usernumber = '{$usernumber}' AND status = 1 AND packages ! = 2"
 
  			);
 

@@ -60,11 +60,30 @@ class OrdersAction extends CommonAction {
 	 */
     public function wait()
     {
+        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
+
     	$params = array(
 
     		'table_name' => 'orders',
 
-    		'where' => "is_del = 0 AND status = 1",
+    		'where' => $where ." AND is_del = 0 AND status = 1",
 
     		'order' => 'created_at desc'
     	);
@@ -166,11 +185,29 @@ class OrdersAction extends CommonAction {
 	 */
     public function sent()
     {
+        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
     	$params = array(
 
     		'table_name' => 'orders',
 
-    		'where' => "is_del = 0 AND status = 2",
+    		'where' => $where ." AND is_del = 0 AND status = 2",
 
     		'order' => 'created_at desc'
     	);
@@ -194,11 +231,29 @@ class OrdersAction extends CommonAction {
 	 */
     public function sign()
     {
+        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
     	$params = array(
 
     		'table_name' => 'orders',
 
-    		'where' => "is_del = 0 AND status = 3",
+    		'where' => $where ." AND is_del = 0 AND status = 3",
 
     		'order' => 'created_at desc'
     	);
