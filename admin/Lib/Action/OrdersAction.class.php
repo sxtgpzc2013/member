@@ -60,9 +60,9 @@ class OrdersAction extends CommonAction {
 	 */
     public function wait()
     {
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
 
         $where = "1";
 
@@ -185,9 +185,9 @@ class OrdersAction extends CommonAction {
 	 */
     public function sent()
     {
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
 
         $where = "1";
 
@@ -231,9 +231,9 @@ class OrdersAction extends CommonAction {
 	 */
     public function sign()
     {
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
 
         $where = "1";
 

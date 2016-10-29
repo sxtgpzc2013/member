@@ -345,7 +345,7 @@
 
 	    					'changetype' => 13,
 
-	    					'recordtype' => 0,
+	    					'recordtype' => 1,
 
 	    					'money' => $result['total_jprice'],
 
@@ -360,6 +360,43 @@
 	    			);
 
 	    			$jiangjinbi_money_change_add = $this -> model -> my_add($params);
+
+	    			//反向计入流水
+	    			$params = array( //奖金币
+
+	    				'table_name' => 'money_change',
+
+	    				'data' => array(
+
+	    					'moneytype' => 1,
+
+	    					'status' => 1,
+
+	    					'targetuserid' => $member_find['uid'],
+
+	    					'targetusernumber' => $member_find['usernumber'],
+
+	    					'userid' => 1,
+
+	    					'usernumber' => 1,
+
+	    					'changetype' => 13,
+
+	    					'recordtype' => 0,
+
+	    					'money' => $result['total_jprice'],
+
+	    					'hasmoney' => $member_find['jiangjinbi'] - $result['total_jprice'],
+
+	    					'createtime' => time(),
+
+	    					'targetrealname' => $member_find['realname'],
+
+	    					'realname' => '戎子'
+	    				)
+	    			);
+
+	    			$re_jiangjinbi_money_change_add = $this -> model -> my_add($params);
 
 	    			$params = array( //戎子盾
 
@@ -381,7 +418,7 @@
 
 	    					'changetype' => 13,
 
-	    					'recordtype' => 0,
+	    					'recordtype' => 1,
 
 	    					'money' => $result['total_rprice'],
 
@@ -396,6 +433,42 @@
 	    			);
 
 	    			$rongzidun_money_change_add = $this -> model -> my_add($params);
+
+	    			$params = array( //戎子盾-反向
+
+	    				'table_name' => 'money_change',
+
+	    				'data' => array(
+
+	    					'moneytype' => 3,
+
+	    					'status' => 1,
+
+	    					'targetuserid' => $member_find['uid'],
+
+	    					'targetusernumber' => $member_find['usernumber'],
+
+	    					'userid' => 1,
+
+	    					'usernumber' => 1,
+
+	    					'changetype' => 13,
+
+	    					'recordtype' => 0,
+
+	    					'money' => $result['total_rprice'],
+
+	    					'hasmoney' => $member_find['rongzidun'] - $result['total_rprice'],
+
+	    					'createtime' => time(),
+
+	    					'targetrealname' => $member_find['realname'],
+
+	    					'realname' => '戎子'
+	    				)
+	    			);
+
+	    			$re_rongzidun_money_change_add = $this -> model -> my_add($params);
 
 	    			//计算最大奖金数
 	    			// $params = array(
@@ -820,14 +893,18 @@
 
 	    	if ($type == 'income') //存入
 	    	{
-	    		$params['data']['income'] = "`income` + {$money}";
+	    		$params['field'] = 'income';
+
+	    		$params['data'] = $money;
 	    	}
 	    	else //支出
 	    	{
-	    		$params['data']['expend'] = "`expend` + {$money}";
+	    		$params['field'] = 'expend';
+
+	    		$params['data'] = $money;
 	    	}
 
-	    	$finance_save = $this -> model -> my_save($params);
+	    	$finance_save = $this -> model -> my_setInc($params);
 
 	    	return $finance_save;
 	    }

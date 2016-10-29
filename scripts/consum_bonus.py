@@ -397,12 +397,12 @@ def isbill_jicha(value, memberisbills):
 			member_value = int(memberisbills[index][2])
 			i = 0
 			for x in range(0, index):
-				if member_title > int(memberisbills[x][1]):
+				if member_isbill > int(memberisbills[x][1]):
 					flag = True
-				elif member_title == int(memberisbills[x][1]):
+				elif member_isbill == int(memberisbills[x][1]):
 					flag = False
 					break
-				elif member_title < int(memberisbills[x][1]):
+				elif member_isbill < int(memberisbills[x][1]):
 					flag = False
 					break
 				i = int(memberisbills[x][2])

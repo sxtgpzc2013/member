@@ -220,9 +220,9 @@ class FinancesAction extends CommonAction {
     public function finance_flow()
     {
         //默认导出今天数据
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
 
-        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
 
         $where = "1";
 
@@ -234,7 +234,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+            $where = $where ." AND targetusernumber = '{$_GET['usernumber']}'";
 
         }
 
