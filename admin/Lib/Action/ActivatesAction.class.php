@@ -281,7 +281,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = 1 AND isbill = 1"
+				'where' => "uid = 1 AND isbill IN (1,2,3)"
 
 			);
 

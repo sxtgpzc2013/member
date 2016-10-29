@@ -245,7 +245,7 @@
 
  			if($member){
 
-				$billcenternumber = $member['isbill'] == 1 ? $member['usernumber'] : $member['billcenternumber'];
+				$billcenternumber = ($member['isbill'] == 1 OR $member['isbill'] == 2 OR $member['isbill'] == 3) ? $member['usernumber'] : $member['billcenternumber'];
 
  			}
 
@@ -408,7 +408,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill = 1"
+				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill IN (1,2,3)"
 
 			);
 
@@ -441,7 +441,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill = 1"
+				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill IN (1,2,3)"
 
 			);
 
