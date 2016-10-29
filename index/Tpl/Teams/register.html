@@ -200,7 +200,17 @@
 
 			                    <div class="col-sm-7">
 			                        <input type="text" class="form-control billcenternumber" name="billcenternumber"
-									value="<if condition="$_SESSION['Rongzi']['user']['isbill'] eq 1">{$_SESSION['Rongzi']['user']['usernumber']}<else/>{$_SESSION['Rongzi']['user']['billcenternumber']}</if>">
+									value="
+										<if condition="$_SESSION['Rongzi']['user']['isbill'] eq 1">
+											{$_SESSION['Rongzi']['user']['usernumber']}
+										<elseif condition="$_SESSION['Rongzi']['user']['isbill'] eq 2"/>
+											{$_SESSION['Rongzi']['user']['usernumber']}
+										<elseif condition="$_SESSION['Rongzi']['user']['isbill'] eq 3"/>
+											{$_SESSION['Rongzi']['user']['usernumber']}
+										<else/>
+											{$_SESSION['Rongzi']['user']['billcenternumber']}
+										</if>
+									">
 
 			                    </div>
 
