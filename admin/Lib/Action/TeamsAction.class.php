@@ -449,7 +449,7 @@
 
 			if($member){
 
-				return $member['is_bill'];
+				return $member['isbill'];
 
 			}else{
 
