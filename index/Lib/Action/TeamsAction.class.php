@@ -115,7 +115,7 @@
 				// 	$data['ID_address_back'] = $pic['ID_address_back']['msg'];
 				// }
 
-				if($data['billcenterid'] == 0){
+				if($data['isbill'] == 0){
 					$this -> _back("{$data['billcenternumber']}不是代理商编号,销费商注册失败,请重试。");return;
 				}
 
