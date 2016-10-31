@@ -540,7 +540,7 @@
 				// 		break;
 				// }
 
-				$data['upgrade_level'] = $_POST['oldrank'];
+				$data['upgrade_level'] = ($_POST['canlevel'] - $_POST['oldrank']) * 2;
 
 				$data['upgrade_status'] = 1;
 
