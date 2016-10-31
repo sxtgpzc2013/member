@@ -267,8 +267,8 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   position: absolute;
   left: 70px;
   top: 0px;
-  background-color: #2f4050;
-  padding: 10px 10px 10px 10px;
+  background-color: #000000;
+  padding: 0px 0px 0px 0px;
   font-size: 12px;
 }
 .canvas-menu.mini-navbar .nav-second-level {
@@ -362,7 +362,7 @@ body.canvas-menu .logo-element {
 }
 body.mini-navbar .nav-header {
   padding: 0;
-  background-color: #1ab394;
+  background-color: #000000;
 }
 body.canvas-menu .nav-header {
   padding: 33px 25px;

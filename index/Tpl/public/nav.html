@@ -1,5 +1,9 @@
 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <ul class="nav navbar-top-links navbar-left">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "><i class="fa fa-bars"></i> </a>
+
+    </div>
+    <!-- <ul class="nav navbar-top-links navbar-left">
         <li>
             <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a title="返回首页" style="color:#000000 !important;" href="__APP__/Consumers/edit_info"><img src="__PUBLIC__/images/user.png" alt="" style="width:14px;height:14px;"/></a>Hi {$_SESSION['Rongzi']['user']['realname']}</span>
         </li>
@@ -8,14 +12,18 @@
                 <i></i>
             </a>
         </li>
-    </ul>
+    </ul> -->
     <ul class="nav navbar-top-links navbar-right">
-        <li>
-            <span class="m-r-sm text-muted welcome-message"  style="color:#000000 !important;"><a href="__APP__/Consumers/edit_info" title="返回首页" style="color:#000000 !important;"><img src="__PUBLIC__/images/user.png" alt="" style="width:14px;height:14px;"/></a>{$_SESSION['Rongzi']['user']['realname']}资料</span>
-        </li>
-        <li>
+        <li style="float:right;margin-right:15px;">
             <a href="__APP__/Login/out"  style="color:#000000 !important;">
                 <i class="fa fa-sign-out"></i> 退出
+            </a>
+        </li>
+
+
+        <li style="float:right">
+            <a href="__APP__/Consumers/edit_info"  style="color:#000000 !important;">
+                <i class="fa fa-user"></i> {$_SESSION['Rongzi']['user']['realname']}资料
             </a>
         </li>
     </ul>
