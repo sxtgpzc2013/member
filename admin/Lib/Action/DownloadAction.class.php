@@ -1168,12 +1168,12 @@ class DownloadAction extends CommonAction {
 			$order_item_name = "";
 
 			foreach ($order_items as $key => $value) {
-				$order_item_name = $order_item_name ."-------------". $value['name'];
+				$order_item_name = $order_item_name.$value['name'];
 			}
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
 
         }
 
@@ -1275,12 +1275,12 @@ class DownloadAction extends CommonAction {
 			$order_item_name = "";
 
 			foreach ($order_items as $key => $value) {
-				$order_item_name = $order_item_name ."-------------". $value['name'];
+				$order_item_name = $order_item_name.$value['name'];
 			}
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
 
         }
 
@@ -1383,12 +1383,12 @@ class DownloadAction extends CommonAction {
 			$order_item_name = "";
 
 			foreach ($order_items as $key => $value) {
-				$order_item_name = $order_item_name ."-------------". $value['name'];
+				$order_item_name = $order_item_name.$value['name'];
 			}
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
 
         }
 
