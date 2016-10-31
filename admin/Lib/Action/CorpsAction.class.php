@@ -540,7 +540,7 @@
 				// 		break;
 				// }
 
-				$data['upgrade_level'] = ($_POST['canlevel'] - $_POST['oldrank']) * 2;
+				$data['upgrade_level'] = $_POST['oldrank'];
 
 				$data['upgrade_status'] = 1;
 
@@ -591,8 +591,14 @@
 			$member = $this -> model -> my_find($params);
 
 			if($member){
-
-				$deduct = $member['upgrade_level'] * 10000;
+				$deduct = 0;
+				if($member['userrank'] == 3 && $member['upgrade_level'] == 2){
+					$deduct = $member['userrank'] * 30000  - $member['upgrade_level']) * 10000;
+				}elseif($member['userrank'] == 4 && member['upgrade_level'] == 3){
+					$deduct = $member['userrank'] * 50000  - $member['upgrade_level']) * 30000;
+				}elseif($member['userrank'] == 4 && member['upgrade_level'] == 2){
+					$deduct = $member['userrank'] * 50000  - $member['upgrade_level']) * 10000;
+				}
 
 				$add_finance = $Activates -> add_finance($deduct);
 
