@@ -65,14 +65,13 @@
 										<td>销费商姓名:{$member['realname']}</td>
 										<td>销费商级别:{$member['userrank']}</td>
 										<td>销费商头衔:<if condition="$member['usertitle'] neq ''">{$member['usertitle']}星销费商<else/>无头衔</if>
-
 										</td>
 									</tr>
 									<tr>
 										<td>注册币余额:{$member['baodanbi']}</td>
+										<td>激活币:{$member['jihuobi']}</td>
 										<td>奖金币余额:{$member['jiangjinbi']}</td>
 										<td>戎子盾:{$member['rongzidun']}</td>
-										<td>福利积分:{$member['jianglijifen']}</td>
 									</tr>
 									<tr>
 										<td>推荐人数:{$recommend_count}</td>
@@ -83,7 +82,7 @@
 
 									<tr>
 										<td>数字红酒资格:{$member['red_wine_number']}</td>
-										<td>激活币:{$member['jihuobi']}</td>
+										<td>福利积分:{$member['jianglijifen']}</td>
 										<if condition="$member['isbill'] == 1">
 											<td>代理商</td>
 										<elseif condition="$member['isbill'] == 2" />

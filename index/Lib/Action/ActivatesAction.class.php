@@ -283,7 +283,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = {$member['billcenterid']} AND isbill = 1"
+				'where' => "uid = {$member['billcenterid']} AND isbill IN (1,2,3)"
 
 			);
 
@@ -1322,6 +1322,14 @@ class ActivatesAction extends CommonAction {
 					$pro_id = 4;
 					break;
 
+			}
+
+			if($member['packages'] == 2 && $member['userrank'] == 3){
+				$pro_id = 5;
+			}
+
+			if($member['packages'] == 2 && $member['userrank'] == 4){
+				$pro_id = 6;
 			}
 
 			$order_items['pro_id'] = $pro_id;

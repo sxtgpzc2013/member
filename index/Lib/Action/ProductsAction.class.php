@@ -45,7 +45,7 @@ class ProductsAction extends CommonAction {
 
     		'table_name' => 'products',
 
-    		'where' => "is_del = 0 AND id NOT IN ('1','2','3','4','5','6')",
+    		'where' => "is_del = 0 AND id NOT IN ('1','2','3','4','5','6','7','8')",
 
     		'order' => 'created_at desc'
     	);

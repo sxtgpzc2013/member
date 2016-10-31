@@ -102,6 +102,8 @@
 				//代理商编号人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
 
+
+				$get_user_is_bill = $this -> get_user_is_bill($data['billcenternumber']);
 				// $pic = $this -> _upload_pic_all('member');
 				//
 				// if ($pic['ID_address_face']['status'] == 1)
@@ -115,7 +117,7 @@
 				// 	$data['ID_address_back'] = $pic['ID_address_back']['msg'];
 				// }
 
-				if($data['billcenterid'] == 0){
+				if($get_user_is_bill == 0){
 					$this -> _back("{$data['billcenternumber']}不是代理商编号,销费商注册失败,请重试。");return;
 				}
 
@@ -244,7 +246,7 @@
 
  			if($member){
 
-				$billcenternumber = $member['isbill'] == 1 ? $member['usernumber'] : $member['billcenternumber'];
+				$billcenternumber = ($member['isbill'] == 1 OR $member['isbill'] == 2 OR $member['isbill'] == 3) ? $member['usernumber'] : $member['billcenternumber'];
 
  			}
 
@@ -407,7 +409,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill = 1"
+				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill IN (1,2,3)"
 
 			);
 
@@ -424,6 +426,38 @@
 			}
 		}
 
+
+		/**
+		 * 获取代理商编号ID
+		 *
+		 * 参数描述：@tuijiannumber 推荐人编号
+		 *
+		 * 返回值：
+		 *
+		 */
+		function get_user_is_bill($usernumber){
+
+			//查询用户资料数据
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "usernumber = '{$usernumber}' AND status = 1 AND isbill IN (1,2,3)"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			if($member){
+
+				return $member['isbill'];
+
+			}else{
+
+				return 0;
+
+			}
+		}
 		/**
 		 * 获取用户所在位置
 		 *

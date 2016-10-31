@@ -281,7 +281,7 @@ class ActivatesAction extends CommonAction {
 
 				'table_name' => 'member',
 
-				'where' => "uid = 1 AND isbill = 1"
+				'where' => "uid = 1 AND isbill IN (1,2,3)"
 
 			);
 
@@ -1321,14 +1321,22 @@ class ActivatesAction extends CommonAction {
 
 			}
 
+			if($member['packages'] == 2 && $member['userrank'] == 3){
+				$pro_id = 5;
+			}
+
+			if($member['packages'] == 2 && $member['userrank'] == 4){
+				$pro_id = 6;
+			}
+
 			switch ($member['upgrade_level']) {
 				case '2':
 					# 红酒2箱
-					$pro_id = 5;
+					$pro_id = 7;
 					break;
 				case '4':
 					# 红酒4箱子
-					$pro_id = 6;
+					$pro_id = 8;
 					break;
 
 			}
