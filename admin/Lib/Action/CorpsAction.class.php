@@ -643,20 +643,16 @@
 
 						$contact_parent_data['leftachievement'] = $contact_parent['leftachievement'] + $deduct;
 
-						$contact_parent_data['achievement'] = $contact_parent['achievement'] + $contact_parent_data['leftachievement'];
-
 					}elseif($contact['zone'] == 2){
 
 						$contact_parent_data['middleachievement'] = $contact_parent['middleachievement'] + $deduct;
 
-						$contact_parent_data['achievement'] = $contact_parent['achievement'] + $contact_parent_data['middleachievement'];
-
 					}elseif($contact['zone'] == 3){
 
 						$contact_parent_data['rightachievement'] = $contact_parent['rightachievement'] + $deduct;
-
-						$contact_parent_data['achievement'] = $contact_parent['achievement'] + $contact_parent_data['rightachievement'];
 					}
+
+					$contact_parent_data['achievement'] = $contact_parent['achievement'] + $deduct;
 
 					$contact_parent_data['num'] = $contact_parent['num'] + 1;
 
