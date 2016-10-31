@@ -47,7 +47,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<foreach name="result" item="item">
+								<foreach name="result['result']" item="item">
 									<if condition="$item['moneytype'] eq 1">
 										<tr>
 											<th>分红</th>
@@ -240,7 +240,7 @@
 	    <div class="col-sm-12 text-right">
 	        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 	            <ul class="pagination">
-	                
+	                {$result.page}
 	            </ul>
 	        </div>
 	    </div>

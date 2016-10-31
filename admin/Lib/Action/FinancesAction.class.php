@@ -200,7 +200,7 @@ class FinancesAction extends CommonAction {
     		'where' => "touserid = {$count_find['touserid']} AND createdate >= {$that_day} AND createdate <= {$tomorrow}"
     	);
 
-    	$result = $this -> model -> easy_select($params);
+    	$result = $this -> model -> order_select($params);
 
     	$this -> assign('result', $result);
 
@@ -770,7 +770,7 @@ class FinancesAction extends CommonAction {
 	 */
     public function cash()
     {
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
 
         $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
 

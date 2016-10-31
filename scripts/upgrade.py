@@ -469,9 +469,11 @@ def upgrade(uid):
 		value = int(result[0]['value'])
 		max_bonus = float(result[0]['max_bonus'])
 		upgrade_level = int(result[0]['upgrade_level'])
-		# 升级的差值金额
-		upgrade_cash = upgrade_level * 10000
 
+		current_cash = cash(userrank)
+		ago_cash = cash(upgrade_level)
+		# 升级的差值金额
+		upgrade_cash = current_cash - ago_cash
 		# 计算升级的管理奖和互助奖
 		managerbonus(uid, upgrade_cash)
 
