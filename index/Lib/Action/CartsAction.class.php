@@ -91,4 +91,30 @@
 
 	    	redirect(__APP__.'/Carts/index', 0);
 	    }
+
+	    /**
+		 * 更改数量
+		 *
+		 * 参数描述：
+		 *
+		 *
+		 *
+		 * 返回值：
+		 *
+		 */
+	    public function changecount()
+	    {
+	    	$id = isset($_GET['id']) ? intval($_GET['id']) : $this -> _back('非法操作');
+
+	    	$type = isset($_GET['type']) ? intval($_GET['type']) : $this -> _back('非法操作');
+
+	    	if ($type == 0 && $_SESSION['Rongzi']['cart'][$id]['count'] >= 1) //减少
+	    	{
+	    		$_SESSION['Rongzi']['cart'][$id]['count'] = $_SESSION['Rongzi']['cart'][$id]['count'] - 1;
+	    	} elseif ($type == 1) {
+	    		$_SESSION['Rongzi']['cart'][$id]['count'] = $_SESSION['Rongzi']['cart'][$id]['count'] + 1;
+	    	}
+
+	    	redirect(__APP__.'/Carts/index', 0);
+	    }
 	}

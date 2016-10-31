@@ -39,7 +39,11 @@
 										<tr>
 											<td>{$item.products_code}</td>
 											<td>{$item.name}</td>
-											<td>{$item.count}</td>
+											<td>
+												<a href="__APP__/Carts/changecount/type/0/id/{$item['id']}">- </a>
+												{$item.count}
+												<a href="__APP__/Carts/changecount/type/1/id/{$item['id']}"> +</a>
+											</td>
 											<td>￥{$item.total_jprice}</td>
 											<td>￥{$item.total_rprice}</td>
 											<td><a href="__APP__/Carts/delete/id/{$item['id']}" onclick="return confirm('确认删除吗?')">删除</a></td>
