@@ -54,7 +54,7 @@ class ActivatesAction extends CommonAction {
 			'where' => "billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0"
 
 		);
-		
+
     	$data = $this -> model -> order_select($params);
 
 		foreach ($data['result'] as $key => $value) {
@@ -456,21 +456,17 @@ class ActivatesAction extends CommonAction {
 
 					$contact_parent_data['leftachievement'] = $contact_parent['leftachievement'] + $deduct;
 
-					$contact_parent_data['achievement'] = $contact_parent['achievement'] + $contact_parent_data['leftachievement'];
-
 				}elseif($contact['zone'] == 2){
 
 					$contact_parent_data['middleachievement'] = $contact_parent['middleachievement'] + $deduct;
 
-					$contact_parent_data['achievement'] = $contact_parent['achievement'] + $contact_parent_data['middleachievement'];
-
 				}elseif($contact['zone'] == 3){
 
 					$contact_parent_data['rightachievement'] = $contact_parent['rightachievement'] + $deduct;
-
-					$contact_parent_data['achievement'] = $contact_parent['achievement'] + $contact_parent_data['rightachievement'];
 				}
 
+				$contact_parent_data['achievement'] = $contact_parent['achievement'] + $deduct;
+				
 				$contact_parent_data['num'] = $contact_parent['num'] + 1;
 
 				//修改父类相关数据
