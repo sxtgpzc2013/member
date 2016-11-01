@@ -1173,7 +1173,7 @@ class DownloadAction extends CommonAction {
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+            $xlsData[$key]['created_at'] = date('Y-m-d H:i:s', $value['created_at']);
 
         }
 
@@ -1280,7 +1280,7 @@ class DownloadAction extends CommonAction {
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+            $xlsData[$key]['created_at'] = date('Y-m-d H:i:s', $value['created_at']);
 
         }
 
@@ -1388,7 +1388,7 @@ class DownloadAction extends CommonAction {
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+            $xlsData[$key]['created_at'] = date('Y-m-d H:i:s', $value['created_at']);
 
         }
 
