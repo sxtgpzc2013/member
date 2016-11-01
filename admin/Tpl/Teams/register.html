@@ -33,12 +33,12 @@
 			                    <label class="col-sm-2 control-label">销费商编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control usernumber" name="usernumber" value="{$usernumber}" minlength="8">
+			                        <input type="number" class="form-control usernumber" name="usernumber" value="{$usernumber}" minlength="8">
 									<span id="cname-error" class="help-block m-b-none usernumber_err" style="display:none;">必填</span>
 								</div>
 
-								<div class="col-sm-3">
-			                        <a class="btn btn-white get_usernumber">验证编号</a>
+								<div class="col-sm-3 col-md-2">
+			                        <button class="btn btn-white get_usernumber">验证编号</button>
 			                    </div>
 			                </div>
 
@@ -66,7 +66,7 @@
 							<div class="form-group">
 			                    <label class="col-sm-2 control-label">数字红酒</label>
 
-			                    <label class="col-sm-6 control-label" style="text-align:left;"><span class="red_wine_number_span">0</span>个数字红酒资格</label>
+			                    <div class="col-sm-6 control-label" style="text-align:left;"><span class="red_wine_number_span">0</span>个数字红酒资格</div>
 								<input type="hidden" name="red_wine_number" value="0" class="red_wine_number">
 			                </div>
 
@@ -185,7 +185,7 @@
 			                    <label class="col-sm-2 control-label">推荐人编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control tuijiannumber" name="tuijiannumber" value="{$_SESSION['Rongzi']['user']['usernumber']}">
+			                        <input type="number" class="form-control tuijiannumber" name="tuijiannumber" value="{$_SESSION['Rongzi']['user']['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -197,7 +197,7 @@
 			                    <label class="col-sm-2 control-label">代理商编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control billcenternumber" name="billcenternumber"
+			                        <input type="number" class="form-control billcenternumber" name="billcenternumber"
 									value="<if condition="$_SESSION['Rongzi']['user']['isbill'] eq 1">{$_SESSION['Rongzi']['user']['usernumber']}<else/>{$_SESSION['Rongzi']['user']['billcenternumber']}</if>">
 
 			                    </div>
@@ -211,7 +211,7 @@
 			                    <label class="col-sm-2 control-label">位置编号</label>
 
 			                    <div class="col-sm-7">
-			                        <input type="text" class="form-control parentnumber" name="parentnumber" value="{$member['usernumber']}">
+			                        <input type="number" class="form-control parentnumber" name="parentnumber" value="{$member['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
@@ -532,8 +532,8 @@
 				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(0)
 				$('.red_wine_number').val(0)
-				
-				
+
+
 			}else if($(this).val() == 2){
 				var html = '<select class="form-control col-sm-2" style="width:300px;" name="packages">'
 					+ '<option value="1">戎子经典1箱</option>'
@@ -541,7 +541,7 @@
 				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(0)
 				$('.red_wine_number').val(0)
-				
+
 			}else if($(this).val() == 3){
 				var html = '<select class="form-control col-sm-2" style="width:300px;" name="packages">'
 					+ '<option value="1">戎子经典3箱</option>'
@@ -551,7 +551,7 @@
 				$('.red_wine_number_span').html(1)
 				$('.red_wine_number').val(1)
 				//red_wine_number_give
-				
+
 			}else if($(this).val() == 4){
 				var html = '<select class="form-control col-sm-2" style="width:100px;" name="packages">'
 					+ '<option value="1">戎子经典5箱</option>'
@@ -560,7 +560,7 @@
 				$('.red_wine_number_give').html(html)
 				$('.red_wine_number_span').html(3)
 				$('.red_wine_number').val(3)
-				
+
 			}
 
 		});
