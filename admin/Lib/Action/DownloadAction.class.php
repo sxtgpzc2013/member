@@ -1167,8 +1167,8 @@ class DownloadAction extends CommonAction {
 
 			$order_item_name = "";
 
-			foreach ($order_items as $key => $value) {
-				$order_item_name = $order_item_name.$value['name'];
+			foreach ($order_items as $key => $value1) {
+				$order_item_name = $order_item_name.$value1['name'];
 			}
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
