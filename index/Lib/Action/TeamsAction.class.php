@@ -107,6 +107,7 @@
 					$this -> _back("{$data['parentnumber']}位置编号不存在,销费商注册失败,请重试。");return;
 				}
 
+
 				//代理商编号人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
 
