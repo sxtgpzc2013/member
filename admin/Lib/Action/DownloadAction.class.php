@@ -272,7 +272,7 @@ class DownloadAction extends CommonAction {
             }elseif ($value['changetype'] == 13){
                 $xlsData[$key]['changetype'] = '消费';
             }elseif ($value['changetype'] == 14){
-                $xlsData[$key]['changetype'] = '系统内部转账';
+                $xlsData[$key]['changetype'] = '内部转账';
             }elseif($value['changetype'] == 15){
                 $xlsData[$key]['changetype'] = '币种转换';
             }
