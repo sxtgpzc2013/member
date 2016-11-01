@@ -513,6 +513,23 @@
  			if ($form_key == 'yes')
  			{
 
+				$params = array(
+
+ 					'table_name' => 'member',
+
+ 					'where' => "uid = {$_POST['uid']} AND usernumber = '{$_POST['usernumber']}'"
+
+ 				);
+
+ 				$member_find = $this -> model -> my_find($params);
+
+				if($member_find['userrank'] == 1){
+					$this -> _back('普卡不能升级');return;
+				}
+				if($member_find && $member_find['upgrade_status'] == 1){
+					$this -> _back('消费商只能升级一次');return;
+				}
+
 				$data['userrank'] = $_POST['canlevel'];
 
 				//获取会员级别
@@ -591,7 +608,10 @@
 			$member = $this -> model -> my_find($params);
 
 			if($member){
+
+
 				$deduct = 0;
+
 				if($member['userrank'] == 3 && $member['upgrade_level'] == 2){
 					$deduct = 30000 - 10000;
 				}elseif($member['userrank'] == 4 && $member['upgrade_level'] == 3){
@@ -600,7 +620,48 @@
 					$deduct = 50000 - 10000;
 				}
 
-				$add_finance = $Activates -> add_finance($deduct);
+				//获取代理商编号数据
+				$params = array(
+
+					'table_name' => 'member',
+
+					'where' => "uid = 1"
+
+				);
+
+				$billmember = $this -> model -> my_find($params);
+
+				if(intval($billmember['baodanbi']) < $deduct/2){
+					$this -> _back("账户激活币不足{$billmember['baodanbi']}");return;
+				}
+
+				if(intval($billmember['jihuobi']) < $deduct/2){
+					$this -> _back("账户激活币不足{$billmember['jihuobi']}");return;
+				}
+
+				//注册币余额计算
+				$billdata['baodanbi'] = intval($billmember['baodanbi']) - $deduct/2;
+
+				//激活币余额计算
+				$billdata['jihuobi'] = intval($billmember['jihuobi']) - $deduct/2;
+
+				//更新代理商编号相应数据
+				$billparams = array(
+
+					'table_name' => 'member',
+
+					'where' => "uid = 1",
+
+					'data' => $billdata
+				);
+
+				$bill_member_save = $this -> model -> my_save($billparams);
+
+				if ($bill_member_save == 1){
+
+					$Activates -> add_finance($deduct);
+
+				}
 
 			}else{
 				$this -> _back('升级账号获取失败，请重试。');
@@ -732,6 +793,8 @@
 
 				//更新拓展补贴
 				$Activates -> save_expand_subsidy($member, $deduct);
+
+
 
 				//调用Python脚本
 				//exec("python ./");

@@ -93,14 +93,27 @@
 
 				$data['reg_uid'] = $_SESSION['Rongzi']['user']['uid'];
 
-				//获取推荐人ID
+				///获取推荐人ID
 				$data['tuijianid'] = $this -> get_recommend_user_id($data['tuijiannumber']);
 
+				if($data['tuijianid'] == 0){
+					$this -> _back("{$data['tuijiannumber']}推荐编号不存在,销费商注册失败,请重试。");return;
+				}
+
 				//获取位置编号ID
-				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber']);
+				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber'], $data['zone']);
+
+				if($data['tuijianid'] == 0){
+					$this -> _back("{$data['parentnumber']}位置编号不存在,销费商注册失败,请重试。");return;
+				}
+
 
 				//代理商编号人ID
 				$data['billcenterid'] = $this -> get_user_center_id($data['billcenternumber']);
+
+				if($data['tuijianid'] == 0){
+					$this -> _back("{$data['billcenternumber']}报单中心编号不存在,销费商注册失败,请重试。");return;
+				}
 
 
 				$get_user_is_bill = $this -> get_user_is_bill($data['billcenternumber']);
@@ -153,7 +166,50 @@
 					//添加用户默认地址
 					$this -> add_user_address($member_id, $data);
 
-					redirect(__APP__."/Index/index", 0);
+					$params = array(
+
+						'table_name' => 'member',
+
+						'where' => "uid = '{$_SESSION['Rongzi']['user']['uid']}'"
+
+					);
+
+					$activatemember = $this -> model -> my_find($params);
+
+					//获取会员级别
+					switch (intval($_POST['userrank'])) {
+						case '1':
+							# 1980...
+							$deduct = 1980;
+							break;
+						case '2':
+							# 10000...
+							$deduct = 10000;
+							break;
+						case '3':
+							# 30000...
+							$deduct = 30000;
+							break;
+						case '4':
+							# 50000...
+							$deduct = 50000;
+							break;
+
+						default:
+							# code...
+							$deduct = 1980;
+							break;
+					}
+
+
+					//判断注册商报单币是否充足 充足自动激活
+					// if(intval($activatemember['baodanbi']) > $deduct/2 && intval($activatemember['jihuobi']) > $deduct/2){
+					// 	redirect(__APP__."/Activates/activate?uid=".$member_id, 0);
+					// }else{
+					// 	redirect(__APP__."/Activates/index", 0);
+					// }
+
+					redirect(__APP__."/Activates/index", 0);
 
 				}else{
 
@@ -365,7 +421,7 @@
 		 * 返回值：
 		 *
 		 */
-		function get_contact_user_id($usernumber){
+		function get_contact_user_id($usernumber, $zone){
 
 			//查询用户资料数据
 			$params = array(
@@ -379,6 +435,18 @@
 			$member = $this -> model -> my_find($params);
 
 			if($member){
+
+				if($zone == 1 && $member['left_zone'] == 1){
+					$this -> _back('左区已被占,请重新选择接点区！');return;
+				}
+
+				if($zone == 2 && $member['middle_zone'] == 1){
+					$this -> _back('中区已被占,请重新选择接点区！');return;
+				}
+
+				if($zone == 3 && $member['right_zone'] == 1){
+					$this -> _back('右区已被占,请重新选择接点区！');return;
+				}
 
 				if($member['left_zone'] == 1 && $member['middle_zone'] == 1 && $member['right_zone'] == 1 ){
 					$this -> _back('位置编号区间已满,请重新选择推荐人！');return;

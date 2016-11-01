@@ -34,7 +34,7 @@
 		{
 			if (!$_SESSION['Rongzi']['user'])
 			{
-				die('<meta http-equiv="Content-Type" content="text/html"; charset="utf8">您未登录或登录已过期，点击<a href="'.__APP__.'/Login/login" target="_top">此处</a>重新登录');
+				//die('<meta http-equiv="Content-Type" content="text/html"; charset="utf8">您未登录或登录已过期，点击<a href="'.__APP__.'/Login/login" target="_top">此处</a>重新登录');
 				redirect(__APP__.'/Login/login', 0);
 			}
 			else

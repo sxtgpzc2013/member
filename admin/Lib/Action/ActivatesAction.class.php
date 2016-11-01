@@ -288,11 +288,11 @@ class ActivatesAction extends CommonAction {
 			$billmember = $this -> model -> my_find($params);
 
 			if(intval($billmember['baodanbi']) < $deduct/2){
-				$this -> _back("账户激活币不足{$billmember['baodanbi']}");return;
+				$this -> _back("账户激活币不足->余额:{$billmember['baodanbi']}");return;
 			}
 
 			if(intval($billmember['jihuobi']) < $deduct/2){
-				$this -> _back("账户激活币不足{$billmember['jihuobi']}");return;
+				$this -> _back("账户激活币不足->余额:{$billmember['jihuobi']}");return;
 			}
 
 			//注册币余额计算
@@ -464,7 +464,7 @@ class ActivatesAction extends CommonAction {
 				}
 
 				$contact_parent_data['achievement'] = $contact_parent['achievement'] + $deduct;
-				
+
 				$contact_parent_data['num'] = $contact_parent['num'] + 1;
 
 				//修改父类相关数据
@@ -620,7 +620,7 @@ class ActivatesAction extends CommonAction {
 
 					'real_total' => $deduct * $marketratio * 0.8,
 
-					'createdate' => strtotime(date("Y-m-d", time())),
+					'createdate' => time(),
 
 					'lovemoney' => $deduct * $marketratio * 0.01,
 
@@ -921,7 +921,7 @@ class ActivatesAction extends CommonAction {
 
 						'real_total' => $deduct * $expand_ratio * 0.8,
 
-						'createdate' => strtotime(date("Y-m-d", time())),
+						'createdate' => time(),
 
 						'lovemoney' => $deduct * $expand_ratio * 0.01,
 

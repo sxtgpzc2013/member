@@ -191,7 +191,7 @@ class DownloadAction extends CommonAction {
             $where = $where ." AND tousernumber = {$_GET['usernumber']}";
 
         }
-    
+
         //导出筛选数据
         $params = array(
 
@@ -242,7 +242,7 @@ class DownloadAction extends CommonAction {
             }elseif ($value['recordtype'] == 1){
                 $xlsData[$key]['recordtype'] = "增加";
             }
-            
+
             if($value['changetype'] == 0){
                 $xlsData[$key]['changetype'] = '未知';
             }elseif ($value['changetype'] == 1){
@@ -272,7 +272,7 @@ class DownloadAction extends CommonAction {
             }elseif ($value['changetype'] == 13){
                 $xlsData[$key]['changetype'] = '消费';
             }elseif ($value['changetype'] == 14){
-                $xlsData[$key]['changetype'] = '系统内部转账';
+                $xlsData[$key]['changetype'] = '内部转账';
             }elseif($value['changetype'] == 15){
                 $xlsData[$key]['changetype'] = '币种转换';
             }
@@ -780,10 +780,10 @@ class DownloadAction extends CommonAction {
         }
 
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
-        
+
     }
 
-    /**
+	/**
 	 * 提现申请
 	 *
 	 * 参数描述：
@@ -795,20 +795,57 @@ class DownloadAction extends CommonAction {
 	 */
     public function cash()
     {
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "createtime >= {$start} AND createtime <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
     	$params = array(
 
     		'table_name' => 'withdrawal',
 
-    		'where' => "status = 1",
+    		'where' => $where ." AND status = 1",
 
     		'order' => 'createtime desc'
     	);
 
-    	$result = $this -> model -> order_select($params);
+		$xlsData = $this -> model -> easy_select($params);
 
-    	$this -> assign('result', $result);
+        $xlsName  = "提现申请";
 
-    	$this -> display();
+        $xlsCell  = array(
+            array('usernumber','提现账户编号'),
+            array('realname','提现账户姓名'),
+            array('banknumber','银行账号'),
+            array('bankname','开户银行'),
+            array('bankholder','开户姓名'),
+            array('money','提取金额'),
+            array('fee','手续费'),
+			array('money_fee','应到金额'),
+            array('createtime','申请时间')
+        );
+
+        foreach ($xlsData as $key => $value) {
+			$xlsData[$key]['money_fee'] = $value['money'] - $value['fee'];
+
+            $xlsData[$key]['createtime'] = date('Y-m-d', $value['createtime']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
     /**
@@ -1035,6 +1072,328 @@ class DownloadAction extends CommonAction {
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
     }
 
+
+
+	/**
+     * 未发货订单
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function order_wait()
+    {
+
+		$start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
+
+    	$params = array(
+
+    		'table_name' => 'orders',
+
+    		'where' => $where ." AND is_del = 0 AND status = 1",
+
+    		'order' => 'created_at desc'
+    	);
+
+        $xlsData = $this -> model -> easy_select($params);
+
+        $xlsName  = "未发货订单";
+
+        //销费商姓名 realname	级别 user_rank	消费套餐 order_item_name	下单时间 created_at	订单编号 order_code	手机号	sendTel 销费商所属省市县 user_area
+		//详细收货地址 sendAddress	物流公司 sendCommpany	物流编号 logistics_number 物流电话 logistics_tel
+        $xlsCell  = array(
+            array('realname','销费商姓名'),
+            array('userrank','级别'),
+            array('order_item_name','消费套餐'),
+            array('created_at','下单时间'),
+            array('order_code','订单编号'),
+            array('sendTel','手机号'),
+            array('area','销费商所属省市县'),
+            array('sendAddress','详细收货地址'),
+            array('sendCommpany','物流公司'),
+            array('logistics_number','物流编号')
+        );
+
+        foreach ($xlsData as $key => $value) {
+			//获取消费商 姓名 级别 realname userrank area
+			//获取该订单商品列表 order_item_name
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = '{$value['user_id']}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+			$xlsData[$key]['userrank'] = $userrank_content[$member['userrank']];
+
+			$xlsData[$key]['area'] = $member['area'];
+
+			$xlsData[$key]['realname'] = $member['realname'];
+
+			$params = array(
+
+				'table_name' => 'order_items',
+
+				'where' => "order_id = '{$value['id']}'"
+
+			);
+
+			$order_items = $this -> model -> easy_select($params);
+
+			$order_item_name = "";
+
+			foreach ($order_items as $key1 => $value1) {
+				$order_item_name = $order_item_name.$value1['name'];
+			}
+
+			$xlsData[$key]['order_item_name'] = $order_item_name;
+
+            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+    }
+
+
+	/**
+     * 已发货订单
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function order_sent()
+    {
+
+		$start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
+
+    	$params = array(
+
+    		'table_name' => 'orders',
+
+    		'where' => $where ." AND is_del = 0 AND status = 2",
+
+    		'order' => 'created_at desc'
+    	);
+
+        $xlsData = $this -> model -> easy_select($params);
+
+        $xlsName  = "已发货订单";
+
+        //销费商姓名 realname	级别 user_rank	消费套餐 order_item_name	下单时间 created_at	订单编号 order_code	手机号	sendTel 销费商所属省市县 user_area
+		//详细收货地址 sendAddress	物流公司 sendCommpany	物流编号 logistics_number 物流电话 logistics_tel
+        $xlsCell  = array(
+            array('realname','销费商姓名'),
+            array('userrank','级别'),
+            array('order_item_name','消费套餐'),
+            array('created_at','下单时间'),
+            array('order_code','订单编号'),
+            array('sendTel','手机号'),
+            array('area','销费商所属省市县'),
+            array('sendAddress','详细收货地址'),
+            array('sendCommpany','物流公司'),
+            array('logistics_number','物流编号')
+        );
+
+        foreach ($xlsData as $key1 => $value) {
+			//获取消费商 姓名 级别 realname userrank area
+			//获取该订单商品列表 order_item_name
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = '{$value['user_id']}' AND status = 1"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+			$xlsData[$key]['userrank'] = $userrank_content[$member['userrank']];
+
+			$xlsData[$key]['area'] = $member['area'];
+
+			$xlsData[$key]['realname'] = $member['realname'];
+
+			$params = array(
+
+				'table_name' => 'order_items',
+
+				'where' => "order_id = '{$value['id']}'"
+
+			);
+
+			$order_items = $this -> model -> easy_select($params);
+
+			$order_item_name = "";
+
+			foreach ($order_items as $key => $value1) {
+				$order_item_name = $order_item_name.$value1['name'];
+			}
+
+			$xlsData[$key]['order_item_name'] = $order_item_name;
+
+            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+    }
+
+
+
+	/**
+     * 已签收订单
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function order_sign()
+    {
+
+		$start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
+
+        $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() + 24 * 60 * 60 ;
+
+        $where = "1";
+
+        if($start && $stop){
+
+            $where = "created_at >= {$start} AND created_at <= {$stop}";
+
+        }
+
+        if($_GET['usernumber']){
+
+            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+
+        }
+
+
+    	$params = array(
+
+    		'table_name' => 'orders',
+
+    		'where' => $where ." AND is_del = 0 AND status = 2",
+
+    		'order' => 'created_at desc'
+    	);
+
+        $xlsData = $this -> model -> easy_select($params);
+
+        $xlsName  = "已签收订单";
+
+        //销费商姓名 realname	级别 user_rank	消费套餐 order_item_name	下单时间 created_at	订单编号 order_code	手机号	sendTel 销费商所属省市县 user_area
+		//详细收货地址 sendAddress	物流公司 sendCommpany	物流编号 logistics_number 物流电话 logistics_tel
+        $xlsCell  = array(
+            array('realname','销费商姓名'),
+            array('userrank','级别'),
+            array('order_item_name','消费套餐'),
+            array('created_at','下单时间'),
+            array('order_code','订单编号'),
+            array('sendTel','手机号'),
+            array('area','销费商所属省市县'),
+            array('sendAddress','详细收货地址'),
+            array('sendCommpany','物流公司'),
+            array('logistics_number','物流编号')
+        );
+
+        foreach ($xlsData as $key1 => $value) {
+			//获取消费商 姓名 级别 realname userrank area
+			//获取该订单商品列表 order_item_name
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = '{$value['user_id']}' AND status = 3"
+
+			);
+
+			$member = $this -> model -> my_find($params);
+
+			$userrank_content = array("","普卡","银卡","金卡","钻卡");
+
+			$xlsData[$key]['userrank'] = $userrank_content[$member['userrank']];
+
+			$xlsData[$key]['area'] = $member['area'];
+
+			$xlsData[$key]['realname'] = $member['realname'];
+
+			$params = array(
+
+				'table_name' => 'order_items',
+
+				'where' => "order_id = '{$value['id']}'"
+
+			);
+
+			$order_items = $this -> model -> easy_select($params);
+
+			$order_item_name = "";
+
+			foreach ($order_items as $key => $value1) {
+				$order_item_name = $order_item_name.$value1['name'];
+			}
+
+			$xlsData[$key]['order_item_name'] = $order_item_name;
+
+            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+
+        }
+
+        $this->exportExcel($xlsName,$xlsCell,$xlsData);
+    }
     /**
 	 * 业绩统计
 	 *

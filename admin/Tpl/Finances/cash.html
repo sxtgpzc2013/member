@@ -22,7 +22,7 @@
         	<div class="row">
                     <div class="col-sm-4 m-b-xs">
                         <p>
-                            <a type="button" class="btn btn-w-m btn-danger" href="">导出数据</a>
+                            <a type="button" class="btn btn-w-m btn-danger" href="__APP__/Download/cash?start={$_GET['start']}&stop={$_GET['stop']}&usernumber={$_GET['usernumber']}">导出数据</a>
                         </p>
                     </div>
                     <div class="col-sm-8 text-right">
@@ -70,7 +70,7 @@
                             	<foreach name="result['result']" item="item">
 	                                <tr>
 										<td>
-	                                        <input type="checkbox" class="i-checks" name="input[]">
+	                                        <input type="checkbox" class="i-checks" name="input[]" value="{$item.id}">
 	                                    </td>
 										<td>{$item.usernumber}</td>
 										<td>{$item.realname}</td>
@@ -89,9 +89,11 @@
 
                         </table>
                         <if condition="$result['result'] neq ''">
-							<a class="btn btn-info chkall" id="check_revsern">全选</a> <a href="#" class="btn btn-info">批量同意</a>
+
+							<a class="btn btn-info chkall" id="check_revsern">全选</a> <a class="btn btn-info ok_all">批量同意</a>
+
                         </if>
-						
+
                     </div>
 
                 </div>
@@ -129,7 +131,7 @@
 
 	$('.get_billcenternumber').click(function(){
 		var tuijiannumber = $('.tuijiannumber').val();
-		
+
 		$.ajax({
 			url: "__APP__/Teams/get_billcenternumber",
 			type: "get",
@@ -154,6 +156,52 @@
 
 	$("#check_revsern").click(function(){
 		$('.i-checks').iCheck('check');
+	});
+
+
+
+	$('.ok_all').click(function(){
+		$('.i-checks:checked').each(function(){
+			//alert($(this).val())
+
+			$.ajax({
+				url: "__APP__/Finances/ajax_cash_action",
+				type: "get",
+				data: {
+					id: $(this).val(),
+					type: 'agreen'
+				},
+				success: function (resdata) {
+					resdata = JSON.parse(resdata);
+					if (resdata.success == true) {
+						console.log(resdata)
+					} else {
+						console.log(resdata)
+						//alert("用户代理商编号获取错误 请重试");
+					}
+				}
+			});
+		});
+
+		// $.ajax({
+		// 	url: "__APP__/Finances/ajax_cash_action",
+		// 	type: "get",
+		// 	data: {
+		// 		id: $(this).val()
+		// 	},
+		// 	success: function (resdata) {
+		// 		resdata = JSON.parse(resdata);
+		// 		if (resdata.success == true) {
+		// 			if(resdata.data == 0){
+		// 				alert("用户代理商编号获取失败,请重新输入用户编号");
+		// 			}else{
+		// 				$('.billcenternumber').val(resdata.data);
+		// 			}
+		// 		} else {
+		// 			alert("用户代理商编号获取错误 请重试");
+		// 		}
+		// 	}
+		// });
 	});
 
    });
