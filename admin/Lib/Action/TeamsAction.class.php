@@ -439,11 +439,11 @@
 					$this -> _back('左区已被占,请重新选择接点区！');return;
 				}
 
-				if($zone == 2 && $member['left_zone'] == 1){
+				if($zone == 2 && $member['middle_zone'] == 1){
 					$this -> _back('中区已被占,请重新选择接点区！');return;
 				}
 
-				if($zone == 3 && $member['left_zone'] == 1){
+				if($zone == 3 && $member['right_zone'] == 1){
 					$this -> _back('右区已被占,请重新选择接点区！');return;
 				}
 

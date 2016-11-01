@@ -39,6 +39,20 @@
 			else
 			{
 				define('ADMIN_ID', $_SESSION['Rongzi']['admin']['id']);
+
+				$this -> model = D('Common');
+				//查询商户
+				$params = array(
+
+					'table_name' => 'auth',
+
+					'where' => "name = '".$_SESSION['Rongzi']['admin']['type_str']."'"
+				);
+
+				$admin_auth = $this -> model -> my_find($params);
+
+				$_SESSION['Rongzi']['adminauth'] = explode("\n", $admin_auth['auth_action']);
+
 			}
 		}
 

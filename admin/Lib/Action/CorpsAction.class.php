@@ -523,6 +523,9 @@
 
  				$member_find = $this -> model -> my_find($params);
 
+				if($member_find['userrank'] == 1){
+					$this -> _back('普卡不能升级');return;
+				}
 				if($member_find && $member_find['upgrade_status'] == 1){
 					$this -> _back('消费商只能升级一次');return;
 				}
