@@ -457,7 +457,7 @@
 
 			}
 		}
-		
+
 		/**
 		 * 获取用户所在位置
 		 *
@@ -1056,7 +1056,7 @@
 
 				'table_name' => 'member',
 
-				'where' => "status = 1 AND tuijianid = 1 AND uid != {$tuijianid}"
+				'where' => "status = 1 AND tuijianid = $tuijianid AND uid != {$tuijianid}"
 			);
 
 			$recommend_list = $this -> model -> easy_select($params);
