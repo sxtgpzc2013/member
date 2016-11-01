@@ -290,11 +290,11 @@ class ActivatesAction extends CommonAction {
 			$billmember = $this -> model -> my_find($params);
 
 			if(intval($billmember['baodanbi']) < $deduct/2){
-				$this -> _back("账户激活币不足{$billmember['baodanbi']}");return;
+				$this -> _back("账户激活币不足->余额:{$billmember['baodanbi']}");return;
 			}
 
 			if(intval($billmember['jihuobi']) < $deduct/2){
-				$this -> _back("账户激活币不足{$billmember['jihuobi']}");return;
+				$this -> _back("账户激活币不足->余额:{$billmember['jihuobi']}");return;
 			}
 
 			//注册币余额计算
