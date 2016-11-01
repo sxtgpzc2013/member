@@ -1167,7 +1167,7 @@ class DownloadAction extends CommonAction {
 
 			$order_item_name = "";
 
-			foreach ($order_items as $key => $value1) {
+			foreach ($order_items as $key1 => $value1) {
 				$order_item_name = $order_item_name.$value1['name'];
 			}
 
@@ -1241,7 +1241,7 @@ class DownloadAction extends CommonAction {
             array('logistics_number','物流编号')
         );
 
-        foreach ($xlsData as $key => $value) {
+        foreach ($xlsData as $key1 => $value) {
 			//获取消费商 姓名 级别 realname userrank area
 			//获取该订单商品列表 order_item_name
 			$params = array(
@@ -1349,7 +1349,7 @@ class DownloadAction extends CommonAction {
             array('logistics_number','物流编号')
         );
 
-        foreach ($xlsData as $key => $value) {
+        foreach ($xlsData as $key1 => $value) {
 			//获取消费商 姓名 级别 realname userrank area
 			//获取该订单商品列表 order_item_name
 			$params = array(
