@@ -202,11 +202,13 @@
 
 
 					//判断注册商报单币是否充足 充足自动激活
-					if(intval($activatemember['baodanbi']) > $deduct/2 && intval($activatemember['jihuobi']) > $deduct/2){
-						redirect(__APP__."/Activates/activate?uid=".$member_id, 0);
-					}else{
-						redirect(__APP__."/Activates/index", 0);
-					}
+					// if(intval($activatemember['baodanbi']) > $deduct/2 && intval($activatemember['jihuobi']) > $deduct/2){
+					// 	redirect(__APP__."/Activates/activate?uid=".$member_id, 0);
+					// }else{
+					// 	redirect(__APP__."/Activates/index", 0);
+					// }
+
+					redirect(__APP__."/Activates/index", 0);
 
 				}else{
 
