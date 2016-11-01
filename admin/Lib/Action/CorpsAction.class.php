@@ -513,6 +513,20 @@
  			if ($form_key == 'yes')
  			{
 
+				$params = array(
+
+ 					'table_name' => 'member',
+
+ 					'where' => "uid = {$_POST['uid']} AND usernumber = '{$_POST['usernumber']}'"
+
+ 				);
+
+ 				$member_find = $this -> model -> my_find($params);
+
+				if($member_find && $member_find['upgrade_status'] == 1){
+					$this -> _back('消费商只能升级一次');return;
+				}
+
 				$data['userrank'] = $_POST['canlevel'];
 
 				//获取会员级别
