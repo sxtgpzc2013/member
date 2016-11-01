@@ -101,7 +101,7 @@
 				}
 
 				//获取位置编号ID
-				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber']);
+				$data['parentid'] = $this -> get_contact_user_id($data['parentnumber'],$data['zone']);
 
 				if($data['tuijianid'] == 0){
 					$this -> _back("{$data['parentnumber']}位置编号不存在,销费商注册失败,请重试。");return;
@@ -420,7 +420,7 @@
 		 * 返回值：
 		 *
 		 */
-		function get_contact_user_id($usernumber){
+		function get_contact_user_id($usernumber, $zone){
 
 			//查询用户资料数据
 			$params = array(
@@ -434,6 +434,18 @@
 			$member = $this -> model -> my_find($params);
 
 			if($member){
+
+				if($zone == 1 && $member['left_zone'] == 1){
+					$this -> _back('左区已被占,请重新选择接点区！');return;
+				}
+
+				if($zone == 2 && $member['left_zone'] == 1){
+					$this -> _back('中区已被占,请重新选择接点区！');return;
+				}
+
+				if($zone == 3 && $member['left_zone'] == 1){
+					$this -> _back('右区已被占,请重新选择接点区！');return;
+				}
 
 				if($member['left_zone'] == 1 && $member['middle_zone'] == 1 && $member['right_zone'] == 1 ){
 					$this -> _back('位置编号区间已满,请重新选择推荐人！');return;
