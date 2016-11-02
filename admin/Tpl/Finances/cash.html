@@ -166,14 +166,14 @@
 
 			$.ajax({
 				url: "__APP__/Finances/ajax_cash_action",
-				type: "get",
+				type: "post",
 				data: {
 					id: $(this).val(),
 					type: 'agreen'
 				},
 				success: function (resdata) {
 					resdata = JSON.parse(resdata);
-					if (resdata.success == true) {
+					if (resdata == 1) {
 						console.log(resdata)
 					} else {
 						console.log(resdata)
