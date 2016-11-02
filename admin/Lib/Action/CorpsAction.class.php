@@ -113,7 +113,7 @@
 			    array('baodanbi','报单币'),
 			    array('rongzidun','戎子盾'),
 			    array('jianglijifen','奖励积分'),
-			    array('tuijiannumber','推荐人'),
+			    array('tuijiannumber','拓展人'),
 			    array('parentnumber','上级人'),
 			    array('billcenterid','代理商编号'),
 			   	array('reg_time','注册时间'),
@@ -199,7 +199,7 @@
 
 	    	$billmember = $this -> model -> my_find($params);
 
-			//获取推荐人数据
+			//获取拓展人数据
 			$params = array(
 				'table_name' => 'member',
 
@@ -452,7 +452,7 @@
 		/**
 		 * 获取消费商信息
 		 *
-		 * 参数描述：@usernumber 推荐人编号
+		 * 参数描述：@usernumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -557,28 +557,30 @@
 				// 		break;
 				// }
 
-				$data['upgrade_level'] = $_POST['oldrank'];
+				$data['upgrade_level'] = $_POST['canlevel'] - $_POST['oldrank'];
 
 				$data['upgrade_status'] = 1;
 
 				$data['upgrade_time'] = time();
 
  				//查询用户手机号是否注册 查询用户编号是否注册
- 				$params = array(
+ 			// 	$params = array(
+				//
+ 			// 		'table_name' => 'member',
+				//
+ 			// 		'where' => "uid = {$_POST['uid']} AND usernumber = '{$_POST['usernumber']}'",
+				//
+				// 	'data' => $data
+				//
+ 			// 	);
+				//
+ 			// 	$my_save = $this -> model -> my_save($params);
 
- 					'table_name' => 'member',
-
- 					'where' => "uid = {$_POST['uid']} AND usernumber = '{$_POST['usernumber']}'",
-
-					'data' => $data
-
- 				);
-
- 				$my_save = $this -> model -> my_save($params);
+			$my_save = 1;
 				if ($my_save == 1){
 
 					//更新相关信息业绩和激活信息
-					$this -> update_upgrade_info($_POST['uid']);
+					$this -> update_upgrade_info($_POST['uid'], $data);
 
 					echo '<script language="JavaScript">;alert("消费商升级成功");</script>;';
 					//$this -> redirect("/Corps/upgrade");
@@ -591,7 +593,7 @@
 		}
 
 
-		function update_upgrade_info($uid)
+		function update_upgrade_info($uid, $upgrade)
 		{
 
 			$Activates=A("Activates");
@@ -610,15 +612,7 @@
 			if($member){
 
 
-				$deduct = 0;
-
-				if($member['userrank'] == 3 && $member['upgrade_level'] == 2){
-					$deduct = 30000 - 10000;
-				}elseif($member['userrank'] == 4 && $member['upgrade_level'] == 3){
-					$deduct = 50000 - 30000;
-				}elseif($member['userrank'] == 4 && $member['upgrade_level'] == 2){
-					$deduct = 50000 - 10000;
-				}
+				$deduct = $upgrade['upgrade_level'] * 20000;
 
 				//获取代理商编号数据
 				$params = array(
@@ -660,6 +654,61 @@
 				if ($bill_member_save == 1){
 
 					$Activates -> add_finance($deduct);
+
+					//添加到戎子财务流水  money_change
+					$money_change_data['changetype'] = 2;
+
+					$money_change_data['realname'] = $member['realname'];
+
+					$money_change_data['status'] = 1;
+
+					$money_change_data['targetrealname'] = "戎子";
+
+					$money_change_data['targetuserid'] = 1;
+
+					$money_change_data['targetusernumber'] = 1;
+
+					$money_change_data['userid'] = $member['uid'];
+
+					$money_change_data['usernumber'] = $member['usernumber'];
+
+					$money_change_data['createtime'] = time();
+
+					//jiangjinbi rongzidun platmoney taxmoney lovemoney
+					$add_array = array(
+						"0" => array(
+							'name' => "jiangjinbi",
+							'moneytype' => 1,
+							'ratio' => "0.50",
+							'recordtype' => 0
+						),
+						"1" => array(
+							'name' => "rongzidun",
+							'moneytype' => 3,
+							'ratio' => "0.50",
+							'recordtype' => 0
+						)
+					);
+
+					foreach ($add_array as $key => $value) {
+
+						$money_change_data['recordtype'] = $value['recordtype'];
+
+						$money_change_data['money'] = $deduct * $value['ratio'];
+
+						$money_change_data['moneytype'] = $value['moneytype'];
+
+						//添加财务明细记录
+						$params = array(
+
+							'table_name' => 'money_change',
+
+							'data' => $money_change_data
+						);
+
+						$money_change_add = $this -> model -> my_add($params);
+
+					}
 
 				}
 
@@ -785,7 +834,7 @@
 
 			if ($my_save == 1)
 			{
-				//更新上级伞下人数
+				//更新上级部门人数
 				//$this -> save_member_num($member);
 
 				//更新市场补贴

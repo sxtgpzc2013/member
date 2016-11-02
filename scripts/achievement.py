@@ -30,7 +30,7 @@ def compare(x, y, z):
 	else:
 		return 0
 
-# 通过父uid获取子推荐
+# 通过父uid获取子拓展
 def gettuijiannumber_child(uid):
 	childs = []
 	sql = """
@@ -89,9 +89,9 @@ def update_member(usertitle, jianglijifen, usernumber):
 # 插入福利积分明细
 def insert_bonus_detail_jianglijifen(uid, usernumber, realname, moneytype, jianglijifen):
 	sql = """
-		insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jianglijifen, createdate) 
-		values (%s, %s, '%s', %s, %s, %s)
-	""" % (uid, usernumber, realname, moneytype, jianglijifen, now_second)
+		insert into zx_bonus_detail (touserid, tousernumber, torealname, moneytype, jianglijifen, total, real_total, createdate) 
+		values (%s, %s, '%s', %s, %s, %s, %s, %s)
+	""" % (uid, usernumber, realname, moneytype, jianglijifen, jianglijifen, jianglijifen, now_second)
 
 	return conn.dml(sql, 'insert')
 

@@ -32,6 +32,17 @@
 		 */
 		public function _initialize()
 		{
+			if($_SESSION['Rongzi']['user']['uid'] != 1){
+
+				$h = intval(date("H"));
+				//10点 到第二天 9点
+				if ($h > 15 || $h < 9) {
+					$url = __APP__.'/Login/login';
+					die('<meta http-equiv="Content-Type" content="text/html"; charset="utf8"><script language="javascript">alert("系统维护时间22:00 -- 次日9：00");window.location.href="'.$url.'";</script>');
+
+				}
+			}
+
 			if (!$_SESSION['Rongzi']['user'])
 			{
 				//die('<meta http-equiv="Content-Type" content="text/html"; charset="utf8">您未登录或登录已过期，点击<a href="'.__APP__.'/Login/login" target="_top">此处</a>重新登录');
@@ -39,6 +50,7 @@
 			}
 			else
 			{
+
 				define('MEMBER_ID', $_SESSION['Rongzi']['user']['uid']);
 
 				if (!MEMBER_ID) { redirect(__APP__.'/Login/login', 0); }

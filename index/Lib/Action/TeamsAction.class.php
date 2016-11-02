@@ -63,7 +63,7 @@
 				}
 
 				if($_POST['zone'] == "" || $_POST["zone"] == 0){
-					$this -> _back('推荐人区间为空,请重新选择推荐人！');return;
+					$this -> _back('拓展人区间为空,请重新选择拓展人！');return;
 				}
 
 				$data = $_POST;
@@ -93,11 +93,11 @@
 
 				$data['reg_uid'] = $_SESSION['Rongzi']['user']['uid'];
 
-				///获取推荐人ID
+				///获取拓展人ID
 				$data['tuijianid'] = $this -> get_recommend_user_id($data['tuijiannumber']);
 
 				if($data['tuijianid'] == 0){
-					$this -> _back("{$data['tuijiannumber']}推荐编号不存在,销费商注册失败,请重试。");return;
+					$this -> _back("{$data['tuijiannumber']}拓展编号不存在,销费商注册失败,请重试。");return;
 				}
 
 				//获取位置编号ID
@@ -155,7 +155,7 @@
 					//用户接点路径
 					$update_data['contactuserpath'] = $this -> get_user_path($data['parentnumber'], 1).",".$member_id;
 
-					//用户推荐路径
+					//用户拓展路径
 					$update_data['recommenduserpath'] = $this -> get_user_path($data['tuijiannumber'], 2).",".$member_id;
 
 					//用户报单路径
@@ -277,7 +277,7 @@
 		/**
 		 * 获取代理商编号
 		 *
-		 * 参数描述：@usernumber 推荐人编号
+		 * 参数描述：@usernumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -382,9 +382,9 @@
 		 }
 
 		/**
-		 * 获取推荐人ID
+		 * 获取拓展人ID
 		 *
-		 * 参数描述：@tuijiannumber 推荐人编号
+		 * 参数描述：@tuijiannumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -414,9 +414,9 @@
 		}
 
 		/**
-		 * 获取推荐人ID
+		 * 获取拓展人ID
 		 *
-		 * 参数描述：@tuijiannumber 推荐人编号
+		 * 参数描述：@tuijiannumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -449,7 +449,7 @@
 				}
 
 				if($member['left_zone'] == 1 && $member['middle_zone'] == 1 && $member['right_zone'] == 1 ){
-					$this -> _back('位置编号区间已满,请重新选择推荐人！');return;
+					$this -> _back('位置编号区间已满,请重新选择拓展人！');return;
 				}else{
 
 					return $member['uid'];
@@ -465,7 +465,7 @@
 		/**
 		 * 获取代理商编号ID
 		 *
-		 * 参数描述：@tuijiannumber 推荐人编号
+		 * 参数描述：@tuijiannumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -498,7 +498,7 @@
 		/**
 		 * 获取代理商编号ID
 		 *
-		 * 参数描述：@tuijiannumber 推荐人编号
+		 * 参数描述：@tuijiannumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -529,7 +529,7 @@
 		/**
 		 * 获取用户所在位置
 		 *
-		 * 参数描述：@$usernumber 用户编号  type 1 接点 2推荐  3报单
+		 * 参数描述：@$usernumber 用户编号  type 1 接点 2拓展  3报单
 		 *
 		 * 返回值：
 		 *
@@ -575,7 +575,7 @@
 		/**
 		 * 修改用户所在位置
 		 *
-		 * 参数描述：@tuijiannumber 推荐人编号
+		 * 参数描述：@tuijiannumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -606,7 +606,7 @@
 			}
 		}
 		/**
-		 * 更新推荐人位置部门间是否被占
+		 * 更新拓展人位置部门间是否被占
 		 *
 		 * 参数描述：@data 用户数据
 		 *
@@ -618,20 +618,20 @@
 
 			switch ($userdata['zone']) {
 				case '1':
-					# A部...
+					# A部门...
 					$zone_name = 'left_zone';
 					break;
 				case '2':
-					# A部...
+					# A部门...
 					$zone_name = 'middle_zone';
 					break;
 				case '3':
-					# A部...
+					# A部门...
 					$zone_name = 'right_zone';
 					break;
 
 				default:
-					# A部...
+					# A部门...
 					$zone_name = 'left_zone';
 					break;
 			}
@@ -683,7 +683,7 @@
 		}
 
 		/**
-		 * 市场管理推荐关系列表
+		 * 市场管理拓展关系列表
 		 *
 		 * 参数描述：
 		 *
@@ -971,7 +971,7 @@
 		/**
 		 * 获取用户今日最新消费业绩
 		 *
-		 * 参数描述：@uid 推荐人编号
+		 * 参数描述：@uid 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -1023,7 +1023,7 @@
 
 
 		/**
-		 * 市场管理推荐关系列表
+		 * 市场管理拓展关系列表
 		 *
 		 * 参数描述：
 		 *
@@ -1058,15 +1058,15 @@
 
 				if($value['zone'] == 1){
 
-					$recommend_list[$key]["zone_name"] = "A部";
+					$recommend_list[$key]["zone_name"] = "A部门";
 
 				}else if($value['zone'] == 2){
 
-					$recommend_list[$key]["zone_name"] = "B部";
+					$recommend_list[$key]["zone_name"] = "B部门";
 
 				}else if($value['zone'] == 3){
 
-					$recommend_list[$key]["zone_name"] = "C部";
+					$recommend_list[$key]["zone_name"] = "C部门";
 
 				}
 
@@ -1105,7 +1105,7 @@
 		}
 
 		/**
-		 * 市场管理推荐关系列表
+		 * 市场管理拓展关系列表
 		 *
 		 * 参数描述：
 		 *
@@ -1180,20 +1180,20 @@
 
 				if($value['zone'] == 1){
 
-					$recommend_list_result[$key]["zone_name"] = "A部";
+					$recommend_list_result[$key]["zone_name"] = "A部门";
 
 				}else if($value['zone'] == 2){
 
-					$recommend_list_result[$key]["zone_name"] = "B部";
+					$recommend_list_result[$key]["zone_name"] = "B部门";
 
 				}else if($value['zone'] == 3){
 
-					$recommend_list_result[$key]["zone_name"] = "C部";
+					$recommend_list_result[$key]["zone_name"] = "C部门";
 
 				}
 			}
 
-			die(json_encode(array("success" => true, "code" => 200, "msg" => "获取用推荐关系成功", "data" => $recommend_list_result)));
+			die(json_encode(array("success" => true, "code" => 200, "msg" => "获取用拓展关系成功", "data" => $recommend_list_result)));
 		}
 
 	}

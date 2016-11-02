@@ -49,7 +49,7 @@ class DownloadAction extends CommonAction {
     }
 
     /**
-     * 奖金统计
+     * 补贴统计
      *
      * 参数描述：
      *
@@ -248,7 +248,7 @@ class DownloadAction extends CommonAction {
             }elseif ($value['changetype'] == 1){
                 $xlsData[$key]['changetype'] = '公司充值';
             }elseif ($value['changetype'] == 2){
-                $xlsData[$key]['changetype'] = '公司扣币';
+                $xlsData[$key]['changetype'] = '激活扣币';
             }elseif ($value['changetype'] == 3){
                 $xlsData[$key]['changetype'] = '分红';
             }elseif ($value['changetype'] == 4){
@@ -533,7 +533,7 @@ class DownloadAction extends CommonAction {
     }
 
     /**
-	 * 公司扣币
+	 * 激活扣币
 	 *
 	 * 参数描述：
 	 *
@@ -1173,7 +1173,7 @@ class DownloadAction extends CommonAction {
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+            $xlsData[$key]['created_at'] = date('Y-m-d H:i:s', $value['created_at']);
 
         }
 
@@ -1280,7 +1280,7 @@ class DownloadAction extends CommonAction {
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+            $xlsData[$key]['created_at'] = date('Y-m-d H:i:s', $value['created_at']);
 
         }
 
@@ -1388,7 +1388,7 @@ class DownloadAction extends CommonAction {
 
 			$xlsData[$key]['order_item_name'] = $order_item_name;
 
-            $xlsData[$key]['created_at'] = date('Y-m-d', $value['created_at']);
+            $xlsData[$key]['created_at'] = date('Y-m-d H:i:s', $value['created_at']);
 
         }
 

@@ -184,14 +184,14 @@
 			                </div>
 
 							<div class="form-group">
-			                    <label class="col-sm-2 control-label">推荐人编号</label>
+			                    <label class="col-sm-2 control-label">拓展人编号</label>
 
 			                    <div class="col-sm-7">
 			                        <input type="number" class="form-control tuijiannumber" name="tuijiannumber" value="{$_SESSION['Rongzi']['user']['usernumber']}">
 			                    </div>
 
 								<div class="col-sm-3">
-									<span>(如修改推荐人请重新获取代理商编号)</span>
+									<span>(如修改拓展人请重新获取代理商编号)</span>
 								</div>
 			                </div>
 
@@ -226,20 +226,20 @@
 			                    <div class="col-sm-7">
 									<select class="form-control zone" id="zone" name="zone">
 										<?php if($_GET['zone']== 1 && $member['left_zone'] == 0){ ?>
-											<option value="1">A部</option>
+											<option value="1">A部门</option>
 										<?php }elseif($_GET['zone']== 2 && $member['middle_zone'] == 0){ ?>
-											<option value="2">B部</option>
+											<option value="2">B部门</option>
 										<?php }elseif($_GET['zone']== 3 && $member['right_zone'] == 0){ ?>
-											<option value="3">C部</option>
+											<option value="3">C部门</option>
 										<?php } ?>
 										<!-- <if condition="$_GET['zone'] eq 1">
 												{$_GET['zone']}
-											<option value="1">A部</option>
+											<option value="1">A部门</option>
 										<elseif condition="$_GET['zone'] == 2">
 												123
-											<option value="2">B部</option>
+											<option value="2">B部门</option>
 										<elseif condition="$_GET['zone'] eq 3">
-											<option value="3">C部</option>
+											<option value="3">C部门</option>
 										</if> -->
 									</select>
 			                    </div>
@@ -499,7 +499,7 @@
 		$('.get_billcenternumber').click(function(){
 			var tuijiannumber = $('.tuijiannumber').val();
 			if(tuijiannumber == ""){
-				alert("请输入推荐人编号");return false;
+				alert("请输入拓展人编号");return false;
 			}
 			$.ajax({
 	            url: "__APP__/Teams/get_billcenternumber",
@@ -570,7 +570,7 @@
 
 			var parentnumber = $('.parentnumber').val();
 			if(parentnumber == ""){
-				alert("请输入推荐人编号");return false;
+				alert("请输入拓展人编号");return false;
 			}
 			$.ajax({
 	            url: "__APP__/Teams/get_parentnumber_zone",
@@ -582,7 +582,7 @@
 	            success: function (resdata) {
 	                if (resdata.success == true) {
 						if(resdata.data == ""){
-							alert("用户区间获取失败,请重新输入推荐人用户编号");
+							alert("用户区间获取失败,请重新输入拓展人用户编号");
 						}else{
 							var zone_list = resdata.data
 							// var zone_list = JSON.stringify(resdata.data);
@@ -592,11 +592,11 @@
 							   //key是属性,object[key]是值
 							   if(zone_list[key] == 0){
 								   if(key == "left_zone"){
-									   obj.options.add(new Option("A部","1"));
+									   obj.options.add(new Option("A部门","1"));
 								   }else if(key == "middle_zone"){
-									   obj.options.add(new Option("B部","2"));
+									   obj.options.add(new Option("B部门","2"));
 								   }else if(key == "right_zone"){
-									   obj.options.add(new Option("C部","3"));
+									   obj.options.add(new Option("C部门","3"));
 								   }
 							   }
 							}

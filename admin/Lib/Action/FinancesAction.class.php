@@ -49,7 +49,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 奖金统计
+	 * 补贴统计
 	 *
 	 * 参数描述：
 	 *
@@ -96,7 +96,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-     * 奖金统计
+     * 补贴统计
      *
      * 参数描述：
      *
@@ -137,7 +137,7 @@ class FinancesAction extends CommonAction {
 
         $xlsData = $this -> model -> easy_select($params);
 
-            $xlsName  = "奖金统计";
+            $xlsName  = "补贴统计";
 
             $xlsCell  = array(
                 array('count_date','日期'),
@@ -639,7 +639,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 公司扣币
+	 * 激活扣币
 	 *
 	 * 参数描述：
 	 *

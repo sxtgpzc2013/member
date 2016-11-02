@@ -470,7 +470,7 @@ def getisbill(parents):
 
 	return members
 
-# 通过子uid获取父推荐
+# 通过子uid获取父拓展
 def gettuijiannumber_parent(uid):
 	parents = []
 	sql = """

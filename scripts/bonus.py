@@ -3,6 +3,8 @@
 import mysql
 import datetime
 import sys
+import urllib, urllib2, json
+import datetime
 
 default_encoding = 'utf-8'
 if sys.getdefaultencoding() != default_encoding:
@@ -10,6 +12,20 @@ if sys.getdefaultencoding() != default_encoding:
     sys.setdefaultencoding(default_encoding)
 
 conn = mysql.db()
+
+
+def isdate():
+	content = 1
+	now = datetime.datetime.now().strftime('%Y%m%d')
+	url = 'http://apis.baidu.com/xiaogg/holiday/holiday?d=%s' % (now)
+	req = urllib2.Request(url)
+	req.add_header("apikey", "9c1081f2f42cce41ad92dad6d8552902")
+	resp = urllib2.urlopen(req)
+	content = resp.read()
+	if(content):
+		return content
+
+	return content
 
 def rate():
 	rate_sql = """
@@ -237,5 +253,11 @@ def fenhong():
 	conn.close()
 	print "ok"
 
+def main():
+	status = isdate()
+	print status
+	if status == 0:
+		fenhong()
+
 if __name__ == '__main__':
-	fenhong()
+	main()
