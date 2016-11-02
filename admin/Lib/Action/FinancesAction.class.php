@@ -401,15 +401,25 @@ class FinancesAction extends CommonAction {
 
     		$type = isset($_POST['type']) ? intval($_POST['type']) : $this -> _back('非法的类型');
 
-    		//查询目标用户
+            //查询目标用户
+            $params = array(
+
+                'table_name' => 'member',
+
+                'where' => "usernumber = {$usernumber}"
+            );
+
+            $member_find = $this -> model -> my_find($params);
+
+    		//查戎子用户
     		$params = array(
 
     			'table_name' => 'member',
 
-    			'where' => "usernumber = {$usernumber}"
+    			'where' => "usernumber = 1"
     		);
 
-    		$member_find = $this -> model -> my_find($params);
+    		$rongzi = $this -> model -> my_find($params);
 
     		if (!$member_find)
     		{
@@ -431,6 +441,8 @@ class FinancesAction extends CommonAction {
     			$this -> _back('请先登录');
     		}
 
+            $key = true;
+
     		switch ($type)
     		{
     			case 1 : //奖金币
@@ -445,23 +457,45 @@ class FinancesAction extends CommonAction {
 
     			case 2 : //注册币
 
-    				$data['baodanbi'] = $member_find['baodanbi'] + $money;
+                    if (($rongzi['baodanbi'] - $money) >= 0)
+                    {
+        				$data['baodanbi'] = $member_find['baodanbi'] + $money;
 
-    				$balance = $data['baodanbi'];
+                        $rongzi_data['baodanbi'] = $rongzi['baodanbi'] - $money;
 
-    				$moneytype = 2;
+        				$balance = $data['baodanbi'];
 
-    				break;
+                        $rongzi_balance = $rongzi_data['baodanbi'];
+
+        				$moneytype = 2;
+
+        				break;
+                    } else {
+                        $key = false;
+
+                        break;
+                    }
 
     			case 3 : //激活币
 
-    				$data['jihuobi'] = $member_find['jihuobi'] + $money;
+                    if (($rongzi['jihuobi'] - $money) >= 0)
+                    {
+        				$data['jihuobi'] = $member_find['jihuobi'] + $money;
 
-    				$balance = $data['jihuobi'];
+                        $rongzi_data['jihuobi'] = $rongzi['jihuobi'] - $money;
 
-    				$moneytype = 4;
+        				$balance = $data['jihuobi'];
 
-    				break;
+                        $rongzi_balance = $rongzi_data['jihuobi'];
+
+        				$moneytype = 4;
+
+        				break;
+                    } else {
+                        $key = false;
+
+                        break;
+                    }
 
     			case 4 : //戎子盾
 
@@ -484,7 +518,14 @@ class FinancesAction extends CommonAction {
     				break;
     		}
 
+            if ($key == false)
+            {
+                $this -> _back('戎子账户余额不足');return;
+            }
+
     		$data['update_time'] = time();
+
+            $rongzi_data['update_time'] = time();
 
     		$params = array(
 
@@ -535,6 +576,57 @@ class FinancesAction extends CommonAction {
 
     		if ($member_save)
     		{
+                //扣除戎子账户
+                $params = array(
+
+                    'table_name' => 'member',
+
+                    'where' => "usernumber = 1",
+
+                    'data' => $rongzi_data
+                );
+
+                $rongzi_save = $this -> model -> my_save($params);
+
+                //写入流水
+                $money_change_data = [];
+
+                $money_change_data['moneytype'] = $moneytype;
+
+                $money_change_data['status'] = $rongzi_save ? 1 : 0;
+
+                $money_change_data['targetuserid'] = $user_find['uid'];
+
+                $money_change_data['targetusernumber'] = $user_find['usernumber'];
+
+                $money_change_data['targetrealname'] = $user_find['realname'];
+
+                $money_change_data['userid'] = $member_find['uid'];
+
+                $money_change_data['usernumber'] = $member_find['usernumber'];
+
+                $money_change_data['realname'] = $member_find['realname'];
+
+                $money_change_data['changetype'] = 1;
+
+                $money_change_data['recordtype'] = 0;
+
+                $money_change_data['money'] = $money;
+
+                $money_change_data['hasmoney'] = $rongzi_balance;
+
+                $money_change_data['createtime'] = time();
+
+                //存入流水
+                $params = array(
+
+                    'table_name' => 'money_change',
+
+                    'data' => $money_change_data
+                );
+
+                $money_change_add = $this -> model -> my_add($params);
+
     			redirect(__APP__.'/Finances/recharge_list', 0);
     		}
     		else
