@@ -49,7 +49,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 奖金统计
+	 * 补贴统计
 	 *
 	 * 参数描述：
 	 *
@@ -96,7 +96,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-     * 奖金统计
+     * 补贴统计
      *
      * 参数描述：
      *
@@ -137,7 +137,7 @@ class FinancesAction extends CommonAction {
 
         $xlsData = $this -> model -> easy_select($params);
 
-            $xlsName  = "奖金统计";
+            $xlsName  = "补贴统计";
 
             $xlsCell  = array(
                 array('count_date','日期'),
@@ -347,7 +347,7 @@ class FinancesAction extends CommonAction {
     public function transfer_list()
     {
         //默认导出今天数据
-        $start = $_GET['start'] ? strtotime($_GET['start']) : time();
+        $start = $_GET['start'] ? strtotime($_GET['start']) : strtotime(date('Y-m-d', time()));
 
         $stop = $_GET['stop'] ? strtotime($_GET['stop']) + 24 * 60 * 60 : time() ;
 
@@ -547,7 +547,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 公司扣币
+	 * 激活扣币
 	 *
 	 * 参数描述：
 	 *
@@ -948,6 +948,157 @@ class FinancesAction extends CommonAction {
     	}
 
     	$this -> display();
+    }
+
+    /**
+     * ajax提现处理
+     *
+     * 参数描述：
+     *
+     *
+     *
+     * 返回值：
+     *
+     */
+    public function ajax_cash_action()
+    {
+        $id = isset($_POST['id']) ? htmlspecialchars($_POST['id']) : die('非法的指向');
+
+        $type = isset($_POST['type']) ? htmlspecialchars($_POST['type']) : $this -> _back('非法的类型');
+
+        //查询这个提现申请
+        $params = array(
+
+            'table_name' => 'withdrawal',
+
+            'where' => "id IN ('{$id}') AND status = 1"
+        );
+
+        $cashes = $this -> model -> easy_select($params);
+
+        if (!$cashes)
+        {
+            die('没有找到该提现记录');
+        }
+
+        foreach ($cashes as $cash_find)
+        {
+            $data = [];
+
+            //查询这个人
+            $params = array(
+
+                'table_name' => 'member',
+
+                'where' => "usernumber = {$cash_find['usernumber']}"
+            );
+
+            $member_find = $this -> model -> my_find($params);
+
+            if (!$member_find)
+            {
+                die('查无此人');
+            }
+
+            if ($type == 'agreen')
+            {
+                //同意
+                $data['status'] = 0;
+            }
+            elseif ($type == 'refuse')
+            {
+                //拒绝
+                $data['status'] = 2;
+            }
+
+            $data['arrival_amount'] = $cash_find['money'] - $cash_find['fee'];
+
+            $data['handtime'] = time();
+
+            $params = array(
+
+                'table_name' => 'withdrawal',
+
+                'where' => "id = {$cash_find['id']}",
+
+                'data' => $data
+            );
+
+            $cash_save = $this -> model -> my_save($params);
+
+            if ($cash_save)
+            {
+                if ($type == 'refuse')
+                {
+                    $member_data = [];
+
+                    if ($cash_find['moneytype'] == 0)
+                    {
+                        //退回原账户
+                        $member_data['jiangjinbi'] = $member_find['jiangjinbi'] + $cash_find['money'];
+                    }
+
+                    $member_data['update_time'] = time();
+
+                    $params = array(
+
+                        'table_name' => 'member',
+
+                        'where' => "uid = {$member_find['uid']}",
+
+                        'data' => $member_data
+                    );
+
+                    $member_save = $this -> model -> my_save($params);
+
+                    $money_change_data['status'] = $member_save ? 1 : 0;
+
+                    $money_change_data['recordtype'] = 1;
+
+                    $money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 && $member_save ? $member_find['jiangjinbi'] + $cash_find['money'] : $member_find['jiangjinbi'];
+                }
+                elseif ($type == 'agreen')
+                {
+                    $money_change_data['status'] = 1;
+
+                    $money_change_data['recordtype'] = 0;
+
+                    $money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 ? $member_find['jiangjinbi'] : 0;
+                }
+
+                $money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 6 : 0;
+
+                $money_change_data['targetuserid'] = $member_find['uid'];
+
+                $money_change_data['targetusernumber'] = $member_find['usernumber'];
+
+                $money_change_data['targetrealname'] = $member_find['realname'];
+
+                $money_change_data['realname'] = '系统';
+
+                $money_change_data['changetype'] = 12;
+
+                $money_change_data['money'] = $cash_find['money'];
+
+                $money_change_data['createtime'] = time();
+
+                //存入流水
+                $params = array(
+
+                    'table_name' => 'money_change',
+
+                    'data' => $money_change_data
+                );
+
+                $money_change_add = $this -> model -> my_add($params);
+
+                die(1);
+            }
+            else
+            {
+                die('操作失败 请重试');
+            }
+        }
     }
 
     /**

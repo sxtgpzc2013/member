@@ -71,7 +71,7 @@
 
 			$member["userrank"] = $userrank_content[$member['userrank']];
 
-			//获取用户推荐人数
+			//获取用户拓展人数
 			$params = array(
 
 				'table_name' => 'member',

@@ -87,9 +87,9 @@
 					</li>
 					<?php } ?>
 
-					<?php if(in_array("推荐拓扑", $_SESSION['Rongzi']['adminauth'])){ ?>
+					<?php if(in_array("拓展拓扑", $_SESSION['Rongzi']['adminauth'])){ ?>
 					<li class="<?php if (MODULE_NAME == 'Teams' && ACTION_NAME == 'recommend_relation') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Teams/recommend_relation">推荐拓扑</a>
+						<a href="__APP__/Teams/recommend_relation">拓展拓扑</a>
 					</li>
 					<?php } ?>
 
@@ -113,9 +113,9 @@
 			<li class="<?php if (MODULE_NAME == 'Finances') {echo 'active';} ?>">
 				<a href="index.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">财务管理</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<?php if(in_array("奖金统计", $_SESSION['Rongzi']['adminauth'])){ ?>
+					<?php if(in_array("补贴统计", $_SESSION['Rongzi']['adminauth'])){ ?>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'bonus_list') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Finances/bonus_list">奖金统计</a>
+						<a href="__APP__/Finances/bonus_list">补贴统计</a>
 					</li>
 					<?php } ?>
 
@@ -137,9 +137,9 @@
 					</li>
 					<?php } ?>
 
-					<?php if(in_array("公司扣币", $_SESSION['Rongzi']['adminauth'])){ ?>
+					<?php if(in_array("激活扣币", $_SESSION['Rongzi']['adminauth'])){ ?>
 					<li class="<?php if (MODULE_NAME == 'Finances' && ACTION_NAME == 'company_deduct_money') {echo 'active bcolor';} ?>">
-						<a href="__APP__/Finances/company_deduct_money">公司扣币</a>
+						<a href="__APP__/Finances/company_deduct_money">激活扣币</a>
 					</li>
 					<?php } ?>
 

@@ -129,7 +129,7 @@ $tests[] = array(
 	'passed' => extension_loaded('pcre') && @preg_match('/pcre/u', 'pcre'),
 	'message' => '支持并且工作正常',
 	'errorMessage' => '禁用或者不支持UTF-8',
-	'description' => 'PCRE扩展推荐开启并支持UTF-8.',
+	'description' => 'PCRE扩展拓展开启并支持UTF-8.',
 );
 
 $tests[] = array(
