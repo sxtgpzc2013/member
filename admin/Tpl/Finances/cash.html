@@ -163,7 +163,6 @@
 	$('.ok_all').click(function(){
 		$('.i-checks:checked').each(function(){
 			//alert($(this).val())
-
 			$.ajax({
 				url: "__APP__/Finances/ajax_cash_action",
 				type: "post",
@@ -172,15 +171,17 @@
 					type: 'agreen'
 				},
 				success: function (resdata) {
-					resdata = JSON.parse(resdata);
-					if (resdata == 1) {
-						console.log(resdata)
+
+
+					if (resdata) {
 					} else {
 						console.log(resdata)
 						//alert("用户代理商编号获取错误 请重试");
 					}
 				}
 			});
+
+			$(this).parent().parent().parent().empty()
 		});
 
 		// $.ajax({
