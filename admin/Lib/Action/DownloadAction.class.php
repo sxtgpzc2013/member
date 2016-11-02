@@ -248,7 +248,7 @@ class DownloadAction extends CommonAction {
             }elseif ($value['changetype'] == 1){
                 $xlsData[$key]['changetype'] = '公司充值';
             }elseif ($value['changetype'] == 2){
-                $xlsData[$key]['changetype'] = '公司扣币';
+                $xlsData[$key]['changetype'] = '激活扣币';
             }elseif ($value['changetype'] == 3){
                 $xlsData[$key]['changetype'] = '分红';
             }elseif ($value['changetype'] == 4){
@@ -533,7 +533,7 @@ class DownloadAction extends CommonAction {
     }
 
     /**
-	 * 公司扣币
+	 * 激活扣币
 	 *
 	 * 参数描述：
 	 *

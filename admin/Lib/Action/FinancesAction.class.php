@@ -547,7 +547,7 @@ class FinancesAction extends CommonAction {
     }
 
     /**
-	 * 公司扣币
+	 * 激活扣币
 	 *
 	 * 参数描述：
 	 *
