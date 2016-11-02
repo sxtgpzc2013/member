@@ -354,7 +354,7 @@ def member_achievement_status(uid):
 
 	return flag
 
-# 通过子uid获取父推荐
+# 通过子uid获取父拓展
 def gettuijiannumber_parent(uid):
 	parents = []
 	sql = """
@@ -461,12 +461,12 @@ def update_achievement_status(uid):
 	status = conn.dml(sql, 'update')
 	return status
 
-# 通过推荐的人计算管理奖
+# 通过拓展的人计算管理奖
 def managerbonus(uid):
 	flag = False
-	# 获取推荐人的级别金额
+	# 获取拓展人的级别金额
 	value = getmembervalue(uid)
-	# 获取推荐的人的父级
+	# 获取拓展的人的父级
 	parents = gettuijiannumber_parent(uid)
 
 	if parents:

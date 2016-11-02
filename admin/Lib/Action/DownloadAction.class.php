@@ -49,7 +49,7 @@ class DownloadAction extends CommonAction {
     }
 
     /**
-     * 奖金统计
+     * 补贴统计
      *
      * 参数描述：
      *

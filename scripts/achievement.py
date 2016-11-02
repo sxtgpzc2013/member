@@ -30,7 +30,7 @@ def compare(x, y, z):
 	else:
 		return 0
 
-# 通过父uid获取子推荐
+# 通过父uid获取子拓展
 def gettuijiannumber_child(uid):
 	childs = []
 	sql = """

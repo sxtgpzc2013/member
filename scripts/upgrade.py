@@ -396,7 +396,7 @@ def maxcash(userrank):
 
 	return value
 
-# 通过子uid获取父推荐
+# 通过子uid获取父拓展
 def gettuijiannumber_parent(uid):
 	parents = []
 	sql = """
@@ -439,10 +439,10 @@ def getmaxmanagercash(usertitle):
 
 	return value
 
-# 通过推荐的人计算管理奖
+# 通过拓展的人计算管理奖
 def managerbonus(uid, value):
 	flag = False
-	# 获取推荐的人的父级
+	# 获取拓展的人的父级
 	parents = gettuijiannumber_parent(uid)
 	if parents:
 		# 赛选有星级的会员

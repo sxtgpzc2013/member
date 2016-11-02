@@ -200,8 +200,8 @@ CREATE TABLE `zx_member` (
   `realname` varchar(255) DEFAULT NULL COMMENT '会员真实姓名',
   `userrank` int(255) DEFAULT '0' COMMENT '用户级别',
   `usertitle` int(255) DEFAULT '0' COMMENT '用户头衔',
-  `tuijianid` int(10) NOT NULL DEFAULT '0' COMMENT '推荐人ID',
-  `tuijiannumber` char(16) NOT NULL DEFAULT '0' COMMENT '推荐人帐号',
+  `tuijianid` int(10) NOT NULL DEFAULT '0' COMMENT '拓展人ID',
+  `tuijiannumber` char(16) NOT NULL DEFAULT '0' COMMENT '拓展人帐号',
   `parentid` int(10) NOT NULL DEFAULT '0' COMMENT '位置编号ID',
   `parentnumber` char(16) NOT NULL DEFAULT '0' COMMENT '位置编号帐号',
   `reg_uid` mediumint(8) DEFAULT '0' COMMENT '注册人id',
@@ -232,16 +232,16 @@ CREATE TABLE `zx_member` (
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员更新时间',
   `psd1` varchar(32) DEFAULT NULL COMMENT '一级密码',
   `psd2` varchar(32) DEFAULT NULL COMMENT '二级密码',
-  `recom_num` int(8) DEFAULT '0' COMMENT '推荐人数',
-  `zone` int(4) DEFAULT '1' COMMENT 'A部（1），B部(2), C部（3）',
+  `recom_num` int(8) DEFAULT '0' COMMENT '拓展人数',
+  `zone` int(4) DEFAULT '1' COMMENT 'A部门（1），B部门(2), C部门（3）',
   `znum` mediumint(10) DEFAULT '0' COMMENT '位置编号',
-  `left_zone` tinyint(1) DEFAULT '0' COMMENT 'A部是否被占',
-  `middle_zone` tinyint(1) DEFAULT '0' COMMENT 'B部是否被占',
-  `right_zone` tinyint(1) DEFAULT '0' COMMENT 'C部是否被占',
+  `left_zone` tinyint(1) DEFAULT '0' COMMENT 'A部门是否被占',
+  `middle_zone` tinyint(1) DEFAULT '0' COMMENT 'B部门是否被占',
+  `right_zone` tinyint(1) DEFAULT '0' COMMENT 'C部门是否被占',
   `proxy_state` tinyint(2) DEFAULT '0' COMMENT '分红状态， 0 不分红，1 分红',
   `achievement` double(16,2) DEFAULT '0.00' COMMENT '总业绩',
-  `achievementstatus` tinyint(1) DEFAULT '0' COMMENT '业绩分红状态 0： 不计算头衔升级的销费商  1： 计算头衔升级推荐销费商',
-  `num` int(10) DEFAULT '0' COMMENT '伞下人数',
+  `achievementstatus` tinyint(1) DEFAULT '0' COMMENT '业绩分红状态 0： 不计算头衔升级的销费商  1： 计算头衔升级拓展销费商',
+  `num` int(10) DEFAULT '0' COMMENT '部门人数',
   `red_wine_number` int(8) DEFAULT NULL COMMENT '数字红酒',
   `last_time` int(10) DEFAULT NULL COMMENT '最后登录时间',
   `max_bonus` double(16,2) DEFAULT '0.00' COMMENT '最大奖金',
@@ -396,7 +396,7 @@ ALTER TABLE zx_member ADD middleachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT 
 ALTER TABLE zx_member ADD rightachievement DOUBLE(16,2) DEFAULT '0.00' COMMENT '右业绩';
 
 ALTER TABLE zx_member ADD contactuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户接点路径';
-ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户推荐路径';
+ALTER TABLE zx_member ADD recommenduserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户拓展路径';
 ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';
 
 ALTER TABLE zx_member ADD billuserpath VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户代理商编号路径';

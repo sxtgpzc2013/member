@@ -113,7 +113,7 @@
 			    array('baodanbi','报单币'),
 			    array('rongzidun','戎子盾'),
 			    array('jianglijifen','奖励积分'),
-			    array('tuijiannumber','推荐人'),
+			    array('tuijiannumber','拓展人'),
 			    array('parentnumber','上级人'),
 			    array('billcenterid','代理商编号'),
 			   	array('reg_time','注册时间'),
@@ -199,7 +199,7 @@
 
 	    	$billmember = $this -> model -> my_find($params);
 
-			//获取推荐人数据
+			//获取拓展人数据
 			$params = array(
 				'table_name' => 'member',
 
@@ -452,7 +452,7 @@
 		/**
 		 * 获取消费商信息
 		 *
-		 * 参数描述：@usernumber 推荐人编号
+		 * 参数描述：@usernumber 拓展人编号
 		 *
 		 * 返回值：
 		 *
@@ -785,7 +785,7 @@
 
 			if ($my_save == 1)
 			{
-				//更新上级伞下人数
+				//更新上级部门人数
 				//$this -> save_member_num($member);
 
 				//更新市场补贴

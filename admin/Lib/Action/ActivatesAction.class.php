@@ -288,11 +288,11 @@ class ActivatesAction extends CommonAction {
 			$billmember = $this -> model -> my_find($params);
 
 			if(intval($billmember['baodanbi']) < $deduct/2){
-				$this -> _back("账户激活币不足->余额:{$billmember['baodanbi']}");return;
+				$this -> _back("激活币不足->余额:{$billmember['baodanbi']}");return;
 			}
 
 			if(intval($billmember['jihuobi']) < $deduct/2){
-				$this -> _back("账户激活币不足->余额:{$billmember['jihuobi']}");return;
+				$this -> _back("激活币不足->余额:{$billmember['jihuobi']}");return;
 			}
 
 			//注册币余额计算
@@ -521,7 +521,7 @@ class ActivatesAction extends CommonAction {
 
 		if ($my_save == 1)
 		{
-			//更新上级伞下人数
+			//更新上级部门人数
 			//$this -> save_member_num($member);
 
 			//更新市场补贴
@@ -1154,7 +1154,7 @@ class ActivatesAction extends CommonAction {
 
 	}
 
-	//更新伞下人数
+	//更新部门人数
 	function save_member_num($expand_member){
 		//获取当前用户接点数据
 		$expand = array_reverse(explode(",", $expand_member['contactuserpath']));
@@ -1167,7 +1167,7 @@ class ActivatesAction extends CommonAction {
 
 		//$expand_slice = array_slice($expand, 0, 1);
 
-		//更新上级所有人的伞下人数
+		//更新上级所有人的部门人数
 		foreach ($expand as $key => $value) {
 
 			// $params = array(
