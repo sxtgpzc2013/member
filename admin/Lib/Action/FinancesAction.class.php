@@ -226,9 +226,15 @@ class FinancesAction extends CommonAction {
 
         $where = "1";
 
-        if($start && $stop){
+        if($start){
 
-            $where = "createtime >= {$start} AND createtime <= {$stop}";
+            $where .= " AND createtime >= {$start}";
+
+        }
+
+        if($stop){
+
+            $where .= " AND createtime <= {$stop}";
 
         }
 
@@ -353,9 +359,15 @@ class FinancesAction extends CommonAction {
 
         $where = "1";
 
-        if($start && $stop){
+        if($start){
 
-            $where = "createtime >= {$start} AND createtime <= {$stop}";
+            $where .= " AND createtime >= {$start}";
+
+        }
+
+        if($stop){
+
+            $where .= " AND createtime <= {$stop}";
 
         }
 
@@ -827,9 +839,15 @@ class FinancesAction extends CommonAction {
 
         $where = "1";
 
-        if($start && $stop){
+        if($start){
 
-            $where = "createtime >= {$start} AND createtime <= {$stop}";
+            $where .= " AND createtime >= {$start}";
+
+        }
+
+        if($stop){
+
+            $where .= " AND createtime <= {$stop}";
 
         }
 
@@ -873,9 +891,15 @@ class FinancesAction extends CommonAction {
 
         $where = "1";
 
-        if($start && $stop){
+        if($start){
 
-            $where = "createtime >= {$start} AND createtime <= {$stop}";
+            $where .= " AND createtime >= {$start}";
+
+        }
+
+        if($stop){
+
+            $where .= "AND createtime <= {$stop}";
 
         }
 
@@ -1217,9 +1241,15 @@ class FinancesAction extends CommonAction {
 
         $where = "1";
 
-        if($start && $stop){
+        if($start){
 
-            $where = "createtime >= {$start} AND createtime <= {$stop}";
+            $where .= " AND createtime >= {$start}";
+
+        }
+
+        if($stop){
+
+            $where .= " AND createtime <= {$stop}";
 
         }
 
