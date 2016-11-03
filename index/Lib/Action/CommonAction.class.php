@@ -36,9 +36,9 @@
 
 				$h = intval(date("H"));
 				//10点 到第二天 9点
-				if ($h > 15 || $h < 9) {
+				if ($h > 21 || $h < 8) {
 					$url = __APP__.'/Login/login';
-					die('<meta http-equiv="Content-Type" content="text/html"; charset="utf8"><script language="javascript">alert("系统维护时间22:00 -- 次日9：00");window.location.href="'.$url.'";</script>');
+					die('<meta http-equiv="Content-Type" content="text/html"; charset="utf8"><script language="javascript">alert("系统维护时间21:00 -- 次日9：00");window.location.href="'.$url.'";</script>');
 
 				}
 			}
