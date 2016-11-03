@@ -240,7 +240,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND targetusernumber = '{$_GET['usernumber']}'";
+            $where = $where ." AND (targetusernumber = '{$_GET['usernumber']}' OR usernumber = '{$_GET['usernumber']}')";
 
         }
 
@@ -373,7 +373,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+            $where = $where ." AND (usernumber = '{$_GET['usernumber']}' OR targetusernumber = '{$_GET['usernumber']}')";
 
         }
 
@@ -853,7 +853,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+            $where = $where ." AND (targetusernumber = '{$_GET['usernumber']}' OR usernumber = '{$_GET['usernumber']}')";
 
         }
 
@@ -905,7 +905,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND usernumber = {$_GET['usernumber']}";
+            $where = $where ." AND usernumber = '{$_GET['usernumber']}'";
 
         }
 
@@ -1255,7 +1255,7 @@ class FinancesAction extends CommonAction {
 
         if($_GET['usernumber']){
 
-            $where = $where ." AND tousernumber = {$_GET['usernumber']}";
+            $where = $where ." AND usernumber = '{$_GET['usernumber']}'";
 
         }
 
