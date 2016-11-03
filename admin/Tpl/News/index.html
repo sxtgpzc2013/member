@@ -73,9 +73,9 @@
     										<a href="__APP__/News/edit/id/{$new.id}">编辑</a>
     										<a href="__APP__/News/delete/id/{$new.id}" onclick="return confirm('确认删除吗？')">删除</a>
                                             <if condition="$new['status'] eq 0">
-    										  <a href="__APP__/News/status/id/{$new.id}/type/0">禁用</a>
+    										  <a href="__APP__/News/status/id/{$new.id}/type/0" onclick="return confirm('确认禁用吗？')">禁用</a>
                                             <elseif condition="$new['status'] eq 1" />
-                                                <a href="__APP__/News/status/id/{$new.id}/type/1">启用</a>
+                                                <a href="__APP__/News/status/id/{$new.id}/type/1" onclick="return confirm('确认启用吗？')">启用</a>
                                             </if>
                                         </td>
                                     </tr>
