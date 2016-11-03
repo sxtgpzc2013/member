@@ -16,7 +16,7 @@ conn = mysql.db()
 def getmemberinfo(uid):
 	flag = False
 	sql = """
-		select usernumber, mobile from zx_member where uid = %s
+		select usernumber, mobile, psd1, psd2 from zx_member where uid = %s
 	""" % (uid)
 	result = conn.query(sql)
 	if result:
