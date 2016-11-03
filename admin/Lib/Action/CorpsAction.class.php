@@ -405,7 +405,45 @@
 
 			$my_save = $this -> model -> my_save($params);
 
+
+			$params = array(
+
+				'table_name' => 'member',
+
+				'where' => "uid = {$uid}"
+			);
+
+			$member = $this -> model -> my_find($params);
+
 			if ($my_save == 1){
+
+				if($member){
+
+					if($member['zone'] == 1){
+						$parentdata['left_zone'] = 0;
+					}
+
+					if($member['zone'] == 2){
+						$parentdata['middle_zone'] = 0;
+					}
+
+
+					if($member['zone'] == 3){
+						$parentdata['right_zone'] = 0;
+					}
+
+					$params = array(
+
+						'table_name' => 'member',
+
+						'where' => "uid = {$uid}",
+
+						'data' => $parentdata
+					);
+
+					$parent_save = $this -> model -> my_save($params);
+				}
+
 				$this -> redirect("/Corps/index");
 			}else{
 				$this -> _back('删除销费商失败');
