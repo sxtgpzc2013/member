@@ -59,7 +59,7 @@
 
 										<td>
 											<a href="__APP__/Admins/edit?id={$item['id']}">编辑</a>
-											<a href="__APP__/Admins/delete?id={$item['id']}">删除</a>
+											<a href="__APP__/Admins/delete?id={$item['id']}" onclick="return confirm('确认删除吗？')">删除</a>
 	                                    </td>
 	                                </tr>
 								</foreach>
