@@ -441,6 +441,11 @@ class FinancesAction extends CommonAction {
     			$this -> _back('请先登录');
     		}
 
+            if ($user_find['uid'] == $member_find['uid'])
+            {
+                $this -> _back('请勿给自己充值');
+            }
+
             $key = true;
 
     		switch ($type)
