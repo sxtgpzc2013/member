@@ -451,7 +451,7 @@ class FinancesAction extends CommonAction {
 
     				$balance = $data['jiangjinbi'];
 
-    				$moneytype = 6;
+    				$moneytype = 1;
 
     				break;
 
@@ -696,7 +696,7 @@ class FinancesAction extends CommonAction {
 
     				$balance = $data['jiangjinbi'];
 
-    				$moneytype = 6;
+    				$moneytype = 1;
 
     				break;
 
@@ -1006,7 +1006,7 @@ class FinancesAction extends CommonAction {
 				$money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 ? $member_find['jiangjinbi'] : 0;
     		}
 
-    		$money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 6 : 0;
+    		$money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 1 : 0;
 
 			$money_change_data['targetuserid'] = $member_find['uid'];
 
@@ -1158,7 +1158,7 @@ class FinancesAction extends CommonAction {
                     $money_change_data['hasmoney'] = $cash_find['moneytype'] == 0 ? $member_find['jiangjinbi'] : 0;
                 }
 
-                $money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 6 : 0;
+                $money_change_data['moneytype'] = $cash_find['moneytype'] == 0 ? 1 : 0;
 
                 $money_change_data['targetuserid'] = $member_find['uid'];
 
