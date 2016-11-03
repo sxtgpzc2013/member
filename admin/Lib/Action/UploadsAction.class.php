@@ -30,20 +30,20 @@
 		}
 
 		public function upload(){
-			//
-			// $upload_dir = $_POST['upload_dir'] ? $_POST['upload_dir'] : 'products';
-			//
-			// $upload_result = $this -> _upload_pic($upload_dir);
-			//
-			// if ($upload_result['status'] == 1)
-    		// {
-    		// 	$data['upload_result'] = $upload_result['msg'];
-    		// 	echo json_encode(array('code' => 200, 'imagename' => $upload_result['msg']));
-    		// }
-    		// elseif ($upload_result['status'] == 0)
-    		// {
-    		// 	echo json_encode(array('code' => 0, 'imagename' => $upload_result['msg']));
-    		// }
+
+			$upload_dir = $_POST['upload_dir'] ? $_POST['upload_dir'] : 'products';
+
+			$upload_result = $this -> _upload_pic($upload_dir);
+
+			if ($upload_result['status'] == 1)
+    		{
+    			$data['upload_result'] = $upload_result['msg'];
+    			echo json_encode(array('code' => 200, 'imagename' => $upload_result['msg']));
+    		}
+    		elseif ($upload_result['status'] == 0)
+    		{
+    			echo json_encode(array('code' => 0, 'imagename' => $upload_result['msg']));
+    		}
 
 		}
 	}
