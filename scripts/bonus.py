@@ -23,7 +23,7 @@ def isdate():
 	resp = urllib2.urlopen(req)
 	content = resp.read()
 	if(content):
-		return content
+		return int(content)
 
 	return content
 
@@ -255,7 +255,6 @@ def fenhong():
 
 def main():
 	status = isdate()
-	print status
 	if status == 0:
 		fenhong()
 
