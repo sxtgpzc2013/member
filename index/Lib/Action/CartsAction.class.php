@@ -108,10 +108,25 @@
 
 	    	$type = isset($_GET['type']) ? intval($_GET['type']) : $this -> _back('非法操作');
 
+	    	//查询这个商品
+	    	$params = array(
+
+	    		'table_name' => 'products',
+
+	    		'where' => "id = {$id} AND is_del = 0"
+	    	);
+
+	    	$product_find = $this -> model -> my_find($params);
+
+	    	if (!$product_find)
+	    	{
+	    		$this -> _back('无效商品');
+	    	}
+
 	    	if ($type == 0 && $_SESSION['Rongzi']['cart'][$id]['count'] >= 1) //减少
 	    	{
 	    		$_SESSION['Rongzi']['cart'][$id]['count'] = $_SESSION['Rongzi']['cart'][$id]['count'] - 1;
-	    	} elseif ($type == 1) {
+	    	} elseif ($type == 1 && $product_find['surplus'] >= ($_SESSION['Rongzi']['cart'][$id]['count'] + 1)) {
 	    		$_SESSION['Rongzi']['cart'][$id]['count'] = $_SESSION['Rongzi']['cart'][$id]['count'] + 1;
 	    	}
 
