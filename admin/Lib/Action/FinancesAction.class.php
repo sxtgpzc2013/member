@@ -899,7 +899,7 @@ class FinancesAction extends CommonAction {
 
         if($stop){
 
-            $where .= "AND createtime <= {$stop}";
+            $where .= " AND createtime <= {$stop}";
 
         }
 
