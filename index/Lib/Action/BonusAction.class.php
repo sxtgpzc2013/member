@@ -53,8 +53,6 @@
 
 	    		'table_name' => 'bonus_count',
 
-	    		//'where' => "touserid = {$_SESSION['Rongzi']['user']['uid']} AND tousernumber = '{$_SESSION['Rongzi']['user']['usernumber']}'",
-
 	    		'order' => 'count_date desc'
 	    	);
 
