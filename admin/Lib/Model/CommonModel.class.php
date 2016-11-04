@@ -170,7 +170,7 @@
 				$table = M($parameter['table_name']);
 
 				$data['result'] = $table -> where($parameter['where']) -> order($parameter['order']) -> page($p.',10') -> select();
-
+dump($table->getLastSql());
 				$count = $table -> where($parameter['where']) -> count();
 
 				$Page = new Page($count, 10);
