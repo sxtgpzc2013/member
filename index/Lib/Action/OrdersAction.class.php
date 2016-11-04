@@ -176,7 +176,7 @@
 
 	    		$data['total_rprice'] = $result['total_rprice'];
 
-	    		$date['agentusernumber'] = isset($_POST['agentusernumber']) ? intval($_POST['agentusernumber']) : $this -> _back('非法的参数');
+	    		$data['agentusernumber'] = isset($_POST['agentusernumber']) ? intval($_POST['agentusernumber']) : $this -> _back('非法的参数');
 
 	    		$data['notice'] = isset($_POST['notice']) ? htmlspecialchars($_POST['notice']) : '';
 
