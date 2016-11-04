@@ -106,6 +106,8 @@
 		{
 			unset($_SESSION['Rongzi']['admin']);
 
+			unset($_SESSION['Rongzi']['adminauth']);
+
 			redirect(__APP__.'/Login/login', 0);
 		}
 

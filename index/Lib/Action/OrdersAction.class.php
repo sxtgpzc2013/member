@@ -492,7 +492,7 @@
 
 	    			//最大金额
 	    			// $userrank_find = $this -> model -> my_find($params);
-	    			
+
 	    			//用户当前最大金额
 	    			$max_bonus = $member_find['max_bonus'];
 
@@ -725,7 +725,7 @@
 
 			    			//最大金额
 			    			// $up_userrank_find = $this -> model -> my_find($params);
-			    			
+
 			    			//用户当前最大金额
 			    			$up_max_bonus = $v['max_bonus'];
 
