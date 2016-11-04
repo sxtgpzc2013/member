@@ -512,7 +512,7 @@ class ActivatesAction extends CommonAction {
 
 			'table_name' => 'member',
 
-			'where' => "uid = {$uid} AND billcenterid = {$billcenterid} AND billcenternumber = {$billcenternumber} AND status = 0",
+			'where' => "uid = {$uid} AND status = 0",
 
 			'data' => $data
 		);
