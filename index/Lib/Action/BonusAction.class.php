@@ -53,6 +53,8 @@
 
 	    		'table_name' => 'bonus_count',
 
+	    		'where' => "touserid = {$_SESSION['Rongzi']['user']['uid']} AND tousernumber = '{$_SESSION['Rongzi']['user']['usernumber']}'",
+
 	    		'order' => 'count_date desc'
 	    	);
 
@@ -182,7 +184,7 @@
 				}elseif($value['moneytype'] == 7){
 					$xlsData[$key]['title'] = "服务补贴";
 				}elseif($value['moneytype'] == 8){
-					$xlsData[$key]['title'] = "服务补贴";
+					$xlsData[$key]['title'] = "二次消费补贴";
 				}
 		    }
 		    $this->exportExcel($xlsName,$xlsCell,$xlsData);
