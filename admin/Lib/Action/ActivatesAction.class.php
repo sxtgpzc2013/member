@@ -399,17 +399,17 @@ class ActivatesAction extends CommonAction {
 		}
 
 		//代理商编号ID
-		$billcenterid = $_SESSION['Rongzi']['user']['uid'];
+		$billcenterid = $member['billcenterid'];
 
 		//代理商编号编号
-		$billcenternumber = $_SESSION['Rongzi']['user']['usernumber'];
+		$billcenternumber = $member['billcenternumber'];
 
 		//数据包
 		$data['status'] = 1;
 
 		$data['active_time'] = time();
 
-		$data['active_uid'] = $_SESSION['Rongzi']['user']['uid'];
+		$data['active_uid'] = $_SESSION['Rongzi']['admin']['id'];
 
 		$data['update_time'] = time();
 
