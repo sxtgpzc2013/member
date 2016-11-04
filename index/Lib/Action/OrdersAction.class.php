@@ -178,6 +178,8 @@
 
 	    		$data['notice'] = isset($_POST['notice']) ? htmlspecialchars($_POST['notice']) : '';
 
+	    		$date['agentusernumber'] = isset($_POST['agentusernumber']) ? $_POST['agentusernumber'] : '';
+
 	    		$data['status'] = 1;
 
 	    		$data['created_at'] = time();
@@ -856,9 +858,12 @@
 	    			//清空购物车
 	    			$_SESSION['Rongzi']['cart'] = array();
 
-	    			//调用李桐的程序
-	    			system("python /var/www/member/scripts/consum_bonus.py {$member_find['uid']} {$result['total_price']}");
-
+	    			//调用python的程序
+	    			if ($data['agentusernumber']) {
+	    				system("python /var/www/member/scripts/consum_bonus.py {$member_find['uid']} {$result['total_price']} {$data['agentusernumber']}");
+	    			} else {
+	    				system("python /var/www/member/scripts/consum_bonus.py {$member_find['uid']} {$result['total_price']}");
+	    			}
 	    			redirect(__APP__.'/Orders/index', 0);
 	    		}
 	    		else
