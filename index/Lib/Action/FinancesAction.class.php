@@ -196,7 +196,8 @@
 
 	    		'table_name' => 'withdrawal',
 
-	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']}"
+	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']}",
+	    		'order' => "createtime desc"
 	    	);
 
 	    	$withdrawals = $this -> model -> easy_select($params);
