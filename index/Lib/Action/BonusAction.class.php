@@ -83,7 +83,9 @@
 
 	    		'table_name' => 'bonus_count',
 
-	    		'where' => "id = {$id}"
+	    		'where' => "id = {$id}",
+
+	    		'order' => 'count_date desc'
 	    	);
 
 	    	$count_find = $this -> model -> my_find($params);
