@@ -52,7 +52,8 @@
 				$admin_auth = $this -> model -> my_find($params);
 
 				$_SESSION['Rongzi']['adminauth'] = explode("\n", $admin_auth['auth_action']);
-
+				var_dump($params);
+var_dump($_SESSION['Rongzi']['adminauth']);exit;
 			}
 		}
 
