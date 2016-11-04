@@ -176,9 +176,9 @@
 
 	    		$data['total_rprice'] = $result['total_rprice'];
 
-	    		$data['notice'] = isset($_POST['notice']) ? htmlspecialchars($_POST['notice']) : '';
-
 	    		$date['agentusernumber'] = isset($_POST['agentusernumber']) ? $_POST['agentusernumber'] : '';
+
+	    		$data['notice'] = isset($_POST['notice']) ? htmlspecialchars($_POST['notice']) : '';
 
 	    		$data['status'] = 1;
 
