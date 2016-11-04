@@ -913,7 +913,7 @@ class FinancesAction extends CommonAction {
 
     		'table_name' => 'withdrawal',
 
-    		//'where' => $where ." AND status = 1",
+    		'where' => $where ." AND status = 1",
 
     		'order' => 'createtime desc'
     	);
@@ -1263,7 +1263,7 @@ class FinancesAction extends CommonAction {
 
             'table_name' => 'withdrawal',
 
-            'where' => $where." AND (status = 0 OR status = 2)",
+            'where' => $where." AND (status = 1 OR status = 2)",
 
             'order' => 'createtime desc'
         );
