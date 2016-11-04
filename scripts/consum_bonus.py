@@ -494,7 +494,7 @@ def gettuijianbillnumber_parent(uid):
 	if result:
 		parents = result[0]['recommenduserpath'].split(',')
 
-	return parents[-2::-1]
+	return parents[::-1]
 
 def main():
 	# 获取销售商的uid和销售产品的金额
@@ -518,6 +518,7 @@ def main():
 		uid = int(sys.argv[1])
 		value = int(sys.argv[2])
 		agent_uid = int(sys.argv[3])
+		
 		parents = gettuijiannumber_parent(uid)
 		bill_parents = gettuijianbillnumber_parent(agent_uid)
 
