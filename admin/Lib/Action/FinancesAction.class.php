@@ -1267,9 +1267,9 @@ class FinancesAction extends CommonAction {
 
             'order' => 'createtime desc'
         );
-dump($params);
+
         $result = $this -> model -> order_select($params);
-dump($result);exit;
+
         $this -> assign('result', $result);
 
         $this -> display();
