@@ -197,13 +197,15 @@
 	    		'table_name' => 'withdrawal',
 
 	    		'where' => "userid = {$_SESSION['Rongzi']['user']['uid']}",
-	    		
+
 	    		'order' => "createtime desc"
 	    	);
 
-	    	$withdrawals = $this -> model -> easy_select($params);
+	    	$withdrawals = $this -> model -> order_select($params);
 
-	    	$this -> assign('withdrawals', $withdrawals);
+			$this -> assign('withdrawals', $withdrawals['result']);
+
+			$this -> assign('page', $withdrawals['page']);
 
 			$this -> display();
 	    }

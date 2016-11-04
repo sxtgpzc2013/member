@@ -25,7 +25,7 @@
 						<div class="ibox-title">
 							<h5 style="float: none !important;">提现记录</h5>
 						</div>
-						<div class="ibox-content">
+						<div class="ibox-content table-responsive">
 							<table class="table table-hover no-margins table-bordered table-striped">
 								<thead>
 									<tr>
@@ -71,6 +71,14 @@
 				</div>
 			</div>
 
+		</div>
+
+		<div class="col-sm-12 text-right">
+			<div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+				<ul class="pagination">
+					{$result['page']}
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
