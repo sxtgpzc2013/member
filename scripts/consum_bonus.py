@@ -496,6 +496,19 @@ def gettuijianbillnumber_parent(uid):
 
 	return parents[::-1]
 
+# 通过子uid获取父拓展
+def gettuijianbillusernumber_parent(usernumber):
+	parents = []
+	sql = """
+		select recommenduserpath from zx_member where usernumber = %s
+	"""  % (usernumber)
+	result = conn.query(sql)
+
+	if result:
+		parents = result[0]['recommenduserpath'].split(',')
+
+	return parents[::-1]
+
 def main():
 	# 获取销售商的uid和销售产品的金额
 	if len(sys.argv) == 3:
@@ -517,10 +530,10 @@ def main():
 	elif len(sys.argv) == 4:
 		uid = int(sys.argv[1])
 		value = int(sys.argv[2])
-		agent_uid = int(sys.argv[3])
+		agentusernumber = int(sys.argv[3])
 		
 		parents = gettuijiannumber_parent(uid)
-		bill_parents = gettuijianbillnumber_parent(agent_uid)
+		bill_parents = gettuijianbillusernumber_parent(agentusernumber)
 
 		if parents:
 			memberlevels = getuservalue(parents)
